@@ -1,24 +1,10 @@
 import React from "react";
-import { useEffect } from "react";
 
 export default function App() {
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
-
-  useEffect(() => {
-    const script1 = document.createElement("script");
-    script1.src = "https://cdn.botpress.cloud/webchat/v3.3/inject.js?v=2";
-    script1.defer = true;
-
-    const script2 = document.createElement("script");
-    script2.src = "https://files.bpcontent.cloud/2026/02/09/15/20260209155612-JRZYC1GZ.js";
-    script2.defer = true;
-
-    document.body.appendChild(script1);
-    document.body.appendChild(script2);
-  }, []);
 
   return (
     <div className="font-sans text-gray-900">
