@@ -28,10 +28,10 @@ export default function App() {
       </header>
 
       {/* HERO */}
-      <section className="pt-32 pb-20 text-center bg-gradient-to-b from-white to-gray-50">
+      <section className="pt-40 pb-32 text-center bg-gradient-to-b from-white to-gray-50">
       <div className="w-full px-8 md:px-16">
 
-        <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+        <h2 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[0.9] tracking-tight">
           Your AI doesn’t chat.
           <br /> It sells.
         </h2>
@@ -50,7 +50,7 @@ export default function App() {
         </div>
 
         {/* VIDEO MOCK */}
-        <div className="overflow-hidden shadow-xl border w-full mx-auto">
+        <div className="overflow-hidden shadow-xl border w-full max-h-[560px] object-cover">
           <video
             autoPlay
             muted
