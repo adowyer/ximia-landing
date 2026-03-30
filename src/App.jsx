@@ -1,7 +1,37 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+// i18n
+import i18n from "i18next";
+import { initReactI18next, useTranslation } from "react-i18next";
+
+import en from "./locales/en/translation.json";
+import es from "./locales/es/translation.json";
+
+// INIT i18n
+i18n.use(initReactI18next).init({
+  resources: {
+    en: { translation: en },
+    es: { translation: es }
+  },
+  lng: navigator.language.startsWith("es") ? "es" : "en",
+  fallbackLng: "en",
+  interpolation: { escapeValue: false }
+});
 
 export default function App() {
+
+  const { t, i18n: i18nInstance } = useTranslation();
+
+  // LANG STATE
+  const [lang, setLang] = useState(
+    localStorage.getItem("lang") ||
+    (navigator.language.startsWith("es") ? "es" : "en")
+  );
+
+  useEffect(() => {
+    i18nInstance.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+  }, [lang, i18nInstance]);
 
   const scrollTo = (id) => {
     const el = document.getElementById(id);
@@ -19,11 +49,10 @@ export default function App() {
     }
   ];
 
-  // STATE
+  // CHAT STATE
   const [visibleMessages, setVisibleMessages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // LOOP + SEQUENCE
   useEffect(() => {
     if (currentIndex < messages.length) {
       const timeout = setTimeout(() => {
@@ -33,7 +62,6 @@ export default function App() {
 
       return () => clearTimeout(timeout);
     } else {
-      // loop reset
       const reset = setTimeout(() => {
         setVisibleMessages([]);
         setCurrentIndex(0);
@@ -43,39 +71,40 @@ export default function App() {
     }
   }, [currentIndex, messages]);
 
-  const fullText1 = "Ximia AI doesn’t chat.";
-  const fullText2 = "It converts.";
+  // HERO TYPEWRITER
+  const fullText1 = t("hero_title_1");
+  const fullText2 = t("hero_title_2");
 
   const [text1, setText1] = useState("");
   const [text2, setText2] = useState("");
 
   useEffect(() => {
-      let i = 0;
+    let i = 0;
 
-      const typing1 = setInterval(() => {
-        setText1(fullText1.slice(0, i + 1));
-        i++;
+    const typing1 = setInterval(() => {
+      setText1(fullText1.slice(0, i + 1));
+      i++;
 
-        if (i === fullText1.length) {
-          clearInterval(typing1);
+      if (i === fullText1.length) {
+        clearInterval(typing1);
 
-          let j = 0;
+        let j = 0;
 
-          setTimeout(() => {
-            const typing2 = setInterval(() => {
-              setText2(fullText2.slice(0, j + 1));
-              j++;
+        setTimeout(() => {
+          const typing2 = setInterval(() => {
+            setText2(fullText2.slice(0, j + 1));
+            j++;
 
-              if (j === fullText2.length) {
-                clearInterval(typing2);
-              }
-            }, 80);
-          }, 700);
-        }
-      }, 80);
+            if (j === fullText2.length) {
+              clearInterval(typing2);
+            }
+          }, 80);
+        }, 700);
+      }
+    }, 80);
 
-      return () => clearInterval(typing1);
-    }, []);
+    return () => clearInterval(typing1);
+  }, [fullText1, fullText2]);
 
   return (
     <div className="font-sans text-gray-900">
@@ -95,6 +124,20 @@ export default function App() {
           >
             Ver demo
           </button>
+          <div className="relative">
+            <select
+              value={lang}
+              onChange={(e) => setLang(e.target.value)}
+              className="appearance-none bg-white/80 backdrop-blur border border-gray-200 rounded-xl px-4 py-2 pr-8 text-sm font-medium cursor-pointer hover:border-black transition"
+            >
+              <option value="en">EN</option>
+              <option value="es">ES</option>
+            </select>
+
+            <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">
+              ▼
+            </div>
+          </div>
         </div>
       </header>
 
