@@ -28,23 +28,42 @@ export default function App() {
       </header>
 
       {/* HERO */}
-      <section className="pt-32 pb-20 text-center bg-gray-50">
-        <div className="max-w-3xl mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Tu mejor vendedor, trabajando 24/7
-          </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Ximia convierte visitantes en leads calificados y los guía hasta la compra,
-            automáticamente.
-          </p>
-          <button
-            onClick={() => scrollTo("demo")}
-            className="bg-black text-white px-6 py-4 rounded-xl text-lg"
-          >
-            Ver demo en vivo
+      <section className="pt-32 pb-20 text-center bg-gradient-to-b from-white to-gray-50">
+      <div className="w-full px-8 md:px-16">
+
+        <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          Your AI doesn’t chat.
+          <br /> It sells.
+        </h2>
+
+        <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+          Ximia turns visitors into qualified buyers and guides them to the right property automatically.
+        </p>
+
+        <div className="flex justify-center gap-4 mb-12">
+          <button className="bg-black text-white px-6 py-3 rounded-xl text-lg">
+            Try the demo
+          </button>
+          <button className="border px-6 py-3 rounded-xl text-lg">
+            Watch how it works
           </button>
         </div>
-      </section>
+
+        {/* VIDEO MOCK */}
+        <div className="overflow-hidden shadow-xl border w-full mx-auto">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full"
+          >
+            <source src="demo.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+      </div>
+    </section>
 
       {/* BENEFITS */}
       <section className="py-20" id="how">
