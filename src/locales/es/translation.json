@@ -42,5 +42,30 @@
         "El proceso depende demasiado del límite humano"
       ],
       "problem_result": "Mucho esfuerzo. Pocas operaciones.",
-      "problem_quote_closing": "Necesitás una inteligencia que decida, no que repita un guión."
+      "problem_quote_closing": "Necesitás una inteligencia que decida, no que repita un guión.",
+      "process_steps": [
+        {
+          "label": "01 · Captura",
+          "title": "Entiende qué busca el cliente",
+          "description": "Detecta si busca vivienda, inversión o lote desde la conversación.",
+          "icon": "zap"
+        },
+        {
+          "label": "02 · Analiza",
+          "title": "Evalúa viabilidad financiera",
+          "description": "Valida presupuesto y perfil con lógica de mercado real.",
+          "icon": "chart"
+        },
+        {
+          "label": "03 · Propone",
+          "title": "Recomienda el match correcto",
+          "icon": "target"
+        },
+        {
+          "label": "04 · Cierra",
+          "title": "Entrega el lead listo para avanzar",
+          "description": "Toda la información queda estructurada para acelerar el cierre.",
+          "icon": "check"
+        }
+      ]
 }

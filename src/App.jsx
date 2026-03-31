@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Zap, BarChart3, Target, Check } from "lucide-react";
 
 // i18n
 import i18n from "i18next";
@@ -195,11 +196,75 @@ export default function App() {
   }, [visible, t]);
 
   const lines = t("problem_headline", { returnObjects: true });
-  const isLine2Done = textLine2.length === lines[1].length; 
+  const isLine2Done = textLine2.length === lines[1].length;
 
   const problemItems = t("problem_items", { returnObjects: true }) || [];
   console.log("problem_items:", problemItems, typeof problemItems);
 
+  const [stage, setStage] = useState(0);
+  const problemRef = useRef(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (!inView) return;
+
+    const timers = [
+      setTimeout(() => setStage(1), 200),
+      setTimeout(() => setStage(2), 1200),
+      setTimeout(() => setStage(3), 2000),
+      setTimeout(() => setStage(4), 2800)
+    ];
+
+    return () => timers.forEach(clearTimeout);
+  }, [inView]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+        }
+      },
+      {
+        threshold: 0.4 // delay
+      }
+    );
+
+    if (problemRef.current) {
+      observer.observe(problemRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const iconMap = { zap: Zap, chart: BarChart3, target: Target, check: Check };
+
+  const rawSteps = t("process_steps", { returnObjects: true });
+  const steps = Array.isArray(rawSteps) ? rawSteps : [];
+
+  const [activeStep, setActiveStep] = useState(0);
+  const stepRefs = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute("data-index"));
+            setActiveStep(index);
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -50% 0px" }
+    );
+
+    const currentRefs = stepRefs.current;
+    currentRefs.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => currentRefs.forEach((ref) => { if (ref) observer.unobserve(ref) });
+  }, [steps]);
 
   // =========================
   // UI
@@ -210,9 +275,11 @@ export default function App() {
 
       {/* NAVBAR */}
       <header className="fixed top-0 left-0 w-full bg-white shadow z-50">
-        <div className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
-          <h1 className="font-bold text-xl">Ximia</h1>
-         <nav className="space-x-6 hidden md:block">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+          <button onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-2 transition-transform hover:scale-105">
+            <img src="/Logo-X-b.png" alt="Ximia IA" className="h-12 md:h-16 w-auto object-contain" />
+          </button>
+          <nav className="space-x-6 hidden md:block">
             <button onClick={() => scrollTo("problem")} className="hover:text-gray-500">
               {t("nav_problem")}
             </button>
@@ -260,7 +327,7 @@ export default function App() {
               </span>
               <span className="block text-gray-500">
                 {text2}
-                 <span className="animate-blink">|</span>
+                <span className="animate-blink">|</span>
               </span>
             </h2>
 
@@ -289,20 +356,18 @@ export default function App() {
             {visibleMessages.map((msg, i) => (
               <div
                 key={i}
-                className={`flex ${
-                  msg.from === "user" ? "justify-end" : "items-start gap-2"
-                }`}
+                className={`flex ${msg.from === "user" ? "justify-end" : "items-start gap-2"
+                  }`}
               >
                 {msg.from === "ai" && (
                   <img src="/AI-Icon.gif" className="w-6 h-6 mt-1" />
                 )}
 
                 <div
-                  className={`p-3 rounded-xl max-w-[75%] transition-all duration-300 ${
-                    msg.from === "user"
-                      ? "bg-[#0092B3] text-white"
-                      : "bg-gray-100"
-                  }`}
+                  className={`p-3 rounded-xl max-w-[75%] transition-all duration-300 ${msg.from === "user"
+                    ? "bg-[#0092B3] text-white"
+                    : "bg-gray-100"
+                    }`}
                 >
                   {msg.text}
                 </div>
@@ -338,110 +403,213 @@ export default function App() {
         </div>
       </section>
 
-      <section className="py-40 bg-gray-900 text-white text-center">
+      <section ref={problemRef} className="py-40 bg-gray-900 text-white text-center">
         <div className="max-w-8xl mx-auto px-6">
           <h2 ref={headlineRef} className="text-5xl md:text-8xl font-bold leading-tight tracking-tight mb-10">
-          <span className="block">
-            {visible ? textLine1 : <span className="opacity-0">{t("problem_headline", { returnObjects: true })[0]}</span>}
-          </span>
-          <span className="block">
-            {visible ? textLine2 : <span className="opacity-0">{t("problem_headline", { returnObjects: true })[1]}</span>}
-          </span>
-          <span className={`block transform transition-all duration-[2000ms] ease-out ${ isLine2Done ? "translate-x-0 opacity-100 delay-300" : "-translate-x-10 opacity-0"}`} >
-            <span className={`text-white ${ isLine2Done ? "animate-fadeToGray" : "" }`} style={{ animationDelay: isLine2Done ? "1s" : "0s" }} >
-              {lines[2]}
+            <span className="block">
+              {visible ? textLine1 : <span className="opacity-0">{t("problem_headline", { returnObjects: true })[0]}</span>}
             </span>
-          </span>
-        </h2>
+            <span className="block">
+              {visible ? textLine2 : <span className="opacity-0">{t("problem_headline", { returnObjects: true })[1]}</span>}
+            </span>
+            <span className={`block transform transition-all duration-[2000ms] ease-out ${isLine2Done ? "translate-x-0 opacity-100 delay-300" : "-translate-x-10 opacity-0"}`} >
+              <span className={`text-white ${isLine2Done ? "animate-fadeToGray" : ""}`} style={{ animationDelay: isLine2Done ? "1s" : "0s" }} >
+                {lines[2]}
+              </span>
+            </span>
+          </h2>
 
-        <div className="flex justify-center my-12">
-          <div className="flex flex-col items-center gap-2 mt-6">
-            {/* Flecha animada */}
-            <div className="animate-bounce text-gray-500 text-6xl">
-              ↓
-            </div>
-
-          </div>
-        </div>
-
-        {/* STAT */}
-        <div className="mb-16 max-w-8xl mx-auto text-center">
-          <p className="text-6xl md:text-8xl font-bold">
-            {t("problem_stat_value")}
-          </p>
-
-          <div className="mt-10 space-y-4 text-gray-400 text-xl md:text-2xl">
-            {problemItems.map((item, index) => (
-              <div key={index} className="flex flex-col items-center">  
-                <p className="opacity-90 text-center max-w-2xl">
-                  {item}
-                </p>
-                {index < problemItems.length - 1 && (<div className="h-px bg-white/10 w-16 mt-4" />)}
+          <div className="flex justify-center my-12">
+            <div className="flex flex-col items-center gap-2 mt-6">
+              {/* Arrow */}
+              <div className="animate-bounce text-gray-500 text-6xl">
+                ↓
               </div>
-            ))}
-          </div>
-        </div>
 
-         <div className="flex justify-center my-12">
-          <div className="flex flex-col items-center gap-2 mt-6">
-            {/* Flecha animada */}
-            <div className="animate-bounce text-gray-500 text-6xl">
-              ↓
+            </div>
+          </div>
+
+          {/* STAT */}
+          <div className="mb-16 max-w-8xl mx-auto text-center">
+            <p className={`text-6xl md:text-8xl font-bold transition-all duration-700 ${stage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}>
+              {t("problem_stat_value")}
+            </p>
+
+            <p className={`text-gray-400 mt-2 md:text-5xl transition-all duration-700 ${stage >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}>
+              {t("problem_stat_caption")}
+            </p>
+
+            <div className="mt-10 space-y-4 text-gray-400 text-xl md:text-2xl">
+              {problemItems.map((item, index) => (
+                <div
+                  key={index}
+                  className={`flex flex-col items-center transition-all duration-700 ${stage >= 4
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-6"
+                    }`}
+                  style={{ transitionDelay: `${index * 200}ms` }}
+                >
+                  <p className="opacity-90 text-center max-w-2xl">
+                    {item}
+                  </p>
+
+                  {index < problemItems.length - 1 && (
+                    <div className="h-px bg-white/10 w-16 mt-4" />
+                  )}
+                </div>
+              ))}
             </div>
 
+            <div className="flex justify-center my-12">
+              <div className="flex flex-col items-center gap-2 mt-6">
+                {/* Flecha animada */}
+                <div className="animate-bounce text-gray-500 text-6xl">
+                  ↓
+                </div>
+
+              </div>
+            </div>
+
+            {/* RESULT */}
+            <p className="text-2xl md:text-6xl font-semibold mb-16">
+              {t("problem_result")}
+            </p>
           </div>
-        </div>
-
-        {/* RESULT */}
-        <p className="text-2xl md:text-6xl font-semibold mb-16">
-          {t("problem_result")}
-        </p>
-
         </div>
       </section>
 
-      {/* THE SOLUTION */}
-      <section id="solution" className="py-40 bg-gray-50 text-center">
+      {/* THE SOLUTION (STICKY STEPPER) */}
+      <section id="solution" className="pt-20 pb-40 bg-white relative">
+        <style>{`
+          @keyframes stepFadeIn {
+            from { opacity: 0; transform: translateY(10px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+          }
+          .animate-step { animation: stepFadeIn 0.5s ease-out forwards; }
+        `}</style>
         <div className="max-w-7xl mx-auto px-6">
 
-          <h2 className="text-6xl md:text-7xl font-bold leading-[0.9] tracking-tight mb-16">
-            Ximia changes that.
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-10">
-
-            <div className="p-10 rounded-3xl bg-white shadow-md hover:shadow-xl transition text-left">
-              <div className="text-4xl mb-6">⚡</div>
-              <h3 className="font-semibold text-2xl mb-3">
-                Understand instantly
-              </h3>
-              <p className="text-gray-600 text-lg">
-                Knows what the user wants in seconds, without forms or friction.
-              </p>
+          {/* HEADER WITH BG X */}
+          <div className="relative py-12 md:py-24 mb-20 flex items-center justify-center w-full">
+            {/* The giant 'X' background watermark */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+              <img src="/X.png" alt="Ximia Watermark" className="w-[800px] h-auto object-contain" />
             </div>
 
-            <div className="p-10 rounded-3xl bg-white shadow-md hover:shadow-xl transition text-left">
-              <div className="text-4xl mb-6">🎯</div>
-              <h3 className="font-semibold text-2xl mb-3">
-                Qualify automatically
-              </h3>
-              <p className="text-gray-600 text-lg">
-                Filters real buyers from noise and focuses only on high-intent users.
-              </p>
+            {/* The actual text */}
+            <h2 className="text-5xl md:text-8xl font-black leading-tight tracking-tight text-center text-gray-900 relative z-10">
+              Ximia IA cambia eso.
+            </h2>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-16 relative items-start">
+
+            {/* LEFT: Scrolling Steps */}
+            <div className="w-full md:w-5/12 space-y-40 py-20 pb-80 md:pb-[60vh]">
+              {steps.map((step, index) => {
+                const Icon = iconMap[step.icon];
+                const isActive = activeStep === index;
+
+                return (
+                  <div
+                    key={index}
+                    ref={(el) => (stepRefs.current[index] = el)}
+                    data-index={index}
+                    className={`flex flex-col gap-4 transform-gpu transition-all duration-500 ease-out origin-left ${isActive ? "opacity-100 scale-100 translate-x-4" : "opacity-30 scale-95 blur-[1px]"
+                      }`}
+                  >
+                    <div className={`flex items-center gap-4 ${isActive ? "text-[#0092B3]" : "text-gray-400"}`}>
+                      <span className="text-6xl font-black">0{index + 1}</span>
+                      {Icon && <Icon size={40} strokeWidth={isActive ? 3 : 1.5} />}
+                    </div>
+                    <div>
+                      <h3 className={`text-4xl font-bold mb-4 transition-colors ${isActive ? "text-gray-900" : "text-gray-400"}`}>
+                        {step.title}
+                      </h3>
+                      <p className="text-2xl text-gray-500 font-medium leading-normal max-w-md">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
-            <div className="p-10 rounded-3xl bg-white shadow-md hover:shadow-xl transition text-left">
-              <div className="text-4xl mb-6">📈</div>
-              <h3 className="font-semibold text-2xl mb-3">
-                Guide to conversion
-              </h3>
-              <p className="text-gray-600 text-lg">
-                Recommends, explains and moves users forward until they’re ready to buy.
-              </p>
+            {/* RIGHT: Sticky Visual Container */}
+            <div className="hidden md:flex w-full md:w-7/12 sticky top-40 h-[600px] bg-gray-100 rounded-3xl border border-gray-200 shadow-[inset_0_2px_20px_rgba(0,0,0,0.04)] p-10 flex-col items-center justify-center overflow-hidden relative">
+
+              {/* BRAND LOGO (FIXED) */}
+              <div className="absolute top-10 left-10">
+                <img src="/Logo-X-ia.png" alt="Ximia AI" className="h-10 md:h-14 w-auto object-contain opacity-100" />
+              </div>
+
+              <div key={activeStep} className="w-full h-full flex items-center justify-center animate-step">
+                {activeStep === 0 && (
+                  <div className="w-full max-w-md bg-white rounded-3xl p-6 shadow-xl border border-gray-100">
+                    <div className="bg-[#0092B3] text-white p-5 rounded-2xl rounded-bl-sm w-5/6 mb-6 text-lg shadow-sm">
+                      Busco un departamento para inversión, tengo USD 80k.
+                    </div>
+                    <div className="flex items-center gap-3 text-sm font-bold text-gray-400 uppercase tracking-widest bg-gray-50 p-4 rounded-xl border border-gray-100">
+                      <Zap size={20} className="text-[#0092B3]" /> Intención: INVERSIÓN
+                    </div>
+                  </div>
+                )}
+
+                {activeStep === 1 && (
+                  <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+                    <div className="flex justify-between items-center border-b border-gray-100 pb-6 mb-6">
+                      <div className="flex items-center gap-3">
+                        <BarChart3 size={28} className="text-blue-600" />
+                        <span className="text-gray-900 font-bold text-2xl">Score Financiero</span>
+                      </div>
+                      <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-bold shadow-sm">Validado</span>
+                    </div>
+                    <div className="space-y-4 text-lg">
+                      <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl">
+                        <span className="text-gray-500 font-medium">Presupuesto</span>
+                        <span className="font-bold text-gray-900">USD 250k</span>
+                      </div>
+                      <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl">
+                        <span className="text-gray-500 font-medium">Perfil de Riesgo</span>
+                        <span className="font-bold text-gray-900">Conservador</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeStep === 2 && (
+                  <div className="w-full max-w-md bg-white rounded-3xl p-6 shadow-xl border border-gray-100">
+                    <div className="h-48 bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl mb-6 w-full flex items-center justify-center shadow-inner">
+                      <Target size={48} className="text-white opacity-50" />
+                    </div>
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="font-bold text-2xl text-gray-900">Proyecto Palmas</h4>
+                      <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-sm font-bold">98% Match</span>
+                    </div>
+                    <p className="text-gray-500 text-base mb-4 font-medium">Ideal para el presupuesto y objetivo de rentabilidad detectado.</p>
+                    <button className="w-full bg-black text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-gray-800 transition">
+                      Avanzar propuesta
+                    </button>
+                  </div>
+                )}
+
+                {activeStep === 3 && (
+                  <div className="w-full max-w-md bg-gray-900 text-white rounded-3xl p-10 shadow-2xl flex flex-col items-center text-center">
+                    <div className="bg-green-500/20 p-6 rounded-full border border-green-500/30 mb-8 shadow-[0_0_30px_rgba(34,197,94,0.3)]">
+                      <Check size={56} className="text-green-400" />
+                    </div>
+                    <h4 className="font-bold text-3xl mb-3">Oportunidad Creada</h4>
+                    <p className="text-gray-400 text-lg font-medium leading-relaxed">
+                      El equipo comercial acaba de recibir un nuevo lead listo para firmar.
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
 
           </div>
-
         </div>
       </section>
 

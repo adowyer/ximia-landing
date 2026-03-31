@@ -85,3 +85,62 @@
 .animate-fadeToGray {
   animation: fadeToGray 1.5s ease forwards;
 }
+
+
+/************************************
+BOTPRESS WIDGET
+************************************/
+
+.bpFabWrapper,
+iframe.bpFab,
+iframe[name="fab"] {
+    width: 250px !important;
+    height: 250px !important;
+    overflow: visible !important;
+}
+
+.bpFabWrapper { 
+    position: fixed !important;
+    right: 16% !important;
+    top: 150px !important;
+}
+
+.bpHeightFull {
+    background-color: #fff !important;
+}
+
+.bpFab {
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.6) !important;
+}
+
+iframe.bpOpen {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: min(99vw, 1024px) !important;
+    height: min(90vh, 840px) !important;
+    z-index: 99998 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45) !important;
+    border: none !important;
+}
+
+body:has(iframe.bpOpen)::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.60);
+    z-index: 99997;
+}
+
+iframe[class*="bpWebchat"] {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+iframe.bpOpen {
+    opacity: 1;
+    pointer-events: auto;
+}
