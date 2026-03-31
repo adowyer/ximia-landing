@@ -29,15 +29,18 @@
       "problem_intro_line1": "El problema actual no es generar leads.",
       "problem_intro_line2": "Es no saber qué hacer con ellos en el momento correcto.",
       "problem_headline": [
-        "Los visitantes llegan.",
-        "Muestran interés.",
-        "Se van."
+        "Tu equipo atiende a todos.",
+        "Sólo el 20% iba a comprar.",
+        "Y ya cerró con alguien más."
       ],
-      "problem_subtext": "Sin calificación. Sin seguimiento. Sin conversión.",
       "problem_stat_value": "70–80%",
-      "problem_stat_caption": "de tus leads no están listos para comprar",
+      "problem_stat_caption": "de tus leads son ruido",
+      "problem_items": [
+        "Tu equipo pierde horas calificando manualmente",
+        "Los leads calientes se enfrían esperando respuesta",
+        "Las conversaciones no escalan",
+        "El proceso depende demasiado del límite humano"
+      ],
       "problem_result": "Mucho esfuerzo. Pocas operaciones.",
-      "problem_quote": "El 80% de tus leads son ruido. El otro 20% se enfría esperando una respuesta.",
-      "problem_quote_sub": "Los flujos rígidos y los bots de respuesta automática frustran al comprador moderno.",
       "problem_quote_closing": "Necesitás una inteligencia que decida, no que repita un guión."
 }

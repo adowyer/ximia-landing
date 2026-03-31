@@ -25,14 +25,25 @@
       { "from": "ai", "text": "Then location and demand consistency are key." },
       { "from": "ai", "text": "I can show you properties optimized for ROI. Want to see top options?" }
     ]
-  ],
-  "problem_label": "Most websites lose their best opportunities",
-
-  "problem_headline_line1": "Visitors come.",
-  "problem_headline_line2": "They show intent.",
-  "problem_headline_line3": "They leave.",
-
-  "problem_subtext": "No qualification. No follow-up. No conversion."
+    ],
+    "problem_label": "El problema no es generar leads",
+    "problem_intro_line1": "El problema actual no es generar leads.",
+    "problem_intro_line2": "Es no saber qué hacer con ellos en el momento correcto.",
+    "problem_headline": [
+      "Tu equipo atiende a todos.",
+      "Sólo el 20% iba a comprar.",
+      "Y ya cerró con alguien más."
+    ],
+    "problem_stat_value": "70–80%",
+    "problem_stat_caption": "de tus leads son ruido",
+    "problem_items": [
+      "Tu equipo pierde horas calificando manualmente",
+      "Los leads calientes se enfrían esperando respuesta",
+      "Las conversaciones no escalan",
+      "El proceso depende demasiado del límite humano"
+    ],
+    "problem_result": "Mucho esfuerzo. Pocas operaciones.",
+    "problem_quote_closing": "Necesitás una inteligencia que decida, no que repita un guión."
 }
 
 

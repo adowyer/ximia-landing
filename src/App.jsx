@@ -19,10 +19,9 @@ i18n.use(initReactI18next).init({
 });
 
 export default function App() {
-
   const { t, i18n: i18nInstance } = useTranslation();
 
-  // LANG STATE
+  // LANG
   const [lang, setLang] = useState(
     localStorage.getItem("lang") ||
     (navigator.language.startsWith("es") ? "es" : "en")
@@ -33,16 +32,18 @@ export default function App() {
     localStorage.setItem("lang", lang);
   }, [lang, i18nInstance]);
 
+  // SCROLL
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
-  // CHAT DATA
+  // =========================
+  // CHAT
+  // =========================
+
   const rawConversations = t("hero_demo_conversations", { returnObjects: true });
-  const conversations = Array.isArray(rawConversations)
-    ? rawConversations
-    : [];
+  const conversations = Array.isArray(rawConversations) ? rawConversations : [];
 
   const [conversationIndex, setConversationIndex] = useState(0);
   const [visibleMessages, setVisibleMessages] = useState([]);
@@ -52,8 +53,6 @@ export default function App() {
     ? conversations[conversationIndex]
     : [];
 
-
-  // CHAT STATE
   useEffect(() => {
     if (messages.length > 0) {
       setVisibleMessages([messages[0]]);
@@ -66,7 +65,6 @@ export default function App() {
 
     if (currentIndex < messages.length) {
       const isLastMessage = currentIndex === messages.length - 1;
-
       const delay = isLastMessage ? 2000 : 1200;
 
       const timeout = setTimeout(() => {
@@ -75,13 +73,8 @@ export default function App() {
       }, delay);
 
       return () => clearTimeout(timeout);
-
     } else {
-      // ⏱ pausa de lectura inteligente
-      const lastMessages = Array.isArray(messages)
-        ? messages.slice(-2)
-        : [];
-
+      const lastMessages = messages.slice(-2);
       const totalChars = lastMessages.reduce(
         (acc, msg) => acc + (msg?.text?.length || 0),
         0
@@ -100,7 +93,10 @@ export default function App() {
     }
   }, [currentIndex, messages, conversations.length]);
 
+  // =========================
   // HERO TYPEWRITER
+  // =========================
+
   const fullText1 = t("hero_title_1");
   const fullText2 = t("hero_title_2");
 
@@ -115,7 +111,6 @@ export default function App() {
     let typing2;
     let delayTimeout;
 
-    // 🔥 RESET estado al cambiar idioma
     setText1("");
     setText2("");
 
@@ -131,24 +126,25 @@ export default function App() {
             setText2(fullText2.slice(0, j + 1));
             j++;
 
-            if (j === fullText2.length) {
-              clearInterval(typing2);
-            }
+            if (j === fullText2.length) clearInterval(typing2);
           }, 50);
         }, 700);
       }
     }, 50);
 
-    // 🔥 COMPLETE CLEANUP 
     return () => {
       clearInterval(typing1);
       clearInterval(typing2);
       clearTimeout(delayTimeout);
     };
-
   }, [fullText1, fullText2]);
 
-  // FADE PROBLEM TEXT
+  // =========================
+  // PROBLEM TYPEWRITER 
+  // =========================
+
+  const [textLine1, setTextLine1] = useState("");
+  const [textLine2, setTextLine2] = useState("");
 
   const headlineRef = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -156,23 +152,58 @@ export default function App() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-        }
+        if (entry.isIntersecting) setVisible(true);
       },
       { threshold: 0.4 }
     );
 
-    if (headlineRef.current) {
-      observer.observe(headlineRef.current);
-    }
+    if (headlineRef.current) observer.observe(headlineRef.current);
 
     return () => {
-      if (headlineRef.current) {
-        observer.unobserve(headlineRef.current);
-      }
+      if (headlineRef.current) observer.unobserve(headlineRef.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+
+    const lines = t("problem_headline", { returnObjects: true });
+
+    let i = 0;
+    let j = 0;
+
+    setTextLine1("");
+    setTextLine2("");
+
+    const typing1 = setInterval(() => {
+      setTextLine1(lines[0].slice(0, i + 1));
+      i++;
+
+      if (i >= lines[0].length) {
+        clearInterval(typing1);
+
+        const typing2 = setInterval(() => {
+          setTextLine2(lines[1].slice(0, j + 1));
+          j++;
+
+          if (j >= lines[1].length) clearInterval(typing2);
+        }, 40);
+      }
+    }, 80);
+
+    return () => clearInterval(typing1);
+  }, [visible, t]);
+
+  const lines = t("problem_headline", { returnObjects: true });
+  const isLine2Done = textLine2.length === lines[1].length; 
+
+  const problemItems = t("problem_items", { returnObjects: true }) || [];
+  console.log("problem_items:", problemItems, typeof problemItems);
+
+
+  // =========================
+  // UI
+  // =========================
 
   return (
     <div className="font-sans text-gray-900">
@@ -218,7 +249,7 @@ export default function App() {
       </header>
 
       {/* HERO */}
-      <section className="pt-56 pb-44 md:pt-64 md:pb-56 bg-gradient-to-b from-white to-gray-50">
+      <section className="pt-44 pb-36 md:pt-52 md:pb-44 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-stretch">
 
           {/* LEFT SIDE */}
@@ -296,9 +327,9 @@ export default function App() {
       </div>
 
       {/* THE PROBLEM */}
-      <section className="py-56 text-center bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <p className="text-xl md:text-3xl text-gray-700 mb-8">
+      <section className="py-40 md:py-48 text-center bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <p className="text-xl md:text-4xl text-gray-700 mb-8">
             {t("problem_intro_line1")}
           </p>
           <p className="text-2xl md:text-6xl font-bold text-gray-900 leading-tight">
@@ -308,53 +339,63 @@ export default function App() {
       </section>
 
       <section className="py-40 bg-gray-900 text-white text-center">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-8xl mx-auto px-6">
           <h2 ref={headlineRef} className="text-5xl md:text-8xl font-bold leading-tight tracking-tight mb-10">
-          <span className={`block ${visible ? "animate-slideIn" : "opacity-0"}`}>
-            {t("problem_headline", { returnObjects: true })[0]}
+          <span className="block">
+            {visible ? textLine1 : <span className="opacity-0">{t("problem_headline", { returnObjects: true })[0]}</span>}
           </span>
-          <span className={`block ${visible ? "animate-slideIn delay-200" : "opacity-0"}`}>
-            {t("problem_headline", { returnObjects: true })[1]}
+          <span className="block">
+            {visible ? textLine2 : <span className="opacity-0">{t("problem_headline", { returnObjects: true })[1]}</span>}
           </span>
-          <span className="block" style={{ opacity: visible ? 1 : 0, transform: visible ? "translateX(0)" : "translateX(-40px)", transition: "transform 2s ease-out, opacity 1.2s ease-out", transitionDelay: visible ? "0.7s" : "0s" }} >
-            <span className="text-white" style={{color: visible ? "#4b5563" : "#ffffff", transition: "color 1.5s ease", transitionDelay: visible ? "1.6s" : "0s"}} >
-            {t("problem_headline", { returnObjects: true })[2]}</span>
+          <span className={`block transform transition-all duration-[2000ms] ease-out ${ isLine2Done ? "translate-x-0 opacity-100 delay-300" : "-translate-x-10 opacity-0"}`} >
+            <span className={`text-white ${ isLine2Done ? "animate-fadeToGray" : "" }`} style={{ animationDelay: isLine2Done ? "1s" : "0s" }} >
+              {lines[2]}
+            </span>
           </span>
         </h2>
 
-          <p className="text-2xl md:text-2xl text-gray-400 mb-12">
-            {t("problem_subtext")}
+        <div className="flex justify-center my-12">
+          <div className="flex flex-col items-center gap-2 mt-6">
+            {/* Flecha animada */}
+            <div className="animate-bounce text-gray-500 text-6xl">
+              ↓
+            </div>
+
+          </div>
+        </div>
+
+        {/* STAT */}
+        <div className="mb-16 max-w-8xl mx-auto text-center">
+          <p className="text-6xl md:text-8xl font-bold">
+            {t("problem_stat_value")}
           </p>
 
-          {/* STAT */}
-          <div className="mb-16">
-            <p className="text-6xl md:text-8xl font-bold">
-              {t("problem_stat_value")}
-            </p>
-            <p className="text-gray-400 mt-2">
-              {t("problem_stat_caption")}
-            </p>
+          <div className="mt-10 space-y-4 text-gray-400 text-xl md:text-2xl">
+            {problemItems.map((item, index) => (
+              <div key={index} className="flex flex-col items-center">  
+                <p className="opacity-90 text-center max-w-2xl">
+                  {item}
+                </p>
+                {index < problemItems.length - 1 && (<div className="h-px bg-white/10 w-16 mt-4" />)}
+              </div>
+            ))}
           </div>
+        </div>
 
-          {/* RESULT */}
-          <p className="text-2xl font-semibold mb-16">
-            {t("problem_result")}
-          </p>
+         <div className="flex justify-center my-12">
+          <div className="flex flex-col items-center gap-2 mt-6">
+            {/* Flecha animada */}
+            <div className="animate-bounce text-gray-500 text-6xl">
+              ↓
+            </div>
 
-          {/* VERDICT */}
-          <div className="max-w-2xl mx-auto">
-            <p className="text-3xl md:text-4xl font-semibold leading-tight mb-6">
-              “{t("problem_quote")}”
-            </p>
-
-            <p className="text-gray-400 mb-4">
-              {t("problem_quote_sub")}
-            </p>
-
-            <p className="font-medium">
-              {t("problem_quote_closing")}
-            </p>
           </div>
+        </div>
+
+        {/* RESULT */}
+        <p className="text-2xl md:text-6xl font-semibold mb-16">
+          {t("problem_result")}
+        </p>
 
         </div>
       </section>

@@ -74,25 +74,6 @@
   animation-delay: 0.5s;
 }
 
-@keyframes slideInReveal {
-  0% {
-    transform: translateX(-40px);
-    opacity: 0;
-  }
-  60% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.animate-slideInReveal {
-  animation: slideInReveal 1.2s ease-out forwards;
-}
-
 @keyframes fadeToGray {
   0% {
     color: white;
