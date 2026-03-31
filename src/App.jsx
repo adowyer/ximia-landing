@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // i18n
 import i18n from "i18next";
@@ -39,37 +39,66 @@ export default function App() {
   };
 
   // CHAT DATA
-  const messages = [
-    { from: "user", text: "I'm looking for a house for my family" },
-    { from: "ai", text: "I see, that's great, a family home. How many people?" },
-    { from: "user", text: "4, two kids" },
-    {
-      from: "ai",
-      text: "Perfect — A 3-bedroom home with separate space to each kid sounds good? I can suggest some houses designed just for families like yours."
-    }
-  ];
+  const rawConversations = t("hero_demo_conversations", { returnObjects: true });
+  const conversations = Array.isArray(rawConversations)
+    ? rawConversations
+    : [];
 
-  // CHAT STATE
+  const [conversationIndex, setConversationIndex] = useState(0);
   const [visibleMessages, setVisibleMessages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const messages = Array.isArray(conversations[conversationIndex])
+    ? conversations[conversationIndex]
+    : [];
+
+
+  // CHAT STATE
   useEffect(() => {
+    if (messages.length > 0) {
+      setVisibleMessages([messages[0]]);
+      setCurrentIndex(1);
+    }
+  }, [conversationIndex]);
+
+  useEffect(() => {
+    if (!messages.length) return;
+
     if (currentIndex < messages.length) {
+      const isLastMessage = currentIndex === messages.length - 1;
+
+      const delay = isLastMessage ? 2000 : 1200;
+
       const timeout = setTimeout(() => {
         setVisibleMessages((prev) => [...prev, messages[currentIndex]]);
         setCurrentIndex((prev) => prev + 1);
-      }, 900);
+      }, delay);
 
       return () => clearTimeout(timeout);
+
     } else {
+      // ⏱ pausa de lectura inteligente
+      const lastMessages = Array.isArray(messages)
+        ? messages.slice(-2)
+        : [];
+
+      const totalChars = lastMessages.reduce(
+        (acc, msg) => acc + (msg?.text?.length || 0),
+        0
+      );
+
+      const readingTime = totalChars * 50;
+      const finalDelay = Math.max(readingTime, 4000);
+
       const reset = setTimeout(() => {
+        setConversationIndex((prev) => (prev + 1) % conversations.length);
         setVisibleMessages([]);
         setCurrentIndex(0);
-      }, 2500);
+      }, finalDelay);
 
       return () => clearTimeout(reset);
     }
-  }, [currentIndex, messages]);
+  }, [currentIndex, messages, conversations.length]);
 
   // HERO TYPEWRITER
   const fullText1 = t("hero_title_1");
@@ -80,31 +109,70 @@ export default function App() {
 
   useEffect(() => {
     let i = 0;
+    let j = 0;
 
-    const typing1 = setInterval(() => {
+    let typing1;
+    let typing2;
+    let delayTimeout;
+
+    // 🔥 RESET estado al cambiar idioma
+    setText1("");
+    setText2("");
+
+    typing1 = setInterval(() => {
       setText1(fullText1.slice(0, i + 1));
       i++;
 
       if (i === fullText1.length) {
         clearInterval(typing1);
 
-        let j = 0;
-
-        setTimeout(() => {
-          const typing2 = setInterval(() => {
+        delayTimeout = setTimeout(() => {
+          typing2 = setInterval(() => {
             setText2(fullText2.slice(0, j + 1));
             j++;
 
             if (j === fullText2.length) {
               clearInterval(typing2);
             }
-          }, 80);
+          }, 50);
         }, 700);
       }
-    }, 80);
+    }, 50);
 
-    return () => clearInterval(typing1);
+    // 🔥 COMPLETE CLEANUP 
+    return () => {
+      clearInterval(typing1);
+      clearInterval(typing2);
+      clearTimeout(delayTimeout);
+    };
+
   }, [fullText1, fullText2]);
+
+  // FADE PROBLEM TEXT
+
+  const headlineRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    if (headlineRef.current) {
+      observer.observe(headlineRef.current);
+    }
+
+    return () => {
+      if (headlineRef.current) {
+        observer.unobserve(headlineRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="font-sans text-gray-900">
@@ -113,10 +181,18 @@ export default function App() {
       <header className="fixed top-0 left-0 w-full bg-white shadow z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
           <h1 className="font-bold text-xl">Ximia</h1>
-          <nav className="space-x-6 hidden md:block">
-            <button onClick={() => scrollTo("problem")} className="hover:text-gray-500">Why our AI</button>
-            <button onClick={() => scrollTo("solution")} className="hover:text-gray-500">How it works</button>
-            <button onClick={() => scrollTo("impact")} className="hover:text-gray-500">The Impact</button>
+         <nav className="space-x-6 hidden md:block">
+            <button onClick={() => scrollTo("problem")} className="hover:text-gray-500">
+              {t("nav_problem")}
+            </button>
+
+            <button onClick={() => scrollTo("solution")} className="hover:text-gray-500">
+              {t("nav_solution")}
+            </button>
+
+            <button onClick={() => scrollTo("impact")} className="hover:text-gray-500">
+              {t("nav_impact")}
+            </button>
           </nav>
           <button
             onClick={() => scrollTo("demo")}
@@ -147,37 +223,38 @@ export default function App() {
 
           {/* LEFT SIDE */}
           <div>
-
-            <h2 className="text-7xl md:text-8xl lg:text-[110px] font-bold leading-[0.9] tracking-tight mb-6">
-
+            <h2 className="text-7xl md:text-8xl lg:text-[130px] font-bold leading-[0.9] tracking-tight mb-6">
               <span className="block">
                 {text1}
               </span>
-
-              <span className="block">
+              <span className="block text-gray-500">
                 {text2}
                  <span className="animate-blink">|</span>
               </span>
-
             </h2>
 
-            <p className="text-xl text-gray-600 mb-8">
-              Ximia turns visitors into qualified buyers and guides them to the right property automatically.
+            <p className="text-2xl md:text-3xl text-gray-700 leading-snug mb-10 max-w-xl">
+              <span className="block">
+                {t("hero_sub_line_1")}
+              </span>
+              <span className="block text-gray-500">
+                {t("hero_sub_line_2")}
+              </span>
             </p>
 
             <div className="flex gap-4">
-              <button className="bg-black text-white px-6 py-3 rounded-xl text-lg">
-                Try the demo
-              </button>
               <button className="border px-6 py-3 rounded-xl text-lg">
-                Watch how it works
+                {t("hero_cta_secondary")}
+              </button>
+              <button className="bg-black text-white px-6 py-3 rounded-xl text-lg">
+                {t("hero_cta_primary")}
               </button>
             </div>
 
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm h-full flex flex-col justify-start gap-4 overflow-hidden">
+          <div className="bg-white border border-gray-300 rounded-2xl p-6 shadow-sm h-full flex flex-col justify-start gap-4 overflow-hidden">
             {visibleMessages.map((msg, i) => (
               <div
                 key={i}
@@ -206,7 +283,7 @@ export default function App() {
         </div>
       </section>
 
-      <div className="w-full h-[500px] overflow-hidden">
+      <div className="w-full h-[700px] overflow-hidden">
         <video
           autoPlay
           muted
@@ -214,27 +291,70 @@ export default function App() {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="/demo.mp4" type="video/mp4" />
+          <source src="/demo2.mp4" type="video/mp4" />
         </video>
       </div>
 
       {/* THE PROBLEM */}
-      <section id="problem" className="py-32 text-center">
+      <section className="py-32 text-center bg-white">
         <div className="max-w-4xl mx-auto px-6">
+          <p className="text-xl md:text-3xl text-gray-700 mb-8">
+            {t("problem_intro_line1")}
+          </p>
+          <p className="text-2xl md:text-6xl font-bold text-gray-900 leading-tight">
+            {t("problem_intro_line2")}
+          </p>
+        </div>
+      </section>
 
-          <p className="text-gray-500 mb-6">
-            Most websites lose their best opportunities
+      <section className="py-40 bg-gray-900 text-white text-center">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 ref={headlineRef} className="text-5xl md:text-8xl font-bold leading-tight tracking-tight mb-10">
+          <span className={`block ${visible ? "animate-slideIn" : "opacity-0"}`}>
+            {t("problem_headline", { returnObjects: true })[0]}
+          </span>
+          <span className={`block ${visible ? "animate-slideIn delay-200" : "opacity-0"}`}>
+            {t("problem_headline", { returnObjects: true })[1]}
+          </span>
+          <span className="block" style={{ opacity: visible ? 1 : 0, transform: visible ? "translateX(0)" : "translateX(-40px)", transition: "transform 2s ease-out, opacity 1.2s ease-out", transitionDelay: visible ? "0.7s" : "0s" }} >
+            <span className="text-white" style={{color: visible ? "#4b5563" : "#ffffff", transition: "color 1.5s ease", transitionDelay: visible ? "1.6s" : "0s"}} >
+            {t("problem_headline", { returnObjects: true })[2]}</span>
+          </span>
+        </h2>
+
+          <p className="text-2xl md:text-2xl text-gray-400 mb-12">
+            {t("problem_subtext")}
           </p>
 
-          <h2 className="text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-6">
-            Visitors come.
-            <br /> They ask.
-            <br /> They leave.
-          </h2>
+          {/* STAT */}
+          <div className="mb-16">
+            <p className="text-6xl md:text-8xl font-bold">
+              {t("problem_stat_value")}
+            </p>
+            <p className="text-gray-400 mt-2">
+              {t("problem_stat_caption")}
+            </p>
+          </div>
 
-          <p className="text-lg text-gray-600">
-            No follow-up. No qualification. No conversion.
+          {/* RESULT */}
+          <p className="text-2xl font-semibold mb-16">
+            {t("problem_result")}
           </p>
+
+          {/* VERDICT */}
+          <div className="max-w-2xl mx-auto">
+            <p className="text-3xl md:text-4xl font-semibold leading-tight mb-6">
+              “{t("problem_quote")}”
+            </p>
+
+            <p className="text-gray-400 mb-4">
+              {t("problem_quote_sub")}
+            </p>
+
+            <p className="font-medium">
+              {t("problem_quote_closing")}
+            </p>
+          </div>
 
         </div>
       </section>

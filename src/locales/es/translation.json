@@ -1,7 +1,43 @@
 {
-  "hero_title_1": "Ximia AI no chatea.",
+  "nav_problem": "Por qué Ximia",
+  "nav_solution": "Cómo funciona",
+  "nav_impact": "Impacto",
+  "hero_title_1": "Ximia IA no chatea.",
   "hero_title_2": "Vende.",
-  "hero_sub": "Ximia transforma visitantes en compradores calificados y los guía automáticamente hacia la propiedad ideal.",
-  "cta_demo": "Probar demo",
-  "cta_watch": "Ver cómo funciona"
+  "hero_sub_line_1": "Ximia IA reemplaza formularios, chatbots y sitios que no convierten.",
+  "hero_sub_line_2": "Cada conversación, una venta.",
+  "hero_cta_secondary": "Cómo funciona",
+  "hero_cta_primary": "Agendar demo",
+  "hero_demo_conversations": [
+    [
+      { "from": "user", "text": "Estoy buscando una casa para mi familia" },
+      { "from": "ai", "text": "Perfecto. En este caso, el espacio y la distribución son clave. ¿Para cuántas personas?" },
+      { "from": "user", "text": "Somos 4, dos chicos" },
+      { "from": "ai", "text": "Entonces una casa de 3 ambientes, con un dormitorio para ustedes y no para cada uno de los chicos sería ideal. Además una buena separación entre zonas comunes y de descanso para cuando traigan amigos sería ideal. Tenemos opciones que serían perfectas para ustedes por valores que rondan los 180 - 250K. ¿Estás en ese rango?" },
+      { "from": "user", "text": "Sí, más o menos" },
+      { "from": "ai", "text": "Perfecto. Encontré 3 opciones que encajan con tu perfil. ¿Querés que te muestre la mejor opción?" }
+    ],
+    [
+      { "from": "user", "text": "Quiero invertir en una propiedad" },
+      { "from": "ai", "text": "Entiendo. Estás pensando en una inversión que te de una renta o en simplemente invertir en una propiedad que no se desvalorice en el largo plazo?" },
+      { "from": "user", "text": "Quisiera tener una renta" },
+      { "from": "ai", "text": "Perfecto, entonces la ubicación y la consistencia de la demanda son fundamentales." },
+      { "from": "ai", "text": "Puedo mostrarte las propiedades en nuestro portfolio con mejor ROI. Te parece si vemos las más destacadas?" }
+    ]
+  ],
+      "problem_label": "El problema no es generar leads",
+      "problem_intro_line1": "El problema actual no es generar leads.",
+      "problem_intro_line2": "Es no saber qué hacer con ellos en el momento correcto.",
+      "problem_headline": [
+        "Los visitantes llegan.",
+        "Muestran interés.",
+        "Se van."
+      ],
+      "problem_subtext": "Sin calificación. Sin seguimiento. Sin conversión.",
+      "problem_stat_value": "70–80%",
+      "problem_stat_caption": "de tus leads no están listos para comprar",
+      "problem_result": "Mucho esfuerzo. Pocas operaciones.",
+      "problem_quote": "El 80% de tus leads son ruido. El otro 20% se enfría esperando una respuesta.",
+      "problem_quote_sub": "Los flujos rígidos y los bots de respuesta automática frustran al comprador moderno.",
+      "problem_quote_closing": "Necesitás una inteligencia que decida, no que repita un guión."
 }

@@ -1,7 +1,39 @@
 {
-  "hero_title_1": "Ximia AI doesn’t chat.",
+  "nav_problem": "Why Ximia",
+  "nav_solution": "How it works",
+  "nav_impact": "The impact",
+  "hero_title_1": "Ximia does't chat.",
   "hero_title_2": "It converts.",
-  "hero_sub": "Ximia turns visitors into qualified buyers and guides them to the right property automatically.",
-  "cta_demo": "Try the demo",
-  "cta_watch": "Watch how it works"
+  "hero_sub_line_1":"Ximia IA replaces forms, chatbots, and websites that do not convert.",
+  "hero_sub_line_2": "Every interaction, a sale.",
+  "hero_cta_secondary": "How it works",
+  "hero_cta_primary": "Book a demo",
+  "hero_demo_conversations": [
+  [
+      { "from": "user", "text": "I'm looking for a house for my family" },
+      { "from": "ai", "text": "Got it. For a family setup, space and layout matter. How many people are you planning for?" },
+      { "from": "user", "text": "4, two kids" },
+      { "from": "ai", "text": "Perfect. A 3-bedroom layout with separation between living and resting areas would fit well." },
+      { "from": "ai", "text": "Based on similar buyers, budget usually ranges between $180K–$250K. Does that align with you?" },
+      { "from": "user", "text": "Yes, around that" },
+      { "from": "ai", "text": "Great. I found 3 options that match your profile. The first one is optimized for families and near schools. Want me to show you the best one?" }
+    ],
+    [
+      { "from": "user", "text": "I want to invest in property" },
+      { "from": "ai", "text": "Understood. Are you looking for rental income or long-term appreciation?" },
+      { "from": "user", "text": "Rental income" },
+      { "from": "ai", "text": "Then location and demand consistency are key." },
+      { "from": "ai", "text": "I can show you properties optimized for ROI. Want to see top options?" }
+    ]
+  ],
+  "problem_label": "Most websites lose their best opportunities",
+
+  "problem_headline_line1": "Visitors come.",
+  "problem_headline_line2": "They show intent.",
+  "problem_headline_line3": "They leave.",
+
+  "problem_subtext": "No qualification. No follow-up. No conversion."
 }
+
+
+
