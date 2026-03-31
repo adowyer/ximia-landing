@@ -218,7 +218,7 @@ export default function App() {
       </header>
 
       {/* HERO */}
-      <section className="pt-40 pb-32 bg-gradient-to-b from-white to-gray-50">
+      <section className="pt-56 pb-44 md:pt-64 md:pb-56 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-stretch">
 
           {/* LEFT SIDE */}
@@ -296,7 +296,7 @@ export default function App() {
       </div>
 
       {/* THE PROBLEM */}
-      <section className="py-32 text-center bg-white">
+      <section className="py-56 text-center bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-xl md:text-3xl text-gray-700 mb-8">
             {t("problem_intro_line1")}
