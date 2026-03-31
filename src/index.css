@@ -100,7 +100,7 @@
   100% {
     color: #4b5563; /* gray-600 */
   }
-}\
+}
 .animate-fadeToGray {
   animation: fadeToGray 1.5s ease forwards;
 }
