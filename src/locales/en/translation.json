@@ -8,6 +8,7 @@
   "hero_sub_line_2": "Every conversation, a closed deal.",
   "hero_cta_secondary": "How it works",
   "hero_cta_primary": "Book a demo",
+  "hero_demo_label": "This is how Ximia works.",
   "hero_scenarios": [
     {
       "id": "capture",
@@ -82,5 +83,31 @@
       "description": "All the information is structured to accelerate the closing process.",
       "icon": "check"
     }
-  ]
+  ],
+  "backend_title": "Pure commercial technology",
+  "backend_subtitle": "It's not a conversational bot. It's a deterministic engine that understands your business and executes the sale.",
+  "backend_items": [
+    {
+      "title": "Transactional Memory",
+      "description": "Builds a real-time lead profile structuring hard data: intent, timeline, and exact property requirements."
+    },
+    {
+      "title": "Deterministic Engine",
+      "description": "Ximia doesn't hallucinate or guess. It financially qualifies using strict rules, bank rates, and actual income."
+    },
+    {
+      "title": "Active Inventory Match",
+      "description": "Connects directly to your catalog to strictly offer properties the client can actually afford today."
+    }
+  ],
+  "vs_title": "Current tools vs Ximia AI",
+  "vs_features": [
+    { "feature": "Core Goal", "old": "Answer FAQs", "ximia": "Execute the sale" },
+    { "feature": "Logic", "old": "Rigid decision trees", "ximia": "Fluid commercial reasoning" },
+    { "feature": "Financing", "old": "No pre-qualification", "ximia": "Calculates real-time viability" },
+    { "feature": "Final Output", "old": "Messy chat logs", "ximia": "Structured lead ready to close" }
+  ],
+  "cta_headline": "The difference is clear when you see it in action",
+  "cta_subheadline": "If you're losing deals to poorly profiled leads or slow follow-ups, you don't need a chatbot... you need intelligence.",
+  "cta_button": "Book a demo"
 }

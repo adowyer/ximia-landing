@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Zap, BarChart3, Target, Check } from "lucide-react";
+import { Zap, BarChart3, Target, Check, Database, Cpu, Home } from "lucide-react";
 
 // i18n
 import i18n from "i18next";
@@ -339,9 +339,9 @@ export default function App() {
             </div>
 
             {/* THE CONTROLS (OUTSIDE, BELOW, CENTERED) */}
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col items-center gap-3 mt-2">
               <span className="text-sm font-medium text-gray-500">
-                {t("hero_demo_label", "Explorá cómo resuelve diferentes escenarios")}
+                {t("hero_demo_label")}
               </span>
               <div className="flex gap-2 p-1 overflow-x-auto scrollbar-hide justify-center w-full max-w-full">
                 {heroScenarios.map((scenario, idx) => (
@@ -528,7 +528,7 @@ export default function App() {
 
               {/* BRAND LOGO (FIXED) */}
               <div className="absolute top-10 left-10">
-                <img src="/Logo-X-ia.png" alt="Ximia AI" className="h-10 md:h-14 w-auto object-contain opacity-100" />
+                <img src="/Logo-X-b.png" alt="Ximia AI" className="h-10 md:h-14 w-auto object-contain opacity-100" />
               </div>
 
               <div key={activeStep} className="w-full h-full flex items-center justify-center animate-step">
@@ -599,34 +599,75 @@ export default function App() {
         </div>
       </section>
 
-      {/* IMPACT */}
-      <section id="impact" className="py-32 text-center">
-        <div className="max-w-4xl mx-auto px-6">
+      {/* 1. BACKEND / TECHNOLOGY */}
+      <section className="py-24 md:py-32 bg-gray-50 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16 md:mb-24 max-w-3xl mx-auto">
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-gray-900 mb-6">
+              {t("backend_title")}
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-500 font-medium">
+              {t("backend_subtitle")}
+            </p>
+          </div>
 
-          <h2 className="text-6xl md:text-7xl font-bold leading-[0.9] tracking-tight mb-6">
-            This isn’t a chatbot.
-            <br /> It’s your best salesperson.
-          </h2>
-
-          <p className="text-xl text-gray-600 mb-10">
-            Working 24/7. Never missing a lead.
-          </p>
-
-          <button className="bg-black text-white px-8 py-4 rounded-xl text-lg">
-            Start converting visitors
-          </button>
-
+          <div className="grid md:grid-cols-3 gap-8">
+            {Array.isArray(t("backend_items", { returnObjects: true })) && t("backend_items", { returnObjects: true }).map((item, idx) => (
+              <div key={idx} className="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                <div className="w-14 h-14 bg-[#0092B3]/10 text-[#0092B3] rounded-2xl flex items-center justify-center mb-8">
+                  {idx === 0 ? <Database size={28} /> : idx === 1 ? <Cpu size={28} /> : <Home size={28} />}
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{item.title}</h3>
+                <p className="text-gray-500 text-lg leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* CTA FINAL */}
-      <section className="py-20 bg-black text-white text-center">
-        <h2 className="text-3xl font-bold mb-6">
-          Empezá a vender más hoy
-        </h2>
-        <button className="bg-white text-black px-6 py-3 rounded-xl">
-          Solicitar demo
-        </button>
+      {/* 2. THE VS TABLE & 3. BRUTAL CTA */}
+      <section className="py-32 md:py-40 bg-gray-900 text-white relative overflow-hidden">
+        {/* Subtle grid background / vignette */}
+        <div className="absolute inset-0 bg-black opacity-40"></div>
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
+          
+          {/* THE TABLE */}
+          <div className="mb-32">
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-center mb-16 md:mb-20">
+              {t("vs_title")}
+            </h2>
+            
+            <div className="bg-gray-800/80 backdrop-blur-xl border border-gray-700 rounded-[2.5rem] p-8 md:p-12 shadow-2xl">
+              <div className="grid grid-cols-3 gap-6 border-b border-gray-700 pb-6 mb-6">
+                <div className="text-gray-500 font-bold uppercase tracking-widest text-xs md:text-sm">Área</div>
+                <div className="text-gray-400 font-bold text-base md:text-xl">Chatbot Tradicional</div>
+                <div className="text-[#0092B3] font-black text-xl md:text-2xl">Ximia IA</div>
+              </div>
+              
+              {Array.isArray(t("vs_features", { returnObjects: true })) && t("vs_features", { returnObjects: true }).map((feat, idx) => (
+                <div key={idx} className={`grid grid-cols-3 gap-6 items-center py-6 ${idx !== t("vs_features", { returnObjects: true }).length - 1 ? 'border-b border-gray-800' : ''}`}>
+                  <div className="text-gray-400 font-medium text-sm md:text-lg">{feat.feature}</div>
+                  <div className="text-gray-500 text-base md:text-xl">{feat.old}</div>
+                  <div className="text-white font-bold text-lg md:text-2xl">{feat.ximia}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* BRUTAL CTA */}
+          <div className="text-center max-w-4xl mx-auto mt-20 md:mt-40 border-t border-gray-800 pt-20 md:pt-40">
+            <h2 className="text-6xl md:text-8xl font-black leading-[0.9] tracking-tight mb-10 text-white">
+              {t("cta_headline")}
+            </h2>
+            <p className="text-2xl md:text-3xl text-gray-400 font-medium mb-16 max-w-3xl mx-auto leading-snug">
+              {t("cta_subheadline")}
+            </p>
+            <button className="bg-white text-black px-12 py-6 rounded-full text-xl font-bold hover:scale-105 transition-transform duration-300 uppercase tracking-widest flex mx-auto items-center gap-3">
+              {t("cta_button")} <Zap size={20} fill="currentColor" />
+            </button>
+          </div>
+
+        </div>
       </section>
 
     </div>

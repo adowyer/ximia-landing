@@ -65,7 +65,6 @@
   animation: slideIn 2s ease forwards;
 }
 
-/* delays */
 .delay-200 {
   animation-delay: 0.2s;
 }
@@ -88,7 +87,6 @@
 
 
 /* BOTPRESS WIDGET */
-
 .bpFabWrapper,
 iframe.bpFab,
 iframe[name="fab"] {

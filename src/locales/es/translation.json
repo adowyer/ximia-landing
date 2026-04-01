@@ -5,13 +5,14 @@
   "hero_title_1": "Ximia IA no chatea.",
   "hero_title_2": "Vende.",
   "hero_sub_line_1": "Ximia IA reemplaza formularios, chatbots y sitios que no convierten.",
-  "hero_sub_line_2": "Cada conversación, una venta.",
+  "hero_sub_line_2": "Cada conversación, una venta.", 
   "hero_cta_secondary": "Cómo funciona",
   "hero_cta_primary": "Agendar demo",
+  "hero_demo_label": "Mirá a Ximia aplicada en escenarios reales.",
   "hero_scenarios": [
     {
       "id": "capture",
-      "tab": "🎯 Intención",
+      "tab": "🎯 La intención",
       "messages": [
         { "from": "user", "text": "Hola, busco algo para invertir mis ahorros." },
         { "from": "ai", "text": "Perfecto. ¿Buscás renta mensual inmediata o revalorización a largo plazo (pozo)?" },
@@ -21,7 +22,7 @@
     },
     {
       "id": "financial",
-      "tab": "📊 Finanzas",
+      "tab": "📊 Las finanzas",
       "messages": [
         { "from": "user", "text": "Me gusta la unidad 4B, pero llego a USD 120k." },
         { "from": "ai", "text": "El valor es USD 150k. Con tus 120k (80%), aplicás directo a nuestra financiación a 24 meses. La cuota quedaría en USD 1,250." },
@@ -31,7 +32,7 @@
     },
     {
       "id": "match",
-      "tab": "🏠 Match",
+      "tab": "🏠 La recomendación",
       "messages": [
         { "from": "user", "text": "Somos 4 de familia. Buscamos casa con verde." },
         { "from": "ai", "text": "Registrado: Uso familiar, 4 personas, jardín. ¿Preferís Zona Norte o corredor Pilar?" },
@@ -82,5 +83,31 @@
           "description": "Toda la información queda estructurada para acelerar el cierre.",
           "icon": "check"
         }
-      ]
+      ],
+      "backend_title": "Tecnología comercial pura",
+      "backend_subtitle": "No es un bot conversacional. Es un motor determinístico que entiende tu negocio y ejecuta la venta.",
+      "backend_items": [
+        {
+          "title": "Memoria Transaccional",
+          "description": "Construye un perfil del lead en tiempo real estructurando datos duros: intención, plazos y requerimientos de la propiedad."
+        },
+        {
+          "title": "Motor Determinístico",
+          "description": "Ximia no alucina ni estima. Califica financieramente basándose en reglas estrictas, tasas bancarias e ingresos reales."
+        },
+        {
+          "title": "Inventario Activo",
+          "description": "Se conecta a tu catálogo para ofrecer únicamente las propiedades que el cliente realmente puede pagar hoy."
+        }
+      ],
+      "vs_title": "Lo que usás hoy vs Ximia IA",
+      "vs_features": [
+        { "feature": "Objetivo", "old": "Responder FAQs", "ximia": "Ejecutar la venta" },
+        { "feature": "Lógica", "old": "Árboles rígidos", "ximia": "Razonamiento comercial fluido" },
+        { "feature": "Finanzas", "old": "No califica", "ximia": "Calcula viabilidad al instante" },
+        { "feature": "Resultado", "old": "Chats desordenados", "ximia": "Lead estructurado listo para cierre" }
+      ],
+      "cta_headline": "La diferencia se entiende cuando la ves funcionar",
+      "cta_subheadline": "Si hoy perdés ventas por leads mal perfilados o tiempos de respuesta lentos, no necesitás un chatbot... necesitás inteligencia comercial.",
+      "cta_button": "Agendar una demo"
 }
