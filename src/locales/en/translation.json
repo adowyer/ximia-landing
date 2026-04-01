@@ -1,76 +1,86 @@
 {
   "nav_problem": "Why Ximia",
   "nav_solution": "How it works",
-  "nav_impact": "The impact",
-  "hero_title_1": "Ximia does't chat.",
-  "hero_title_2": "It converts.",
-  "hero_sub_line_1":"Ximia IA replaces forms, chatbots, and websites that do not convert.",
-  "hero_sub_line_2": "Every interaction, a sale.",
+  "nav_impact": "Impact",
+  "hero_title_1": "Ximia AI doesn't chat.",
+  "hero_title_2": "It sells.",
+  "hero_sub_line_1": "Ximia AI replaces forms, chatbots, and websites that don't convert.",
+  "hero_sub_line_2": "Every conversation, a closed deal.",
   "hero_cta_secondary": "How it works",
   "hero_cta_primary": "Book a demo",
-  "hero_demo_conversations": [
-  [
-      { "from": "user", "text": "I'm looking for a house for my family" },
-      { "from": "ai", "text": "Got it. For a family setup, space and layout matter. How many people are you planning for?" },
-      { "from": "user", "text": "4, two kids" },
-      { "from": "ai", "text": "Perfect. A 3-bedroom layout with separation between living and resting areas would fit well." },
-      { "from": "ai", "text": "Based on similar buyers, budget usually ranges between $180K–$250K. Does that align with you?" },
-      { "from": "user", "text": "Yes, around that" },
-      { "from": "ai", "text": "Great. I found 3 options that match your profile. The first one is optimized for families and near schools. Want me to show you the best one?" }
-    ],
-    [
-      { "from": "user", "text": "I want to invest in property" },
-      { "from": "ai", "text": "Understood. Are you looking for rental income or long-term appreciation?" },
-      { "from": "user", "text": "Rental income" },
-      { "from": "ai", "text": "Then location and demand consistency are key." },
-      { "from": "ai", "text": "I can show you properties optimized for ROI. Want to see top options?" }
-    ]
-    ],
-    "problem_label": "El problema no es generar leads",
-    "problem_intro_line1": "El problema actual no es generar leads.",
-    "problem_intro_line2": "Es no saber qué hacer con ellos en el momento correcto.",
-    "problem_headline": [
-      "Tu equipo atiende a todos.",
-      "Sólo el 20% iba a comprar.",
-      "Y ya cerró con alguien más."
-    ],
-    "problem_stat_value": "70–80%",
-    "problem_stat_caption": "de tus leads son ruido",
-    "problem_items": [
-      "Tu equipo pierde horas calificando manualmente",
-      "Los leads calientes se enfrían esperando respuesta",
-      "Las conversaciones no escalan",
-      "El proceso depende demasiado del límite humano"
-    ],
-    "problem_result": "Mucho esfuerzo. Pocas operaciones.",
-    "problem_quote_closing": "Necesitás una inteligencia que decida, no que repita un guión.",
-
-    "process_steps": [
-        {
-          "label": "01 · Captura",
-          "title": "Entiende qué busca el cliente",
-          "description": "Detecta si busca vivienda, inversión o lote desde la conversación.",
-          "icon": "zap"
-        },
-        {
-          "label": "02 · Analiza",
-          "title": "Evalúa viabilidad financiera",
-          "description": "Valida presupuesto y perfil con lógica de mercado real.",
-          "icon": "chart"
-        },
-        {
-          "label": "03 · Propone",
-          "title": "Recomienda el match correcto",
-          "icon": "target"
-        },
-        {
-          "label": "04 · Cierra",
-          "title": "Entrega el lead listo para avanzar",
-          "description": "Toda la información queda estructurada para acelerar el cierre.",
-          "icon": "check"
-        }
+  "hero_scenarios": [
+    {
+      "id": "capture",
+      "tab": "🎯 Intent",
+      "messages": [
+        { "from": "user", "text": "Hi, I'm looking to invest my savings." },
+        { "from": "ai", "text": "Perfect. Are you looking for immediate monthly rental income or long-term appreciation (pre-construction)?" },
+        { "from": "user", "text": "USD rent, as soon as possible." },
+        { "from": "ai", "text": "Got it. I'll filter for finished projects in high-demand areas (e.g. AIRBNB). Shall we proceed with that profile?" }
       ]
+    },
+    {
+      "id": "financial",
+      "tab": "📊 Finance",
+      "messages": [
+        { "from": "user", "text": "I love unit 4B, but I only have $120k in cash." },
+        { "from": "ai", "text": "The price is $150k. With your $120k (80%), you instantly qualify for our 24-month developer financing. The installment would be $1,250/mo." },
+        { "from": "user", "text": "Excellent, I can afford that." },
+        { "from": "ai", "text": "Validated ✔️. Preparing the formal simulation and connecting you with the sales team to reserve." }
+      ]
+    },
+    {
+      "id": "match",
+      "tab": "🏠 Match",
+      "messages": [
+        { "from": "user", "text": "Family of 4. We want a house with a backyard." },
+        { "from": "ai", "text": "Logged: Family use, 4 people, outdoor space. North zone or Pilar corridor?" },
+        { "from": "user", "text": "Pilar, closer to the schools." },
+        { "from": "ai", "text": "I have 3 properties that are an exact match (all 3 beds + garden). Would you like to schedule visits for the highest-ranked one?" }
+      ]
+    }
+  ],
+  "problem_label": "Generating leads isn't the problem",
+  "problem_intro_line1": "Generating leads isn't the problem anymore.",
+  "problem_intro_line2": "It's knowing what to do with them at the exact right moment.",
+  "problem_headline": [
+    "Your team attends to everyone.",
+    "Only 20% were actual buyers.",
+    "And they already closed with someone else."
+  ],
+  "problem_stat_value": "70–80%",
+  "problem_stat_caption": "of your leads are just noise",
+  "problem_items": [
+    "Your team wastes hours on manual qualification",
+    "Hot leads go cold waiting for a response",
+    "Conversations don't scale",
+    "The process is bottlenecked by human limits"
+  ],
+  "problem_result": "Huge effort. Few deals.",
+  "problem_quote_closing": "You need an intelligence that decides, not one that repeats a script.",
+  "process_steps": [
+    {
+      "label": "01 · Capture",
+      "title": "Understand exactly what they want",
+      "description": "Detect if they want a home, investment, or land right from the conversation.",
+      "icon": "zap"
+    },
+    {
+      "label": "02 · Analyze",
+      "title": "Evaluate financial viability",
+      "description": "Validate their budget and profile using real market logic.",
+      "icon": "chart"
+    },
+    {
+      "label": "03 · Propose",
+      "title": "Recommend the perfect match",
+      "icon": "target"
+    },
+    {
+      "label": "04 · Close",
+      "title": "Deliver a ready-to-close lead",
+      "description": "All the information is structured to accelerate the closing process.",
+      "icon": "check"
+    }
+  ]
 }
-
-
-

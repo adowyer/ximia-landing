@@ -8,22 +8,37 @@
   "hero_sub_line_2": "Cada conversación, una venta.",
   "hero_cta_secondary": "Cómo funciona",
   "hero_cta_primary": "Agendar demo",
-  "hero_demo_conversations": [
-    [
-      { "from": "user", "text": "Estoy buscando una casa para mi familia" },
-      { "from": "ai", "text": "Perfecto. En este caso, el espacio y la distribución son clave. ¿Para cuántas personas?" },
-      { "from": "user", "text": "Somos 4, dos chicos" },
-      { "from": "ai", "text": "Entonces una casa de 3 ambientes, con un dormitorio para ustedes y no para cada uno de los chicos sería ideal. Además una buena separación entre zonas comunes y de descanso para cuando traigan amigos sería ideal. Tenemos opciones que serían perfectas para ustedes por valores que rondan los 180 - 250K. ¿Estás en ese rango?" },
-      { "from": "user", "text": "Sí, más o menos" },
-      { "from": "ai", "text": "Perfecto. Encontré 3 opciones que encajan con tu perfil. ¿Querés que te muestre la mejor opción?" }
-    ],
-    [
-      { "from": "user", "text": "Quiero invertir en una propiedad" },
-      { "from": "ai", "text": "Entiendo. Estás pensando en una inversión que te de una renta o en simplemente invertir en una propiedad que no se desvalorice en el largo plazo?" },
-      { "from": "user", "text": "Quisiera tener una renta" },
-      { "from": "ai", "text": "Perfecto, entonces la ubicación y la consistencia de la demanda son fundamentales." },
-      { "from": "ai", "text": "Puedo mostrarte las propiedades en nuestro portfolio con mejor ROI. Te parece si vemos las más destacadas?" }
-    ]
+  "hero_scenarios": [
+    {
+      "id": "capture",
+      "tab": "🎯 Intención",
+      "messages": [
+        { "from": "user", "text": "Hola, busco algo para invertir mis ahorros." },
+        { "from": "ai", "text": "Perfecto. ¿Buscás renta mensual inmediata o revalorización a largo plazo (pozo)?" },
+        { "from": "user", "text": "Renta en dólares, lo antes posible." },
+        { "from": "ai", "text": "Entiendo. Entonces filtramos proyectos terminados en zonas de alta demanda (ej. AIRBNB). ¿Avanzamos con ese perfil?" }
+      ]
+    },
+    {
+      "id": "financial",
+      "tab": "📊 Finanzas",
+      "messages": [
+        { "from": "user", "text": "Me gusta la unidad 4B, pero llego a USD 120k." },
+        { "from": "ai", "text": "El valor es USD 150k. Con tus 120k (80%), aplicás directo a nuestra financiación a 24 meses. La cuota quedaría en USD 1,250." },
+        { "from": "user", "text": "Excelente, puedo pagar esa cuota." },
+        { "from": "ai", "text": "Validado ✔️. Preparo la simulación financiera formal y te pongo en contacto con el equipo comercial para reservar." }
+      ]
+    },
+    {
+      "id": "match",
+      "tab": "🏠 Match",
+      "messages": [
+        { "from": "user", "text": "Somos 4 de familia. Buscamos casa con verde." },
+        { "from": "ai", "text": "Registrado: Uso familiar, 4 personas, jardín. ¿Preferís Zona Norte o corredor Pilar?" },
+        { "from": "user", "text": "Pilar, por los colegios." },
+        { "from": "ai", "text": "Tengo 3 propiedades que hacen match exacto (todas con 3 dormitorios y parque). ¿Querés que armemos visitas a la mejor rankeada?" }
+      ]
+    }
   ],
       "problem_label": "El problema no es generar leads",
       "problem_intro_line1": "El problema actual no es generar leads.",
@@ -46,7 +61,7 @@
       "process_steps": [
         {
           "label": "01 · Captura",
-          "title": "Entiende qué busca el cliente",
+          "title": "Entiende exactamente qué busca el cliente",
           "description": "Detecta si busca vivienda, inversión o lote desde la conversación.",
           "icon": "zap"
         },

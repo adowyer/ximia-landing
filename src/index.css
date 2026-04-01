@@ -94,14 +94,14 @@ BOTPRESS WIDGET
 .bpFabWrapper,
 iframe.bpFab,
 iframe[name="fab"] {
-    width: 250px !important;
-    height: 250px !important;
+    width: 200px !important;
+    height: 200px !important;
     overflow: visible !important;
 }
 
 .bpFabWrapper { 
     position: fixed !important;
-    right: 16% !important;
+    right: 12% !important;
     top: 150px !important;
 }
 

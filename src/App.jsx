@@ -43,56 +43,9 @@ export default function App() {
   // CHAT
   // =========================
 
-  const rawConversations = t("hero_demo_conversations", { returnObjects: true });
-  const conversations = Array.isArray(rawConversations) ? rawConversations : [];
-
-  const [conversationIndex, setConversationIndex] = useState(0);
-  const [visibleMessages, setVisibleMessages] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const messages = Array.isArray(conversations[conversationIndex])
-    ? conversations[conversationIndex]
-    : [];
-
-  useEffect(() => {
-    if (messages.length > 0) {
-      setVisibleMessages([messages[0]]);
-      setCurrentIndex(1);
-    }
-  }, [conversationIndex]);
-
-  useEffect(() => {
-    if (!messages.length) return;
-
-    if (currentIndex < messages.length) {
-      const isLastMessage = currentIndex === messages.length - 1;
-      const delay = isLastMessage ? 2000 : 1200;
-
-      const timeout = setTimeout(() => {
-        setVisibleMessages((prev) => [...prev, messages[currentIndex]]);
-        setCurrentIndex((prev) => prev + 1);
-      }, delay);
-
-      return () => clearTimeout(timeout);
-    } else {
-      const lastMessages = messages.slice(-2);
-      const totalChars = lastMessages.reduce(
-        (acc, msg) => acc + (msg?.text?.length || 0),
-        0
-      );
-
-      const readingTime = totalChars * 50;
-      const finalDelay = Math.max(readingTime, 4000);
-
-      const reset = setTimeout(() => {
-        setConversationIndex((prev) => (prev + 1) % conversations.length);
-        setVisibleMessages([]);
-        setCurrentIndex(0);
-      }, finalDelay);
-
-      return () => clearTimeout(reset);
-    }
-  }, [currentIndex, messages, conversations.length]);
+  const rawScenarios = t("hero_scenarios", { returnObjects: true });
+  const heroScenarios = Array.isArray(rawScenarios) ? rawScenarios : [];
+  const [activeScenario, setActiveScenario] = useState(0);
 
   // =========================
   // HERO TYPEWRITER
@@ -351,28 +304,61 @@ export default function App() {
 
           </div>
 
-          {/* RIGHT SIDE */}
-          <div className="bg-white border border-gray-300 rounded-2xl p-6 shadow-sm h-full flex flex-col justify-start gap-4 overflow-hidden">
-            {visibleMessages.map((msg, i) => (
-              <div
-                key={i}
-                className={`flex ${msg.from === "user" ? "justify-end" : "items-start gap-2"
-                  }`}
-              >
-                {msg.from === "ai" && (
-                  <img src="/AI-Icon.gif" className="w-6 h-6 mt-1" />
-                )}
+          {/* RIGHT SIDE: Interactive Demo */}
+          <div className="w-full h-full flex flex-col gap-6 justify-between">
+            
+            {/* THE CHAT BOX */}
+            <div className="bg-white/90 backdrop-blur-xl border border-gray-200 rounded-[2rem] p-4 md:p-6 shadow-xl flex flex-col overflow-hidden relative flex-1 min-h-[420px]">
+              {/* MESSAGES */}
+              <div key={activeScenario} className="flex-1 flex flex-col justify-start gap-4 overflow-y-auto pb-8 scrollbar-hide">
+                {heroScenarios[activeScenario]?.messages?.map((msg, i) => (
+                  <div
+                    key={i}
+                    className={`flex animate-step ${msg.from === "user" ? "justify-end" : "items-start gap-2"}`}
+                    style={{ animationDelay: `${i * 0.15}s`, animationFillMode: "both" }}
+                  >
+                    {msg.from === "ai" && (
+                      <img src="/AI-Icon.gif" alt="AI Agent" className="w-6 h-6 mt-1 rounded-full shadow-sm" />
+                    )}
 
-                <div
-                  className={`p-3 rounded-xl max-w-[75%] transition-all duration-300 ${msg.from === "user"
-                    ? "bg-[#0092B3] text-white"
-                    : "bg-gray-100"
-                    }`}
-                >
-                  {msg.text}
-                </div>
+                    <div
+                      className={`p-3 rounded-2xl max-w-[85%] md:max-w-[80%] text-sm md:text-base leading-relaxed shadow-sm ${
+                        msg.from === "user"
+                          ? "bg-[#0092B3] text-white rounded-br-sm"
+                          : "bg-gray-50 border border-gray-100 text-gray-800 rounded-bl-sm"
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+
+              {/* Bottom fading gradient to simulate scroll bounds */}
+              <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white to-transparent pointer-events-none rounded-b-[2rem]"></div>
+            </div>
+
+            {/* THE CONTROLS (OUTSIDE, BELOW, CENTERED) */}
+            <div className="flex flex-col items-center gap-3">
+              <span className="text-sm font-medium text-gray-500">
+                {t("hero_demo_label", "Explorá cómo resuelve diferentes escenarios")}
+              </span>
+              <div className="flex gap-2 p-1 overflow-x-auto scrollbar-hide justify-center w-full max-w-full">
+                {heroScenarios.map((scenario, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveScenario(idx)}
+                    className={`whitespace-nowrap px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 border ${
+                      activeScenario === idx 
+                        ? 'bg-gray-700 text-white border-gray-700 shadow-md scale-105' 
+                        : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:bg-gray-50 hover:scale-105'
+                    }`}
+                  >
+                    {scenario.tab}
+                  </button>
+                ))}
+              </div>
+            </div>
 
           </div>
 
