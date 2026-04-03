@@ -58,56 +58,69 @@
         "El proceso depende demasiado del límite humano"
       ],
       "problem_result": "Mucho esfuerzo. Pocas operaciones.",
-      "problem_quote_closing": "Necesitás una inteligencia que decida, no que repita un guión.",
+      "problem_quote_closing": "",
+
+      "solution_title": "Ximia resuelve eso.",
+
       "process_steps": [
         {
           "label": "01 · Captura",
-          "title": "Entiende exactamente qué busca el cliente",
-          "description": "Detecta si busca vivienda, inversión o lote desde la conversación.",
+          "title": "Convierte lenguaje natural en datos accionables",
+          "description": "Mientras el usuario conversa, Ximia interpreta intención real, contexto y necesidades, transformando cada mensaje en datos estructurados sin usar formularios.",
           "icon": "zap"
         },
         {
           "label": "02 · Analiza",
-          "title": "Evalúa viabilidad financiera",
-          "description": "Valida presupuesto y perfil con lógica de mercado real.",
+          "title": "Valida viabilidad con lógica determinística",
+          "description": "Los datos extraídos se procesan contra reglas financieras reales, evaluando capacidad de compra y eliminando estimaciones o supuestos.",
           "icon": "chart"
         },
         {
           "label": "03 · Propone",
-          "title": "Recomienda el match correcto",
+          "title": "Activa decisiones basadas en datos",
+          "description": "Cruza perfil, intención y presupuesto contra el inventario disponible para identificar únicamente las opciones que realmente aplican.",
           "icon": "target"
         },
         {
           "label": "04 · Cierra",
-          "title": "Entrega el lead listo para avanzar",
-          "description": "Toda la información queda estructurada para acelerar el cierre.",
+          "title": "Entrega un lead listo para avanzar",
+          "description": "El resultado no es un chat: es un perfil completo, validado y priorizado, listo para que el equipo comercial actúe con precisión.",
           "icon": "check"
         }
       ],
-      "backend_title": "Tecnología comercial pura",
-      "backend_subtitle": "No es un bot conversacional. Es un motor determinístico que entiende tu negocio y ejecuta la venta.",
+      "backend_title": "Tecnología que entiende, valida y decide en tiempo real",
+      "backend_title_words": [
+        "Tecnología",
+        "que entiende,",
+        "valida",
+        "y decide",
+        "en tiempo real."
+      ],
+      "backend_subtitle": "Ximia combina modelos de lenguaje, extracción estructurada y lógica determinística para transformar conversación en datos, validarlos y operar sobre ellos con precisión.",
       "backend_items": [
-        {
-          "title": "Memoria Transaccional",
-          "description": "Construye un perfil del lead en tiempo real estructurando datos duros: intención, plazos y requerimientos de la propiedad."
-        },
-        {
-          "title": "Motor Determinístico",
-          "description": "Ximia no alucina ni estima. Califica financieramente basándose en reglas estrictas, tasas bancarias e ingresos reales."
-        },
-        {
-          "title": "Inventario Activo",
-          "description": "Se conecta a tu catálogo para ofrecer únicamente las propiedades que el cliente realmente puede pagar hoy."
-        }
-      ],
-      "vs_title": "Lo que usás hoy vs Ximia IA",
-      "vs_features": [
-        { "feature": "Objetivo", "old": "Responder FAQs", "ximia": "Ejecutar la venta" },
-        { "feature": "Lógica", "old": "Árboles rígidos", "ximia": "Razonamiento comercial fluido" },
-        { "feature": "Finanzas", "old": "No califica", "ximia": "Calcula viabilidad al instante" },
-        { "feature": "Resultado", "old": "Chats desordenados", "ximia": "Lead estructurado listo para cierre" }
-      ],
-      "cta_headline": "La diferencia se entiende cuando la ves funcionar",
-      "cta_subheadline": "Si hoy perdés ventas por leads mal perfilados o tiempos de respuesta lentos, no necesitás un chatbot... necesitás inteligencia comercial.",
-      "cta_button": "Agendar una demo"
+          {
+            "title": "Motor de extracción NLP → JSON",
+            "description": "Mientras el usuario conversa en lenguaje natural, el sistema interpreta el input con modelos de lenguaje y extrae variables críticas como capital disponible, composición del hogar y horizonte de compra. Estas variables no se almacenan como texto: se estructuran en datos utilizables por el sistema, eliminando la necesidad de formularios."
+          },
+          {
+            "title": "Validación financiera determinística",
+            "description": "Los modelos de lenguaje no participan en los cálculos. Las variables extraídas se procesan en una capa separada, donde se evalúan contra reglas financieras, condiciones de mercado y lógica de negocio. El resultado es consistente, reproducible y alineado con datos reales."
+          },
+          {
+            "title": "Scoring por insights + análisis de señal",
+            "description": "Cada interacción genera señales que el sistema interpreta más allá del contenido explícito: intención, urgencia, consistencia y comportamiento. Estas señales se consolidan en un scoring dinámico que refleja la madurez real del lead y evoluciona a medida que avanza la conversación."
+          }
+        ],
+        "vs_title": "Lo que usás hoy vs Ximia.ai",
+        "vs_features": [
+          { "feature": "Objetivo", "old": "Responder consultas", "ximia": "Ejecutar decisiones comerciales" },
+          { "feature": "Procesamiento", "old": "Texto sin estructura", "ximia": "Datos estructurados en tiempo real" },
+          { "feature": "Lógica", "old": "Flujos o prompts", "ximia": "Motor determinístico sobre datos" },
+          { "feature": "Finanzas", "old": "No califica", "ximia": "Validación financiera real" },
+          { "feature": "Inteligencia", "old": "Sin contexto acumulado", "ximia": "Scoring por intención y urgencia" },
+          { "feature": "Resultado", "old": "Charlas", "ximia": "Leads listos para cierre" }
+        ],
+        "cta_headline": "No escales tu equipo. Escalá tu capacidad de cierre.",
+        "cta_subheadline": "Ximia genera y califica leads 24/7, prioriza oportunidades reales y libera a tu equipo para enfocarse en cerrar ventas, no en filtrar contactos.",
+        "cta_button": "Agendar demo"
 }

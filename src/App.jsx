@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Zap, BarChart3, Target, Check, Database, Cpu, Home } from "lucide-react";
+import { Zap, BarChart3, Target, Check, Database, Cpu, Home, Braces, Landmark, Radar } from "lucide-react";
 
 // i18n
 import i18n from "i18next";
@@ -157,6 +157,17 @@ export default function App() {
   const [stage, setStage] = useState(0);
   const problemRef = useRef(null);
   const [inView, setInView] = useState(false);
+
+  const backendTitleRef = useRef(null);
+  const [backendInView, setBackendInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setBackendInView(true);
+    }, { threshold: 0.3 });
+    if (backendTitleRef.current) observer.observe(backendTitleRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!inView) return;
@@ -479,14 +490,14 @@ export default function App() {
 
           {/* HEADER WITH BG X */}
           <div className="relative py-12 md:py-24 mb-20 flex items-center justify-center w-full">
-            {/* The giant 'X' background watermark */}
+            {/* The 'X' watermark */}
             <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
               <img src="/X.png" alt="Ximia Watermark" className="w-[800px] h-auto object-contain" />
             </div>
 
             {/* The actual text */}
             <h2 className="text-5xl md:text-8xl font-black leading-tight tracking-tight text-center text-gray-900 relative z-10">
-              Ximia IA cambia eso.
+              {t("solution_title")}
             </h2>
           </div>
 
@@ -600,32 +611,49 @@ export default function App() {
       </section>
 
       {/* 1. BACKEND / TECHNOLOGY */}
-      <section className="py-24 md:py-32 bg-gray-50 border-t border-gray-100">
+      <section className="py-24 md:py-32 bg-gray-50 border-t border-gray-100 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16 md:mb-24 max-w-3xl mx-auto">
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-gray-900 mb-6">
-              {t("backend_title")}
+          <div ref={backendTitleRef} className="text-center mb-16 md:mb-24 max-w-4xl mx-auto">
+            <h2 className="text-7xl md:text-7xl font-bold tracking-tight mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2">
+              {Array.isArray(t("backend_title_words", { returnObjects: true })) 
+                ? t("backend_title_words", { returnObjects: true }).map((word, idx, arr) => (
+                  <span 
+                    key={idx} 
+                    className={`inline-block ${backendInView ? "animate-step" : "opacity-0"} ${idx === 0 ? "text-gray-900" : idx === arr.length - 1 ? "text-[#0092B3]" : "text-gray-500"}`}
+                    style={{ animationDelay: `${idx * 0.4}s`, animationFillMode: "both" }}
+                  >
+                    {word}
+                  </span>
+                ))
+                : <span className="text-gray-900">{t("backend_title")}</span>
+              }
             </h2>
-            <p className="text-xl md:text-2xl text-gray-500 font-medium">
+            <p className={`text-xl md:text-2xl text-gray-500 leading-relaxed transition-opacity duration-1000 ${backendInView ? "opacity-100" : "opacity-0"}`} style={{ transitionDelay: "1.6s" }}>
               {t("backend_subtitle")}
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {Array.isArray(t("backend_items", { returnObjects: true })) && t("backend_items", { returnObjects: true }).map((item, idx) => (
-              <div key={idx} className="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-                <div className="w-14 h-14 bg-[#0092B3]/10 text-[#0092B3] rounded-2xl flex items-center justify-center mb-8">
-                  {idx === 0 ? <Database size={28} /> : idx === 1 ? <Cpu size={28} /> : <Home size={28} />}
+              <div 
+                key={idx} 
+                className={`transition-all duration-700 ${backendInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} 
+                style={{ transitionDelay: `${1200 + idx * 200}ms` }}
+              >
+                <div className="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full">
+                  <div className="w-14 h-14 bg-[#0092B3]/10 text-[#0092B3] rounded-2xl flex items-center justify-center mb-8 transition-transform duration-300 hover:scale-110">
+                    {idx === 0 ? <Braces size={28} /> : idx === 1 ? <Landmark size={28} /> : <Radar size={28} />}
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{item.title}</h3>
+                  <p className="text-gray-500 text-lg leading-relaxed">{item.description}</p>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{item.title}</h3>
-                <p className="text-gray-500 text-lg leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 2. THE VS TABLE & 3. BRUTAL CTA */}
+      {/* 2. THE VS TABLE & 3. CTA */}
       <section className="py-32 md:py-40 bg-gray-900 text-white relative overflow-hidden">
         {/* Subtle grid background / vignette */}
         <div className="absolute inset-0 bg-black opacity-40"></div>
@@ -641,14 +669,14 @@ export default function App() {
               <div className="grid grid-cols-3 gap-6 border-b border-gray-700 pb-6 mb-6">
                 <div className="text-gray-500 font-bold uppercase tracking-widest text-xs md:text-sm">Área</div>
                 <div className="text-gray-400 font-bold text-base md:text-xl">Chatbot Tradicional</div>
-                <div className="text-[#0092B3] font-black text-xl md:text-2xl">Ximia IA</div>
+                <div className="text-[#0092B3] font-black text-xl md:text-2xl">Ximia</div>
               </div>
               
               {Array.isArray(t("vs_features", { returnObjects: true })) && t("vs_features", { returnObjects: true }).map((feat, idx) => (
                 <div key={idx} className={`grid grid-cols-3 gap-6 items-center py-6 ${idx !== t("vs_features", { returnObjects: true }).length - 1 ? 'border-b border-gray-800' : ''}`}>
-                  <div className="text-gray-400 font-medium text-sm md:text-lg">{feat.feature}</div>
-                  <div className="text-gray-500 text-base md:text-xl">{feat.old}</div>
-                  <div className="text-white font-bold text-lg md:text-2xl">{feat.ximia}</div>
+                  <div className="text-gray-400 text-sm md:text-lg">{feat.feature}</div>
+                  <div className="text-gray-500 text-base md:text-2xl">{feat.old}</div>
+                  <div className="text-white text-lg md:text-2xl">{feat.ximia}</div>
                 </div>
               ))}
             </div>

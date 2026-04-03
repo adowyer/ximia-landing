@@ -58,56 +58,69 @@
     "The process is bottlenecked by human limits"
   ],
   "problem_result": "Huge effort. Few deals.",
-  "problem_quote_closing": "You need an intelligence that decides, not one that repeats a script.",
+  "problem_quote_closing": "",
+
+  "solution_title": "Ximia fixes that.",
+
   "process_steps": [
     {
       "label": "01 · Capture",
-      "title": "Understand exactly what they want",
-      "description": "Detect if they want a home, investment, or land right from the conversation.",
-      "icon": "zap"
+      "title": "Turns natural language into actionable data",
+      "description": "While the user is having a conversation, Ximia interprets intent, context, and needs, transforming every message into structured data without relying on forms.",
+      "icon": "brain-circuit"
     },
     {
       "label": "02 · Analyze",
-      "title": "Evaluate financial viability",
-      "description": "Validate their budget and profile using real market logic.",
-      "icon": "chart"
+      "title": "Validates feasibility with deterministic logic",
+      "description": "Extracted data is processed against real financial rules, evaluating purchasing capacity with zero assumptions or guesswork.",
+      "icon": "cpu"
     },
     {
-      "label": "03 · Propose",
-      "title": "Recommend the perfect match",
-      "icon": "target"
+      "label": "03 · Decide",
+      "title": "Activates data-driven decisions",
+      "description": "Combines profile, intent, and budget with available inventory to surface only the options that truly fit.",
+      "icon": "network"
     },
     {
       "label": "04 · Close",
-      "title": "Deliver a ready-to-close lead",
-      "description": "All the information is structured to accelerate the closing process.",
-      "icon": "check"
+      "title": "Delivers a sales-ready lead",
+      "description": "The output isn’t a conversation — it’s a complete, validated, and prioritized profile ready for your sales team to act with precision.",
+      "icon": "check-circle"
     }
   ],
-  "backend_title": "Pure commercial technology",
-  "backend_subtitle": "It's not a conversational bot. It's a deterministic engine that understands your business and executes the sale.",
+  "backend_title": "Technology that understands, validates, and decides in real time.",
+  "backend_title_words": [
+    "Technology",
+    "that understands,",
+    "validates,",
+    "and decides",
+    "in real time."
+  ],
+  "backend_subtitle": "Ximia combines language models, structured extraction, and deterministic logic to transform conversations into data, validate them, and operate with absolute precision.",
   "backend_items": [
     {
-      "title": "Transactional Memory",
-      "description": "Builds a real-time lead profile structuring hard data: intent, timeline, and exact property requirements."
+      "title": "NLP → JSON Extraction Engine",
+      "description": "While the user converses in natural language, the system interprets the input via language models and extracts critical variables like available capital, household composition, and buying horizon. These variables are not stored as text: they are structured into system-usable data, eliminating the need for forms."
     },
     {
-      "title": "Deterministic Engine",
-      "description": "Ximia doesn't hallucinate or guess. It financially qualifies using strict rules, bank rates, and actual income."
+      "title": "Deterministic Financial Validation",
+      "description": "Language models are not involved in calculations. Extracted variables are processed in a separate layer, where they are evaluated against financial rules, market conditions, and business logic. The result is consistent, reproducible, and strictly aligned with real-world data."
     },
     {
-      "title": "Active Inventory Match",
-      "description": "Connects directly to your catalog to strictly offer properties the client can actually afford today."
+      "title": "Insight Scoring + Signal Analysis",
+      "description": "Every interaction generates signals that the system interprets beyond explicit content: intent, urgency, consistency, and behavior. These signals consolidate into a dynamic scoring model that reflects the true maturity of the lead, evolving continuously as the conversation progresses."
     }
   ],
-  "vs_title": "Current tools vs Ximia AI",
+  "vs_title": "Current tools vs Ximia.ai",
   "vs_features": [
-    { "feature": "Core Goal", "old": "Answer FAQs", "ximia": "Execute the sale" },
-    { "feature": "Logic", "old": "Rigid decision trees", "ximia": "Fluid commercial reasoning" },
-    { "feature": "Financing", "old": "No pre-qualification", "ximia": "Calculates real-time viability" },
-    { "feature": "Final Output", "old": "Messy chat logs", "ximia": "Structured lead ready to close" }
+    { "feature": "Goal", "old": "Answer questions", "ximia": "Execute commercial decisions" },
+    { "feature": "Processing", "old": "Unstructured text", "ximia": "Structured data in real time" },
+    { "feature": "Logic", "old": "Flows or prompts", "ximia": "Deterministic engine on data" },
+    { "feature": "Finance", "old": "No qualification", "ximia": "Real financial validation" },
+    { "feature": "Intelligence", "old": "No accumulated context", "ximia": "Intent & urgency scoring" },
+    { "feature": "Outcome", "old": "Chats", "ximia": "Leads ready to close" }
   ],
-  "cta_headline": "The difference is clear when you see it in action",
-  "cta_subheadline": "If you're losing deals to poorly profiled leads or slow follow-ups, you don't need a chatbot... you need intelligence.",
+  "cta_headline": "Don’t scale your team. Scale your closing capacity.",
+  "cta_subheadline": "Ximia generates and qualifies leads 24/7, prioritizes real opportunities, and frees your team to focus on closing deals instead of filtering contacts.",
   "cta_button": "Book a demo"
 }
