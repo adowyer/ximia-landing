@@ -190,7 +190,7 @@ export default function App() {
         }
       },
       {
-        threshold: 0.4 // delay
+        threshold: 0.75 // delay until prominent
       }
     );
 
@@ -229,6 +229,23 @@ export default function App() {
 
     return () => currentRefs.forEach((ref) => { if (ref) observer.unobserve(ref) });
   }, [steps]);
+
+  // Observers for Final Sections
+  const tableRef = useRef(null);
+  const [tableInView, setTableInView] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setTableInView(true); }, { threshold: 0.2 });
+    if (tableRef.current) obs.observe(tableRef.current);
+    return () => obs.disconnect();
+  }, []);
+
+  const ctaRef = useRef(null);
+  const [ctaInView, setCtaInView] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setCtaInView(true); }, { threshold: 0.4 });
+    if (ctaRef.current) obs.observe(ctaRef.current);
+    return () => obs.disconnect();
+  }, []);
 
   // =========================
   // UI
@@ -502,7 +519,7 @@ export default function App() {
           <div className="flex flex-col md:flex-row gap-16 relative items-start">
 
             {/* LEFT: Scrolling Steps */}
-            <div className="w-full md:w-5/12 space-y-40 py-20 pb-80 md:pb-[60vh]">
+            <div className="w-full md:w-5/12 space-y-40 py-20 pb-[10vh] md:pb-[20vh]">
               {steps.map((step, index) => {
                 const Icon = iconMap[step.icon];
                 const isActive = activeStep === index;
@@ -673,48 +690,51 @@ export default function App() {
         </div>
       </section>
 
-      {/* 2. THE VS TABLE & 3. CTA */}
-      <section className="py-32 md:py-40 bg-gray-900 text-white relative overflow-hidden">
-        {/* Subtle grid background / vignette */}
-        <div className="absolute inset-0 bg-black opacity-40"></div>
-        <div className="max-w-5xl mx-auto px-6 relative z-10">
-
-          {/* THE TABLE */}
-          <div className="mb-32">
+      {/* 2. THE VS TABLE (LIGHT) */}
+      <section ref={tableRef} className="py-32 md:py-40 bg-white text-gray-900 border-b border-gray-100">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="mb-10">
             <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-center mb-16 md:mb-20">
               {t("vs_title")}
             </h2>
 
-            <div className="bg-gray-800/80 backdrop-blur-xl border border-gray-700 rounded-[2.5rem] p-8 md:p-12 shadow-2xl">
-              <div className="grid grid-cols-3 gap-6 border-b border-gray-700 pb-6 mb-6">
-                <div className="text-gray-500 font-bold uppercase tracking-widest text-xs md:text-sm">Área</div>
-                <div className="text-gray-400 font-bold text-base md:text-xl">Chatbot Tradicional</div>
+            <div className={`bg-gray-50 border border-gray-200 rounded-[2.5rem] p-8 md:p-12 shadow-2xl transition-all duration-1000 transform ${tableInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+              <div className="grid grid-cols-3 gap-6 border-b border-gray-200 pb-6 mb-6">
+                <div className="text-gray-400 font-bold uppercase tracking-widest text-xs md:text-sm">Área</div>
+                <div className="text-gray-500 font-bold text-base md:text-xl">Chatbot Tradicional</div>
                 <div className="text-[#0092B3] font-black text-xl md:text-2xl">Ximia</div>
               </div>
 
               {Array.isArray(t("vs_features", { returnObjects: true })) && t("vs_features", { returnObjects: true }).map((feat, idx) => (
-                <div key={idx} className={`grid grid-cols-3 gap-6 items-center py-6 ${idx !== t("vs_features", { returnObjects: true }).length - 1 ? 'border-b border-gray-800' : ''}`}>
-                  <div className="text-gray-400 text-sm md:text-lg">{feat.feature}</div>
-                  <div className="text-gray-500 text-base md:text-2xl">{feat.old}</div>
-                  <div className="text-white text-lg md:text-2xl">{feat.ximia}</div>
+                <div key={idx} className={`grid grid-cols-3 gap-6 items-center py-6 transition-all duration-700 ease-out transform ${tableInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"} ${idx !== t("vs_features", { returnObjects: true }).length - 1 ? 'border-b border-gray-200' : ''}`} style={{ transitionDelay: `${400 + idx * 150}ms` }}>
+                  <div className="text-gray-500 text-sm md:text-lg font-medium">{feat.feature}</div>
+                  <div className="text-gray-400 text-base md:text-xl">{feat.old}</div>
+                  <div className="text-gray-900 font-bold text-lg md:text-2xl flex items-center gap-3">
+                    <Check className="text-green-500" strokeWidth={3} /> {feat.ximia}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* BRUTAL CTA */}
-          <div className="text-center max-w-4xl mx-auto mt-20 md:mt-40 border-t border-gray-800 pt-20 md:pt-40">
-            <h2 className="text-6xl md:text-8xl font-black leading-[0.9] tracking-tight mb-10 text-white">
+      {/* 3. CTA (DARK) */}
+      <section ref={ctaRef} className="py-32 md:py-40 bg-gray-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-black opacity-40"></div>
+        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className={`text-6xl md:text-8xl font-black leading-[0.9] tracking-tight mb-10 text-white transition-all duration-1000 ${ctaInView ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
               {t("cta_headline")}
             </h2>
-            <p className="text-2xl md:text-3xl text-gray-400 font-medium mb-16 max-w-3xl mx-auto leading-snug">
+            <p className={`text-2xl md:text-3xl text-gray-400 font-medium mb-16 max-w-3xl mx-auto leading-snug transition-all duration-1000 delay-300 ${ctaInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
               {t("cta_subheadline")}
             </p>
-            <button className="bg-white text-black px-12 py-6 rounded-full text-xl font-bold hover:scale-105 transition-transform duration-300 uppercase tracking-widest flex mx-auto items-center gap-3">
-              {t("cta_button")} <Zap size={20} fill="currentColor" />
+            <button className={`relative overflow-hidden group bg-white text-black px-12 py-6 rounded-full text-xl font-bold transition-all duration-1000 delay-700 uppercase tracking-widest flex mx-auto items-center gap-3 shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.6)] ${ctaInView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-90"}`}>
+              <span className="relative z-10 flex items-center gap-2">{t("cta_button")} <Zap size={20} fill="currentColor" /></span>
+              <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-gray-100 to-gray-300 transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></div>
             </button>
           </div>
-
         </div>
       </section>
 
