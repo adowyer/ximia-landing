@@ -88,6 +88,56 @@
           "icon": "check"
         }
       ],
+      "stepper_chat_0_user_1": "Hola, quiero invertir unos USD 80k. ¿Tienen algo bueno?",
+      "stepper_chat_0_ai_1": "¡Excelente capital inicial! Para enfocar mi búsqueda y recomendarte el mejor proyecto:<br/><br/>¿Estás buscando <b>renta inmediata</b> mensual (unidades terminadas) o preferís <b>maximizar la inversión</b> comprando barato de pozo?",
+      "stepper_chat_0_user_2": "De pozo para resguardar valor.",
+      "stepper_chat_1_user": "no tengo deudas",
+      "stepper_chat_1_ai": "Perfecto, sin deudas es un punto de partida muy sólido para planificar la financiación.<br/><br/>Con el perfil que armamos —monotributista con 15 años de actividad e ingresos mensuales de $6.000.000— ya podemos ver cómo se traduce en un proyecto real.<br/><br/>Te paso el escenario que arroja el sistema:<br/><br/><b>Banco Nación</b> es la opción que mejor encaja con tu perfil.<br/>• Podría otorgar un préstamo de hasta <b>USD 180.000</b><br/>• Con un plazo de <b>30 años</b><br/>• Cuota estimada de alrededor de <b>$1.200.000 ARS</b>",
+      "stepper_chat_2_ai": "Sumando esos USD 180.000 a tus ahorros iniciales, el presupuesto total disponible sería cercano a los <b>USD 210.000</b>.<br/><br/>Considerando que necesitás una casa para 5 personas, el modelo que mejor se ajusta es el <b>HPR03 — Vivienda Familiar Amplia</b>.<br/><br/>Es una casa con espacios sociales definidos y privacidad necesaria. Su precio base está <b>dentro de tu presupuesto</b> calculado.<br/><br/>¿Te gustaría que profundice en el HPR03 o prefieres que revisemos próximos pasos juntos?",
+      "stepper_chat_input": "Escribe tu respuesta aquí...",
+      "stepper_crm_title": "Notificaciones",
+      "stepper_crm_leads": [
+        {
+          "time": "1m",
+          "title": "Ximia IA registró actividad en un lead",
+          "name": "Familia / 1ra Vivienda",
+          "tag": "Calificado",
+          "tagColor": "text-green-600 bg-green-50 border-green-100",
+          "desc": "👍 Pros: Presupuesto USD 210k. 👎 Cons: Solo mira modelo HPR03."
+        },
+        {
+          "time": "8m",
+          "title": "Ximia IA agendó una visita virtual",
+          "name": "Inversor / Renta inmediata",
+          "tag": "Agendado",
+          "tagColor": "text-blue-600 bg-blue-50 border-blue-100",
+          "desc": "👍 Pros: Pago efectivo contado. 👎 Cons: Busca descuento agresivo."
+        },
+        {
+          "time": "19m",
+          "title": "Ximia IA clasificó intención de compra",
+          "name": "Construcción / Lote perimetral",
+          "tag": "Seguimiento",
+          "tagColor": "text-yellow-600 bg-yellow-50 border-yellow-100",
+          "desc": "👍 Pros: Crédito pre-aprobado. 👎 Cons: Solo zona norte."
+        },
+        {
+          "time": "40m",
+          "title": "Ximia IA detectó falta de presupuesto",
+          "name": "Pareja / 2 ambientes",
+          "tag": "Descartado",
+          "tagColor": "text-red-600 bg-red-50 border-red-100",
+          "desc": "👍 Pros: Intención alta. 👎 Cons: 40% debajo del valor de pozo."
+        },
+        {
+          "time": "1h 9m",
+          "title": "Ximia IA envió catálogo de propiedades",
+          "name": "Familia / Cambio de casa",
+          "tag": "Nutrición",
+          "tagColor": "text-purple-600 bg-purple-50 border-purple-100",
+          "desc": "👍 Pros: Venden casa actual. 👎 Cons: Aún no tasaron su propiedad."
+        }
+      ],
       "backend_title": "Tecnología que entiende, valida y decide en tiempo real",
       "backend_title_words": [
         "Tecnología",

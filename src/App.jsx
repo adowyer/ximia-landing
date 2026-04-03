@@ -317,7 +317,7 @@ export default function App() {
 
           {/* RIGHT SIDE: Interactive Demo */}
           <div className="w-full h-full flex flex-col gap-6 justify-between">
-            
+
             {/* THE CHAT BOX */}
             <div className="bg-white/90 backdrop-blur-xl border border-gray-200 rounded-[2rem] p-4 md:p-6 shadow-xl flex flex-col overflow-hidden relative flex-1 min-h-[420px]">
               {/* MESSAGES */}
@@ -333,11 +333,10 @@ export default function App() {
                     )}
 
                     <div
-                      className={`p-3 rounded-2xl max-w-[85%] md:max-w-[80%] text-sm md:text-base leading-relaxed shadow-sm ${
-                        msg.from === "user"
+                      className={`p-3 rounded-2xl max-w-[85%] md:max-w-[80%] text-sm md:text-base leading-relaxed shadow-sm ${msg.from === "user"
                           ? "bg-[#0092B3] text-white rounded-br-sm"
                           : "bg-gray-50 border border-gray-100 text-gray-800 rounded-bl-sm"
-                      }`}
+                        }`}
                     >
                       {msg.text}
                     </div>
@@ -359,11 +358,10 @@ export default function App() {
                   <button
                     key={idx}
                     onClick={() => setActiveScenario(idx)}
-                    className={`whitespace-nowrap px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 border ${
-                      activeScenario === idx 
-                        ? 'bg-gray-700 text-white border-gray-700 shadow-md scale-105' 
+                    className={`whitespace-nowrap px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 border ${activeScenario === idx
+                        ? 'bg-gray-700 text-white border-gray-700 shadow-md scale-105'
                         : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:bg-gray-50 hover:scale-105'
-                    }`}
+                      }`}
                   >
                     {scenario.tab}
                   </button>
@@ -534,73 +532,95 @@ export default function App() {
               })}
             </div>
 
-            {/* RIGHT: Sticky Visual Container */}
-            <div className="hidden md:flex w-full md:w-7/12 sticky top-40 h-[600px] bg-gray-100 rounded-3xl border border-gray-200 shadow-[inset_0_2px_20px_rgba(0,0,0,0.04)] p-10 flex-col items-center justify-center overflow-hidden relative">
-
-              {/* BRAND LOGO (FIXED) */}
-              <div className="absolute top-10 left-10">
-                <img src="/Logo-X-b.png" alt="Ximia AI" className="h-10 md:h-14 w-auto object-contain opacity-100" />
-              </div>
+            {/* RIGHT: Sticky Visual Container (Borderless) */}
+            <div className="hidden md:flex w-full md:w-7/12 sticky top-40 h-[600px] flex-col items-center justify-center relative">
 
               <div key={activeStep} className="w-full h-full flex items-center justify-center animate-step">
-                {activeStep === 0 && (
-                  <div className="w-full max-w-md bg-white rounded-3xl p-6 shadow-xl border border-gray-100">
-                    <div className="bg-[#0092B3] text-white p-5 rounded-2xl rounded-bl-sm w-5/6 mb-6 text-lg shadow-sm">
-                      Busco un departamento para inversión, tengo USD 80k.
-                    </div>
-                    <div className="flex items-center gap-3 text-sm font-bold text-gray-400 uppercase tracking-widest bg-gray-50 p-4 rounded-xl border border-gray-100">
-                      <Zap size={20} className="text-[#0092B3]" /> Intención: INVERSIÓN
-                    </div>
-                  </div>
-                )}
-
-                {activeStep === 1 && (
-                  <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
-                    <div className="flex justify-between items-center border-b border-gray-100 pb-6 mb-6">
+                {/* INTERFAZ CHAT B2C PARA PASOS 0, 1 Y 2 */}
+                {activeStep <= 2 && (
+                  <div className="w-full max-w-lg h-[540px] bg-[#FAFAFA] rounded-3xl shadow-[0_15px_60px_-15px_rgba(0,0,0,0.1)] border border-gray-200 flex flex-col overflow-hidden relative">
+                    {/* Header Chat */}
+                    <div className="bg-white border-b border-gray-100 p-4 flex items-center justify-between z-10 shrink-0">
                       <div className="flex items-center gap-3">
-                        <BarChart3 size={28} className="text-blue-600" />
-                        <span className="text-gray-900 font-bold text-2xl">Score Financiero</span>
+                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-gray-200 overflow-hidden">
+                          <img src="/AI-Icon.gif" alt="Ximia.ai" className="h-8 w-auto object-contain scale-125" />
+                        </div>
                       </div>
-                      <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-bold shadow-sm">Validado</span>
                     </div>
-                    <div className="space-y-4 text-lg">
-                      <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl">
-                        <span className="text-gray-500 font-medium">Presupuesto</span>
-                        <span className="font-bold text-gray-900">USD 250k</span>
-                      </div>
-                      <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl">
-                        <span className="text-gray-500 font-medium">Perfil de Riesgo</span>
-                        <span className="font-bold text-gray-900">Conservador</span>
+
+                    <div className="flex-1 overflow-y-auto p-6 scrollbar-hide flex flex-col gap-6 relative">
+                      {activeStep === 0 && (
+                        <div className="flex flex-col gap-4 animate-step">
+                          <div className="self-end max-w-[85%] bg-[#0092B3] text-white p-4 rounded-xl rounded-tr-sm text-sm shadow-sm" dangerouslySetInnerHTML={{ __html: t("stepper_chat_0_user_1") }}></div>
+                          <div className="self-start max-w-[90%] bg-white border border-gray-100 text-gray-700 p-5 rounded-xl rounded-tl-sm text-[13px] shadow-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: t("stepper_chat_0_ai_1") }}></div>
+                          <div className="self-end max-w-[85%] bg-[#0092B3] text-white p-4 rounded-xl rounded-tr-sm text-sm shadow-sm opacity-30 blur-[1px]" dangerouslySetInnerHTML={{ __html: t("stepper_chat_0_user_2") }}></div>
+                        </div>
+                      )}
+
+                      {activeStep === 1 && (
+                        <div className="flex flex-col gap-4 animate-step">
+                          <div className="self-end max-w-[60%] bg-[#0092B3] text-white px-5 py-3 rounded-xl rounded-tr-sm text-sm font-medium shadow-sm">
+                            {t("stepper_chat_1_user")}
+                          </div>
+                          <div className="self-start w-full bg-white border border-gray-100 text-gray-700 p-5 rounded-xl rounded-tl-sm text-[13px] leading-relaxed shadow-sm" dangerouslySetInnerHTML={{ __html: t("stepper_chat_1_ai") }}></div>
+                        </div>
+                      )}
+
+                      {activeStep === 2 && (
+                        <div className="flex flex-col gap-4 animate-step">
+                          <div className="self-start w-full bg-white border border-gray-100 text-gray-700 p-5 rounded-xl rounded-tl-sm text-[13px] leading-relaxed shadow-sm">
+                            <img src="/2-Plantas.jpg" alt="Vivienda HPR03" className="w-full h-36 object-cover rounded-lg mb-4 border border-gray-100" />
+                            <div dangerouslySetInnerHTML={{ __html: t("stepper_chat_2_ai") }}></div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    {/* Fake Chat Input */}
+                    <div className="bg-white p-4 border-t border-gray-100 shrink-0">
+                      <div className="bg-gray-50 border border-gray-200 rounded-full h-10 flex items-center px-4">
+                        <div className="w-full h-full bg-transparent flex items-center text-xs text-gray-400">{t("stepper_chat_input")}</div>
                       </div>
                     </div>
                   </div>
                 )}
 
-                {activeStep === 2 && (
-                  <div className="w-full max-w-md bg-white rounded-3xl p-6 shadow-xl border border-gray-100">
-                    <div className="h-48 bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl mb-6 w-full flex items-center justify-center shadow-inner">
-                      <Target size={48} className="text-white opacity-50" />
-                    </div>
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-bold text-2xl text-gray-900">Proyecto Palmas</h4>
-                      <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-sm font-bold">98% Match</span>
-                    </div>
-                    <p className="text-gray-500 text-base mb-4 font-medium">Ideal para el presupuesto y objetivo de rentabilidad detectado.</p>
-                    <button className="w-full bg-black text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-gray-800 transition">
-                      Avanzar propuesta
-                    </button>
-                  </div>
-                )}
-
+                {/* PASO 3: LIGHT CRM MOCKUP */}
                 {activeStep === 3 && (
-                  <div className="w-full max-w-md bg-gray-900 text-white rounded-3xl p-10 shadow-2xl flex flex-col items-center text-center">
-                    <div className="bg-green-500/20 p-6 rounded-full border border-green-500/30 mb-8 shadow-[0_0_30px_rgba(34,197,94,0.3)]">
-                      <Check size={56} className="text-green-400" />
+                  <div className="w-full max-w-lg h-[540px] bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden relative animate-step">
+                    {/* CRM Header */}
+                    <div className="bg-[#3b82f6] h-14 flex items-center px-6 shrink-0">
+                      <div className="flex gap-6 text-white text-sm">
+                        <span className="font-bold flex items-center gap-2 px-3 py-1.5"><Target size={18}/> CRM DASHBOARD</span>
+                        <span className="opacity-70 flex items-center"><BarChart3 size={18}/></span>
+                      </div>
                     </div>
-                    <h4 className="font-bold text-3xl mb-3">Oportunidad Creada</h4>
-                    <p className="text-gray-400 text-lg font-medium leading-relaxed">
-                      El equipo comercial acaba de recibir un nuevo lead listo para firmar.
-                    </p>
+                    <div className="p-6 flex-1 bg-gray-50/30 overflow-y-auto">
+                      <h3 className="text-xl text-gray-700 mb-4">{t("stepper_crm_title")}</h3>
+                      <div className="h-px w-full bg-blue-500 mb-6"></div>
+                      {/* Notifications List */}
+                      <div className="flex flex-col gap-6">
+                        {(Array.isArray(t("stepper_crm_leads", { returnObjects: true })) ? t("stepper_crm_leads", { returnObjects: true }) : []).map((lead, idx) => (
+                          <div key={idx} className="flex items-start gap-4 pb-6 border-b border-gray-100 last:border-0 last:pb-0">
+                            <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                              <img src="/X.png" className="w-6 h-6 object-contain" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex justify-between items-start mb-1">
+                                <p className="text-[13px] text-gray-500 truncate mr-2">{lead.title}</p>
+                                <span className="text-[11px] text-gray-400 shrink-0">{lead.time}</span>
+                              </div>
+                              <p className="text-blue-600 font-bold text-[14px] mb-2 truncate">{lead.name}</p>
+                              <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 w-full text-[13px]">
+                                <span className={`px-2 py-0.5 rounded text-[11px] font-bold tracking-widest uppercase border shrink-0 ${lead.tagColor}`}>
+                                  {lead.tag}
+                                </span>
+                                <span className="text-gray-500 leading-snug break-words">{lead.desc}</span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
@@ -615,10 +635,10 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6">
           <div ref={backendTitleRef} className="text-center mb-16 md:mb-24 max-w-4xl mx-auto">
             <h2 className="text-7xl md:text-7xl font-bold tracking-tight mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2">
-              {Array.isArray(t("backend_title_words", { returnObjects: true })) 
+              {Array.isArray(t("backend_title_words", { returnObjects: true }))
                 ? t("backend_title_words", { returnObjects: true }).map((word, idx, arr) => (
-                  <span 
-                    key={idx} 
+                  <span
+                    key={idx}
                     className={`inline-block ${backendInView ? "animate-step" : "opacity-0"} ${idx === 0 ? "text-gray-900" : idx === arr.length - 1 ? "text-[#0092B3]" : "text-gray-500"}`}
                     style={{ animationDelay: `${idx * 0.4}s`, animationFillMode: "both" }}
                   >
@@ -635,9 +655,9 @@ export default function App() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {Array.isArray(t("backend_items", { returnObjects: true })) && t("backend_items", { returnObjects: true }).map((item, idx) => (
-              <div 
-                key={idx} 
-                className={`transition-all duration-700 ${backendInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} 
+              <div
+                key={idx}
+                className={`transition-all duration-700 ${backendInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${1200 + idx * 200}ms` }}
               >
                 <div className="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full">
@@ -658,20 +678,20 @@ export default function App() {
         {/* Subtle grid background / vignette */}
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="max-w-5xl mx-auto px-6 relative z-10">
-          
+
           {/* THE TABLE */}
           <div className="mb-32">
             <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-center mb-16 md:mb-20">
               {t("vs_title")}
             </h2>
-            
+
             <div className="bg-gray-800/80 backdrop-blur-xl border border-gray-700 rounded-[2.5rem] p-8 md:p-12 shadow-2xl">
               <div className="grid grid-cols-3 gap-6 border-b border-gray-700 pb-6 mb-6">
                 <div className="text-gray-500 font-bold uppercase tracking-widest text-xs md:text-sm">Área</div>
                 <div className="text-gray-400 font-bold text-base md:text-xl">Chatbot Tradicional</div>
                 <div className="text-[#0092B3] font-black text-xl md:text-2xl">Ximia</div>
               </div>
-              
+
               {Array.isArray(t("vs_features", { returnObjects: true })) && t("vs_features", { returnObjects: true }).map((feat, idx) => (
                 <div key={idx} className={`grid grid-cols-3 gap-6 items-center py-6 ${idx !== t("vs_features", { returnObjects: true }).length - 1 ? 'border-b border-gray-800' : ''}`}>
                   <div className="text-gray-400 text-sm md:text-lg">{feat.feature}</div>
