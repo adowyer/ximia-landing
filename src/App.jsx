@@ -156,6 +156,7 @@ export default function App() {
 
   const [stage, setStage] = useState(0);
   const problemRef = useRef(null);
+  const statsRef = useRef(null);
   const [inView, setInView] = useState(false);
 
   const backendTitleRef = useRef(null);
@@ -190,12 +191,16 @@ export default function App() {
         }
       },
       {
-        threshold: 0.75 // delay until prominent
+        threshold: 0.5 // delay until prominent
       }
     );
 
     if (problemRef.current) {
       observer.observe(problemRef.current);
+    }
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
     }
 
     return () => observer.disconnect();
@@ -277,7 +282,7 @@ export default function App() {
             onClick={() => scrollTo("demo")}
             className="bg-black text-white px-4 py-2 rounded-xl"
           >
-            Ver demo
+            Agendar demo
           </button>
           <div className="relative">
             <select
@@ -442,7 +447,7 @@ export default function App() {
           </div>
 
           {/* STAT */}
-          <div className="mb-16 max-w-8xl mx-auto text-center">
+          <div ref={statsRef} className="mb-16 max-w-8xl mx-auto text-center">
             <p className={`text-6xl md:text-8xl font-bold transition-all duration-700 ${stage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}>
               {t("problem_stat_value")}
