@@ -510,11 +510,6 @@ export default function App() {
 
           {/* HEADER WITH BG X */}
           <div className="relative py-12 md:py-24 mb-20 flex items-center justify-center w-full">
-            {/* The 'X' watermark */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-              <img src="/X.png" alt="Ximia Watermark" className="w-[800px] h-auto object-contain" />
-            </div>
-
             {/* The actual text */}
             <h2 className="text-5xl md:text-8xl font-black leading-tight tracking-tight text-center text-gray-900 relative z-10">
               {t("solution_title")}
@@ -699,15 +694,15 @@ export default function App() {
       <section ref={tableRef} className="py-32 md:py-40 bg-white text-gray-900 border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-10">
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-center mb-16 md:mb-20">
+            <h2 className="text-5xl md:text-6xl tracking-tight text-center mb-16 md:mb-20">
               {t("vs_title")}
             </h2>
 
             <div className={`bg-gray-50 border border-gray-200 rounded-[2.5rem] p-8 md:p-12 shadow-2xl transition-all duration-1000 transform ${tableInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
               <div className="grid grid-cols-3 gap-6 border-b border-gray-200 pb-6 mb-6">
                 <div className="text-gray-400 font-bold uppercase tracking-widest text-xs md:text-sm">Área</div>
-                <div className="text-gray-500 font-bold text-base md:text-xl">Chatbot Tradicional</div>
-                <div className="text-[#0092B3] font-black text-xl md:text-2xl">Ximia</div>
+                <div className="text-gray-500 font-bold text-base md:text-xl">Sin Ximia</div>
+                <div className="text-[#0092B3] font-black text-xl md:text-2xl">Con Ximia</div>
               </div>
 
               {Array.isArray(t("vs_features", { returnObjects: true })) && t("vs_features", { returnObjects: true }).map((feat, idx) => (
