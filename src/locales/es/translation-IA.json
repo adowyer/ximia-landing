@@ -1,0 +1,176 @@
+{
+  "nav_problem": "Por qué Ximia",
+  "nav_solution": "Cómo funciona",
+  "nav_impact": "Impacto",
+  "hero_title_1": "Ximia IA no chatea.",
+  "hero_title_2": "Vende.",
+  "hero_sub_line_1": "Ximia IA reemplaza formularios, chatbots y sitios que no convierten.",
+  "hero_sub_line_2": "Cada conversación, una venta.", 
+  "hero_cta_secondary": "Cómo funciona",
+  "hero_cta_primary": "Agendar demo",
+  "hero_demo_label": "Mirá a Ximia aplicada en escenarios reales.",
+  "hero_scenarios": [
+    {
+      "id": "capture",
+      "tab": "🎯 La intención",
+      "messages": [
+        { "from": "user", "text": "Hola, busco algo para invertir mis ahorros." },
+        { "from": "ai", "text": "Perfecto. ¿Buscás renta mensual inmediata o revalorización a largo plazo (pozo)?" },
+        { "from": "user", "text": "Renta en dólares, lo antes posible." },
+        { "from": "ai", "text": "Entiendo. Entonces filtramos proyectos terminados en zonas de alta demanda (ej. AIRBNB). ¿Avanzamos con ese perfil?" }
+      ]
+    },
+    {
+      "id": "financial",
+      "tab": "📊 Las finanzas",
+      "messages": [
+        { "from": "user", "text": "Me gusta la unidad 4B, pero llego a USD 120k." },
+        { "from": "ai", "text": "El valor es USD 150k. Con tus 120k (80%), aplicás directo a nuestra financiación a 24 meses. La cuota quedaría en USD 1,250." },
+        { "from": "user", "text": "Excelente, puedo pagar esa cuota." },
+        { "from": "ai", "text": "Validado ✔️. Preparo la simulación financiera formal y te pongo en contacto con el equipo comercial para reservar." }
+      ]
+    },
+    {
+      "id": "match",
+      "tab": "🏠 La recomendación",
+      "messages": [
+        { "from": "user", "text": "Somos 4 de familia. Buscamos casa con verde." },
+        { "from": "ai", "text": "Registrado: Uso familiar, 4 personas, jardín. ¿Preferís Zona Norte o corredor Pilar?" },
+        { "from": "user", "text": "Pilar, por los colegios." },
+        { "from": "ai", "text": "Tengo 3 propiedades que hacen match exacto (todas con 3 dormitorios y parque). ¿Querés que armemos visitas a la mejor rankeada?" }
+      ]
+    }
+  ],
+      "problem_label": "El problema no es generar leads",
+      "problem_intro_line1": "El problema actual no es generar leads.",
+      "problem_intro_line2": "Es no saber qué hacer con ellos en el momento correcto.",
+      "problem_headline": [
+        "Tu equipo atiende a todos.",
+        "Sólo el 20% iba a comprar.",
+        "Y ya cerró con alguien más."
+      ],
+      "problem_stat_value": "70–80%",
+      "problem_stat_caption": "de tus leads son ruido",
+      "problem_items": [
+        "Tu equipo pierde horas calificando manualmente",
+        "Los leads calientes se enfrían esperando respuesta",
+        "Las conversaciones no escalan",
+        "El proceso depende demasiado del límite humano"
+      ],
+      "problem_result": "Mucho esfuerzo. Pocas operaciones.",
+      "problem_quote_closing": "",
+
+      "solution_title": "Ximia resuelve eso.",
+
+      "process_steps": [
+        {
+          "label": "01 · Captura",
+          "title": "Convierte lenguaje natural en datos accionables",
+          "description": "Mientras el usuario conversa, Ximia interpreta intención real, contexto y necesidades, transformando cada mensaje en datos estructurados sin usar formularios.",
+          "icon": "zap"
+        },
+        {
+          "label": "02 · Analiza",
+          "title": "Valida viabilidad con lógica determinística",
+          "description": "Los datos extraídos se procesan contra reglas financieras reales, evaluando capacidad de compra y eliminando estimaciones o supuestos.",
+          "icon": "chart"
+        },
+        {
+          "label": "03 · Propone",
+          "title": "Activa decisiones basadas en datos",
+          "description": "Cruza perfil, intención y presupuesto contra el inventario disponible para identificar únicamente las opciones que realmente aplican.",
+          "icon": "target"
+        },
+        {
+          "label": "04 · Cierra",
+          "title": "Entrega un lead listo para avanzar",
+          "description": "El resultado no es un chat: es un perfil completo, validado y priorizado, listo para que el equipo comercial actúe con precisión.",
+          "icon": "check"
+        }
+      ],
+      "stepper_chat_0_user_1": "Hola, quiero invertir unos USD 80k. ¿Tienen algo bueno?",
+      "stepper_chat_0_ai_1": "¡Excelente capital inicial! Para enfocar mi búsqueda y recomendarte el mejor proyecto:<br/><br/>¿Estás buscando <b>renta inmediata</b> mensual (unidades terminadas) o preferís <b>maximizar la inversión</b> comprando barato de pozo?",
+      "stepper_chat_0_user_2": "De pozo para resguardar valor.",
+      "stepper_chat_1_user": "no tengo deudas",
+      "stepper_chat_1_ai": "Perfecto, sin deudas es un punto de partida muy sólido para planificar la financiación.<br/><br/>Con el perfil que armamos —monotributista con 15 años de actividad e ingresos mensuales de $6.000.000— ya podemos ver cómo se traduce en un proyecto real.<br/><br/>Te paso el escenario que arroja el sistema:<br/><br/><b>Banco Nación</b> es la opción que mejor encaja con tu perfil.<br/>• Podría otorgar un préstamo de hasta <b>USD 180.000</b><br/>• Con un plazo de <b>30 años</b><br/>• Cuota estimada de alrededor de <b>$1.200.000 ARS</b>",
+      "stepper_chat_2_ai": "Sumando esos USD 180.000 a tus ahorros iniciales, el presupuesto total disponible sería cercano a los <b>USD 210.000</b>.<br/><br/>Considerando que necesitás una casa para 5 personas, el modelo que mejor se ajusta es el <b>HPR03 — Vivienda Familiar Amplia</b>.<br/><br/>Es una casa con espacios sociales definidos y privacidad necesaria. Su precio base está <b>dentro de tu presupuesto</b> calculado.<br/><br/>¿Te gustaría que profundice en el HPR03 o prefieres que revisemos próximos pasos juntos?",
+      "stepper_chat_input": "Escribe tu respuesta aquí...",
+      "stepper_crm_title": "Notificaciones",
+      "stepper_crm_leads": [
+        {
+          "time": "1m",
+          "title": "Ximia IA registró actividad en un lead",
+          "name": "Familia / 1ra Vivienda",
+          "tag": "Calificado",
+          "tagColor": "text-green-600 bg-green-50 border-green-100",
+          "desc": "👍 Pros: Presupuesto USD 210k. 👎 Cons: Solo mira modelo HPR03."
+        },
+        {
+          "time": "8m",
+          "title": "Ximia IA agendó una visita virtual",
+          "name": "Inversor / Renta inmediata",
+          "tag": "Agendado",
+          "tagColor": "text-blue-600 bg-blue-50 border-blue-100",
+          "desc": "👍 Pros: Pago efectivo contado. 👎 Cons: Busca descuento agresivo."
+        },
+        {
+          "time": "19m",
+          "title": "Ximia IA clasificó intención de compra",
+          "name": "Construcción / Lote perimetral",
+          "tag": "Seguimiento",
+          "tagColor": "text-yellow-600 bg-yellow-50 border-yellow-100",
+          "desc": "👍 Pros: Crédito pre-aprobado. 👎 Cons: Solo zona norte."
+        },
+        {
+          "time": "40m",
+          "title": "Ximia IA detectó falta de presupuesto",
+          "name": "Pareja / 2 ambientes",
+          "tag": "Descartado",
+          "tagColor": "text-red-600 bg-red-50 border-red-100",
+          "desc": "👍 Pros: Intención alta. 👎 Cons: 40% debajo del valor de pozo."
+        },
+        {
+          "time": "1h 9m",
+          "title": "Ximia IA envió catálogo de propiedades",
+          "name": "Familia / Cambio de casa",
+          "tag": "Nutrición",
+          "tagColor": "text-purple-600 bg-purple-50 border-purple-100",
+          "desc": "👍 Pros: Venden casa actual. 👎 Cons: Aún no tasaron su propiedad."
+        }
+      ],
+      "backend_title": "Tecnología que entiende, valida y decide en tiempo real",
+      "backend_title_words": [
+        "Tecnología",
+        "que entiende,",
+        "valida",
+        "y decide",
+        "en tiempo real."
+      ],
+      "backend_subtitle": "Ximia combina modelos de lenguaje, extracción estructurada y lógica determinística para transformar conversación en datos, validarlos y operar sobre ellos con precisión.",
+      "backend_items": [
+          {
+            "title": "Motor de extracción NLP → JSON",
+            "description": "Mientras el usuario conversa en lenguaje natural, el sistema interpreta el input con modelos de lenguaje y extrae variables críticas como capital disponible, composición del hogar y horizonte de compra. Estas variables no se almacenan como texto: se estructuran en datos utilizables por el sistema, eliminando la necesidad de formularios."
+          },
+          {
+            "title": "Validación financiera determinística",
+            "description": "Los modelos de lenguaje no participan en los cálculos. Las variables extraídas se procesan en una capa separada, donde se evalúan contra reglas financieras, condiciones de mercado y lógica de negocio. El resultado es consistente, reproducible y alineado con datos reales."
+          },
+          {
+            "title": "Scoring por insights + análisis de señal",
+            "description": "Cada interacción genera señales que el sistema interpreta más allá del contenido explícito: intención, urgencia, consistencia y comportamiento. Estas señales se consolidan en un scoring dinámico que refleja la madurez real del lead y evoluciona a medida que avanza la conversación."
+          }
+        ],
+        "vs_title": "Lo que usás hoy vs Ximia.ai",
+        "vs_features": [
+          { "feature": "Objetivo", "old": "Responder consultas", "ximia": "Ejecutar decisiones comerciales" },
+          { "feature": "Procesamiento", "old": "Texto sin estructura", "ximia": "Datos estructurados en tiempo real" },
+          { "feature": "Lógica", "old": "Flujos o prompts", "ximia": "Motor determinístico sobre datos" },
+          { "feature": "Finanzas", "old": "No califica", "ximia": "Validación financiera real" },
+          { "feature": "Inteligencia", "old": "Sin contexto acumulado", "ximia": "Scoring por intención y urgencia" },
+          { "feature": "Resultado", "old": "Charlas", "ximia": "Leads listos para cierre" }
+        ],
+        "cta_headline": "No escales tu equipo. Escalá tu capacidad de cierre.",
+        "cta_subheadline": "Ximia genera y califica leads 24/7, prioriza oportunidades reales y libera a tu equipo para enfocarse en cerrar ventas, no en filtrar contactos.",
+        "cta_button": "Agendar demo"
+}
