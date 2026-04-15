@@ -524,7 +524,7 @@ export default function App() {
             </div>
 
             {/* RESULT */}
-            <p className="text-4xl md:text-8xl font-black leading-none tracking-tight md:whitespace-nowrap mb-24 text-gray-400">
+            <p className="text-5xl md:text-8xl font-black leading-tight tracking-tight text-center mb-24 text-gray-400">
               {t("problem_result")}
             </p>
           </div>
