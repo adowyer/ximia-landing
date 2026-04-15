@@ -808,29 +808,34 @@ export default function App() {
       {/* 4. FOOTER */}
       <footer className="bg-gray-900 border-t border-gray-800/80 pt-16 pb-12 text-gray-400 relative z-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-10 md:gap-0 pb-12 border-b border-gray-800/60 mb-8">
+          {/* TOP ROW: Logo & Copy | Contact */}
+          <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-10 md:gap-0 pb-16">
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <img src="/Logo-X-b.png" alt="Ximia AI" className="h-8 md:h-10 mb-5 opacity-90" />
-              <p className="max-w-sm text-sm text-gray-500 leading-relaxed">
+              <img src="/Logo-X-b.png" alt="Ximia AI" className="h-10 md:h-12 mb-6 opacity-90 transition-opacity hover:opacity-100" />
+              <p className="max-w-sm text-base text-gray-500 leading-relaxed">
                 El Agentic Sales Layer para Real Estate.
                 <br />
                 Automatización orquestada, validación financiera y cierre sin fricciones.
               </p>
             </div>
 
-            <div className="flex flex-col items-center md:items-end gap-6">
-              <a href="mailto:hola@ximia.ai" className="text-lg hover:text-white transition-colors border-b border-transparent hover:border-white pb-1">
+            <div className="flex flex-col items-center md:items-end">
+              <a href="mailto:hola@ximia.ai" className="text-4xl md:text-5xl font-bold text-white hover:text-[#0092B3] transition-colors pb-1">
                 hola@ximia.ai
               </a>
-
-              <div className="flex flex-wrap justify-center md:justify-end items-center gap-6 md:gap-8 mt-2">
-                <img src="/logos/n8n.png" alt="n8n" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300" />
-                <img src="/logos/botpress.png" alt="Botpress" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300" />
-                <img src="/logos/supabase.png" alt="Supabase" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300" />
-                <img src="/logos/deepseek.png" alt="DeepSeek" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300" />
-                <img src="/logos/openai.png" alt="OpenAI" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300" />
-              </div>
             </div>
+          </div>
+
+          {/* BOTTOM ROW: Logos */}
+          <div className="pt-10 pb-12 border-y border-gray-800/60 mb-8 flex flex-wrap md:flex-nowrap justify-between md:justify-center items-center gap-6 md:gap-10 w-full overflow-hidden">
+            <img src="/logos/n8n.png" alt="n8n" className="h-6 md:h-8 opacity-50 hover:opacity-100 transition-opacity duration-300 object-contain shrink-0" />
+            <img src="/logos/botpress.png" alt="Botpress" className="h-6 md:h-8 opacity-50 hover:opacity-100 transition-opacity duration-300 object-contain shrink-0" />
+            <img src="/logos/supabase.png" alt="Supabase" className="h-6 md:h-8 opacity-50 hover:opacity-100 transition-opacity duration-300 object-contain shrink-0" />
+            <img src="/logos/deepseek.png" alt="DeepSeek" className="h-6 md:h-8 opacity-50 hover:opacity-100 transition-opacity duration-300 object-contain shrink-0" />
+            <img src="/logos/openai.png" alt="OpenAI" className="h-8 md:h-10 px-2 scale-125 opacity-50 hover:opacity-100 transition-opacity duration-300 object-contain shrink-0" />
+            <img src="/logos/ad.png" alt="AD" className="h-10 md:h-14 px-3 scale-[1.7] opacity-50 hover:opacity-100 transition-opacity duration-300 object-contain shrink-0" />
+            <img src="/logos/link.png" alt="Link" className="h-10 md:h-14 px-2 scale-110 opacity-50 hover:opacity-100 transition-opacity duration-300 object-contain shrink-0" />
+            <img src="/logos/marketeam.png" alt="Marketeam" className="h-10 md:h-14 px-2 scale-125 opacity-50 hover:opacity-100 transition-opacity duration-300 object-contain shrink-0" />
           </div>
 
           <div className="flex flex-col-reverse md:flex-row justify-between items-center text-xs text-gray-600">
