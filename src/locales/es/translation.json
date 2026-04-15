@@ -4,8 +4,8 @@
   "nav_impact": "Impacto",
   "hero_title_1": "Ximia IA no chatea.",
   "hero_title_2": "Vende.",
-  "hero_sub_line_1": "Ximia AI no es un Chatbot, ni un asistente virtual. Es un Superagente Vendedor de arquitectura agéntica que se multiplica por miles para atender, calificar y pre-vender tu stock, 24/7.",
-  "hero_sub_line_2": "Inteligencia que escala tus ventas en tiempo real, sin perder ningún lead.", 
+  "hero_sub_line_1": "Una superestructura de agentes de IA que automatiza tu inbound, califica la capacidad de compra y orquesta el inventario en tiempo real. Diseñada para que tu equipo humano solo se dedique a cerrar.",
+  "hero_sub_line_2": "",
   "hero_cta_secondary": "Cuánto Cuesta",
   "hero_cta_primary": "Agendar Demo",
   "hero_demo_label": "Mirá la IA de Ximia trabajando en escenarios reales.",
@@ -14,163 +14,258 @@
       "id": "capture",
       "tab": "🎯 Intención",
       "messages": [
-        { "from": "user", "text": "Busco algo para invertir mis ahorros." },
-        { "from": "ai", "text": "Perfecto. Para procesar tu solicitud bajo una lógica de rendimiento, necesito definir tu perfil de riesgo: ¿Priorizamos Renta Inmediata (unidades terminadas con flujo de caja activo) o Maximización de Capital (proyectos en pozo con alta tasa de revalorización)?" },
-        { "from": "user", "text": "Renta en dólares, a corto plazo sería mejor." },
-        { "from": "ai", "text": "Perfil configurado: Inversor de Renta Directa. Orquestando inventario en nodos de alta rotación (Housing Corporativo en Vaca Muerta). He preseleccionado unidades con un Yield proyectado del 9-15%. Antes de mostrarte el inventario, ¿tenés un ticket de inversión definido para el desembolso inicial? Con ese dato ya podemos ir al punto y concretar tu inversión" }
+        {
+          "from": "user",
+          "text": "Busco algo para invertir mis ahorros."
+        },
+        {
+          "from": "ai",
+          "text": "Perfecto. Para encontrarte la mejor opción necesito definir tu perfil de riesgo:<br/><br/>¿Priorizamos <b>Renta Inmediata</b> (unidades terminadas con flujo de caja activo) o <b>Maximización de Capital</b> (proyectos en pozo con alta revalorización)?"
+        },
+        {
+          "from": "user",
+          "text": "Renta en dólares, a corto plazo."
+        },
+        {
+          "from": "ai",
+          "text": "✅ <b>Perfil configurado:</b> Inversor de Renta Directa.<br/><br/>Orquestando inventario en nodos de alta rotación. He preseleccionado unidades con un <b>Yield proyectado del 9-15%</b>.<br/><br/>Antes de mostrarte el inventario, ¿tenés un <b>ticket de inversión definido</b> para el desembolso inicial?"
+        }
       ]
     },
     {
       "id": "match",
       "tab": "🏠 Recomendación",
       "messages": [
-        { "from": "user", "text": "Somos 4 de familia. Buscamos mudarnos a una casa, con espacio verde." },
-        { "from": "ai", "text": "Registrado: Uso familiar, 4 personas, jardín. ¿Preferís alguna zona particular de la ciudad o es indistinto y busco la opción más rentable?" },
-        { "from": "user", "text": "Preferimos zona norte por mi trabajo y los colegios de los chicos." },
-        { "from": "ai", "text": "Excelente. Registrando Modelo de Cliente Estructurado. Tengo 37 propiedades que hacen match exacto. Te envié las mejor rankeadas según cercanía a colegios y ratio de superficie verde. ¿Validamos tu capacidad de pago para avanzar con la reserva?" }
+        {
+          "from": "user",
+          "text": "Somos 4 de familia. Buscamos mudarnos a una casa con espacio verde."
+        },
+        {
+          "from": "ai",
+          "text": "Registrado:<br/>• Uso <b>familiar</b>, 4 personas<br/>• Requisito: <b>jardín / espacio verde</b><br/><br/>¿Preferís alguna zona particular o busco la opción más rentable?"
+        },
+        {
+          "from": "user",
+          "text": "Zona norte, por mi trabajo y los colegios de los chicos."
+        },
+        {
+          "from": "ai",
+          "text": "Excelente. Tengo <b>6 propiedades</b> que hacen match exacto.<br/><br/>Te envié las mejor rankeadas según cercanía a colegios y ratio de superficie verde.<br/><br/>¿Validamos tu <b>capacidad de pago</b> para avanzar con la reserva? 🏡"
+        }
       ]
     },
     {
       "id": "financial",
       "tab": "📊 Finanzas",
       "messages": [
-       { "from": "user", "text": "Nos encantó la unidad #447 de Puertos del Lago, pero llegamos a USD 120k con el crédito, y el valor es 150k..." },
-        { "from": "ai", "text": "Entiendo el planteo, y tengo solución para eso. Ejecutando Motor Determinístico sobre la unidad #447 de Puertos del Lago: Con tu capital inicial de USD 120k (80% del valor), califican para nuestra estructura de financiación privada por “cupos”. El saldo de USD 30k se puede prorratear en 24 cuotas fijas de USD 1,250, adicionales a la financiación bancaria que te coticé antes." },
-        { "from": "user", "text": "Excelente, puedo pagar esas cuotas." },
-        { "from": "ai", "text": "Validado ✔️. Preparamos la simulación financiera formal y te la envío por correo electrónico. Cuando estén listos te pongo en contacto con el equipo comercial para reservar la unidad. ¿Prefieres que te llamen o agendar una visita?" }
+        {
+          "from": "user",
+          "text": "Nos encantó la unidad #447, pero llegamos a USD 120k y vale 150k..."
+        },
+        {
+          "from": "ai",
+          "text": "Tengo solución para eso.<br/><br/>Con tu capital de <b>USD 120k</b> (80% del valor), califican para nuestra estructura de financiación privada por cupos:<br/><br/>• Saldo: <b>USD 30k</b><br/>• Plazo: <b>24 cuotas fijas</b><br/>• Cuota: <b>USD 1.250/mes</b><br/><br/>Esto es adicional a la financiación bancaria que ya cotizamos."
+        },
+        {
+          "from": "user",
+          "text": "Excelente, puedo pagar esas cuotas."
+        },
+        {
+          "from": "ai",
+          "text": "✅ <b>Validado.</b><br/><br/>Preparamos la simulación financiera formal y te la envío por email. Cuando estén listos te pongo en contacto con el equipo comercial.<br/><br/>¿Prefieren que los <b>llamen</b> o agendar una <b>visita</b>?"
+        }
       ]
     }
   ],
-      "problem_label": "Tu embudo de ventas sin Ximia AI es una fuga de capital.",
-      "problem_intro_line1": "Tu embudo de ventas sin Ximia AI es una fuga de capital.",
-      "problem_intro_line2": "Estás pagando sueldos calificados para responder preguntas, no para cerrar ventas. Mientras tu equipo califica basura, los clientes reales cierran con tu competencia.",
-      "problem_headline": [
-        "Tus leads de Clase A se enfrían",
-        "mientras tu equipo",
-        "atiende a los curiosos."
-      ],
-      "problem_stat_value": "El 80%",
-      "problem_stat_caption": "de tu embudo es ruido estadístico",
-      "problem_items": [
-        "Tu equipo pierde horas calificando manualmente",
-        "Los leads calientes se enfrían esperando respuesta",
-        "Las conversaciones no escalan",
-        "El proceso depende demasiado del límite humano"
-      ],
-      "problem_result": "Mucho esfuerzo y pocas conversiones.",
-      "problem_quote_closing": "",
-
-      "solution_title": "Ximia AI resuelve eso.",
-
-      "process_steps": [
-        {
-          "label": "01 · Percibe",
-          "title": "Traduce el deseo en estructura de datos accionables",
-          "description": "Mientras el usuario conversa, Ximia AI interpreta su intención real, identifica el lifestyle, la urgencia y su perfil de inversor en tiempo real, construyendo un Gemelo Digital preciso y detallado, sin que el usuario llene un solo formulario.",
-          "icon": "zap"
-        },
-        {
-          "label": "02 · Califica",
-          "title": "Define financieramente el presupuesto del cliente",
-          "description": "Ximia AI valida la viabilidad de la operación con lógica determinística estricta. Los datos se procesan contra reglas financieras y ratios de solvencia logrando separar eficientemente el interés de la capacidad de pago real, eliminando estimaciones y supuestos.",
-          "icon": "chart"
-        },
-        {
-          "label": "03 · Propone",
-          "title": "Activa decisiones basadas en datos",
-          "description": "Cruza el perfil validado contra la disponibilidad real del inventario. Ximia AI no muestra stock, orquesta soluciones: selecciona unidades ejecutables que se ajustan al deseo y la realidad financiera del cliente, cruzando su scoring de intención con el inventario disponible.",
-          "icon": "target"
-        },
-        {
-          "label": "04 · Cierra",
-          "title": "Entrega un lead listo para cerrar la venta",
-          "description": "El proceso de Ximia AI no termina en un chat de consulta. Tu equipo comercial recibe un cliente que ya sabe qué puede comprar, cómo lo va a pagar y por qué esa es su mejor opción. Crea un perfil completo, validado y priorizado, listo para que el equipo comercial actúe con precisión.",
-          "icon": "check"
-        }
-      ],
-      "stepper_chat_0_user_1": "Hola, quiero invertir unos USD 80k. ¿Tienen algo bueno?",
-      "stepper_chat_0_ai_1": "¡Excelente capital inicial! Para enfocar mi búsqueda y recomendarte el mejor proyecto:<br/><br/>¿Estás buscando <b>renta inmediata</b> mensual (unidades terminadas) o preferís <b>maximizar la inversión</b> comprando barato de pozo?",
-      "stepper_chat_0_user_2": "De pozo para resguardar valor.",
-      "stepper_chat_1_user": "no tengo deudas",
-      "stepper_chat_1_ai": "Perfecto, sin deudas es un punto de partida muy sólido para planificar la financiación.<br/><br/>Con el perfil que armamos —monotributista con 15 años de actividad e ingresos mensuales de $6.000.000— ya podemos ver cómo se traduce en un proyecto real.<br/><br/>Te paso el escenario que arroja el sistema:<br/><br/Hay una línea de crédito bancario que encaja perfecto con tu perfil.<br/>• Podría otorgar un préstamo de hasta <b>USD 180.000</b><br/>• Con un plazo de <b>30 años</b><br/>• Cuota estimada de alrededor de <b>$1.200.000 ARS</b>",
-      "stepper_chat_2_ai": "Sumando esos USD 180.000 a tus ahorros iniciales, el presupuesto total disponible sería cercano a los <b>USD 210.000</b>.<br/><br/>Considerando que necesitás una casa para 5 personas, el modelo que mejor se ajusta es el <b>HPR03 — Vivienda Familiar Amplia</b>.<br/><br/>Es una casa con espacios sociales definidos y privacidad necesaria. Su precio base está <b>dentro de tu presupuesto</b> calculado.<br/><br/>¿Te gustaría que profundice en el HPR03 o prefieres que revisemos próximos pasos juntos?",
-      "stepper_chat_input": "Escribe tu respuesta aquí...",
-      "stepper_crm_title": "Notificaciones",
-      "stepper_crm_leads": [
-        {
-          "time": "1m",
-          "title": "Ximia IA registró actividad en un lead",
-          "name": "Familia / 1ra Vivienda",
-          "tag": "Calificado",
-          "tagColor": "text-green-600 bg-green-50 border-green-100",
-          "desc": "👍 Pros: Presupuesto USD 210k. 👎 Cons: Solo mira modelo HPR03."
-        },
-        {
-          "time": "8m",
-          "title": "Ximia IA agendó una visita virtual",
-          "name": "Inversor / Renta inmediata",
-          "tag": "Agendado",
-          "tagColor": "text-blue-600 bg-blue-50 border-blue-100",
-          "desc": "👍 Pros: Pago efectivo contado. 👎 Cons: Busca descuento agresivo."
-        },
-        {
-          "time": "19m",
-          "title": "Ximia IA clasificó intención de compra",
-          "name": "Construcción / Lote perimetral",
-          "tag": "Seguimiento",
-          "tagColor": "text-yellow-600 bg-yellow-50 border-yellow-100",
-          "desc": "👍 Pros: Crédito pre-aprobado. 👎 Cons: Solo zona norte."
-        },
-        {
-          "time": "40m",
-          "title": "Ximia IA detectó falta de presupuesto",
-          "name": "Pareja / 2 ambientes",
-          "tag": "Descartado",
-          "tagColor": "text-red-600 bg-red-50 border-red-100",
-          "desc": "👍 Pros: Intención alta. 👎 Cons: 40% debajo del valor de pozo."
-        },
-        {
-          "time": "1h 9m",
-          "title": "Ximia IA envió catálogo de propiedades",
-          "name": "Familia / Cambio de casa",
-          "tag": "Nutrición",
-          "tagColor": "text-purple-600 bg-purple-50 border-purple-100",
-          "desc": "👍 Pros: Venden casa actual. 👎 Cons: Aún no tasaron su propiedad."
-        }
-      ],
-      "backend_title": "Ximia es el Agentic Sales Layer que el Real Estate necesitaba. Combinamos la fluidez de la IA generativa con el rigor de un motor de reglas determinísticas para asegurar que cada interacción tenga una consecuencia económica real.",
-      "backend_title_words": [
-        "Tecnología agéntica",
-        "que entiende,",
-        "califica",
-        "y decide",
-        "en milisegundos."
-      ],
-      "backend_subtitle": "Ximia combina modelos de lenguaje, extracción estructurada y lógica determinística para transformar conversación en datos, validarlos y operar sobre ellos con precisión.",
-      "backend_items": [
-          {
-            "title": "Motor de extracción NLP → JSON",
-            "description": "Mientras el usuario conversa en lenguaje natural, el sistema interpreta el input con modelos de lenguaje y extrae variables críticas como capital disponible, composición del hogar y horizonte de compra. Estas variables no se almacenan como texto: se estructuran en datos utilizables por el sistema, eliminando la necesidad de formularios."
-          },
-          {
-            "title": "Validación financiera determinística",
-            "description": "Los modelos de lenguaje no participan en los cálculos. Las variables extraídas se procesan en una capa separada, donde se evalúan contra reglas financieras, condiciones de mercado y lógica de negocio. El resultado es consistente, reproducible y alineado con datos reales."
-          },
-          {
-            "title": "Scoring por insights + análisis de señal",
-            "description": "Cada interacción genera señales que el sistema interpreta más allá del contenido explícito: intención, urgencia, consistencia y comportamiento. Estas señales se consolidan en un scoring dinámico que refleja la madurez real del lead y evoluciona a medida que avanza la conversación."
-          }
-        ],
-        "vs_title": "Lo que usás hoy vs Ximia AI",
-        "vs_features": [
-          { "feature": "Objetivo", "old": "Responder consultas", "ximia": "Ejecutar decisiones comerciales" },
-          { "feature": "Procesamiento", "old": "Texto sin estructura", "ximia": "Datos estructurados en tiempo real" },
-          { "feature": "Lógica", "old": "Flujos o prompts", "ximia": "Motor determinístico sobre datos" },
-          { "feature": "Finanzas", "old": "No califica financieramente", "ximia": "Validación financiera real" },
-          { "feature": "Inteligencia", "old": "Sin contexto acumulado", "ximia": "Scoring por intención y urgencia" },
-          { "feature": "Resultado", "old": "Charlas de atención primaria", "ximia": "Leads listos para cierre" }
-        ],
-        "cta_headline": "No escales tu equipo de ventas. Escalá tu capacidad de cierre.",
-        "cta_subheadline": "Dejá de pagar sueldos para responder preguntas frecuentes. Suma un Agentic Sales Layer que transforma el ruido de tu embudo en activos transaccionales. Tu equipo humano potenciado 24/7 por una poderosa Inteligencia Artificial que entrega operaciones validadas, listas para reservar y elimina todos tus límites.",
-        "cta_button": "Agendar Demo"
+  "problem_label": "Tu embudo de ventas sin Ximia AI es una fuga de recursos.",
+  "problem_intro_line1": "Tu embudo de ventas sin Ximia AI\nes una fuga de recursos.",
+  "problem_intro_line2": "Un equipo altamente calificado no debería desgastarse gestionando tráfico frío. Al delegar la validación a la infraestructura de Ximia, reemplazas un proceso manual con un algoritmo de calificación automatizado que acelera tus cierres.",
+  "problem_headline": [
+    "Tus leads de Clase A se enfrían",
+    "mientras tu equipo",
+    "atiende a los curiosos."
+  ],
+  "problem_stat_value": "El 80%",
+  "problem_stat_caption": "de tu embudo es ruido estadístico que asfixia la capacidad de cierre de tu equipo de ventas.",
+  "problem_flow_without_label": "Sin Ximia",
+  "problem_flow_without": [
+    "Lead entra",
+    "Humano califica manualmente",
+    "Espera 4+ horas",
+    "El cliente no califica o ya se enfrió"
+  ],
+  "problem_flow_with_label": "Con Ximia",
+  "problem_flow_with": [
+    "Lead entra",
+    "Ximia AI valida solvencia en 2 min",
+    "Scoring + match automático",
+    "Humano recibe operación lista para reservar"
+  ],
+  "problem_result": "Mucho esfuerzo y pocas conversiones.",
+  "problem_quote_closing": "",
+  "solution_title": "Ximia AI resuelve eso.",
+  "process_steps": [
+    {
+      "label": "01 · Percibe",
+      "title": "Traduce el deseo en estructura de datos accionables",
+      "description": "Mientras el usuario conversa, Ximia AI interpreta su intención real, identifica el lifestyle, la urgencia y su perfil de inversor en tiempo real, construyendo un Gemelo Digital preciso y detallado, sin que el usuario llene un solo formulario.",
+      "icon": "zap"
+    },
+    {
+      "label": "02 · Califica",
+      "title": "Define financieramente el presupuesto del cliente",
+      "description": "Ximia AI valida la viabilidad de la operación con lógica determinística estricta. Los datos se procesan contra reglas financieras y ratios de solvencia logrando separar eficientemente el interés de la capacidad de pago real, eliminando estimaciones y supuestos.",
+      "icon": "chart"
+    },
+    {
+      "label": "03 · Propone",
+      "title": "Activa decisiones basadas en datos",
+      "description": "Cruza el perfil validado contra la disponibilidad real del inventario. Ximia AI no muestra stock, orquesta soluciones: selecciona unidades ejecutables que se ajustan al deseo y la realidad financiera del cliente, cruzando su scoring de intención con el inventario disponible.",
+      "icon": "target"
+    },
+    {
+      "label": "04 · Cierra",
+      "title": "Entrega un lead listo para cerrar la venta",
+      "description": "El proceso de Ximia AI no termina en un chat de consulta. Tu equipo comercial recibe un cliente que ya sabe qué puede comprar, cómo lo va a pagar y por qué esa es su mejor opción. Crea un perfil completo, validado y priorizado, listo para que el equipo comercial actúe con precisión.",
+      "icon": "check"
+    }
+  ],
+  "stepper_chat_0_user_1": "Hola, quiero invertir unos USD 80k. ¿Tienen algo bueno?",
+  "stepper_chat_0_ai_1": "¡Excelente capital inicial! Para enfocar mi búsqueda y recomendarte el mejor proyecto:<br/><br/>¿Estás buscando <b>renta inmediata</b> mensual (unidades terminadas) o preferís <b>maximizar la inversión</b> comprando barato de pozo?",
+  "stepper_chat_0_user_2": "De pozo para resguardar valor.",
+  "stepper_chat_1_user": "no tengo deudas",
+  "stepper_chat_1_ai": "Perfecto, sin deudas es un punto de partida muy sólido para planificar la financiación.<br/><br/>Con el perfil que armamos —monotributista con 15 años de actividad e ingresos mensuales de $6.000.000— ya podemos ver cómo se traduce en un proyecto real.<br/><br/>Te paso el escenario que arroja el sistema:<br/><br/Hay una línea de crédito bancario que encaja perfecto con tu perfil.<br/>• Podría otorgar un préstamo de hasta <b>USD 180.000</b><br/>• Con un plazo de <b>30 años</b><br/>• Cuota estimada de alrededor de <b>$1.200.000 ARS</b>",
+  "stepper_chat_2_ai": "Sumando esos USD 180.000 a tus ahorros iniciales, el presupuesto total disponible sería cercano a los <b>USD 210.000</b>.<br/><br/>Considerando que necesitás una casa para 5 personas, el modelo que mejor se ajusta es el <b>HPR03 — Vivienda Familiar Amplia</b>.<br/><br/>Es una casa con espacios sociales definidos y privacidad necesaria. Su precio base está <b>dentro de tu presupuesto</b> calculado.<br/><br/>¿Te gustaría que profundice en el HPR03 o prefieres que revisemos próximos pasos juntos?",
+  "stepper_chat_input": "Escribe tu respuesta aquí...",
+  "stepper_crm_title": "Notificaciones",
+  "stepper_crm_leads": [
+    {
+      "time": "1m",
+      "title": "Ximia IA registró actividad en un lead",
+      "name": "Familia / 1ra Vivienda",
+      "tag": "Calificado",
+      "tagColor": "text-green-600 bg-green-50 border-green-100",
+      "desc": "👍 Pros: Presupuesto USD 210k. 👎 Cons: Solo mira modelo HPR03."
+    },
+    {
+      "time": "8m",
+      "title": "Ximia IA agendó una visita virtual",
+      "name": "Inversor / Renta inmediata",
+      "tag": "Agendado",
+      "tagColor": "text-blue-600 bg-blue-50 border-blue-100",
+      "desc": "👍 Pros: Pago efectivo contado. 👎 Cons: Busca descuento agresivo."
+    },
+    {
+      "time": "19m",
+      "title": "Ximia IA clasificó intención de compra",
+      "name": "Construcción / Lote perimetral",
+      "tag": "Seguimiento",
+      "tagColor": "text-yellow-600 bg-yellow-50 border-yellow-100",
+      "desc": "👍 Pros: Crédito pre-aprobado. 👎 Cons: Solo zona norte."
+    },
+    {
+      "time": "40m",
+      "title": "Ximia IA detectó falta de presupuesto",
+      "name": "Pareja / 2 ambientes",
+      "tag": "Descartado",
+      "tagColor": "text-red-600 bg-red-50 border-red-100",
+      "desc": "👍 Pros: Intención alta. 👎 Cons: 40% debajo del valor de pozo."
+    },
+    {
+      "time": "1h 9m",
+      "title": "Ximia IA envió catálogo de propiedades",
+      "name": "Familia / Cambio de casa",
+      "tag": "Nutrición",
+      "tagColor": "text-purple-600 bg-purple-50 border-purple-100",
+      "desc": "👍 Pros: Venden casa actual. 👎 Cons: Aún no tasaron su propiedad."
+    }
+  ],
+  "why_ximia_label": "",
+  "why_ximia_headline": "Ximia AI no es un prompt distinto. Es una arquitectura diferente.",
+  "why_ximia_intro": "Mientras un humano duerme y un chatbot frustra, Ximia AI decide. Nuestra inteligencia elimina la fricción entre el interés del cliente y la firma del boleto, procesando datos financieros en tiempo real para que tu equipo solo intervenga en el cierre.",
+  "infra_title": "Arquitectura de un Sistema Orquestado",
+  "infra_subtitle": "Ximia AI no es un chatbot monolítico. Es un ecosistema de capas coordinadas donde cada componente ejecuta una función crítica.",
+  "infra_layers": [
+    {
+      "layer": "Percepción e Interfaz",
+      "function": "Traduce lenguaje natural en datos accionables (NLP → JSON)."
+    },
+    {
+      "layer": "Orquestador Central",
+      "function": "El cerebro que sincroniza módulos e integraciones web/CRM."
+    },
+    {
+      "layer": "Motores de Cálculo",
+      "function": "Ejecuta lógica financiera sobre catálogos de inventario."
+    },
+    {
+      "layer": "Persistencia",
+      "function": "Mantiene el perfil vivo del usuario entre sesiones."
+    }
+  ],
+  "why_ximia_features": [
+    {
+      "title": "Gestión de Estado Determinista",
+      "description": "A diferencia de los bots de FAQ que se pierden en flujos rígidos, Ximia AI opera con un motor de decisiones autónomo. No sigue un guión; evalúa el estado de la venta y decide el próximo paso lógico para avanzar hacia el cierre."
+    },
+    {
+      "title": "Cálculos Financieros Reales",
+      "description": "Ximia AI no 'estima' presupuestos. Aplica lógica bancaria, reglas de crédito y matemática financiera en vivo. El cliente recibe una propuesta de viabilidad técnica, no una respuesta genérica."
+    },
+    {
+      "title": "Profile Estructurado Evolutivo",
+      "description": "La información no se guarda como texto muerto. Construimos un 'objeto de datos' del cliente que se acumula y refina en cada mensaje. Ximia AI jamás repite una pregunta y nunca pierde el contexto de la operación."
+    },
+    {
+      "title": "El socio del equipo comercial",
+      "description": "No reemplazamos al vendedor, lo potenciamos. Ximia AI entrega leads Clase A con toda su información estructurada, reduciendo el agotamiento del equipo y elevando drásticamente el promedio de cierres."
+    }
+  ],
+  "stack_title": "Estructura Flexible y Adaptativa",
+  "stack_subtitle": "Integramos el mejor stack tecnológico según ecosistema:",
+  "stack_tags": [
+    "Automatización (n8n & Botpress)",
+    "LLMs (DeepSeek / GPT)",
+    "Bases Vectoriales (Supabase)",
+    "SQL & NoSQL",
+    "Integración CRM",
+    "Seguridad eMail OTP",
+    "Voice STT/TTS"
+  ],
+  "vs_title": "Lo que usás hoy vs. Ximia AI",
+  "vs_features": [
+    {
+      "feature": "Objetivo",
+      "old": "Responder consultas",
+      "ximia": "Ejecutar decisiones comerciales"
+    },
+    {
+      "feature": "Procesamiento",
+      "old": "Texto sin estructura",
+      "ximia": "Datos estructurados en tiempo real"
+    },
+    {
+      "feature": "Lógica",
+      "old": "Flujos o prompts",
+      "ximia": "Motor determinístico sobre datos"
+    },
+    {
+      "feature": "Finanzas",
+      "old": "No califica financieramente",
+      "ximia": "Validación financiera real"
+    },
+    {
+      "feature": "Inteligencia",
+      "old": "Sin contexto acumulado",
+      "ximia": "Scoring por intención y urgencia"
+    },
+    {
+      "feature": "Resultado",
+      "old": "Charlas de atención primaria",
+      "ximia": "Leads listos para cierre"
+    }
+  ],
+  "cta_headline": "No escales tu equipo de ventas. Escalá tu capacidad de cierre.",
+  "cta_subheadline": "Dejá de pagar sueldos para responder preguntas frecuentes. Suma un Agentic Sales Layer que transforma el ruido de tu embudo en activos transaccionales. Tu equipo humano potenciado 24/7 por una poderosa Inteligencia Artificial que entrega operaciones validadas, listas para reservar y elimina todos tus límites.",
+  "cta_button": "Agendar Demo"
 }

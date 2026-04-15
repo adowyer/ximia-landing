@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Zap, BarChart3, Target, Check, Database, Cpu, Home, Braces, Landmark, Radar } from "lucide-react";
+import { Zap, BarChart3, Target, Check, Database, Cpu, Home, Braces, Landmark, Radar, BrainCircuit, Calculator, UserCheck, ShieldCheck } from "lucide-react";
 
 // i18n
 import i18n from "i18next";
@@ -151,8 +151,6 @@ export default function App() {
   const lines = t("problem_headline", { returnObjects: true });
   const isLine2Done = textLine2.length === lines[1].length;
 
-  const problemItems = t("problem_items", { returnObjects: true }) || [];
-  console.log("problem_items:", problemItems, typeof problemItems);
 
   const [stage, setStage] = useState(0);
   const problemRef = useRef(null);
@@ -317,7 +315,7 @@ export default function App() {
               </span>
             </h2>
 
-            <p className="text-2xl md:text-3xl text-gray-700 leading-snug mb-10 max-w-xl">
+            <p className="text-2xl md:text-2.5xl text-gray-700 leading-snug mb-10 max-w-xl">
               <span className="block">
                 {t("hero_sub_line_1")}
               </span>
@@ -341,9 +339,9 @@ export default function App() {
           <div className="w-full h-full flex flex-col gap-6 justify-between">
 
             {/* THE CHAT BOX */}
-            <div className="bg-white/90 backdrop-blur-xl border border-gray-200 rounded-[2rem] p-4 md:p-6 shadow-xl flex flex-col overflow-hidden relative flex-1 min-h-[420px]">
+            <div className="bg-white/90 backdrop-blur-xl border border-gray-200 rounded-[2rem] p-4 md:p-6 shadow-xl flex flex-col overflow-hidden relative max-h-[520px]">
               {/* MESSAGES */}
-              <div key={activeScenario} className="flex-1 flex flex-col justify-start gap-4 overflow-y-auto pb-8 scrollbar-hide">
+              <div key={activeScenario} className="flex-1 flex flex-col justify-start gap-4 overflow-y-auto py-2 pb-6 scrollbar-hide">
                 {heroScenarios[activeScenario]?.messages?.map((msg, i) => (
                   <div
                     key={i}
@@ -351,27 +349,27 @@ export default function App() {
                     style={{ animationDelay: `${i * 0.15}s`, animationFillMode: "both" }}
                   >
                     {msg.from === "ai" && (
-                      <img src="/AI-Icon.gif" alt="AI Agent" className="w-6 h-6 mt-1 rounded-full shadow-sm" />
+                      <img src="/AI-Icon.gif" alt="AI Agent" className="w-6 h-6 mt-1 rounded-full shadow-sm shrink-0" />
                     )}
 
                     <div
                       className={`p-3 rounded-2xl max-w-[85%] md:max-w-[80%] text-sm md:text-base leading-relaxed shadow-sm ${msg.from === "user"
-                          ? "bg-[#0092B3] text-white rounded-br-sm"
-                          : "bg-gray-50 border border-gray-100 text-gray-800 rounded-bl-sm"
+                        ? "bg-[#0092B3] text-white rounded-br-sm"
+                        : "bg-gray-50 border border-gray-100 text-gray-800 rounded-bl-sm"
                         }`}
+                      dangerouslySetInnerHTML={{ __html: msg.text }}
                     >
-                      {msg.text}
                     </div>
                   </div>
                 ))}
               </div>
 
               {/* Bottom fading gradient to simulate scroll bounds */}
-              <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white to-transparent pointer-events-none rounded-b-[2rem]"></div>
+              <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-white/95 to-transparent pointer-events-none rounded-b-[2rem]"></div>
             </div>
 
             {/* THE CONTROLS (OUTSIDE, BELOW, CENTERED) */}
-            <div className="flex flex-col items-center gap-3 mt-2">
+            <div className="flex flex-col items-center gap-2 mt-1">
               <span className="text-sm font-medium text-gray-500">
                 {t("hero_demo_label")}
               </span>
@@ -381,8 +379,8 @@ export default function App() {
                     key={idx}
                     onClick={() => setActiveScenario(idx)}
                     className={`whitespace-nowrap px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 border ${activeScenario === idx
-                        ? 'bg-gray-700 text-white border-gray-700 shadow-md scale-105'
-                        : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:bg-gray-50 hover:scale-105'
+                      ? 'bg-gray-700 text-white border-gray-700 shadow-md scale-105'
+                      : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:bg-gray-50 hover:scale-105'
                       }`}
                   >
                     {scenario.tab}
@@ -402,19 +400,18 @@ export default function App() {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-top"
         >
-          <source src="/demo2.mp4" type="video/mp4" />
+          <source src="/AI.mp4" type="video/mp4" />
         </video>
       </div>
 
-      {/* THE PROBLEM */}
       <section className="py-40 md:py-48 text-center bg-white">
         <div className="max-w-6xl mx-auto px-6">
-          <p className="text-xl md:text-4xl text-gray-700 mb-8">
+          <p className="text-2xl md:text-5xl font-bold text-gray-900 mb-8 whitespace-pre-line">
             {t("problem_intro_line1")}
           </p>
-          <p className="text-2xl md:text-6xl font-bold text-gray-900 leading-tight">
+          <p className="text-2xl md:text-5xl text-gray-700 leading-tight whitespace-pre-line">
             {t("problem_intro_line2")}
           </p>
         </div>
@@ -447,7 +444,7 @@ export default function App() {
           </div>
 
           {/* STAT */}
-          <div ref={statsRef} className="mb-16 max-w-8xl mx-auto text-center">
+          <div ref={statsRef} className="mb-16 max-w-5xl mx-auto text-center">
             <p className={`text-6xl md:text-8xl font-bold transition-all duration-700 ${stage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}>
               {t("problem_stat_value")}
@@ -458,25 +455,31 @@ export default function App() {
               {t("problem_stat_caption")}
             </p>
 
-            <div className="mt-10 space-y-4 text-gray-400 text-xl md:text-2xl">
-              {problemItems.map((item, index) => (
-                <div
-                  key={index}
-                  className={`flex flex-col items-center transition-all duration-700 ${stage >= 4
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-6"
-                    }`}
-                  style={{ transitionDelay: `${index * 200}ms` }}
-                >
-                  <p className="opacity-90 text-center max-w-2xl">
-                    {item}
-                  </p>
-
-                  {index < problemItems.length - 1 && (
-                    <div className="h-px bg-white/10 w-16 mt-4" />
-                  )}
-                </div>
-              ))}
+            <div className={`mt-16 grid grid-cols-2 gap-0 max-w-4xl mx-auto transition-all duration-700 ${stage >= 4 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+              {/* WITHOUT XIMIA */}
+              <div className="flex flex-col items-center pr-8 border-r border-white/10">
+                <p className="text-sm md:text-base font-bold uppercase tracking-widest mb-8">{t("problem_flow_without_label")}</p>
+                {(t("problem_flow_without", { returnObjects: true }) || []).map((step, idx, arr) => (
+                  <div key={idx} className="flex flex-col items-center" style={{ transitionDelay: `${idx * 200}ms` }}>
+                    <p className={`text-center text-base md:text-xl ${idx === arr.length - 1 ? "font-bold" : "text-gray-400"}`}>{step}</p>
+                    {idx < arr.length - 1 && (
+                      <span className="text-gray-600 text-2xl my-3">↓</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+              {/* WITH XIMIA */}
+              <div className="flex flex-col items-center pl-8">
+                <p className="text-sm md:text-base font-bold uppercase tracking-widest mb-8">{t("problem_flow_with_label")}</p>
+                {(t("problem_flow_with", { returnObjects: true }) || []).map((step, idx, arr) => (
+                  <div key={idx} className="flex flex-col items-center" style={{ transitionDelay: `${idx * 200}ms` }}>
+                    <p className={`text-center text-base md:text-xl ${idx === arr.length - 1 ? "font-bold" : "text-gray-300"}`}>{step}</p>
+                    {idx < arr.length - 1 && (
+                      <span className="text-2xl my-3">↓</span>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="flex justify-center my-12">
@@ -607,8 +610,8 @@ export default function App() {
                     {/* CRM Header */}
                     <div className="bg-[#3b82f6] h-14 flex items-center px-6 shrink-0">
                       <div className="flex gap-6 text-white text-sm">
-                        <span className="font-bold flex items-center gap-2 px-3 py-1.5"><Target size={18}/> CRM DASHBOARD</span>
-                        <span className="opacity-70 flex items-center"><BarChart3 size={18}/></span>
+                        <span className="font-bold flex items-center gap-2 px-3 py-1.5"><Target size={18} /> CRM DASHBOARD</span>
+                        <span className="opacity-70 flex items-center"><BarChart3 size={18} /></span>
                       </div>
                     </div>
                     <div className="p-6 flex-1 bg-gray-50/30 overflow-y-auto">
@@ -647,45 +650,105 @@ export default function App() {
         </div>
       </section>
 
-      {/* 1. BACKEND / TECHNOLOGY */}
+      {/* THE ARCHITECTURE BENTO GRID */}
       <section className="py-24 md:py-32 bg-gray-50 border-t border-gray-100 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div ref={backendTitleRef} className="text-center mb-16 md:mb-24 max-w-4xl mx-auto">
-            <h2 className="text-7xl md:text-7xl font-bold tracking-tight mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2">
-              {Array.isArray(t("backend_title_words", { returnObjects: true }))
-                ? t("backend_title_words", { returnObjects: true }).map((word, idx, arr) => (
-                  <span
-                    key={idx}
-                    className={`inline-block ${backendInView ? "animate-step" : "opacity-0"} ${idx === 0 ? "text-gray-900" : idx === arr.length - 1 ? "text-[#0092B3]" : "text-gray-500"}`}
-                    style={{ animationDelay: `${idx * 0.4}s`, animationFillMode: "both" }}
-                  >
-                    {word}
-                  </span>
-                ))
-                : <span className="text-gray-900">{t("backend_title")}</span>
-              }
+          <div ref={backendTitleRef} className="max-w-5xl mb-16 md:mb-20">
+            <p className="text-[#0092B3] font-bold tracking-widest uppercase mb-4 text-sm md:text-base">{t("why_ximia_label")}</p>
+            <h2 className={`text-5xl md:text-7xl font-bold tracking-tight mb-8 transition-all duration-1000 ${backendInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              {t("why_ximia_headline")}
             </h2>
-            <p className={`text-xl md:text-2xl text-gray-500 leading-relaxed transition-opacity duration-1000 ${backendInView ? "opacity-100" : "opacity-0"}`} style={{ transitionDelay: "1.6s" }}>
-              {t("backend_subtitle")}
+            <p className={`text-xl md:text-2xl text-gray-500 leading-relaxed max-w-3xl transition-opacity duration-1000 delay-300 ${backendInView ? "opacity-100" : "opacity-0"}`}>
+              {t("why_ximia_intro")}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {Array.isArray(t("backend_items", { returnObjects: true })) && t("backend_items", { returnObjects: true }).map((item, idx) => (
-              <div
-                key={idx}
-                className={`transition-all duration-700 ${backendInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                style={{ transitionDelay: `${1200 + idx * 200}ms` }}
-              >
-                <div className="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full">
-                  <div className="w-14 h-14 bg-[#0092B3]/10 text-[#0092B3] rounded-2xl flex items-center justify-center mb-8 transition-transform duration-300 hover:scale-110">
-                    {idx === 0 ? <Braces size={28} /> : idx === 1 ? <Landmark size={28} /> : <Radar size={28} />}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            {/* CARD 1: The Core Features (Col 1) */}
+            <div className={`col-span-1 bg-[#0092B3] text-white rounded-3xl p-8 md:p-10 shadow-xl flex flex-col justify-between transition-all duration-1000 delay-500 transform ${backendInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+              <div className="space-y-10">
+                {Array.isArray(t("why_ximia_features", { returnObjects: true })) && t("why_ximia_features", { returnObjects: true }).map((feat, idx) => (
+                  <div key={idx} className="flex flex-col gap-3">
+                    <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0 mb-2">
+                      {idx === 0 ? <BrainCircuit size={24} /> : idx === 1 ? <Calculator size={24} /> : idx === 2 ? <UserCheck size={24} /> : <ShieldCheck size={24} />}
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold mb-2">{feat.title}</h4>
+                      <p className="text-white/80 leading-relaxed text-sm md:text-base">{feat.description}</p>
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{item.title}</h3>
-                  <p className="text-gray-500 text-lg leading-relaxed">{item.description}</p>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN STACK */}
+            <div className="col-span-1 md:col-span-2 flex flex-col gap-6">
+
+              {/* CARD 2: Architecture Layers (Bigger, more weight) */}
+              <div className={`flex-grow bg-white border border-gray-100 rounded-3xl p-8 md:p-12 shadow-sm transition-all duration-1000 delay-700 transform ${backendInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+                <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">{t("infra_title")}</h3>
+                <p className="text-gray-500 text-xl mb-10 max-w-2xl leading-relaxed">{t("infra_subtitle")}</p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
+                  {Array.isArray(t("infra_layers", { returnObjects: true })) && t("infra_layers", { returnObjects: true }).map((layer, idx) => (
+                    <div key={idx} className="flex items-start gap-5 p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-md transition-shadow">
+                      <div className="w-12 h-12 rounded-full border border-gray-300 bg-white text-gray-900 flex items-center justify-center font-bold text-lg shrink-0 shadow-sm">
+                        0{idx + 1}
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-gray-900 text-lg mb-2">{layer.layer}</h4>
+                        <p className="text-base text-gray-500 leading-relaxed">{layer.function}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
+
+              {/* CARD 3: Tech Stack (Smaller) */}
+              <div className={`bg-gray-900 text-white rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden flex flex-col transition-all duration-1000 delay-1000 transform ${backendInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#0092B3] rounded-full filter blur-[100px] opacity-20 transform translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+
+                <div className="relative z-10 flex flex-col md:flex-row gap-8 justify-between items-center h-full">
+                  <div className="flex-1">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4">{t("stack_title")}</h3>
+                    <p className="text-gray-400 text-base mb-8 max-w-lg">{t("stack_subtitle")}</p>
+
+                    <div className="flex flex-wrap gap-2 md:gap-3">
+                      {Array.isArray(t("stack_tags", { returnObjects: true })) && t("stack_tags", { returnObjects: true }).map((tag, idx) => (
+                        <span key={idx} className="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-xs md:text-sm font-medium backdrop-blur-md hover:bg-white/20 transition-colors cursor-default">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* VISUAL FILLER: MOCK CODE SNIPPET */}
+                  <div className="w-full md:w-auto shrink-0 mt-6 md:mt-0">
+                    <div className="bg-[#0b1120]/80 rounded-xl p-5 font-mono text-xs md:text-sm border border-gray-800/80 shadow-inner overflow-x-auto text-gray-300 leading-relaxed w-full md:w-[340px]">
+                      <div className="flex gap-2 mb-3 opacity-70">
+                        <div className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
+                      </div>
+                      <div>
+                        <span className="text-pink-400">const</span> <span className="text-blue-300">ximiaStack</span> <span className="text-pink-400">=</span> <span className="text-yellow-300">{"{"}</span>
+                        <br />
+                        &nbsp;&nbsp;<span className="text-[#0092B3]">orchestrator</span><span className="text-pink-400">:</span> <span className="text-green-300">"n8n"</span>,
+                        <br />
+                        &nbsp;&nbsp;<span className="text-[#0092B3]">logicModel</span><span className="text-pink-400">:</span> <span className="text-green-300">"DeepSeek-R1"</span>,
+                        <br />
+                        &nbsp;&nbsp;<span className="text-[#0092B3]">persistence</span><span className="text-pink-400">:</span> <span className="text-green-300">"Supabase-Vector"</span>,
+                        <br />
+                        &nbsp;&nbsp;<span className="text-[#0092B3]">state</span><span className="text-pink-400">:</span> <span className="text-yellow-200">DecisionEngine</span>.<span className="text-blue-300">execute</span>()
+                        <br />
+                        <span className="text-yellow-300">{"}"}</span>;
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -694,22 +757,22 @@ export default function App() {
       <section ref={tableRef} className="py-32 md:py-40 bg-white text-gray-900 border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-10">
-            <h2 className="text-5xl md:text-6xl tracking-tight text-center mb-16 md:mb-20">
+            <h2 className="text-5xl md:text-6xl tracking-tight font-bold text-center mb-16 md:mb-20">
               {t("vs_title")}
             </h2>
 
             <div className={`bg-gray-50 border border-gray-200 rounded-[2.5rem] p-8 md:p-12 shadow-2xl transition-all duration-1000 transform ${tableInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
               <div className="grid grid-cols-3 gap-6 border-b border-gray-200 pb-6 mb-6">
-                <div className="text-gray-400 font-bold uppercase tracking-widest text-xs md:text-sm">Área</div>
+                <div className="text-gray-400 uppercase tracking-widest text-xs md:text-sm">Área</div>
                 <div className="text-gray-500 font-bold text-base md:text-xl">Sin Ximia</div>
-                <div className="text-[#0092B3] font-black text-xl md:text-2xl">Con Ximia</div>
+                <div className="text-[#0092B3] font-bold text-xl md:text-xl">Con Ximia</div>
               </div>
 
               {Array.isArray(t("vs_features", { returnObjects: true })) && t("vs_features", { returnObjects: true }).map((feat, idx) => (
                 <div key={idx} className={`grid grid-cols-3 gap-6 items-center py-6 transition-all duration-700 ease-out transform ${tableInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"} ${idx !== t("vs_features", { returnObjects: true }).length - 1 ? 'border-b border-gray-200' : ''}`} style={{ transitionDelay: `${400 + idx * 150}ms` }}>
                   <div className="text-gray-500 text-sm md:text-lg font-medium">{feat.feature}</div>
-                  <div className="text-gray-400 text-base md:text-xl">{feat.old}</div>
-                  <div className="text-gray-900 font-bold text-lg md:text-2xl flex items-center gap-3">
+                  <div className="text-gray-400 text-base md:text-lg">{feat.old}</div>
+                  <div className="text-gray-900 text-lg md:text-lg flex items-center gap-3">
                     <Check className="text-green-500" strokeWidth={3} /> {feat.ximia}
                   </div>
                 </div>
@@ -724,7 +787,7 @@ export default function App() {
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <div className="text-center max-w-4xl mx-auto">
-            <h2 className={`text-6xl md:text-8xl font-black leading-[0.9] tracking-tight mb-10 text-white transition-all duration-1000 ${ctaInView ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
+            <h2 className={`text-6xl md:text-6xl font-bold leading-[0.9] tracking-tight mb-10 text-white transition-all duration-1000 ${ctaInView ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
               {t("cta_headline")}
             </h2>
             <p className={`text-2xl md:text-3xl text-gray-400 font-medium mb-16 max-w-3xl mx-auto leading-snug transition-all duration-1000 delay-300 ${ctaInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
@@ -737,6 +800,43 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* 4. FOOTER */}
+      <footer className="bg-gray-900 border-t border-gray-800/80 pt-16 pb-12 text-gray-400 relative z-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-10 md:gap-0 pb-12 border-b border-gray-800/60 mb-8">
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+              <img src="/Logo-X-b.png" alt="Ximia AI" className="h-8 md:h-10 mb-5 opacity-90" />
+              <p className="max-w-sm text-sm text-gray-500 leading-relaxed">
+                El Agentic Sales Layer para Real Estate.
+                <br />
+                Automatización orquestada, validación financiera y cierre sin fricciones.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center md:items-end gap-6">
+              <a href="mailto:hola@ximia.ai" className="text-lg hover:text-white transition-colors border-b border-transparent hover:border-white pb-1">
+                hola@ximia.ai
+              </a>
+
+              <div className="flex flex-wrap justify-center md:justify-end items-center gap-6 md:gap-8 mt-2">
+                <img src="https://logo.clearbit.com/n8n.io" alt="n8n" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300 filter grayscale brightness-0 invert" />
+                <img src="https://logo.clearbit.com/botpress.com" alt="Botpress" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300 filter grayscale brightness-0 invert" />
+                <img src="https://logo.clearbit.com/supabase.com" alt="Supabase" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300 filter grayscale brightness-0 invert" />
+                <img src="https://logo.clearbit.com/openai.com" alt="OpenAI" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300 filter grayscale brightness-0 invert" />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col-reverse md:flex-row justify-between items-center text-xs text-gray-600">
+            <span>&copy; {new Date().getFullYear()} Ximia AI. Todos los derechos reservados.</span>
+            <div className="flex gap-6 mb-4 md:mb-0">
+              <a href="#" className="hover:text-gray-400 transition-colors">Política de Privacidad</a>
+              <a href="#" className="hover:text-gray-400 transition-colors">Términos de Servicio</a>
+            </div>
+          </div>
+        </div>
+      </footer>
 
     </div>
   );

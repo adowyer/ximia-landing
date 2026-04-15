@@ -14,30 +14,66 @@
       "id": "capture",
       "tab": "🎯 Intent",
       "messages": [
-        { "from": "user", "text": "Hi, I'm looking to invest my savings." },
-        { "from": "ai", "text": "Perfect. Are you looking for immediate monthly rental income or long-term appreciation (pre-construction)?" },
-        { "from": "user", "text": "USD rent, as soon as possible." },
-        { "from": "ai", "text": "Got it. I'll filter for finished projects in high-demand areas (e.g. AIRBNB). Shall we proceed with that profile?" }
+        {
+          "from": "user",
+          "text": "Hi, I'm looking to invest my savings."
+        },
+        {
+          "from": "ai",
+          "text": "Great. To find you the best option, I need to define your risk profile:<br/><br/>Are you looking for <b>Immediate Rental Income</b> (finished units with active cash flow) or <b>Capital Appreciation</b> (pre-construction with high revaluation)?"
+        },
+        {
+          "from": "user",
+          "text": "USD rent, as soon as possible."
+        },
+        {
+          "from": "ai",
+          "text": "✅ <b>Profile set:</b> Direct Income Investor.<br/><br/>Orchestrating inventory in high-demand nodes. I've shortlisted units with a <b>projected Yield of 9-15%</b>.<br/><br/>Before showing results, do you have a <b>defined investment ticket</b> for the initial outlay?"
+        }
       ]
     },
     {
       "id": "financial",
       "tab": "📊 Finance",
       "messages": [
-        { "from": "user", "text": "I love unit 4B, but I only have $120k in cash." },
-        { "from": "ai", "text": "The price is $150k. With your $120k (80%), you instantly qualify for our 24-month developer financing. The installment would be $1,250/mo." },
-        { "from": "user", "text": "Excellent, I can afford that." },
-        { "from": "ai", "text": "Validated ✔️. Preparing the formal simulation and connecting you with the sales team to reserve." }
+        {
+          "from": "user",
+          "text": "I love unit 4B, but I only have $120k in cash."
+        },
+        {
+          "from": "ai",
+          "text": "I have a solution.<br/><br/>With your capital of <b>USD 120k</b> (80% of value), you qualify for our private developer financing:<br/><br/>• Balance: <b>USD 30k</b><br/>• Term: <b>24 fixed installments</b><br/>• Payment: <b>USD 1,250/mo</b><br/><br/>This is on top of the bank financing we already quoted."
+        },
+        {
+          "from": "user",
+          "text": "Excellent, I can afford that."
+        },
+        {
+          "from": "ai",
+          "text": "✅ <b>Validated.</b><br/><br/>Preparing the formal financial simulation and sending it to your email. When you're ready, I'll connect you with the sales team.<br/><br/>Would you prefer a <b>call</b> or to schedule a <b>visit</b>?"
+        }
       ]
     },
     {
       "id": "match",
       "tab": "🏠 Match",
       "messages": [
-        { "from": "user", "text": "Family of 4. We want a house with a backyard." },
-        { "from": "ai", "text": "Logged: Family use, 4 people, outdoor space. North zone or Pilar corridor?" },
-        { "from": "user", "text": "Pilar, closer to the schools." },
-        { "from": "ai", "text": "I have 3 properties that are an exact match (all 3 beds + garden). Would you like to schedule visits for the highest-ranked one?" }
+        {
+          "from": "user",
+          "text": "Family of 4. We want a house with a backyard."
+        },
+        {
+          "from": "ai",
+          "text": "Logged:<br/>• <b>Family</b> use, 4 people<br/>• Requirement: <b>backyard / green space</b><br/><br/>Any preferred area, or should I find the best value option?"
+        },
+        {
+          "from": "user",
+          "text": "Pilar, closer to the schools."
+        },
+        {
+          "from": "ai",
+          "text": "Got it. I have <b>6 properties</b> that are an exact match (all 3 beds + garden).<br/><br/>I've ranked them by school proximity and green space ratio.<br/><br/>Shall we <b>validate your budget</b> to move forward with a reservation? 🏡"
+        }
       ]
     }
   ],
@@ -51,17 +87,23 @@
   ],
   "problem_stat_value": "70–80%",
   "problem_stat_caption": "of your leads are just noise",
-  "problem_items": [
-    "Your team wastes hours on manual qualification",
-    "Hot leads go cold waiting for a response",
-    "Conversations don't scale",
-    "The process is bottlenecked by human limits"
+  "problem_flow_without_label": "Without Ximia",
+  "problem_flow_without": [
+    "Lead comes in via WhatsApp or web",
+    "Human qualifies manually",
+    "4+ hour wait",
+    "Client doesn't qualify or already went cold"
+  ],
+  "problem_flow_with_label": "With Ximia",
+  "problem_flow_with": [
+    "Lead comes in via WhatsApp or web",
+    "Ximia AI validates solvency in 2 min",
+    "Auto scoring + property match",
+    "Human receives a deal ready to close"
   ],
   "problem_result": "Huge effort. Few deals.",
   "problem_quote_closing": "",
-
   "solution_title": "Ximia fixes that.",
-
   "process_steps": [
     {
       "label": "01 · Capture",
@@ -138,37 +180,90 @@
       "desc": "👍 Pros: Selling current home. 👎 Cons: Property not appraised yet."
     }
   ],
-  "backend_title": "Technology that understands, validates, and decides in real time.",
-  "backend_title_words": [
-    "Technology",
-    "that understands,",
-    "validates,",
-    "and decides",
-    "in real time."
-  ],
-  "backend_subtitle": "Ximia combines language models, structured extraction, and deterministic logic to transform conversations into data, validate them, and operate with absolute precision.",
-  "backend_items": [
+  "why_ximia_label": "Why Ximia AI",
+  "why_ximia_headline": "It's not a different prompt. It's a different architecture.",
+  "why_ximia_intro": "While a human sleeps and a chatbot frustrates, Ximia decides. Our intelligence eliminates friction by processing financial data in real-time, letting your team focus only on closing.",
+  "infra_title": "Architecture of an Orchestrated System",
+  "infra_subtitle": "Ximia AI is not a monolithic bot. It's an ecosystem of coordinated layers.",
+  "infra_layers": [
     {
-      "title": "NLP → JSON Extraction Engine",
-      "description": "While the user converses in natural language, the system interprets the input via language models and extracts critical variables like available capital, household composition, and buying horizon. These variables are not stored as text: they are structured into system-usable data, eliminating the need for forms."
+      "layer": "Perception & Interface",
+      "function": "Translates natural language into actionable data (NLP → JSON)."
     },
     {
-      "title": "Deterministic Financial Validation",
-      "description": "Language models are not involved in calculations. Extracted variables are processed in a separate layer, where they are evaluated against financial rules, market conditions, and business logic. The result is consistent, reproducible, and strictly aligned with real-world data."
+      "layer": "Core Orchestrator",
+      "function": "The brain synchronizing modules and web/CRM integrations."
     },
     {
-      "title": "Insight Scoring + Signal Analysis",
-      "description": "Every interaction generates signals that the system interprets beyond explicit content: intent, urgency, consistency, and behavior. These signals consolidate into a dynamic scoring model that reflects the true maturity of the lead, evolving continuously as the conversation progresses."
+      "layer": "Calculation Engines",
+      "function": "Executes financial logic on real inventory catalogs."
+    },
+    {
+      "layer": "Persistence",
+      "function": "Maintains the live user profile across sessions."
     }
+  ],
+  "why_ximia_features": [
+    {
+      "title": "Deterministic State Engine",
+      "description": "Unlike FAQ bots that get lost in rigid flows, Ximia AI operates with an autonomous decision engine. It doesn't follow a script; it evaluates the state of the sale and decides the next logical step to advance the deal."
+    },
+    {
+      "title": "Real Financial Calculations",
+      "description": "Ximia AI doesn't 'estimate' budgets. It applies banking logic, credit rules, and financial math in real-time. The client receives a technical viability proposal, not a generic response."
+    },
+    {
+      "title": "Evolving Structured Profile",
+      "description": "Information is not saved as dead text. We build a client 'data object' that accumulates and refines with every message. Ximia AI never repeats a question and never loses the context of the operation."
+    },
+    {
+      "title": "The Sales Team Partner",
+      "description": "We don't replace the salesperson; we empower them. Ximia AI delivers Class A leads with all their structured information, reducing team burnout and drastically raising the average closing rate."
+    }
+  ],
+  "stack_title": "Adaptive & Flexible Structure",
+  "stack_subtitle": "We integrate the best tech stack according to your ecosystem:",
+  "stack_tags": [
+    "Automation (n8n & Botpress)",
+    "LLMs (DeepSeek / GPT)",
+    "Vector DBs (Supabase)",
+    "SQL & NoSQL",
+    "CRM Integration",
+    "OTP Email Security",
+    "Voice STT/TTS"
   ],
   "vs_title": "Current tools vs Ximia.ai",
   "vs_features": [
-    { "feature": "Goal", "old": "Answer questions", "ximia": "Execute commercial decisions" },
-    { "feature": "Processing", "old": "Unstructured text", "ximia": "Structured data in real time" },
-    { "feature": "Logic", "old": "Flows or prompts", "ximia": "Deterministic engine on data" },
-    { "feature": "Finance", "old": "No qualification", "ximia": "Real financial validation" },
-    { "feature": "Intelligence", "old": "No accumulated context", "ximia": "Intent & urgency scoring" },
-    { "feature": "Outcome", "old": "Chats", "ximia": "Leads ready to close" }
+    {
+      "feature": "Goal",
+      "old": "Answer questions",
+      "ximia": "Execute commercial decisions"
+    },
+    {
+      "feature": "Processing",
+      "old": "Unstructured text",
+      "ximia": "Structured data in real time"
+    },
+    {
+      "feature": "Logic",
+      "old": "Flows or prompts",
+      "ximia": "Deterministic engine on data"
+    },
+    {
+      "feature": "Finance",
+      "old": "No qualification",
+      "ximia": "Real financial validation"
+    },
+    {
+      "feature": "Intelligence",
+      "old": "No accumulated context",
+      "ximia": "Intent & urgency scoring"
+    },
+    {
+      "feature": "Outcome",
+      "old": "Chats",
+      "ximia": "Leads ready to close"
+    }
   ],
   "cta_headline": "Don’t scale your team. Scale your closing capacity.",
   "cta_subheadline": "Ximia generates and qualifies leads 24/7, prioritizes real opportunities, and frees your team to focus on closing deals instead of filtering contacts.",
