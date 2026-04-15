@@ -263,24 +263,28 @@ export default function App() {
           <button onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-2 transition-transform hover:scale-105">
             <img src="/Logo-X-b.png" alt="Ximia IA" className="h-12 md:h-16 w-auto object-contain" />
           </button>
-          <nav className="space-x-6 hidden md:block">
-            <button onClick={() => scrollTo("problem")} className="hover:text-gray-500">
+          <nav className="space-x-6 hidden md:block font-medium">
+            <button onClick={() => scrollTo("problem")} className="hover:text-gray-500 transition-colors">
               {t("nav_problem")}
             </button>
 
-            <button onClick={() => scrollTo("solution")} className="hover:text-gray-500">
+            <button onClick={() => scrollTo("solution")} className="hover:text-gray-500 transition-colors">
               {t("nav_solution")}
             </button>
 
-            <button onClick={() => scrollTo("impact")} className="hover:text-gray-500">
-              {t("nav_impact")}
+            <button onClick={() => scrollTo("tech")} className="hover:text-gray-500 transition-colors">
+              {t("nav_tech")}
+            </button>
+
+            <button onClick={() => scrollTo("vs")} className="hover:text-gray-500 transition-colors">
+              {t("nav_vs")}
             </button>
           </nav>
           <button
-            onClick={() => scrollTo("demo")}
-            className="bg-black text-white px-4 py-2 rounded-xl"
+            onClick={() => scrollTo("cta")}
+            className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-md hover:scale-105 transition-all"
           >
-            Agendar demo
+            {t("hero_cta_primary")}
           </button>
           <div className="relative">
             <select
@@ -417,7 +421,7 @@ export default function App() {
         </div>
       </section>
 
-      <section ref={problemRef} className="py-40 bg-gray-900 text-white text-center">
+      <section ref={problemRef} id="problem" className="py-40 bg-gray-900 text-white text-center">
         <div className="max-w-8xl mx-auto px-6">
           <h2 ref={headlineRef} className="text-5xl md:text-8xl font-bold leading-tight tracking-tight mb-10">
             <span className="block">
@@ -651,7 +655,7 @@ export default function App() {
       </section>
 
       {/* THE ARCHITECTURE BENTO GRID */}
-      <section className="py-24 md:py-32 bg-gray-50 border-t border-gray-100 overflow-hidden">
+      <section id="tech" className="py-24 md:py-32 bg-gray-50 border-t border-gray-100 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div ref={backendTitleRef} className="max-w-5xl mb-16 md:mb-20">
             <p className="text-[#0092B3] font-bold tracking-widest uppercase mb-4 text-sm md:text-base">{t("why_ximia_label")}</p>
@@ -754,7 +758,7 @@ export default function App() {
       </section>
 
       {/* 2. THE VS TABLE (LIGHT) */}
-      <section ref={tableRef} className="py-32 md:py-40 bg-white text-gray-900 border-b border-gray-100">
+      <section ref={tableRef} id="vs" className="py-32 md:py-40 bg-white text-gray-900 border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-10">
             <h2 className="text-5xl md:text-6xl tracking-tight font-bold text-center mb-16 md:mb-20">
@@ -783,7 +787,7 @@ export default function App() {
       </section>
 
       {/* 3. CTA (DARK) */}
-      <section ref={ctaRef} className="py-32 md:py-40 bg-gray-900 text-white relative overflow-hidden">
+      <section ref={ctaRef} id="cta" className="py-32 md:py-40 bg-gray-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <div className="text-center max-w-4xl mx-auto">
@@ -820,10 +824,11 @@ export default function App() {
               </a>
 
               <div className="flex flex-wrap justify-center md:justify-end items-center gap-6 md:gap-8 mt-2">
-                <img src="https://logo.clearbit.com/n8n.io" alt="n8n" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300 filter grayscale brightness-0 invert" />
-                <img src="https://logo.clearbit.com/botpress.com" alt="Botpress" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300 filter grayscale brightness-0 invert" />
-                <img src="https://logo.clearbit.com/supabase.com" alt="Supabase" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300 filter grayscale brightness-0 invert" />
-                <img src="https://logo.clearbit.com/openai.com" alt="OpenAI" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300 filter grayscale brightness-0 invert" />
+                <img src="/logos/n8n.png" alt="n8n" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300" />
+                <img src="/logos/botpress.png" alt="Botpress" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300" />
+                <img src="/logos/supabase.png" alt="Supabase" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300" />
+                <img src="/logos/deepseek.png" alt="DeepSeek" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300" />
+                <img src="/logos/openai.png" alt="OpenAI" className="h-5 md:h-6 opacity-40 hover:opacity-100 transition-opacity duration-300" />
               </div>
             </div>
           </div>

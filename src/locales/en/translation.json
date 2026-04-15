@@ -1,7 +1,8 @@
 {
-  "nav_problem": "Why Ximia",
-  "nav_solution": "How it works",
-  "nav_impact": "Impact",
+  "nav_problem": "Concept",
+  "nav_solution": "Product",
+  "nav_tech": "Architecture",
+  "nav_vs": "Why Ximia",
   "hero_title_1": "Ximia AI doesn't chat.",
   "hero_title_2": "It sells.",
   "hero_sub_line_1": "Ximia AI replaces forms, chatbots, and websites that don't convert.",

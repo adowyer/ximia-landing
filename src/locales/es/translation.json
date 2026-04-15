@@ -1,8 +1,9 @@
 {
-  "nav_problem": "Por qué Ximia",
-  "nav_solution": "Cómo funciona",
-  "nav_impact": "Impacto",
-  "hero_title_1": "Ximia IA no chatea.",
+  "nav_problem": "Concepto",
+  "nav_solution": "Producto",
+  "nav_tech": "Arquitectura",
+  "nav_vs": "Por qué Ximia",
+  "hero_title_1": "Ximia AI no chatea.",
   "hero_title_2": "Vende.",
   "hero_sub_line_1": "Una superestructura de agentes de IA que automatiza tu inbound, califica la capacidad de compra y orquesta el inventario en tiempo real. Diseñada para que tu equipo humano solo se dedique a cerrar.",
   "hero_sub_line_2": "",
