@@ -5,11 +5,11 @@
   "nav_vs": "Why Ximia",
   "hero_title_1": "Ximia AI doesn't chat.",
   "hero_title_2": "It sells.",
-  "hero_sub_line_1": "Ximia AI replaces forms, chatbots, and websites that don't convert.",
-  "hero_sub_line_2": "Every conversation, a closed deal.",
-  "hero_cta_secondary": "How it works",
+  "hero_sub_line_1": "An AI superstructure that automates your inbound, qualifies purchasing capacity, and orchestrates inventory in real-time. Designed so your human team only focuses on closing.",
+  "hero_sub_line_2": "",
+  "hero_cta_secondary": "",
   "hero_cta_primary": "Book a demo",
-  "hero_demo_label": "This is how Ximia works.",
+  "hero_demo_label": "See Ximia AI working in real scenarios.",
   "hero_scenarios": [
     {
       "id": "capture",
@@ -17,41 +17,19 @@
       "messages": [
         {
           "from": "user",
-          "text": "Hi, I'm looking to invest my savings."
+          "text": "I'm looking to invest my savings."
         },
         {
           "from": "ai",
-          "text": "Great. To find you the best option, I need to define your risk profile:<br/><br/>Are you looking for <b>Immediate Rental Income</b> (finished units with active cash flow) or <b>Capital Appreciation</b> (pre-construction with high revaluation)?"
+          "text": "Perfect. To find the best option I need to define your risk profile:<br/><br/>Do we prioritize <b>Immediate Rent</b> (finished units with active cash flow) or <b>Capital Maximization</b> (pre-construction projects with high revaluation)?"
         },
         {
           "from": "user",
-          "text": "USD rent, as soon as possible."
+          "text": "USD rent, short term."
         },
         {
           "from": "ai",
-          "text": "✅ <b>Profile set:</b> Direct Income Investor.<br/><br/>Orchestrating inventory in high-demand nodes. I've shortlisted units with a <b>projected Yield of 9-15%</b>.<br/><br/>Before showing results, do you have a <b>defined investment ticket</b> for the initial outlay?"
-        }
-      ]
-    },
-    {
-      "id": "financial",
-      "tab": "📊 Finance",
-      "messages": [
-        {
-          "from": "user",
-          "text": "I love unit 4B, but I only have $120k in cash."
-        },
-        {
-          "from": "ai",
-          "text": "I have a solution.<br/><br/>With your capital of <b>USD 120k</b> (80% of value), you qualify for our private developer financing:<br/><br/>• Balance: <b>USD 30k</b><br/>• Term: <b>24 fixed installments</b><br/>• Payment: <b>USD 1,250/mo</b><br/><br/>This is on top of the bank financing we already quoted."
-        },
-        {
-          "from": "user",
-          "text": "Excellent, I can afford that."
-        },
-        {
-          "from": "ai",
-          "text": "✅ <b>Validated.</b><br/><br/>Preparing the formal financial simulation and sending it to your email. When you're ready, I'll connect you with the sales team.<br/><br/>Would you prefer a <b>call</b> or to schedule a <b>visit</b>?"
+          "text": "✅ <b>Profile configured:</b> Direct Rent Investor.<br/><br/>Orchestrating inventory in high rotation nodes. I have pre-selected units with a <b>projected Yield of 9-15%</b>.<br/><br/>Before showing you the inventory, do you have a <b>defined investment ticket</b> for the initial disbursement?"
         }
       ]
     },
@@ -61,113 +39,135 @@
       "messages": [
         {
           "from": "user",
-          "text": "Family of 4. We want a house with a backyard."
+          "text": "We are a family of 4. Looking to move to a house with a green space."
         },
         {
           "from": "ai",
-          "text": "Logged:<br/>• <b>Family</b> use, 4 people<br/>• Requirement: <b>backyard / green space</b><br/><br/>Any preferred area, or should I find the best value option?"
+          "text": "Registered:<br/>• <b>Family</b> use, 4 people<br/>• Requirement: <b>garden / green space</b><br/><br/>Do you prefer a particular area or should I look for the most profitable option?"
         },
         {
           "from": "user",
-          "text": "Pilar, closer to the schools."
+          "text": "North zone, because of my job and the kids' schools."
         },
         {
           "from": "ai",
-          "text": "Got it. I have <b>6 properties</b> that are an exact match (all 3 beds + garden).<br/><br/>I've ranked them by school proximity and green space ratio.<br/><br/>Shall we <b>validate your budget</b> to move forward with a reservation? 🏡"
+          "text": "Excellent. I have <b>6 properties</b> that make an exact match.<br/><br/>I sent you the best ranked according to proximity to schools and green surface ratio.<br/><br/>Shall we validate your <b>payment capacity</b> to advance with the reservation? 🏡"
+        }
+      ]
+    },
+    {
+      "id": "financial",
+      "tab": "📊 Finance",
+      "messages": [
+        {
+          "from": "user",
+          "text": "We loved unit #447, but we reach USD 120k and it's worth 150k..."
+        },
+        {
+          "from": "ai",
+          "text": "I have a solution for that.<br/><br/>With your capital of <b>USD 120k</b> (80% of the value), you qualify for our private financing structure by quotas:<br/><br/>• Balance: <b>USD 30k</b><br/>• Term: <b>24 fixed installments</b><br/>• Quota: <b>USD 1,250/month</b><br/><br/>This is in addition to the bank financing we already quoted."
+        },
+        {
+          "from": "user",
+          "text": "Excellent, I can pay those quotas."
+        },
+        {
+          "from": "ai",
+          "text": "✅ <b>Validated.</b><br/><br/>We are preparing the formal financial simulation and I will send it by email. When you're ready I'll put you in touch with the sales team.<br/><br/>Would you prefer to be <b>called</b> or to schedule a <b>visit</b>?"
         }
       ]
     }
   ],
-  "problem_label": "Generating leads isn't the problem",
-  "problem_intro_line1": "Generating leads isn't the problem anymore.",
-  "problem_intro_line2": "It's knowing what to do with them at the exact right moment.",
+  "problem_label": "Your sales funnel without Ximia AI is a resource leak.",
+  "problem_intro_line1": "Your sales funnel without Ximia AI\nis a resource leak.",
+  "problem_intro_line2": "A highly qualified team shouldn't burn out handling cold traffic. By delegating validation to Ximia's infrastructure, you replace a manual process with an automated qualification algorithm that accelerates your closings.",
   "problem_headline": [
-    "Your team attends to everyone.",
-    "Only 20% were actual buyers.",
-    "And they already closed with someone else."
+    "Your Class A leads go cold",
+    "while your team",
+    "attends to the curious."
   ],
-  "problem_stat_value": "70–80%",
-  "problem_stat_caption": "of your leads are just noise",
+  "problem_stat_value": "80%",
+  "problem_stat_caption": "of your funnel is statistical noise that suffocates your sales team's closing capacity.",
   "problem_flow_without_label": "Without Ximia",
   "problem_flow_without": [
-    "Lead comes in via WhatsApp or web",
-    "Human qualifies manually",
-    "4+ hour wait",
-    "Client doesn't qualify or already went cold"
+    "Lead enters",
+    "Human manually qualifies",
+    "Waits 4+ hours",
+    "Client doesn't qualify or went cold"
   ],
   "problem_flow_with_label": "With Ximia",
   "problem_flow_with": [
-    "Lead comes in via WhatsApp or web",
+    "Lead enters",
     "Ximia AI validates solvency in 2 min",
-    "Auto scoring + property match",
-    "Human receives a deal ready to close"
+    "Auto scoring + match",
+    "Human receives operation ready to reserve"
   ],
-  "problem_result": "Huge effort. Few deals.",
+  "problem_result": "Much effort and few conversions.",
   "problem_quote_closing": "",
-  "solution_title": "Ximia fixes that.",
+  "solution_title": "Ximia AI solves that.",
   "process_steps": [
     {
-      "label": "01 · Capture",
-      "title": "Turns natural language into actionable data",
-      "description": "While the user is having a conversation, Ximia interprets intent, context, and needs, transforming every message into structured data without relying on forms.",
-      "icon": "brain-circuit"
+      "label": "01 · Perceives",
+      "title": "Translates desire into actionable data structure",
+      "description": "While the user converses, Ximia AI interprets their real intent, identifies lifestyle, urgency and investor profile in real-time, building a precise and detailed Digital Twin, without the user filling out a single form.",
+      "icon": "zap"
     },
     {
-      "label": "02 · Analyze",
-      "title": "Validates feasibility with deterministic logic",
-      "description": "Extracted data is processed against real financial rules, evaluating purchasing capacity with zero assumptions or guesswork.",
-      "icon": "cpu"
+      "label": "02 · Qualifies",
+      "title": "Financially defines the client's budget",
+      "description": "Ximia AI validates the feasibility of the operation with strict deterministic logic. Data is processed against financial rules and solvency ratios, efficiently separating interest from real payment capacity, eliminating estimates and assumptions.",
+      "icon": "chart"
     },
     {
-      "label": "03 · Decide",
+      "label": "03 · Proposes",
       "title": "Activates data-driven decisions",
-      "description": "Combines profile, intent, and budget with available inventory to surface only the options that truly fit.",
-      "icon": "network"
+      "description": "Crosses the validated profile against the real availability of the inventory. Ximia AI doesn't show stock, it orchestrates solutions: selects executable units that fit the client's desire and financial reality, crossing their intent scoring with available inventory.",
+      "icon": "target"
     },
     {
-      "label": "04 · Close",
-      "title": "Delivers a sales-ready lead",
-      "description": "The output isn’t a conversation — it’s a complete, validated, and prioritized profile ready for your sales team to act with precision.",
-      "icon": "check-circle"
+      "label": "04 · Closes",
+      "title": "Delivers a lead ready to close the sale",
+      "description": "Ximia AI's process doesn't end in a consultation chat. Your sales team receives a client who already knows what they can buy, how they are going to pay for it, and why it's their best option. It creates a complete, validated, and prioritized profile, ready for the sales team to act with precision.",
+      "icon": "check"
     }
   ],
-  "stepper_chat_0_user_1": "Hi, I want to invest around USD 80k. Any good options?",
-  "stepper_chat_0_ai_1": "Excellent initial capital! To focus my search and recommend the best project:<br/><br/>Are you looking for <b>immediate monthly yield</b> (finished units) or do you prefer to <b>maximize appreciation</b> by buying pre-construction?",
+  "stepper_chat_0_user_1": "Hi, I want to invest about USD 80k. Do you have anything good?",
+  "stepper_chat_0_ai_1": "Excellent starting capital! To focus my search and recommend the best project:<br/><br/>Are you looking for <b>immediate monthly rent</b> (finished units) or do you prefer to <b>maximize the investment</b> by buying cheap pre-construction?",
   "stepper_chat_0_user_2": "Pre-construction to protect value.",
   "stepper_chat_1_user": "I have no debts",
-  "stepper_chat_1_ai": "Perfect, being debt-free is a very solid starting point for financial planning.<br/><br/>With the profile we've built —freelancer with 15 years of activity and monthly income of USD 12,000 — we can now see how that translates into a real project.<br/><br/>Here is the scenario generated by the system:<br/><br/><b>Banco Nación</b> is the option that best fits your profile.<br/>• Could grant a loan up to <b>USD 680,000</b><br/>• With a term of <b>30 years</b><br/>• Estimated monthly installment around <b>USD 2,300</b>",
-  "stepper_chat_2_ai": "Adding those USD 180,000 to your initial savings, the total budget available would be close to <b>USD 860,000</b>.<br/><br/>Considering you need a house for 5 people, the model that best fits is the <b>HPR03 — Large Family Home</b>.<br/><br/>It's a house with well-defined social spaces and necessary privacy. Its base price is <b>within your calculated budget</b>.<br/><br/>Would you like me to go deeper into the HPR03 details, and design options?",
+  "stepper_chat_1_ai": "Perfect, no debts is a very solid starting point to plan financing.<br/><br/>With the profile we built —freelancer with 15 years of activity and monthly income of $6,000,000 ARS— we can now see how it translates into a real project.<br/><br/>I'm sending you the scenario the system throws:<br/><br/>There is a bank credit line that fits your profile perfectly.<br/>• Could grant a loan of up to <b>USD 180,000</b><br/>• With a term of <b>30 years</b><br/>• Estimated quota of around <b>$1,200,000 ARS</b>",
+  "stepper_chat_2_ai": "Adding those USD 180,000 to your initial savings, the total available budget would be close to <b>USD 210,000</b>.<br/><br/>Considering you need a house for 5 people, the model that best fits is the <b>HPR03 — Spacious Family Home</b>.<br/><br/>It's a house with defined social spaces and necessary privacy. Its base price is <b>within your calculated budget</b>.<br/><br/>Would you like me to delve into the HPR03 or do you prefer we review next steps together?",
   "stepper_chat_input": "Type your response here...",
   "stepper_crm_title": "Notifications",
   "stepper_crm_leads": [
     {
       "time": "1m",
-      "title": "Ximia AI logged an activity on a lead",
+      "title": "Ximia AI registered activity on a lead",
       "name": "Family / 1st Home",
       "tag": "Qualified",
       "tagColor": "text-green-600 bg-green-50 border-green-100",
-      "desc": "👍 Pros: Budget USD 210k. 👎 Cons: Only looking at HPR03 model."
+      "desc": "👍 Pros: Budget USD 210k. 👎 Cons: Only looks at HPR03 model."
     },
     {
       "time": "8m",
-      "title": "Ximia AI scheduled a virtual tour",
-      "name": "Investor / Immediate yield",
+      "title": "Ximia AI scheduled a virtual visit",
+      "name": "Investor / Immediate rent",
       "tag": "Scheduled",
       "tagColor": "text-blue-600 bg-blue-50 border-blue-100",
-      "desc": "👍 Pros: All cash buyer. 👎 Cons: Aggressive discount seeker."
+      "desc": "👍 Pros: Cash payment. 👎 Cons: Looks for aggressive discount."
     },
     {
       "time": "19m",
       "title": "Ximia AI classified purchase intent",
       "name": "Construction / Perimeter lot",
-      "tag": "Follow up",
+      "tag": "Follow-up",
       "tagColor": "text-yellow-600 bg-yellow-50 border-yellow-100",
-      "desc": "👍 Pros: Pre-approved credit. 👎 Cons: Requires gated community."
+      "desc": "👍 Pros: Pre-approved credit. 👎 Cons: Only north zone."
     },
     {
       "time": "40m",
-      "title": "Ximia AI detected budget gap",
-      "name": "Couple / 1 Bedroom",
+      "title": "Ximia AI detected lack of budget",
+      "name": "Couple / 2 rooms",
       "tag": "Discarded",
       "tagColor": "text-red-600 bg-red-50 border-red-100",
       "desc": "👍 Pros: High intent. 👎 Cons: 40% below pre-construction value."
@@ -175,17 +175,17 @@
     {
       "time": "1h 9m",
       "title": "Ximia AI sent property catalog",
-      "name": "Family / Upgrade",
+      "name": "Family / House change",
       "tag": "Nurturing",
       "tagColor": "text-purple-600 bg-purple-50 border-purple-100",
-      "desc": "👍 Pros: Selling current home. 👎 Cons: Property not appraised yet."
+      "desc": "👍 Pros: Selling current house. 👎 Cons: Haven't appraised property yet."
     }
   ],
-  "why_ximia_label": "Why Ximia AI",
-  "why_ximia_headline": "It's not a different prompt. It's a different architecture.",
-  "why_ximia_intro": "While a human sleeps and a chatbot frustrates, Ximia decides. Our intelligence eliminates friction by processing financial data in real-time, letting your team focus only on closing.",
+  "why_ximia_label": "",
+  "why_ximia_headline": "Ximia AI is not a different prompt. It's a different architecture.",
+  "why_ximia_intro": "While a human sleeps and a chatbot frustrates, Ximia AI decides. Our intelligence eliminates the friction between the client's interest and signing the contract, processing financial data in real time so your team only intervenes in closing.",
   "infra_title": "Architecture of an Orchestrated System",
-  "infra_subtitle": "Ximia AI is not a monolithic bot. It's an ecosystem of coordinated layers.",
+  "infra_subtitle": "Ximia AI is not a monolithic chatbot. It is an ecosystem of coordinated layers where each component executes a critical function.",
   "infra_layers": [
     {
       "layer": "Perception & Interface",
@@ -193,51 +193,51 @@
     },
     {
       "layer": "Core Orchestrator",
-      "function": "The brain synchronizing modules and web/CRM integrations."
+      "function": "The brain that synchronizes modules and web/CRM integrations."
     },
     {
       "layer": "Calculation Engines",
-      "function": "Executes financial logic on real inventory catalogs."
+      "function": "Executes financial logic on inventory catalogs."
     },
     {
       "layer": "Persistence",
-      "function": "Maintains the live user profile across sessions."
+      "function": "Maintains the user's living profile across sessions."
     }
   ],
   "why_ximia_features": [
     {
-      "title": "Deterministic State Engine",
-      "description": "Unlike FAQ bots that get lost in rigid flows, Ximia AI operates with an autonomous decision engine. It doesn't follow a script; it evaluates the state of the sale and decides the next logical step to advance the deal."
+      "title": "Deterministic State Management",
+      "description": "Unlike FAQ bots that get lost in rigid flows, Ximia AI operates with an autonomous decision engine. It does not follow a script; it evaluates the state of the sale and decides the next logical step to advance towards closing."
     },
     {
       "title": "Real Financial Calculations",
-      "description": "Ximia AI doesn't 'estimate' budgets. It applies banking logic, credit rules, and financial math in real-time. The client receives a technical viability proposal, not a generic response."
+      "description": "Ximia AI doesn't 'estimate' budgets. It applies banking logic, credit rules, and financial math live. The client receives a technical viability proposal, not a generic answer."
     },
     {
-      "title": "Evolving Structured Profile",
-      "description": "Information is not saved as dead text. We build a client 'data object' that accumulates and refines with every message. Ximia AI never repeats a question and never loses the context of the operation."
+      "title": "Evolutionary Structured Profile",
+      "description": "Information is not saved as dead text. We build a client 'data object' that accumulates and refines with each message. Ximia AI never repeats a question and never loses context of the operation."
     },
     {
-      "title": "The Sales Team Partner",
-      "description": "We don't replace the salesperson; we empower them. Ximia AI delivers Class A leads with all their structured information, reducing team burnout and drastically raising the average closing rate."
+      "title": "The Commercial Team's Partner",
+      "description": "We don't replace the seller, we empower them. Ximia AI delivers Class A leads with all their structured information, reducing team exhaustion and drastically elevating the closing average."
     }
   ],
-  "stack_title": "Adaptive & Flexible Structure",
-  "stack_subtitle": "We integrate the best tech stack according to your ecosystem:",
+  "stack_title": "Flexible & Adaptive Structure",
+  "stack_subtitle": "We integrate the best technological stack according to ecosystem:",
   "stack_tags": [
     "Automation (n8n & Botpress)",
     "LLMs (DeepSeek / GPT)",
-    "Vector DBs (Supabase)",
+    "Vector Databases (Supabase)",
     "SQL & NoSQL",
     "CRM Integration",
     "OTP Email Security",
     "Voice STT/TTS"
   ],
-  "vs_title": "Current tools vs Ximia.ai",
+  "vs_title": "What you use today vs. Ximia AI",
   "vs_features": [
     {
-      "feature": "Goal",
-      "old": "Answer questions",
+      "feature": "Objective",
+      "old": "Answer queries",
       "ximia": "Execute commercial decisions"
     },
     {
@@ -248,25 +248,28 @@
     {
       "feature": "Logic",
       "old": "Flows or prompts",
-      "ximia": "Deterministic engine on data"
+      "ximia": "Deterministic engine over data"
     },
     {
       "feature": "Finance",
-      "old": "No qualification",
+      "old": "Does not financially qualify",
       "ximia": "Real financial validation"
     },
     {
       "feature": "Intelligence",
       "old": "No accumulated context",
-      "ximia": "Intent & urgency scoring"
+      "ximia": "Intent and urgency scoring"
     },
     {
-      "feature": "Outcome",
-      "old": "Chats",
-      "ximia": "Leads ready to close"
+      "feature": "Result",
+      "old": "Primary attention chats",
+      "ximia": "Leads ready for closing"
     }
   ],
-  "cta_headline": "Don’t scale your team. Scale your closing capacity.",
-  "cta_subheadline": "Ximia generates and qualifies leads 24/7, prioritizes real opportunities, and frees your team to focus on closing deals instead of filtering contacts.",
-  "cta_button": "Book a Demo"
+  "cta_headline": "Don't scale your sales team. Scale your closing capacity.",
+  "cta_subheadline": "Stop paying salaries to answer frequently asked questions. Add an Agentic Sales Layer that transforms your funnel noise into transactional assets. Your human team empowered 24/7 by powerful Artificial Intelligence that delivers validated operations, ready to reserve, and eliminates all your limits.",
+  "cta_button": "Book Demo",
+  "footer_rights": "All rights reserved.",
+  "footer_privacy": "Privacy Policy",
+  "footer_terms": "Terms of Service"
 }

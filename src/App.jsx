@@ -261,7 +261,7 @@ export default function App() {
       <header className="fixed top-0 left-0 w-full bg-white shadow z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
           <button onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-2 transition-transform hover:scale-105">
-            <img src="/Logo-X-b.png" alt="Ximia IA" className="h-12 md:h-16 w-auto object-contain" />
+            <img src="/Ximia-Header.png" alt="Ximia IA" className="h-12 md:h-16 w-auto object-contain" />
           </button>
           <nav className="space-x-6 hidden md:block font-medium">
             <button onClick={() => scrollTo("problem")} className="hover:text-gray-500 transition-colors">
@@ -319,7 +319,7 @@ export default function App() {
               </span>
             </h2>
 
-            <p className="text-2xl md:text-2.5xl text-gray-700 leading-snug mb-10 max-w-xl">
+            <p className="text-2xl md:text-2xl text-gray-700 leading-snug mb-10 max-w-xl">
               <span className="block">
                 {t("hero_sub_line_1")}
               </span>
@@ -329,9 +329,9 @@ export default function App() {
             </p>
 
             <div className="flex gap-4">
-              <button className="border px-6 py-3 rounded-xl text-lg">
+              {/* <button className="border px-6 py-3 rounded-xl text-lg">
                 {t("hero_cta_secondary")}
-              </button>
+              </button> */}
               <button className="bg-black text-white px-6 py-3 rounded-xl text-lg">
                 {t("hero_cta_primary")}
               </button>
@@ -788,7 +788,6 @@ export default function App() {
 
       {/* 3. CTA (DARK) */}
       <section ref={ctaRef} id="cta" className="py-32 md:py-40 bg-gray-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <div className="text-center max-w-4xl mx-auto">
             <h2 className={`text-6xl md:text-6xl font-bold leading-[0.9] tracking-tight mb-10 text-white transition-all duration-1000 ${ctaInView ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
@@ -824,22 +823,23 @@ export default function App() {
           </div>
 
           {/* BOTTOM ROW: Logos */}
-          <div className="pt-10 pb-12 border-y border-gray-800/60 mb-8 flex flex-row items-center justify-between gap-1 md:gap-2 w-full">
-            <img src="/logos/n8n.png" alt="n8n" className="h-4 md:h-7 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
-            <img src="/logos/botpress.png" alt="Botpress" className="h-4 md:h-7 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
-            <img src="/logos/supabase.png" alt="Supabase" className="h-5 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain -mt-1" />
-            <img src="/logos/deepseek.png" alt="DeepSeek" className="h-4 md:h-7 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
-            <img src="/logos/openai.png" alt="OpenAI" className="h-6 md:h-11 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain scale-[1.35] -mx-4" />
-            <img src="/logos/ad.png" alt="AD" className="h-6 md:h-11 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain scale-[1.6] -mx-4" />
-            <img src="/logos/link.png" alt="Link" className="h-8 md:h-14 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain scale-[1.2]" />
-            <img src="/logos/marketeam.png" alt="Marketeam" className="h-6 md:h-11 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain scale-[1.4] -ml-4" />
+          <div className="pt-10 pb-12 border-y border-gray-800/60 mb-8 flex flex-row items-center justify-between gap-2 md:gap-4 w-full">
+            <img src="/logos/marketeam.png" alt="Marketeam" className="h-9 md:h-16 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
+            <img src="/logos/ad.png" alt="AD" className="h-12 md:h-24 scale-110 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
+            <img src="/logos/link.png" alt="Link" className="h-10 md:h-20 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
+            <img src="/logos/n8n.png" alt="n8n" className="h-4 md:h-6 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
+            <img src="/logos/botpress.png" alt="Botpress" className="h-4 md:h-6 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
+            <img src="/logos/supabase.png" alt="Supabase" className="h-5 md:h-6  w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
+            <img src="/logos/deepseek.png" alt="DeepSeek" className="h-4 md:h-6 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
+            <img src="/logos/openai.png" alt="OpenAI" className="h-8 md:h-10 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
+            <img src="/logos/hubspot.png" alt="Hubspot" className="h-8 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
           </div>
 
           <div className="flex flex-col-reverse md:flex-row justify-between items-center text-xs text-gray-600">
-            <span>&copy; {new Date().getFullYear()} Ximia AI. Todos los derechos reservados.</span>
+            <span>&copy; {new Date().getFullYear()} Ximia AI. {t("footer_rights")}</span>
             <div className="flex gap-6 mb-4 md:mb-0">
-              <a href="#" className="hover:text-gray-400 transition-colors"></a>
-              <a href="#" className="hover:text-gray-400 transition-colors"></a>
+              <a href="#" className="hover:text-gray-400 transition-colors">{t("footer_privacy")}</a>
+              <a href="#" className="hover:text-gray-400 transition-colors">{t("footer_terms")}</a>
             </div>
           </div>
         </div>
