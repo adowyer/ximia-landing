@@ -831,8 +831,8 @@ export default function App() {
           <div className="flex flex-col-reverse md:flex-row justify-between items-center text-xs text-gray-600">
             <span>&copy; {new Date().getFullYear()} Ximia AI. Todos los derechos reservados.</span>
             <div className="flex gap-6 mb-4 md:mb-0">
-              <a href="#" className="hover:text-gray-400 transition-colors">Política de Privacidad</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">Términos de Servicio</a>
+              <a href="#" className="hover:text-gray-400 transition-colors"></a>
+              <a href="#" className="hover:text-gray-400 transition-colors"></a>
             </div>
           </div>
         </div>
