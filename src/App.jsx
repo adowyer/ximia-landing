@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Zap, BarChart3, Target, Check, Database, Cpu, Home, Braces, Landmark, Radar, BrainCircuit, Calculator, UserCheck, ShieldCheck } from "lucide-react";
+import { Zap, BarChart3, Target, Check, Database, Cpu, Home, Braces, Landmark, Radar, BrainCircuit, Calculator, UserCheck, ShieldCheck, AlertTriangle } from "lucide-react";
 
 // i18n
 import i18n from "i18next";
@@ -152,7 +152,33 @@ export default function App() {
   const isLine2Done = textLine2.length === lines[1].length;
 
 
+  const rawStat = t("problem_stat_value");
+  const targetMatch = rawStat?.match(/\d+/);
+  const targetValue = targetMatch ? parseInt(targetMatch[0]) : 75;
+  const statPrefix = rawStat?.split(/\d+/)[0] || "";
+  const statSuffix = rawStat?.split(/\d+/)[1] || "";
+
+  const [statCount, setStatCount] = useState(0);
   const [stage, setStage] = useState(0);
+
+  useEffect(() => {
+    if (stage >= 2 && targetValue > 0) {
+      let current = 0;
+      const duration = 1200; // 1.2s to count up
+      const stepTime = Math.max(16, Math.floor(duration / targetValue));
+
+      const timer = setInterval(() => {
+        current += 1;
+        setStatCount(current);
+        if (current >= targetValue) {
+          setStatCount(targetValue);
+          clearInterval(timer);
+        }
+      }, stepTime);
+
+      return () => clearInterval(timer);
+    }
+  }, [stage, targetValue]);
   const problemRef = useRef(null);
   const statsRef = useRef(null);
   const [inView, setInView] = useState(false);
@@ -319,7 +345,7 @@ export default function App() {
               </span>
             </h2>
 
-            <p className="text-2xl md:text-2xl text-gray-700 leading-snug mb-10 max-w-xl">
+            <p className="text-[22px] md:text-[22px] text-gray-700 leading-[1.5] mb-10 max-w-xl">
               <span className="block">
                 {t("hero_sub_line_1")}
               </span>
@@ -410,13 +436,14 @@ export default function App() {
         </video>
       </div>
 
-      <section className="py-40 md:py-48 text-center bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="text-2xl md:text-5xl font-bold text-gray-900 mb-8 whitespace-pre-line">
-            {t("problem_intro_line1")}
-          </p>
-          <p className="text-2xl md:text-5xl text-gray-700 leading-tight whitespace-pre-line">
+      <section className="py-20 md:py-40 text-center bg-white">
+        <div className="w-full max-w-7xl mx-auto px-6 flex flex-col items-center">
+          <p className="text-xl md:text-3xl text-gray-600 leading-snug whitespace-pre-line max-w-6xl mb-12">
             {t("problem_intro_line2")}
+          </p>
+          <p className="text-4xl md:text-[4rem] leading-[1.1] font-bold text-gray-900 tracking-tight whitespace-pre-line max-w-full text-center">
+            <AlertTriangle size={80} strokeWidth={2.5} fill="#facc15" className="text-black inline-block align-middle mr-4 -mt-4 animate-pulse" />
+            {t("problem_intro_line1")}
           </p>
         </div>
       </section>
@@ -431,7 +458,7 @@ export default function App() {
               {visible ? textLine2 : <span className="opacity-0">{t("problem_headline", { returnObjects: true })[1]}</span>}
             </span>
             <span className={`block transform transition-all duration-[2000ms] ease-out ${isLine2Done ? "translate-x-0 opacity-100 delay-300" : "-translate-x-10 opacity-0"}`} >
-              <span className={`text-white ${isLine2Done ? "animate-fadeToGray" : ""}`} style={{ animationDelay: isLine2Done ? "1s" : "0s" }} >
+              <span className={`transition-colors duration-[2000ms] ease-in-out ${isLine2Done ? "text-[#98daed]" : "text-white"}`} style={{ transitionDelay: isLine2Done ? "1s" : "0s" }} >
                 {lines[2]}
               </span>
             </span>
@@ -448,10 +475,10 @@ export default function App() {
           </div>
 
           {/* STAT */}
-          <div ref={statsRef} className="mb-16 max-w-5xl mx-auto text-center">
-            <p className={`text-6xl md:text-8xl font-bold transition-all duration-700 ${stage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          <div ref={statsRef} className="mb-16 max-w-5xl mx-auto text-center flex flex-col items-center">
+            <p className={`text-[8rem] md:text-[11rem] leading-none tracking-tighter transition-all duration-500 ease-out ${stage >= 2 ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-90"
               }`}>
-              {t("problem_stat_value")}
+              {statPrefix}{statCount}{statSuffix}
             </p>
 
             <p className={`text-gray-400 mt-2 md:text-5xl transition-all duration-700 ${stage >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
@@ -462,7 +489,7 @@ export default function App() {
             <div className={`mt-16 grid grid-cols-2 gap-0 max-w-4xl mx-auto transition-all duration-700 ${stage >= 4 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
               {/* WITHOUT XIMIA */}
               <div className="flex flex-col items-center pr-8 border-r border-white/10">
-                <p className="text-sm md:text-base font-bold uppercase tracking-widest mb-8">{t("problem_flow_without_label")}</p>
+                <p className="text-sm md:text-xl font-bold uppercase tracking-widest mb-8">{t("problem_flow_without_label")}</p>
                 {(t("problem_flow_without", { returnObjects: true }) || []).map((step, idx, arr) => (
                   <div key={idx} className="flex flex-col items-center" style={{ transitionDelay: `${idx * 200}ms` }}>
                     <p className={`text-center text-base md:text-xl ${idx === arr.length - 1 ? "font-bold" : "text-gray-400"}`}>{step}</p>
@@ -474,7 +501,7 @@ export default function App() {
               </div>
               {/* WITH XIMIA */}
               <div className="flex flex-col items-center pl-8">
-                <p className="text-sm md:text-base font-bold uppercase tracking-widest mb-8">{t("problem_flow_with_label")}</p>
+                <p className="text-sm md:text-xl font-bold uppercase tracking-widest mb-8">{t("problem_flow_with_label")}</p>
                 {(t("problem_flow_with", { returnObjects: true }) || []).map((step, idx, arr) => (
                   <div key={idx} className="flex flex-col items-center" style={{ transitionDelay: `${idx * 200}ms` }}>
                     <p className={`text-center text-base md:text-xl ${idx === arr.length - 1 ? "font-bold" : "text-gray-300"}`}>{step}</p>

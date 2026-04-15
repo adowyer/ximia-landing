@@ -82,11 +82,11 @@
   "problem_intro_line1": "Your sales funnel without Ximia AI\nis a resource leak.",
   "problem_intro_line2": "A highly qualified team shouldn't burn out handling cold traffic. By delegating validation to Ximia's infrastructure, you replace a manual process with an automated qualification algorithm that accelerates your closings.",
   "problem_headline": [
-    "Your Class A leads go cold",
-    "while your team",
-    "attends to the curious."
+    "While your team",
+    "attends to the curious",
+    "your best leads go cold."
   ],
-  "problem_stat_value": "80%",
+  "problem_stat_value": "+75%",
   "problem_stat_caption": "of your funnel is statistical noise that suffocates your sales team's closing capacity.",
   "problem_flow_without_label": "Without Ximia",
   "problem_flow_without": [

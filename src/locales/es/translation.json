@@ -5,7 +5,7 @@
   "nav_vs": "Por qué Ximia",
   "hero_title_1": "Ximia AI no chatea.",
   "hero_title_2": "Vende.",
-  "hero_sub_line_1": "Una superestructura de agentes de IA que automatiza tu inbound, califica la capacidad de compra y orquesta el inventario en tiempo real. Diseñada para que tu equipo humano solo se dedique a cerrar.",
+  "hero_sub_line_1": "Una superestructura de agentes de IA que automatiza tu inbound, califica capacidad de compra y orquesta inventario en tiempo real. Diseñada para que tu equipo humano solo se dedique a cerrar.",
   "hero_sub_line_2": "",
   "hero_cta_secondary": "",
   "hero_cta_primary": "Agendar Demo",
@@ -82,11 +82,11 @@
   "problem_intro_line1": "Tu embudo de ventas sin Ximia AI\nes una fuga de recursos.",
   "problem_intro_line2": "Un equipo altamente calificado no debería desgastarse gestionando tráfico frío. Al delegar la validación a la infraestructura de Ximia, reemplazas un proceso manual con un algoritmo de calificación automatizado que acelera tus cierres.",
   "problem_headline": [
-    "Tus leads de Clase A se enfrían",
-    "mientras tu equipo",
-    "atiende a los curiosos."
+    "Mientras tu equipo",
+    "atiende a los curiosos",
+    "tus mejores leads se enfrían."
   ],
-  "problem_stat_value": "El 80%",
+  "problem_stat_value": "+75%",
   "problem_stat_caption": "de tu embudo es ruido estadístico que asfixia la capacidad de cierre de tu equipo de ventas.",
   "problem_flow_without_label": "Sin Ximia",
   "problem_flow_without": [
