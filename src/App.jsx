@@ -866,14 +866,14 @@ export default function App() {
 
           {/* BOTTOM ROW: Logos */}
           <div className="pt-10 pb-12 border-y border-gray-800/60 mb-8 grid grid-cols-4 md:grid-cols-8 place-items-center gap-y-8 w-full">
-            <img src="/logos/marketeam.png" alt="Marketeam" className="h-9 md:h-14 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
-            <img src="/logos/ad.png" alt="AD" className="h-12 md:h-24 scale-110 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
-            <img src="/logos/link.png" alt="Link" className="h-10 md:h-20 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
-            <img src="/logos/n8n.png" alt="n8n" className="h-4 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
-            <img src="/logos/botpress.png" alt="Botpress" className="h-4 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
-            <img src="/logos/deepseek.png" alt="DeepSeek" className="h-4 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
-            <img src="/logos/openai.png" alt="OpenAI" className="h-8 md:h-10 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
-            <img src="/logos/hubspot.png" alt="Hubspot" className="h-8 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" />
+            <a href="https://linkargentina.com" target="_blank" rel="noopener noreferrer"><img src="/logos/link.png" alt="Link" className="h-10 md:h-20 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
+            <a href="https://andreadowyer.com" target="_blank" rel="noopener noreferrer"><img src="/logos/ad.png" alt="AD" className="h-12 md:h-24 scale-110 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
+            <a href="https://marketeam.xyz" target="_blank" rel="noopener noreferrer"><img src="/logos/marketeam.png" alt="Marketeam" className="h-9 md:h-14 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
+            <a href="https://n8n.io" target="_blank" rel="noopener noreferrer"><img src="/logos/n8n.png" alt="n8n" className="h-4 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
+            <a href="https://botpress.com" target="_blank" rel="noopener noreferrer"><img src="/logos/botpress.png" alt="Botpress" className="h-4 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
+            <a href="https://github.com/deepseek-ai/DeepSeek-LLM" target="_blank" rel="noopener noreferrer"><img src="/logos/deepseek.png" alt="DeepSeek" className="h-4 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
+            <a href="https://developers.openai.com" target="_blank" rel="noopener noreferrer"><img src="/logos/openai.png" alt="OpenAI" className="h-8 md:h-10 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
+            <a href="https://hubspot.com" target="_blank" rel="noopener noreferrer"><img src="/logos/hubspot.png" alt="Hubspot" className="h-8 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
           </div>
 
           <div className="flex flex-col-reverse md:flex-row justify-between items-center text-xs text-gray-600">
