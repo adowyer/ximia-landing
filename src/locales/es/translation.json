@@ -182,7 +182,7 @@
     }
   ],
   "why_ximia_label": "",
-  "why_ximia_headline": "No es un prompt distinto. Es una arquitectura diferente.",
+  "why_ximia_headline": "No es un prompt distinto.\nEs una arquitectura diferente.",
   "why_ximia_intro": "Mientras un humano duerme y un chatbot frustra, Ximia AI decide. Nuestra inteligencia elimina la fricción entre el interés del cliente y la firma del boleto, procesando datos financieros en tiempo real para que tu equipo solo intervenga en el cierre.",
   "infra_title": "Arquitectura de un Sistema Orquestado",
   "infra_subtitle": "Ximia AI no es un chatbot monolítico. Es un ecosistema de capas coordinadas donde cada componente ejecuta una función crítica.",
@@ -234,6 +234,9 @@
     "Voice STT/TTS"
   ],
   "vs_title": "Lo que usás hoy vs. Ximia AI",
+  "vs_col1": "Área",
+  "vs_col2": "Sin Ximia",
+  "vs_col3": "Con Ximia",
   "vs_features": [
     {
       "feature": "Objetivo",

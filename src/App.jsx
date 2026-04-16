@@ -22,6 +22,14 @@ i18n.use(initReactI18next).init({
 export default function App() {
   const { t, i18n: i18nInstance } = useTranslation();
 
+  const handleCalendlyClick = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({ url: 'https://calendly.com/hola-ximia-ectr/ximia-demo' });
+    } else {
+      window.open("https://calendly.com/hola-ximia-ectr/ximia-demo", "_blank");
+    }
+  };
+
   // LANG
   const [lang, setLang] = useState(
     localStorage.getItem("lang") ||
@@ -307,7 +315,7 @@ export default function App() {
             </button>
           </nav>
           <button
-            onClick={() => window.open("https://calendly.com/hola-ximia-ectr/ximia-demo", "_blank")}
+            onClick={handleCalendlyClick}
             className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-md hover:scale-105 transition-all"
           >
             {t("hero_cta_primary")}
@@ -358,8 +366,8 @@ export default function App() {
               {/* <button className="border px-6 py-3 rounded-xl text-lg">
                 {t("hero_cta_secondary")}
               </button> */}
-              <button 
-                onClick={() => window.open("https://calendly.com/hola-ximia-ectr/ximia-demo", "_blank")}
+              <button
+                onClick={handleCalendlyClick}
                 className="bg-black text-white px-6 py-3 rounded-xl text-lg"
               >
                 {t("hero_cta_primary")}
@@ -694,9 +702,9 @@ export default function App() {
 
             <div className={`bg-white border border-gray-100 rounded-[2.5rem] p-8 md:p-12 shadow-xl transition-all duration-1000 transform ${tableInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
               <div className="grid grid-cols-3 gap-6 border-b border-gray-200 pb-6 mb-6">
-                <div className="text-gray-400 uppercase tracking-widest text-xs md:text-sm">Área</div>
-                <div className="text-gray-500 font-bold text-base md:text-xl">Sin Ximia</div>
-                <div className="text-[#0092B3] font-bold text-xl md:text-xl">Con Ximia</div>
+                <div className="text-gray-400 uppercase tracking-widest text-xs md:text-sm">{t("vs_col1")}</div>
+                <div className="text-gray-500 font-bold text-base md:text-xl">{t("vs_col2")}</div>
+                <div className="text-[#0092B3] font-bold text-xl md:text-xl">{t("vs_col3")}</div>
               </div>
 
               {Array.isArray(t("vs_features", { returnObjects: true })) && t("vs_features", { returnObjects: true }).map((feat, idx) => (
@@ -716,9 +724,9 @@ export default function App() {
       {/* THE ARCHITECTURE BENTO GRID */}
       <section id="tech" className="py-24 md:py-32 bg-white border-t border-gray-100/50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div ref={backendTitleRef} className="max-w-5xl mb-16 md:mb-20">
+          <div ref={backendTitleRef} className="max-w-6xl mb-16 md:mb-20">
             <p className="text-[#0092B3] font-bold tracking-widest uppercase mb-4 text-sm md:text-base">{t("why_ximia_label")}</p>
-            <h2 className={`text-[60px] md:text-[85px] leading-[1.1] font-bold tracking-tight mb-8 transition-all duration-1000 ${backendInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <h2 className={`whitespace-pre-line text-[60px] md:text-[85px] leading-[1.1] font-bold tracking-tight mb-8 transition-all duration-1000 ${backendInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
               {t("why_ximia_headline")}
             </h2>
             <p className={`text-xl md:text-3xl text-gray-500 leading-relaxed max-w-4xl transition-opacity duration-1000 delay-300 ${backendInView ? "opacity-100" : "opacity-0"}`}>
@@ -827,8 +835,8 @@ export default function App() {
             <p className={`text-2xl md:text-3xl text-gray-400 font-medium mb-16 max-w-3xl mx-auto leading-snug transition-all duration-1000 delay-300 ${ctaInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
               {t("cta_subheadline")}
             </p>
-            <button 
-              onClick={() => window.open("https://calendly.com/hola-ximia-ectr/ximia-demo", "_blank")}
+            <button
+              onClick={handleCalendlyClick}
               className={`relative overflow-hidden group bg-white text-black px-12 py-6 rounded-full text-xl font-bold transition-all duration-1000 delay-700 uppercase tracking-widest flex mx-auto items-center gap-3 shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.6)] ${ctaInView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-90"}`}
             >
               <span className="relative z-10 flex items-center gap-2">{t("cta_button")} <Zap size={20} fill="currentColor" /></span>
