@@ -380,7 +380,7 @@ export default function App() {
           <div className="w-full h-full flex flex-col gap-6 justify-between">
 
             {/* THE CHAT BOX */}
-            <div className="bg-white/90 backdrop-blur-xl border border-gray-200 rounded-[2rem] p-4 md:p-6 shadow-xl flex flex-col overflow-hidden relative h-[520px] md:h-[540px]">
+            <div className="bg-white/90 backdrop-blur-xl border border-gray-200 rounded-[2rem] p-4 md:p-6 shadow-xl flex flex-col overflow-hidden relative h-[520px] md:h-[530px]">
               {/* MESSAGES */}
               <div key={activeScenario} className="flex-1 flex flex-col justify-start gap-4 overflow-y-auto py-2 pb-6 scrollbar-hide">
                 {heroScenarios[activeScenario]?.messages?.map((msg, i) => (
