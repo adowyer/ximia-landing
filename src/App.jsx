@@ -871,8 +871,8 @@ export default function App() {
             <a href="https://marketeam.xyz" target="_blank" rel="noopener noreferrer"><img src="/logos/marketeam.png" alt="Marketeam" className="h-9 md:h-14 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
             <a href="https://n8n.io" target="_blank" rel="noopener noreferrer"><img src="/logos/n8n.png" alt="n8n" className="h-4 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
             <a href="https://botpress.com" target="_blank" rel="noopener noreferrer"><img src="/logos/botpress.png" alt="Botpress" className="h-4 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
-            <a href="https://github.com/deepseek-ai/DeepSeek-LLM" target="_blank" rel="noopener noreferrer"><img src="/logos/deepseek.png" alt="DeepSeek" className="h-4 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
             <a href="https://developers.openai.com" target="_blank" rel="noopener noreferrer"><img src="/logos/openai.png" alt="OpenAI" className="h-8 md:h-10 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
+            <a href="https://github.com/deepseek-ai/DeepSeek-LLM" target="_blank" rel="noopener noreferrer"><img src="/logos/deepseek.png" alt="DeepSeek" className="h-4 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
             <a href="https://hubspot.com" target="_blank" rel="noopener noreferrer"><img src="/logos/hubspot.png" alt="Hubspot" className="h-8 md:h-8 w-auto opacity-50 hover:opacity-100 transition-all duration-300 object-contain" /></a>
           </div>
 
