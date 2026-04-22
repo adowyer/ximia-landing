@@ -1,0 +1,2644 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ximia — Calculadora de Costos</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --surface2: #f1f5f9;
+      --surface3: #e2e8f0;
+      --border: #e2e8f0;
+      --border2: #cbd5e1;
+      --text: #0f172a;
+      --text2: #334155;
+      --muted: #64748b;
+      --muted2: #94a3b8;
+      --accent: #0092B3;
+      --accent-l: #eefcfe;
+      --accent2: #0e7490;
+      --btn-bg: #0f172a;
+      --green: #059669;
+      --green-l: #d1fae5;
+      --amber: #d97706;
+      --font: 'Plus Jakarta Sans', sans-serif;
+      --font-h: 'Outfit', sans-serif;
+      --radius: 18px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      font-size: 20px;
+    }
+
+    /* ── Layout ── */
+    .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    /* ── Header ── */
+    .calc-header {
+      margin-bottom: 48px;
+    }
+
+    .calc-eyebrow {
+      font-family: var(--font);
+      font-size: 17px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .calc-eyebrow::before {
+      content: '';
+      width: 30px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .calc-header h1 {
+      font-size: clamp(38px, 6.6vw, 72px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      margin-bottom: 14px;
+      line-height: 1.05;
+      font-family: var(--font-h);
+    }
+
+    .calc-header h1 span {
+      color: var(--accent);
+    }
+
+    .calc-subtitle {
+      font-size: 20px;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* ── Setup banner ── */
+    .setup-banner {
+      background: var(--text);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .setup-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #06b6d4, #7c3aed);
+    }
+
+    .setup-left {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .setup-tag {
+      font-family: var(--font);
+      font-size: 14px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .setup-title {
+      font-size: 48px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .setup-desc {
+      font-size: 19px;
+      color: #cbd5e1;
+      max-width: 480px;
+      line-height: 1.6;
+      margin-top: 2px;
+    }
+
+    .setup-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .setup-chip {
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      color: #94a3b8;
+    }
+
+    /* ── Main grid ── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media(max-width:800px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky-col {
+        order: -1;
+      }
+    }
+
+    .controls-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* ── Sticky results ── */
+    .sticky-col {
+      position: sticky;
+      top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-dark {
+      background: var(--text);
+      border-radius: var(--radius);
+      padding: 40px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-dark::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), #06b6d4);
+    }
+
+    .card-teal {
+      background: var(--accent-l);
+      border: 1.5px solid rgba(8, 145, 178, 0.2);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .card-title {
+      font-family: var(--font-h);
+      font-size: 32px;
+      letter-spacing: -.02em;
+      text-transform: none;
+      color: var(--text);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+    }
+
+    .step-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── Field blocks ── */
+    .field {
+      margin-bottom: 32px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    .field-label {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 14px;
+      letter-spacing: -.015em;
+      font-family: var(--font-h);
+    }
+
+    .field-note {
+      font-family: var(--font);
+      font-size: 18px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-left: 10px;
+    }
+
+    /* ── Market grid ── */
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+    }
+
+    @media(max-width:500px) {
+      .market-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .mkt-btn {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 8px;
+      cursor: pointer;
+      transition: all .15s;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .mkt-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .mkt-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-l);
+    }
+
+    .mkt-flag {
+      font-size: 22px;
+    }
+
+    .mkt-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ── Sliders ── */
+    .slider-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
+
+    .slider-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -.015em;
+      font-family: var(--font-h);
+    }
+
+    .slider-val {
+      font-family: var(--font);
+      font-size: 29px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: -.04em;
+    }
+
+    .slider-range {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font);
+      font-size: 10px;
+      color: var(--muted2);
+      margin-top: 7px;
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 3px;
+      background: var(--surface3);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      margin-top: -8.5px;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.12);
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 0 6px rgba(8, 145, 178, 0.18);
+    }
+
+    /* ── Tier grid ── */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+
+    @media(max-width:420px) {
+      .tier-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tier-btn {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 13px 11px;
+      cursor: pointer;
+      transition: all .15s;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .tier-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .tier-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-l);
+    }
+
+    .tier-icon {
+      font-size: 19px;
+    }
+
+    .tier-label {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .tier-note {
+      font-family: var(--font);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── Toggle ── */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toggle-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .toggle-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .toggle-sub {
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .ts-wrap {
+      position: relative;
+      width: 48px;
+      height: 26px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .ts-wrap input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    .ts-track {
+      position: absolute;
+      inset: 0;
+      background: var(--surface3);
+      border-radius: 26px;
+      border: 1.5px solid var(--border2);
+      transition: all .2s;
+    }
+
+    .ts-thumb {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 2px;
+      left: 2px;
+      background: var(--muted2);
+      border-radius: 50%;
+      transition: transform .2s, background .2s;
+    }
+
+    .ts-wrap input:checked~.ts-track {
+      background: var(--accent-l);
+      border-color: var(--accent);
+    }
+
+    .ts-wrap input:checked~.ts-track .ts-thumb {
+      transform: translateX(22px);
+      background: var(--accent);
+    }
+
+    /* ── Engagement selector ── */
+    .engage-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .btn-primary {
+      background: var(--btn-bg);
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 40px;
+      font-size: 20.4px;
+    }
+
+    .eng-tab {
+      font-family: var(--font);
+      font-size: 16.8px;
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border2);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .eng-tab:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .eng-tab.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent;
+      font-weight: 500;
+    }
+
+    /* ── Voice stack ── */
+    .vs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 7px;
+      margin-top: 14px;
+      animation: fadeUp .2s ease;
+    }
+
+    .vs-btn {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 11px 12px;
+      cursor: pointer;
+      transition: all .15s;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .vs-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .vs-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-l);
+    }
+
+    .vs-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .vs-note {
+      font-family: var(--font);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── Opt tabs (SLA) ── */
+    .opt-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .opt-tab {
+      font-family: var(--font);
+      font-size: 16px;
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border2);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .opt-tab:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .opt-tab.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent;
+      font-weight: 500;
+    }
+
+    /* ── Lang counter ── */
+    .lang-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .lang-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border2);
+      background: var(--surface2);
+      color: var(--text);
+      font-size: 16px;
+      cursor: pointer;
+      transition: all .15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .lang-num {
+      font-size: 26px;
+      font-weight: 800;
+      font-family: var(--font);
+      color: var(--accent);
+      min-width: 32px;
+      text-align: center;
+    }
+
+    .lang-lbl {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── Two col ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media(max-width:460px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Derived note ── */
+    .derived-note {
+      font-family: var(--font);
+      font-size: 12px;
+      color: var(--accent2);
+      background: var(--accent-l);
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-top: 10px;
+      display: block;
+    }
+
+    /* ── Result card (dark) ── */
+    .res-tag {
+      font-family: var(--font-h);
+      font-size: 14px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+      font-weight: 800;
+    }
+
+    .res-amount {
+      font-size: 75px;
+      font-weight: 800;
+      letter-spacing: -.05em;
+      color: #fff;
+      line-height: 0.9;
+      transition: all .25s;
+    }
+
+    .res-period {
+      font-family: var(--font);
+      font-size: 16px;
+      color: var(--muted2);
+      margin-top: 10px;
+      margin-bottom: 32px;
+      letter-spacing: .02em;
+    }
+
+    .res-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .rr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 17px;
+    }
+
+    .rr-label {
+      font-family: var(--font);
+      color: var(--muted2);
+    }
+
+    .rr-val {
+      font-family: var(--font);
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -.02em;
+    }
+
+    .rr-val.teal {
+      color: var(--accent);
+    }
+
+    /* ── Result card (teal) ── */
+    .rl-tag {
+      font-family: var(--font-h);
+      font-size: 14px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 18px;
+      font-weight: 800;
+    }
+
+    .rl-amount {
+      font-size: 65px;
+      font-weight: 800;
+      letter-spacing: -.06em;
+      color: var(--text);
+      line-height: 0.9;
+      transition: all .25s;
+    }
+
+    .rl-period {
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--accent2);
+      opacity: .9;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .rl-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(8, 145, 178, 0.25);
+    }
+
+    .rl-chip {
+      font-family: var(--font);
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(8, 145, 178, 0.15);
+      border: 1.5px solid rgba(8, 145, 178, 0.3);
+      color: var(--text);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    /* ── Lead pricing card ── */
+    .lead-card-tag {
+      font-family: var(--font-h);
+      font-size: 18px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-weight: 800;
+    }
+
+    .lead-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .lead-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 28px;
+      /* Un poco más de aire para el diseño premium */
+      border-radius: 18px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      transition: transform 0.2s ease;
+    }
+
+    .row-calc {
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: -0.01em;
+      opacity: 0.8;
+      margin-top: 4px;
+      /* Espacio bajo el precio */
+    }
+
+    .row-total {
+      font-weight: 800;
+      font-family: var(--font-h);
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .lead-price {
+      display: flex;
+      flex-direction: column;
+      /* Apilado vertical */
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .lead-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+      font-family: var(--font-h);
+    }
+
+    .lead-desc {
+      font-family: var(--font);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .lead-price {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      letter-spacing: -.02em;
+    }
+
+    .lead-price.q .row-total {
+      color: var(--accent);
+    }
+
+    .lead-price.p .row-total {
+      color: var(--amber);
+    }
+
+    .lead-price.z .row-total {
+      color: var(--muted2);
+      font-size: 20px;
+    }
+
+    /* ── Funnel section ── */
+    .funnel-section {
+      margin-top: 16px;
+      background: var(--text);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .funnel-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--accent));
+    }
+
+    .funnel-header {
+      padding: 32px 48px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .funnel-title-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .funnel-sub-text {
+      font-family: var(--font);
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 4px;
+    }
+
+    .funnel-conv-badge {
+      font-family: var(--font);
+      font-size: 12px;
+      color: var(--accent);
+      background: rgba(8, 145, 178, 0.15);
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1.5px solid rgba(8, 145, 178, 0.3);
+    }
+
+    .funnel-body {
+      padding: 32px 48px 48px;
+    }
+
+    .funnel-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .f-row {
+      display: grid;
+      grid-template-columns: 240px 1fr 120px;
+      align-items: center;
+      gap: 24px;
+    }
+
+    @media(max-width:580px) {
+      .f-row {
+        grid-template-columns: 1fr auto 70px;
+      }
+    }
+
+    .f-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .f-name {
+      font-size: 16px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .f-desc {
+      font-family: var(--font);
+      font-size: 13px;
+      color: var(--muted2);
+    }
+
+    .f-pct {
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .f-bar-wrap {
+      height: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .f-bar {
+      height: 100%;
+      border-radius: 8px;
+      transition: width .4s ease;
+    }
+
+    .f-num {
+      font-family: var(--font-h);
+      font-size: 24px;
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .f-row-hl {
+      background: rgba(5, 150, 105, 0.1);
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin: 0 -12px;
+    }
+
+    /* ── ROI section ── */
+    .roi-section {
+      margin-top: 16px;
+    }
+
+    .roi-title-row {
+      margin: 51px 14px 20px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .roi-title-text {
+      font-size: 33px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .roi-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    @media(max-width:680px) {
+      .roi-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .roi-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .roi-card-tag {
+      font-family: var(--font);
+      font-size: 11px;
+      letter-spacing: .01em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      font-weight: 600;
+    }
+
+    .roi-card-main {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -.05em;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .roi-card-main.accent {
+      color: var(--accent);
+    }
+
+    .roi-card-main.green {
+      color: var(--green);
+    }
+
+    .roi-card-sub {
+      font-family: var(--font);
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .roi-compare {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .roi-compare-label {
+      font-family: var(--font);
+      font-size: 10px;
+      color: var(--muted2);
+    }
+
+    .roi-compare-val {
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted2);
+      text-decoration: line-through;
+    }
+
+    /* ── Tech breakdown ── */
+    .tech-section {
+      margin-top: 16px;
+    }
+
+    .tech-toggle {
+      width: 100%;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all .15s;
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+
+    .tech-toggle:hover {
+      border-color: var(--accent);
+    }
+
+    .tt-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tt-title {
+      font-size: 18px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .tt-sub {
+      font-family: var(--font);
+      font-size: 10px;
+      color: var(--muted);
+      text-align: left;
+    }
+
+    .tt-arrow {
+      color: var(--muted);
+      transition: transform .2s;
+      font-size: 12px;
+    }
+
+    .tt-arrow.open {
+      transform: rotate(180deg);
+    }
+
+    .tech-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 32px 40px;
+      display: none;
+    }
+
+    .tech-body.open {
+      display: block;
+      animation: fadeUp .2s ease;
+    }
+
+    .tech-thead {
+      display: grid;
+      grid-template-columns: 1fr 160px;
+      gap: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border2);
+      margin-bottom: 8px;
+    }
+
+    .tech-thead span {
+      font-family: var(--font);
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted2);
+      text-align: right;
+    }
+
+    .tech-thead span:first-child {
+      text-align: left;
+    }
+
+    .tech-row {
+      display: grid;
+      grid-template-columns: 1fr 160px;
+      gap: 20px;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 16px;
+    }
+
+    .tech-row:last-child {
+      border-bottom: none;
+    }
+
+    .tr-label {
+      font-family: var(--font);
+      color: var(--muted);
+    }
+
+    .tr-raw {
+      font-family: var(--font);
+      font-size: 11px;
+      color: var(--muted2);
+      text-align: right;
+      min-width: 70px;
+    }
+
+    .tr-marked {
+      font-family: var(--font);
+      font-weight: 600;
+      color: var(--text);
+      text-align: right;
+      min-width: 70px;
+    }
+
+    .tech-total-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: var(--accent-l);
+      border: 1px solid rgba(8, 145, 178, 0.2);
+      border-radius: var(--radius-sm);
+    }
+
+    .tech-total-label {
+      font-family: var(--font);
+      font-size: 16px;
+      color: var(--accent2);
+    }
+
+    .tech-total-val {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: var(--font);
+      letter-spacing: -.04em;
+    }
+
+    .tech-note {
+      font-family: var(--font);
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      line-height: 1.8;
+    }
+
+    /* ── Final CTA ── */
+    .final-cta {
+      margin-top: 16px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-label {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -.015em;
+    }
+
+    .cta-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--btn-bg);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .2s;
+      white-space: nowrap;
+      letter-spacing: -.01em;
+    }
+
+    .btn-primary:hover {
+      background: #1e293b;
+      transform: translateY(-1px);
+      box-shadow: 0 0 20px rgba(8, 145, 178, 0.4);
+    }
+
+    .btn-glow {
+      box-shadow: 0 0 15px rgba(8, 145, 178, 0.25);
+      animation: pulseGlow 3s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 10px rgba(8, 145, 178, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 25px rgba(8, 145, 178, 0.4);
+      }
+
+      100% {
+        box-shadow: 0 0 10px rgba(8, 145, 178, 0.2);
+      }
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(-6px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes numPop {
+      0% {
+        opacity: .3;
+        transform: translateY(-3px) scale(.97)
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    .na {
+      animation: numPop .22s ease forwards;
+    }
+
+    /* ver detalle link */
+    .ver-detalle-wrap {
+      width: 100%;
+      text-align: center;
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(8, 145, 178, 0.15);
+    }
+
+    .ver-detalle-link {
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: var(--font);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      transition: color .2s;
+    }
+
+    .ver-detalle-link:hover {
+      color: var(--accent2);
+      text-decoration: underline;
+    }
+
+    /* ── Graphical Funnel (New) ── */
+    .funnel-graph-card {
+      background: #0f172a;
+      border-radius: var(--radius);
+      padding: 60px 48px;
+      margin-top: 32px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .funnel-graph-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+    }
+
+    .funnel-container {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media(max-width: 950px) {
+      .funnel-graph-card {
+        padding: 40px 24px;
+      }
+
+      .funnel-container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+
+      .funnel-svg-container {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .f-legend {
+        text-align: left;
+      }
+    }
+
+    /* BAR STRATEGY CHART */
+    .bar-strategy-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 32px;
+      padding: 0 10px;
+    }
+
+    .st-subtotal {
+      font-size: 11px;
+      color: var(--muted2);
+      font-weight: 600;
+      margin-top: 2px;
+      text-align: right;
+    }
+
+    .help-icon {
+      cursor: help;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      margin-left: 4px;
+      position: relative;
+      vertical-align: middle;
+    }
+
+    .help-icon:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e293b;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      width: 200px;
+      line-height: 1.4;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+      text-align: left;
+      font-weight: 400;
+    }
+
+    .strategy-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .strategy-row:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .strategy-row.disabled {
+      opacity: 0.3;
+      filter: grayscale(1);
+      transform: scale(0.98);
+    }
+
+    .bar-label-group {
+      width: 160px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bar-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .bar-sub {
+      font-size: 11px;
+      color: var(--muted2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      /* Dinámico */
+      transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border-radius: 4px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .bar-num {
+      width: 100px;
+      text-align: right;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      font-family: var(--font-h);
+    }
+
+    /* Strategy Toggle Switch */
+    .strategy-toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+    .strategy-toggle input {
+      display: none;
+    }
+
+    .st-slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.1);
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .st-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked+.st-slider {
+      background-color: var(--green);
+    }
+
+    input:checked+.st-slider:before {
+      transform: translateX(20px);
+    }
+
+    /* ── Dashboard Table Card ── */
+    .table-card {
+      background: rgba(15, 23, 42, 0.4);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 32px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .lead-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font);
+      color: #fff;
+    }
+
+    .lead-table th {
+      text-align: left;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+    }
+
+    .lead-table td {
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 16px;
+    }
+
+    .lead-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .lead-table .val-num {
+      font-family: var(--font-h);
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .lead-table .val-price {
+      color: #94a3b8;
+    }
+
+    .lead-table .val-revenue {
+      font-family: var(--font-h);
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .lead-table .val-note {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .lead-table .row-total {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .lead-table .row-total td {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .lead-table .row-total .val-revenue {
+      color: var(--green);
+      font-size: 18px;
+    }
+
+    .price-input {
+      background: transparent;
+      border: 1px solid transparent;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 2px 4px;
+      width: 80px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .price-input:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      color: var(--accent);
+    }
+
+    .price-input:focus {
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+    }
+
+    /* Ocultar flechas en input number */
+    .price-input::-webkit-inner-spin-button,
+    .price-input::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- HEADER -->
+    <div class="calc-header">
+      <div class="calc-eyebrow">Ximia AI · Transparencia de precios</div>
+      <h1>Cuánto cuesta<br><span>sumar el poder de Ximia a tu negocio</span></h1>
+      <p class="calc-subtitle">Configurá tu caso y obtené un estimado en tiempo real. Los valores se ajustan según tu
+        volumen, tu
+        mercado
+        y la arquitectura que elijas.</p>
+    </div>
+
+    <!-- SETUP -->
+    <div class="setup-banner">
+      <div class="setup-left">
+        <span class="setup-tag">Fase 1 · Implementación de Arquitectura</span>
+        <div class="setup-title">Setup &amp; Onboarding</div>
+        <div class="setup-desc">El fee de implementación se personaliza tras una sesión de <strong>Onboarding &amp;
+            Discovery</strong>. Analizamos tu stack técnico, objetivos comerciales y procesos de venta para diseñar una
+          arquitectura a medida.</div>
+        <div class="setup-chips">
+          <span class="setup-chip">📍 Análisis de Mercado</span>
+          <span class="setup-chip">🗂️ Auditoría de Portfolio</span>
+          <span class="setup-chip">🔗 Integración de Stack</span>
+          <span class="setup-chip">🌐 Localización</span>
+        </div>
+      </div>
+      <div class="setup-action" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+        <div class="setup-price"
+          style="font-size: 80px; font-weight: 700; color: #fff; line-height: 2; letter-spacing: -0.04em;">$?</div>
+        <a href="https://calendly.com/hola-ximia-ectr/ximia-demo" target="_blank" class="btn-primary btn-glow"
+          style="white-space: nowrap;">Agendar Onboarding & Demo →</a>
+      </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+
+      <!-- LEFT: CONTROLS -->
+      <div class="controls-col">
+
+        <!-- CARD 1: Tu negocio -->
+        <div class="card">
+          <div class="card-title"><span class="step-dot">1</span> Tu negocio</div>
+
+          <div class="field">
+            <div class="field-label">Mercado</div>
+            <div class="market-grid">
+              <button class="mkt-btn active" data-mkt="latam" onclick="setMarket(this)">
+                <span class="mkt-flag">🌎</span><span class="mkt-name">Latam</span>
+              </button>
+              <button class="mkt-btn" data-mkt="usa" onclick="setMarket(this)">
+                <span class="mkt-flag">🇺🇸</span><span class="mkt-name">USA</span>
+              </button>
+              <button class="mkt-btn" data-mkt="europa" onclick="setMarket(this)">
+                <span class="mkt-flag">🇪🇺</span><span class="mkt-name">Europa</span>
+              </button>
+              <button class="mkt-btn" data-mkt="eau" onclick="setMarket(this)">
+                <span class="mkt-flag">🇦🇪</span><span class="mkt-name">EAU / Dubai</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="slider-head">
+              <span class="slider-name">Valor promedio del m² en tu portfolio</span>
+              <span class="slider-val" id="m2-out">USD 1.700</span>
+            </div>
+            <input type="range" class="range-field" id="m2-slider" min="500" max="20000" step="100" value="1700"
+              oninput="onSlider()">
+            <div class="slider-range"><span>USD 100</span><span>USD 20.000</span></div>
+            <div class="derived-note" id="ticket-derived" style="font-size:14px; line-height:1.4;">
+              <div style="margin-bottom: 4px;">📐 Ticket promedio estimado: <strong id="ticket-est">—</strong></div>
+              <div style="font-size:14px; opacity:0.8;">
+                Calculado según m² portfolio × superficie estándar del mercado.<br>
+                <strong>Propósito:</strong> Este valor calibra el costo por lead y asegura que tu proyección de ROI sea
+                realista.
+              </div>
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom:24px">
+            <div class="slider-head">
+              <span class="slider-name">Unidades en cartera</span>
+              <span class="slider-val" id="units-out">50</span>
+            </div>
+            <input type="range" id="units" min="50" max="5000" step="1" value="100" oninput="onSlider()">
+            <div class="slider-range"><span>50</span><span>5.000</span></div>
+          </div>
+
+          <div class="two-col"
+            style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 24px;">
+            <div class="field" style="flex: 1; margin-bottom:0">
+              <div class="slider-head">
+                <span class="slider-name">Usuarios CRM</span>
+                <span class="slider-val" id="vendors-out">5</span>
+              </div>
+              <input type="range" id="vendors" min="1" max="100" step="1" value="5" oninput="onSlider()">
+              <div class="slider-range"><span>1</span><span>100</span></div>
+            </div>
+
+            <div class="field" style="width: 220px; margin-bottom:0;">
+              <div class="field-label" style="font-size: 14px; margin-bottom: 12px; text-align: left;">Idiomas del
+                agente</div>
+              <div class="lang-row" style="margin-top: 0; padding: 12px 16px; justify-content: space-between;">
+                <button class="lang-btn" onclick="changeLang(-1)">−</button>
+                <span class="lang-num" id="lang-out">1</span>
+                <span class="lang-lbl" id="lang-lbl" style="flex: 1; text-align: center;">idioma</span>
+                <button class="lang-btn" onclick="changeLang(1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:24px; border-top: 1px solid var(--border); padding-top: 24px;">
+            <div class="field-label">Total estimado de contactos mensuales <span class="field-note">→ Flujo
+                omnicanal</span></div>
+            <div
+              style="font-family:var(--font); font-size:16px; color:var(--muted); line-height:1.6; margin-bottom:20px; padding:16px; background:var(--surface); border-radius:var(--radius); border:1px dashed var(--border2);">
+              <strong style="color:var(--text); margin-bottom:4px;">IMPORTANTE:</strong>En este número sumá el total de
+              contactos, consultas y mensajes provenientes de <strong>tus páginas web, WhatsApp, redes sociales y
+                llamadas telefónicas</strong>. El objetivo es calcular el 100% de ese tráfico para derivarlo al motor de
+              Ximia.
+            </div>
+            <div class="slider-head">
+              <span class="slider-name" style="font-size: 16px;">Contactos totales</span>
+              <span class="slider-val" id="visits-out">35.000</span>
+            </div>
+            <input type="range" id="visits" min="500" max="200000" step="500" value="35000" oninput="onSlider()">
+            <div class="slider-range"><span>500</span><span>200.000</span></div>
+
+            <!-- Conversaciones iniciadas (80%) -->
+            <div class="field-label" style="margin-top:14px">💬 Conversaciones iniciadas</div>
+            <div
+              style="font-family:var(--font); font-size:16px; color:var(--accent2); font-weight:600; padding:18px; background:var(--accent-l); border-radius:var(--radius); border:1px solid rgba(0, 146, 179, 0.2); margin-bottom:12px;">
+              <span id="label-conv-est"
+                style="font-size: 22px; color: var(--accent); display: block; margin-bottom: 4px;">—
+                conversaciones/mes</span>
+              <span style="font-weight: 400; opacity: 0.8; font-size: 14px;">Basado en un 75% de interacción por
+                visibilidad proactiva ("Hero-Integrated"). Rango de mercado: 10–35% chatbot tradicional, hasta 80% con
+                agente animado en primer plano.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: Arquitectura -->
+        <div class="card">
+          <div class="card-title"><span class="step-dot">2</span> Arquitectura del agente</div>
+
+
+          <div class="field">
+            <div class="field-label">Motor de Inteligencia Artificial</div>
+            <div class="tier-grid">
+              <button class="tier-btn active" data-tier="economic" onclick="setAI(this)">
+                <span class="tier-icon">⚡</span><span class="tier-label">Estándar</span>
+                <span class="tier-note">Costo optimizado (GPT-4o-mini / DeepSeek)</span>
+              </button>
+              <button class="tier-btn" data-tier="balanced" onclick="setAI(this)">
+                <span class="tier-icon">⚖️</span><span class="tier-label">Pro</span>
+                <span class="tier-note">Equilibrado (GPT-4o / Claude 3.5 Sonnet)</span>
+              </button>
+              <button class="tier-btn" data-tier="premium" onclick="setAI(this)">
+                <span class="tier-icon">🔥</span><span class="tier-label">Premium</span>
+                <span class="tier-note">Máximo razonamiento (o1 / Claude Opus 4)</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <span class="toggle-name">Soporte de Voz (STT / TTS)</span>
+                <span class="toggle-sub">Conversaciones por voz con el agente</span>
+              </div>
+              <label class="ts-wrap">
+                <input type="checkbox" id="voice-toggle" onchange="toggleVoice()">
+                <div class="ts-track">
+                  <div class="ts-thumb"></div>
+                </div>
+              </label>
+            </div>
+            <div id="voice-section" style="display:none">
+              <div class="vs-grid">
+                <button class="vs-btn active" data-vs="standard" onclick="setVS(this)">
+                  <span class="vs-label">Estándar</span><span class="vs-note">Buena calidad, latencia media</span>
+                </button>
+                <button class="vs-btn" data-vs="premium" onclick="setVS(this)">
+                  <span class="vs-label">Premium</span><span class="vs-note">Voz natural, ultrabaja latencia</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-label">Base de datos e infraestructura</div>
+            <div class="tier-grid">
+              <button class="tier-btn active" data-db="standard" onclick="setDB(this)">
+                <span class="tier-label">Estándar</span>
+                <span class="tier-note">$25 / mes</span>
+                <span class="tier-note">Hasta 50k registros + Backup semanal</span>
+              </button>
+              <button class="tier-btn" data-db="scalable" onclick="setDB(this)">
+                <span class="tier-label">Pro</span>
+                <span class="tier-note">$75 / mes</span>
+                <span class="tier-note">+500k registros + Backup diario</span>
+              </button>
+              <button class="tier-btn" data-db="enterprise" onclick="setDB(this)">
+                <span class="tier-label">Premium</span>
+                <span class="tier-note">$200 / mes</span>
+                <span class="tier-note">Servidor Replicado + 99.9% de Disponibilidad</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom:0">
+            <div class="field-label">Plataforma & Fee de Servicio</div>
+            <div class="tier-grid">
+              <button class="tier-btn active" data-sla="standard" onclick="setSLA(this)">
+                <span class="tier-label">Estándar</span>
+                <span class="tier-note" id="sla-price-standard">$— </span>
+                <span class="tier-note">Licencia + Respuesta < 48h · 1 actualización mensual</span>
+              </button>
+              <button class="tier-btn" data-sla="priority" onclick="setSLA(this)">
+                <span class="tier-label">Pro</span>
+                <span class="tier-note" id="sla-price-priority">$— </span>
+                <span class="tier-note">Licencia + Respuesta < 12h · 2 actualizaciones mensuales</span>
+              </button>
+              <button class="tier-btn" data-sla="enterprise" onclick="setSLA(this)">
+                <span class="tier-label">Premium</span>
+                <span class="tier-note" id="sla-price-enterprise">$— </span>
+                <span class="tier-note">Licencia + Respuesta < 1h · Actualizaciones ilimitadas</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESTRATEGIA DE CAPTACIÓN (BARRAS) -->
+        <div class="funnel-graph-card na">
+          <div style="text-align: center; margin-bottom: 32px;">
+            <h2
+              style="font-size: 32px; font-weight: 800; color: #fff; font-family: var(--font-h); letter-spacing: -0.02em;">
+              Costo por Leads
+            </h2>
+            <p style="color: var(--muted2); font-size: 16px; margin-top: 8px;">Selecciona el perfil de leads que queres
+              recibir para obtener el costo total de Ximia.</p>
+          </div>
+
+          <div class="bar-strategy-container">
+            <!-- FRÍO -->
+            <div class="strategy-row" id="row-frio">
+              <label class="strategy-toggle">
+                <input type="checkbox" id="sw-frio" checked onchange="toggleTier('frio', this)">
+                <span class="st-slider"></span>
+              </label>
+              <div class="bar-label-group">
+                <span class="bar-label">Frío <span class="help-icon"
+                    data-tip="Contactos iniciales con datos básicos. Sólo nombre o nombre + email.">?</span></span>
+                <span class="bar-sub">Datos Parciales</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-frio" style="background: var(--accent);"></div>
+              </div>
+              <div class="bar-num-wrap"
+                style="display:flex; flex-direction:column; align-items:flex-end; min-width:60px;">
+                <div class="bar-num" id="bn-frio" style="font-weight:700;">0</div>
+                <div class="st-subtotal" id="st-frio">$0</div>
+              </div>
+            </div>
+
+            <!-- CALIFICADO -->
+            <div class="strategy-row" id="row-calificado">
+              <label class="strategy-toggle">
+                <input type="checkbox" id="sw-calificado" checked onchange="toggleTier('calificado', this)">
+                <span class="st-slider"></span>
+              </label>
+              <div class="bar-label-group">
+                <span class="bar-label">Calificado <span class="help-icon"
+                    data-tip="Perfil incial completo (nombre + email) + perfil de búsqueda + datos financieros incompletos o completos sin pre-aprobación (deudas, bajos ingresos, calificación crediticia no aprobada).">?</span></span>
+                <span class="bar-sub">Perfil Completo</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-calificado" style="background: var(--amber);"></div>
+              </div>
+              <div class="bar-num-wrap"
+                style="display:flex; flex-direction:column; align-items:flex-end; min-width:60px;">
+                <div class="bar-num" id="bn-calificado" style="font-weight:700;">0</div>
+                <div class="st-subtotal" id="st-calificado">$0</div>
+              </div>
+            </div>
+
+            <!-- CALIFICADO APROBADO -->
+            <div class="strategy-row" id="row-aprobado">
+              <label class="strategy-toggle">
+                <input type="checkbox" id="sw-aprobado" checked onchange="toggleTier('aprobado', this)">
+                <span class="st-slider"></span>
+              </label>
+              <div class="bar-label-group">
+                <span class="bar-label">Calificado<br>Pre-aprobado <span class="help-icon"
+                    data-tip="Datos de contacto + perfil de búsqueda + validación financiera positiva y listo para cierre.">?</span></span>
+                <span class="bar-sub">Financiación Ok</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-aprobado" style="background: var(--accent2);"></div>
+              </div>
+              <div class="bar-num-wrap"
+                style="display:flex; flex-direction:column; align-items:flex-end; min-width:60px;">
+                <div class="bar-num" id="bn-aprobado" style="font-weight:700;">0</div>
+                <div class="st-subtotal" id="st-aprobado">$0</div>
+              </div>
+            </div>
+
+            <!-- PRE-VENTA -->
+            <div class="strategy-row" id="row-preventa">
+              <label class="strategy-toggle">
+                <input type="checkbox" id="sw-preventa" checked onchange="toggleTier('preventa', this)">
+                <span class="st-slider"></span>
+              </label>
+              <div class="bar-label-group">
+                <span class="bar-label">Operación<br>Pre-Venta <span class="help-icon"
+                    data-tip="Datos de contacto + perfil de búsqueda + validación financiera positiva + Reserva iniciada en el sistema por 48hs.">?</span></span>
+                <span class="bar-sub">Reserva Iniciada</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-preventa" style="background: var(--green);"></div>
+              </div>
+              <div class="bar-num-wrap"
+                style="display:flex; flex-direction:column; align-items:flex-end; min-width:60px;">
+                <div class="bar-num" id="bn-preventa" style="font-weight:700;">0</div>
+                <div class="st-subtotal" id="st-preventa">$0</div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            style="margin-top: 32px; padding: 16px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 13px; color: var(--muted2); line-height: 1.6; text-align: center;">
+            <p><strong>Configuración Proactiva:</strong> Al desactivar un nivel, Ximia dejará de enviarte esos
+              contactos, reduciendo el costo mensual de servicio.</p>
+          </div>
+        </div>
+
+        <!-- ROI SECTION -->
+        <div class="roi-section sep">
+          <div class="roi-title-row">
+            <div>
+              <div class="roi-title-text" style="font-size: 33px;">Cuánto vale lo que genera Ximia</div>
+              <div style="font-family:var(--font);font-size:12px;color:var(--muted);margin-top:3px;">Basado en tu
+                portfolio, mercado y volumen</div>
+            </div>
+          </div>
+          <div class="roi-cards">
+
+            <div class="roi-card">
+              <div class="roi-card-tag">Costo por lead pre-aprobado</div>
+              <div class="roi-card-main accent" id="roi-lead-cost" style="font-size:36px;">$—</div>
+              <div class="roi-card-sub">Ximia · pre-calificado financieramente</div>
+              <div
+                style="font-family: var(--font); font-size: 11px; color: var(--muted2); margin-top: 12px; margin-bottom: 4px; line-height: 1.4; opacity: 0.8;">
+                Valor estadístico referencial de tu mercado</div>
+              <div class="roi-compare">
+                <span class="roi-compare-label" id="roi-benchmark-label">vs. mercado sin calificación</span>
+                <span class="roi-compare-val" id="roi-benchmark">$—</span>
+              </div>
+            </div>
+
+            <div class="roi-card">
+              <div class="roi-card-tag">Tiempo de absorción</div>
+              <div class="roi-card-main accent" id="roi-tiempo" style="font-size:36px;">— meses</div>
+              <div class="roi-card-sub" id="roi-tiempo-sub">100% del stock cubierto</div>
+              <div
+                style="font-family: var(--font); font-size: 11px; color: var(--muted2); margin-top: 12px; margin-bottom: 4px; line-height: 1.4; opacity: 0.8;">
+                Volumen de interesados para agotar el inventario</div>
+              <div class="roi-compare">
+                <span class="roi-compare-label">vs. prospección humana</span>
+                <span class="roi-compare-val" id="roi-tiempo-human">— meses</span>
+              </div>
+            </div>
+
+            <div class="roi-card">
+              <div class="roi-card-tag">ROI</div>
+              <div class="roi-card-main green" id="roi-mult" style="font-size:36px;">×—</div>
+              <div class="roi-card-sub" id="roi-ingresos-sub">Cierres asistidos por Ximia</div>
+              <div
+                style="font-family: var(--font); font-size: 11px; color: var(--muted2); margin-top: 12px; margin-bottom: 4px; line-height: 1.4; opacity: 0.8;">
+                Proyección de comisiones brutas del portfolio</div>
+              <div class="roi-compare">
+                <span class="roi-compare-label">GCI Estimado / mes</span>
+                <span style="font-family:var(--font);font-size:12px;font-weight:600;color:var(--green)"
+                  id="roi-ingresos">$—</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TECH BREAKDOWN -->
+        <div class="tech-section sep" id="tech-section">
+          <button class="tech-toggle" onclick="toggleTech()">
+            <div class="tt-left">
+              <span style="font-size:20px">🔍</span>
+              <div>
+                <div class="tt-title">Detalle técnico de costos</div>
+                <div class="tt-sub">Desglose por componente</div>
+              </div>
+            </div>
+            <span class="tt-arrow open" id="tt-arrow">▼</span>
+          </button>
+          <div class="tech-body open" id="tech-body">
+            <div class="tech-thead"><span>Recurso / Volumen de procesamiento</span><span>Costo Gestión</span></div>
+            <div class="tech-row">
+              <span class="tr-label" id="label-hosting">Infraestructura Cloud (VPS 24/7)</span>
+              <span class="tr-marked" id="t-hosting">—</span>
+            </div>
+            <div class="tech-row">
+              <span class="tr-label" id="label-plat">Plataforma & Orquestación</span>
+              <span class="tr-marked" id="t-plat">—</span>
+            </div>
+            <div class="tech-row">
+              <span class="tr-label" id="label-llm">Motor IA (Procesamiento LLM)</span>
+              <span class="tr-marked" id="t-llm">—</span>
+            </div>
+            <div class="tech-row" id="t-voice-row" style="display:none">
+              <span class="tr-label" id="label-voice">Soporte de Voz (STT + TTS)</span>
+              <span class="tr-marked" id="t-voice">—</span>
+            </div>
+            <div class="tech-row">
+              <span class="tr-label" id="label-db">Base de Datos e índice</span>
+              <span class="tr-marked" id="t-db">—</span>
+            </div>
+            <div class="tech-row">
+              <span class="tr-label" id="label-crm">Integraciones CRM & API</span>
+              <span class="tr-marked" id="t-crm">—</span>
+            </div>
+            <div class="tech-total-bar">
+              <div>
+                <div class="tech-total-label">Total infraestructura / mes</div>
+                <div style="font-family:var(--font);font-size:12px;color:var(--muted);margin-top:2px;">Cálculo
+                  dinámico
+                  según uso real</div>
+              </div>
+              <div class="tech-total-val" id="t-total" style="font-size:36px;">—</div>
+            </div>
+            <div class="tech-note" style="font-size:10.5px;">El cálculo considera <strong>Context Caching</strong>
+              (factor blended 0.30 — Anthropic 10%, OpenAI 50%) y precios oficiales de OpenAI y Anthropic. El "Costo
+              Gestión" incluye orquestación, integración y soporte.</div>
+            <div
+              style="font-family:var(--font);font-size:11px;color:var(--muted2);margin-top:10px;padding:8px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border);text-align:center;letter-spacing:0.05em;">
+              📅 Valores de referencia · <strong>Abril 2026</strong> · Los precios de los modelos de IA varían con el
+              tiempo
+            </div>
+          </div>
+        </div>
+
+        <!-- FINAL CTA CARD -->
+        <div class="final-cta"
+          style="margin-top: 48px; border: 1.5px solid var(--accent); background: linear-gradient(to right, #ffffff, var(--accent-l)); padding: 38px; border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          <div>
+            <div class="cta-label" style="font-size: 27px; font-weight: 800; color: var(--text); margin-bottom: 8px;">
+              Agenda una reunión</div>
+            <div class="cta-sub" style="font-size: 17px; color: var(--muted); max-width: 500px; line-height: 1.5;">
+              Hablemos para resolver las dudas finales y comienza a disfrutar un mundo en que vender es más fácil.
+            </div>
+          </div>
+          <a href="https://calendly.com/hola-ximia-ectr/ximia-demo" target="_blank" class="btn-primary btn-glow"
+            style="padding: 21px 40px; font-size: 19px;">Agendar Demo →</a>
+        </div>
+
+      </div>
+      <!-- END LEFT -->
+
+      <!-- RIGHT: STICKY RESULTS -->
+      <div class="sticky-col">
+
+        <!-- Servicio (teal) -->
+        <div class="card-teal">
+          <div class="rl-tag">Plataforma & Gestión</div>
+          <div class="rl-amount" id="r-svc">$—</div>
+          <!--div class="rl-period">Licencia + Platforma + Service Fee</div-->
+          <div class="rl-chips" id="svc-chips">
+            <span class="rl-chip">Licencia + Platforma + Service Fee: <span id="r-platform-total">—</span></span>
+          </div>
+        </div>
+
+        <!-- Infra (teal) -->
+        <div class="card-teal">
+          <div class="rl-tag">Costo de Infraestructura</div>
+          <div class="rl-amount" id="r-infra2">$—</div>
+          <div class="rl-period">Stack técnico · estimado</div>
+          <div class="rl-chips">
+            <span class="rl-chip" id="ic-ai">—</span>
+            <span class="rl-chip" id="ic-db">—</span>
+            <span class="rl-chip" id="ic-voice" style="display:none">—</span>
+            <span class="rl-chip" id="ic-crm" style="display:none">—</span>
+            <div class="ver-detalle-wrap">
+              <a href="#tech-section" class="ver-detalle-link">Ver detalle técnico →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total (dark) -->
+        <div class="card-dark">
+          <div class="res-tag">Total estimado</div>
+          <div class="res-amount" id="r-total">$—</div>
+          <div class="res-period">USD · infraestructura + servicio</div>
+          <div class="res-rows">
+            <div class="rr"><span class="rr-label">Servicio</span><span class="rr-val teal" id="r-maint">—</span>
+            </div>
+            <div class="rr"><span class="rr-label">Infraestructura</span><span class="rr-val teal" id="r-infra">—</span>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.08);margin:6px 0"></div>
+            <div style="font-family:var(--font);font-size:11px;color:#94a3b8;line-height:1.6;">
+              Infraestructura + mantenimiento mensual.<br>Setup se define en el primer contacto.
+            </div>
+          </div>
+        </div>
+
+        <!-- Lead pricing -->
+        <div class="card">
+          <div class="lead-card-tag">Costos por Lead</div>
+          <div class="lead-rows">
+            <div class="lead-row">
+              <div>
+                <div class="lead-name" style="font-weight: 400;">Lead Frío</div>
+                <div class="lead-desc">cold · datos parciales</div>
+              </div>
+              <span class="lead-price z" id="r-lead-frio-sb">—</span>
+            </div>
+            <div class="lead-row">
+              <div>
+                <div class="lead-name" style="font-weight: 400;">Calificado</div>
+                <div class="lead-desc">warm · perfil financiero completo</div>
+              </div>
+              <span class="lead-price p" id="r-lead-p">—</span>
+            </div>
+            <div class="lead-row">
+              <div>
+                <div class="lead-name" style="font-weight: 400;">Calificado Aprobado</div>
+                <div class="lead-desc">hot · pre-aprobado / listo</div>
+              </div>
+              <span class="lead-price q" id="r-lead-q">—</span>
+            </div>
+            <div class="lead-row">
+              <div>
+                <div class="lead-name" style="font-weight: 600;">Operación Pre-Venta</div>
+                <div class="lead-desc">reserva iniciada</div>
+              </div>
+              <span class="lead-price p" id="r-lead-preventa" style="font-weight:700; color:var(--text);">—</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- END RIGHT -->
+
+    </div> <!-- main-grid -->
+
+
+    <script>
+      // ════════════════════════════════════════════
+      // CONFIGURACIÓN DE PRECIOS REALES (USD)
+      // ════════════════════════════════════════════
+
+      // PRECIOS BASE (Calibrados para que el precio FINAL con descuento por volumen sea el benchmark)
+      const LEAD_BASE = {
+        frio: 0.11,   // Dará ~$0.05 con descuento masivo
+        cali: 2.25,   // Dará ~$1.00 con descuento masivo
+        apro: 22.50,  // Dará ~$10.00 con descuento masivo
+        prev: 450.00  // Dará ~$200.00 con descuento masivo
+      };
+
+      // TECHOS ABSOLUTOS: Edita estos valores para topar el precio máximo de un lead en cualquier mercado
+      const LEAD_CEILING = {
+        frio: 50,    // Máximo para Lead Frío
+        cali: 150,   // Máximo para Calificado
+        apro: 500,   // Máximo para Calificado Aprobado
+        prev: 2000   // Máximo para Operación Pre-Venta
+      };
+
+      // MARKUP DINÁMICO: Ahora se calcula en calc() para amortizar costos en volúmenes altos
+      const MARKUP_BASE = 2.0;
+
+      const MAINT_BASE_SLA = { standard: 500, priority: 800, enterprise: 1500 };
+      const SLA_INFO = {
+        standard: "Mantenimiento mensual · Soporte por ticket (<48h respuesta).",
+        priority: "Mantenimiento quincenal · WhatsApp/Slack dedicado (<12h respuesta).",
+        enterprise: "Mantenimiento bajo demanda · Account Manager 24/7 · Soporte Crítico."
+      };
+
+      const MARKET = {
+        latam: { label: 'Latam', flag: '🌎', mktWeight: 1.0, refM2: 1500, refArea: 65, commission: 0.030, humanLeadCost: 50 },
+        europa: { label: 'Europa', flag: '🇪🇺', mktWeight: 2.5, refM2: 2500, refArea: 110, commission: 0.030, humanLeadCost: 100 },
+        usa: { label: 'USA', flag: '🇺🇸', mktWeight: 3.5, refM2: 4000, refArea: 260, commission: 0.025, humanLeadCost: 133 },
+        eau: { label: 'EAU / Dubai', flag: '🇦🇪', mktWeight: 5.0, refM2: 8000, refArea: 450, commission: 0.020, humanLeadCost: 223 },
+      };
+
+      const AI_TIERS = {
+        economic: {
+          label: 'GPT-4o-mini',  // Precios correctos para 4o-mini (Abril 2026)
+          in: 0.15 / 1e6, out: 0.60 / 1e6, plat: 0.005,
+          hostRaw: 75
+        },
+        balanced: {
+          label: 'GPT-4o / Claude 3.5 Sonnet',  // Claude 3.5 Sonnet output = $15/1M (no $10)
+          in: 2.50 / 1e6, out: 10.00 / 1e6, plat: 0.01,
+          hostRaw: 50
+        },
+        premium: {
+          label: 'o1 / Claude Opus 4',  // o1-Preview deprecado Q4 2024; Opus 4 output ≈ $75/1M
+          in: 15.00 / 1e6, out: 60.00 / 1e6, plat: 0.02,
+          hostRaw: 100
+        },
+      };
+
+      const DB_TIERS = { standard: { raw: 25 }, scalable: { raw: 75 }, enterprise: { raw: 200 } };
+
+      const VOICE_STACKS = {
+        none: { stt: 0, tts: 0 },
+        standard: { stt: 0.002, tts: 0.008 },
+        premium: { stt: 0.003, tts: 0.020 }, // Precios Corporativos (Wholesale)
+      };
+
+      // Configuración de Tokens (Estructura Ximia)
+      const TOKENS = {
+        fixedInput: 11180,  // System + KB + Profile (Cachable)
+        turnInput: 200,    // User text + some hist
+        turnOutput: 300,
+        weightedTurns: {
+          rebote: 2.5,   // < 3 turns
+          frio: 8.0,     // partial data
+          caliente: 15.0, // full process
+          ready: 25.0    // qualified closing
+        },
+        cacheFactor: 0.30   // Factor blended: Anthropic 0.10, OpenAI 0.50 — promedio para stack mixto GPT-4o/Claude
+      };
+
+
+      // ════════════════════════════════════════════
+      // STATE
+      // ════════════════════════════════════════════
+      const S = {
+        market: 'latam',
+        m2Value: 1700,
+        units: 50,
+        vendors: 3,
+        languages: 1,
+        sla: 'standard',
+        visits: 35000,
+        engRate: 0.75, // Default 75% — visibilidad alta
+        aiTier: 'economic',
+        dbTier: 'standard',
+        voiceEnabled: false,
+        voiceStack: 'standard',
+        selectedTiers: {
+          frio: true,
+          calificado: true,
+          aprobado: true,
+          preventa: true
+        }
+      };
+
+      // ════════════════════════════════════════════
+      // SETTERS
+      // ════════════════════════════════════════════
+      function activateBtn(sel, btn) { document.querySelectorAll(sel).forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+      function setMarket(btn) {
+        activateBtn('.mkt-btn', btn);
+        const mkey = btn.dataset.mkt;
+        S.market = mkey;
+        // Auto-update m2 slider based on market reference
+        const mref = MARKET[mkey].refM2;
+        S.m2Value = mref;
+        const sld = document.getElementById('m2-slider');
+        if (sld) sld.value = mref;
+        onSlider(); // Update state and UI
+      }
+      function setAI(btn) { activateBtn('.tier-btn[data-tier]', btn); S.aiTier = btn.dataset.tier; calc(); }
+      function setDB(btn) { activateBtn('.tier-btn[data-db]', btn); S.dbTier = btn.dataset.db; calc(); }
+      function setVS(btn) { activateBtn('.vs-btn', btn); S.voiceStack = btn.dataset.vs; calc(); }
+      function setSLA(btn) { activateBtn('.tier-btn[data-sla]', btn); S.sla = btn.dataset.sla; calc(); }
+      function setEngage(btn) { activateBtn('.eng-tab', btn); S.engRate = +btn.dataset.eng; calc(); }
+
+      function toggleTier(tier, el) {
+        S.selectedTiers[tier] = el.checked;
+        const row = document.getElementById('row-' + (tier === 'calificado' ? 'calificado' : (tier === 'aprobado' ? 'aprobado' : (tier === 'preventa' ? 'preventa' : 'frio'))));
+        if (row) {
+          if (el.checked) row.classList.remove('disabled');
+          else row.classList.add('disabled');
+        }
+        calc();
+      }
+
+      function changeLang(d) {
+        S.languages = Math.max(1, Math.min(5, S.languages + d));
+        s('lang-out', S.languages.toString());
+        s('lang-lbl', S.languages === 1 ? 'idioma' : 'idiomas');
+        calc();
+      }
+
+      function toggleVoice() {
+        S.voiceEnabled = document.getElementById('voice-toggle').checked;
+        document.getElementById('voice-section').style.display = S.voiceEnabled ? 'block' : 'none';
+        calc();
+      }
+
+      function onSlider() {
+        S.m2Value = +document.getElementById('m2-slider').value;
+        S.units = +document.getElementById('units').value;
+        S.vendors = +document.getElementById('vendors').value;
+        S.visits = +document.getElementById('visits').value;
+        s('m2-out', 'USD ' + fmt0(S.m2Value));
+        s('units-out', fmt0(S.units));
+        s('vendors-out', S.vendors.toString());
+        s('visits-out', fmt0(S.visits));
+        calc();
+      }
+
+      function toggleTech() {
+        const body = document.getElementById('tech-body'), arrow = document.getElementById('tt-arrow');
+        if (body.classList.contains('open')) {
+          body.classList.remove('open');
+          arrow.classList.remove('open');
+        } else {
+          body.classList.add('open');
+          arrow.classList.add('open');
+        }
+      }
+
+      // ════════════════════════════════════════════
+      // FORMAT
+      // ════════════════════════════════════════════
+      const loc = n => Math.round(n).toLocaleString('es-AR');
+      const fmt0 = n => n.toLocaleString('es-AR');
+      function fmtUSD(n) {
+        if (n === 0) return '$0';
+        if (n >= 1000) return '$' + loc(n);
+        if (n >= 10) return '$' + Math.round(n);
+        return '$' + n.toFixed(2);
+      }
+      function fmtLead(n) {
+        if (n < 0.01) return '<$0.01';
+        if (n < 100) return '$' + n.toFixed(2);
+        return '$' + Math.round(n);
+      }
+      function s(id, val) {
+        const el = document.getElementById(id); if (!el) return;
+        el.innerHTML = val; el.classList.remove('na'); void el.offsetWidth; el.classList.add('na');
+      }
+
+      // ════════════════════════════════════════════
+      // CALCULATE
+      // ════════════════════════════════════════════
+      function calc() {
+        // ── CONFIGURACIÓN DE MERCADO Y TIER ──
+        const mkt = MARKET[S.market];
+        const ai = AI_TIERS[S.aiTier];
+        const db = DB_TIERS[S.dbTier];
+        const vs = VOICE_STACKS[S.voiceEnabled ? S.voiceStack : 'none'];
+
+        // 1. Ticket estimado y ponderación de valor
+        const ticketEst = S.m2Value * mkt.refArea;
+        const valueWeight = Math.pow(S.m2Value / mkt.refM2, 0.25);
+        s('ticket-est', 'USD ' + loc(ticketEst));
+
+        // 2. Bonus por calidad de IA (Standard = base sólida, Premium = mejora)
+        // El LLM no inventa gente — mejora la tasa de calificación y retención
+        const aiBonus = S.aiTier === 'premium' ? 1.30 : (S.aiTier === 'balanced' ? 1.10 : 1.0);
+
+        // 3. Funnel Secuencial (Base real de mercado)
+        const conversations = Math.round(S.visits * S.engRate);
+        s('label-conv-est', loc(conversations) + ' conversaciones/mes');
+
+        // Etapa 1: Fríos — 25% del total (el LLM no puede inventar más gente)
+        const nNoRebote = Math.round(S.visits * 0.25);
+
+        // Etapa 2: Calificados — la IA mejora la tasa de calificación (20% base)
+        const nCali = Math.round(nNoRebote * 0.20 * aiBonus);
+
+        // Etapa 3: Calificados Aprobados — la IA mejora la pre-aprobación (15% base)
+        const nApro = Math.round(nCali * 0.15 * aiBonus);
+
+        // Etapa 4: Operación Pre-Venta — 5% de los aprobados (constante)
+        const nPreV = Math.round(nApro * 0.05);
+
+        // 4. Infraestructura Estabilizada (Elastic Hosting)
+        const hostBase = S.aiTier === 'premium' ? 450 : (S.aiTier === 'balanced' ? 280 : 120);
+        const hostDynamic = (hostBase + (Math.floor(conversations / 10000) * 40)) * valueWeight;
+
+        // Cálculo de tokens por profundidad de etapa
+        const calcLLMDepth = (n, turns) => {
+          if (n <= 0) return 0;
+          const tokens = (TOKENS.fixedInput * 0.3) + (TOKENS.turnInput * turns) + (TOKENS.turnOutput * turns);
+          return n * tokens * ai.in;
+        };
+
+        const llmRaw = calcLLMDepth(conversations - nNoRebote, 2) +
+          calcLLMDepth(nNoRebote - nCali, 8) +
+          calcLLMDepth(nCali - nApro, 15) +
+          calcLLMDepth(nApro, 25);
+
+        let markup = S.aiTier === 'premium' ? 1.5 : (S.aiTier === 'balanced' ? 1.7 : 2.0);
+        const infraTotalFinal = (hostDynamic + (llmRaw * markup) + (conversations * ai.plat * markup) + db.raw + (S.vendors > 3 ? (S.vendors - 3) * 15 : 0)) * 1.1;
+
+        // 5. Gestión y Servicio (Markup Amortizado)
+        const baseLicencia = 500 * mkt.mktWeight * valueWeight;
+        const baseSLAValue = MAINT_BASE_SLA[S.sla] * valueWeight;
+        const supportUnitFactor = Math.min(2.5, Math.pow(S.units / 50, 0.2));
+        const soporteFee = Math.round(baseSLAValue * mkt.mktWeight * supportUnitFactor);
+
+        // Fee de gestión basado en el valor teórico del pipeline
+        const pipeWeight = (nNoRebote * 0.1) + (nCali * 2) + (nApro * 20) + (nPreV * 400);
+        const managementFee = (pipeWeight * 0.05 * valueWeight) + (baseLicencia * 0.5);
+
+        const fixedService = Math.round(baseLicencia + soporteFee + managementFee);
+        const grandTotal = infraTotalFinal + fixedService;
+
+        // 6. ACTUALIZACIÓN DE INTERFAZ (Eliminación de ceros)
+        const fixedPool = grandTotal;
+        s('r-total', fmtUSD(grandTotal));
+        s('r-svc', fmtUSD(fixedService));
+        s('r-maint', fmtUSD(fixedService));
+        s('r-infra', fmtUSD(infraTotalFinal));
+        s('r-infra2', fmtUSD(infraTotalFinal));
+
+        // Subtotales técnicos
+        s('t-hosting', fmtUSD(hostDynamic));
+        s('t-plat', fmtUSD(conversations * ai.plat * markup));
+        s('t-llm', fmtUSD(llmRaw * markup));
+        s('t-db', fmtUSD(db.raw));
+        s('t-total', fmtUSD(infraTotalFinal));
+
+        // Actualización de barras y números centrales
+        const updateRow = (id, count, theorVal, totalWeight) => {
+          const num = document.getElementById('bn-' + id);
+          const st = document.getElementById('st-' + id);
+          if (num) num.textContent = loc(count);
+          if (st) st.textContent = fmtUSD(fixedPool * (totalWeight > 0 ? theorVal / totalWeight : 0));
+
+          const bar = document.getElementById('bar-' + id);
+          if (bar) bar.style.width = Math.max(2, (count / (conversations || 1)) * 100) + '%';
+        };
+
+        const wFrio = nNoRebote * 1;
+        const wCali = nCali * 10;
+        const wApro = nApro * 100;
+        const wPrev = nPreV * 1000;
+        const totalWeight = (S.selectedTiers.frio ? wFrio : 0) +
+          (S.selectedTiers.calificado ? wCali : 0) +
+          (S.selectedTiers.aprobado ? wApro : 0) +
+          (S.selectedTiers.preventa ? wPrev : 0);
+
+        updateRow('frio', nNoRebote, S.selectedTiers.frio ? wFrio : 0, totalWeight);
+        updateRow('calificado', nCali, S.selectedTiers.calificado ? wCali : 0, totalWeight);
+        updateRow('aprobado', nApro, S.selectedTiers.aprobado ? wApro : 0, totalWeight);
+        updateRow('preventa', nPreV, S.selectedTiers.preventa ? wPrev : 0, totalWeight);
+
+        // Sidebar Lead Pricing
+        const fmtLeadRow = (count, weight) => {
+          if (count <= 0 || totalWeight <= 0) return `$0`;
+          const unitPrice = (fixedPool * (weight / totalWeight)) / count;
+          return fmtLead(unitPrice);
+        };
+
+        s('r-lead-frio-sb', fmtLeadRow(nNoRebote, S.selectedTiers.frio ? wFrio : 0));
+        s('r-lead-p', fmtLeadRow(nCali, S.selectedTiers.calificado ? wCali : 0));
+        s('r-lead-q', fmtLeadRow(nApro, S.selectedTiers.aprobado ? wApro : 0));
+        s('r-lead-preventa', fmtLeadRow(nPreV, S.selectedTiers.preventa ? wPrev : 0));
+
+        // ROI y Benchmarks
+        const ingresosMes = nPreV * ticketEst * mkt.commission;
+        s('roi-mult', '×' + (grandTotal > 0 ? (ingresosMes / grandTotal).toFixed(1) : 0));
+        s('roi-ingresos', fmtUSD(ingresosMes));
+        s('roi-lead-cost', fmtLeadRow(nApro, S.selectedTiers.aprobado ? wApro : 0));
+        s('roi-benchmark', '$' + mkt.humanLeadCost);
+
+        const xMeses = nPreV > 0 ? Math.ceil(S.units / nPreV) : 0;
+        s('roi-tiempo', xMeses > 0 ? `${xMeses} meses` : '—');
+        s('roi-tiempo-human', xMeses > 0 ? `${Math.ceil(xMeses * 3.5)} meses` : '—');
+
+        // Precios SLA
+        const updateSlaPrice = (id, baseVal) => {
+          const totalSla = Math.round((baseLicencia / mkt.mktWeight + (baseVal * supportUnitFactor)) * mkt.mktWeight);
+          s('sla-price-' + id, fmtUSD(totalSla) + ' / mes');
+        };
+        updateSlaPrice('standard', MAINT_BASE_SLA.standard);
+        updateSlaPrice('priority', MAINT_BASE_SLA.priority);
+        updateSlaPrice('enterprise', MAINT_BASE_SLA.enterprise);
+
+        s('tb-note-frio', '25% del total de contactos');
+        s('tb-note-caliente', '20% de Fríos');
+        s('tb-note-listo', '15% de Calientes');
+        s('tb-note-trans', '5% de Listos');
+      }
+
+      // INIT
+      onSlider();
+    </script>
+</body>
+
+</html>
