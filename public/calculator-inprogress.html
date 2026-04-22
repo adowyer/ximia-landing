@@ -2605,10 +2605,16 @@
           (S.selectedTiers.aprobado ? wApro : 0) +
           (S.selectedTiers.preventa ? wPrev : 0);
 
-        updateRow('frio', nNoRebote, S.selectedTiers.frio ? wFrio : 0, totalWeight);
-        updateRow('calificado', nCali, S.selectedTiers.calificado ? wCali : 0, totalWeight);
-        updateRow('aprobado', nApro, S.selectedTiers.aprobado ? wApro : 0, totalWeight);
-        updateRow('preventa', nPreV, S.selectedTiers.preventa ? wPrev : 0, totalWeight);
+        // 7. CONTEO ESTRICTO (Si se apagan, Caen a 0 en UI. Si se apaga Pre-Venta, se resta de Aprobado)
+        const finalFrio = S.selectedTiers.frio ? nNoRebote : 0;
+        const finalCali = S.selectedTiers.calificado ? nCali : 0;
+        const finalApro = S.selectedTiers.aprobado ? (S.selectedTiers.preventa ? nApro : Math.max(0, nApro - nPreV)) : 0;
+        const finalPreV = S.selectedTiers.preventa ? nPreV : 0;
+
+        updateRow('frio', finalFrio, S.selectedTiers.frio ? wFrio : 0, totalWeight);
+        updateRow('calificado', finalCali, S.selectedTiers.calificado ? wCali : 0, totalWeight);
+        updateRow('aprobado', finalApro, S.selectedTiers.aprobado ? wApro : 0, totalWeight);
+        updateRow('preventa', finalPreV, S.selectedTiers.preventa ? wPrev : 0, totalWeight);
 
         // Sidebar Lead Pricing
         const fmtLeadRow = (count, weight) => {
@@ -2617,21 +2623,33 @@
           return fmtLead(unitPrice);
         };
 
-        s('r-lead-frio-sb', fmtLeadRow(nNoRebote, S.selectedTiers.frio ? wFrio : 0));
-        s('r-lead-p', fmtLeadRow(nCali, S.selectedTiers.calificado ? wCali : 0));
-        s('r-lead-q', fmtLeadRow(nApro, S.selectedTiers.aprobado ? wApro : 0));
-        s('r-lead-preventa', fmtLeadRow(nPreV, S.selectedTiers.preventa ? wPrev : 0));
+        s('r-lead-frio-sb', fmtLeadRow(finalFrio, S.selectedTiers.frio ? wFrio : 0));
+        s('r-lead-p', fmtLeadRow(finalCali, S.selectedTiers.calificado ? wCali : 0));
+        s('r-lead-q', fmtLeadRow(finalApro, S.selectedTiers.aprobado ? wApro : 0));
+        s('r-lead-preventa', fmtLeadRow(finalPreV, S.selectedTiers.preventa ? wPrev : 0));
 
         // ROI y Benchmarks
         const ingresosMes = nPreV * ticketEst * mkt.commission;
         s('roi-mult', '×' + (grandTotal > 0 ? (ingresosMes / grandTotal).toFixed(1) : 0));
         s('roi-ingresos', fmtUSD(ingresosMes));
-        s('roi-lead-cost', fmtLeadRow(nApro, S.selectedTiers.aprobado ? wApro : 0));
+        s('roi-lead-cost', fmtLeadRow(nApro, S.selectedTiers.aprobado ? wApro : 0)); // Mantenemos nApro matemático referencial para benchmark
         s('roi-benchmark', '$' + mkt.humanLeadCost);
 
-        const xMeses = nPreV > 0 ? Math.ceil(S.units / nPreV) : 0;
+        // Cálculo de Tiempo de Absorción según calidad de funnel
+        let effectiveClosures = 0;
+        if (S.selectedTiers.preventa) {
+          effectiveClosures = nPreV * 1.2; // Alta velocidad, cierre casi directo
+        } else if (S.selectedTiers.aprobado) {
+          effectiveClosures = finalApro * 0.04; // Media velocidad (requiere fuerza de ventas fuerte para cerrar un "aprobado")
+        } else if (S.selectedTiers.calificado) {
+          effectiveClosures = finalCali * 0.005; // Baja velocidad
+        } else if (S.selectedTiers.frio) {
+          effectiveClosures = finalFrio * 0.001; // Muy baja
+        }
+
+        const xMeses = effectiveClosures > 0 ? Math.ceil(S.units / effectiveClosures) : 0;
         s('roi-tiempo', xMeses > 0 ? `${xMeses} meses` : '—');
-        s('roi-tiempo-human', xMeses > 0 ? `${Math.ceil(xMeses * 3.5)} meses` : '—');
+        s('roi-tiempo-human', xMeses > 0 ? `${Math.ceil(xMeses * 4)} meses` : '—');
 
         // Precios SLA
         const updateSlaPrice = (id, baseVal) => {
