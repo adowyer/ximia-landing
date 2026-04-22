@@ -2537,10 +2537,10 @@
           return n * tokens * ai.in;
         };
 
-        const llmRaw = calcLLMDepth(conversations - nNoRebote, 2) + 
-                       calcLLMDepth(nNoRebote - nCali, 8) + 
-                       calcLLMDepth(nCali - nApro, 15) + 
-                       calcLLMDepth(nApro, 25);
+        const llmRaw = calcLLMDepth(conversations - nNoRebote, 2) +
+          calcLLMDepth(nNoRebote - nCali, 8) +
+          calcLLMDepth(nCali - nApro, 15) +
+          calcLLMDepth(nApro, 25);
 
         let markup = S.aiTier === 'premium' ? 1.5 : (S.aiTier === 'balanced' ? 1.7 : 2.0);
         const infraTotalFinal = (hostDynamic + (llmRaw * markup) + (conversations * ai.plat * markup) + db.raw + (S.vendors > 3 ? (S.vendors - 3) * 15 : 0)) * 1.1;
@@ -2550,11 +2550,11 @@
         const baseSLAValue = MAINT_BASE_SLA[S.sla] * valueWeight;
         const supportUnitFactor = Math.min(2.5, Math.pow(S.units / 50, 0.2));
         const soporteFee = Math.round(baseSLAValue * mkt.mktWeight * supportUnitFactor);
-        
+
         // Fee de gestión basado en el valor teórico del pipeline
         const pipeWeight = (nNoRebote * 0.1) + (nCali * 2) + (nApro * 20) + (nPreV * 400);
         const managementFee = (pipeWeight * 0.05 * valueWeight) + (baseLicencia * 0.5);
-        
+
         const fixedService = Math.round(baseLicencia + soporteFee + managementFee);
         const grandTotal = infraTotalFinal + fixedService;
 
@@ -2579,7 +2579,7 @@
           const st = document.getElementById('st-' + id);
           if (num) num.textContent = loc(count);
           if (st) st.textContent = fmtUSD(fixedPool * (totalWeight > 0 ? theorVal / totalWeight : 0));
-          
+
           const bar = document.getElementById('bar-' + id);
           if (bar) bar.style.width = Math.max(2, (count / (conversations || 1)) * 100) + '%';
         };
@@ -2588,10 +2588,10 @@
         const wCali = nCali * 10;
         const wApro = nApro * 100;
         const wPrev = nPreV * 1000;
-        const totalWeight = (S.selectedTiers.frio ? wFrio : 0) + 
-                            (S.selectedTiers.calificado ? wCali : 0) + 
-                            (S.selectedTiers.aprobado ? wApro : 0) + 
-                            (S.selectedTiers.preventa ? wPrev : 0);
+        const totalWeight = (S.selectedTiers.frio ? wFrio : 0) +
+          (S.selectedTiers.calificado ? wCali : 0) +
+          (S.selectedTiers.aprobado ? wApro : 0) +
+          (S.selectedTiers.preventa ? wPrev : 0);
 
         updateRow('frio', nNoRebote, S.selectedTiers.frio ? wFrio : 0, totalWeight);
         updateRow('calificado', nCali, S.selectedTiers.calificado ? wCali : 0, totalWeight);
@@ -2616,7 +2616,7 @@
         s('roi-ingresos', fmtUSD(ingresosMes));
         s('roi-lead-cost', fmtLeadRow(nApro, S.selectedTiers.aprobado ? wApro : 0));
         s('roi-benchmark', '$' + mkt.humanLeadCost);
-        
+
         const xMeses = nPreV > 0 ? Math.ceil(S.units / nPreV) : 0;
         s('roi-tiempo', xMeses > 0 ? `${xMeses} meses` : '—');
         s('roi-tiempo-human', xMeses > 0 ? `${Math.ceil(xMeses * 3.5)} meses` : '—');
