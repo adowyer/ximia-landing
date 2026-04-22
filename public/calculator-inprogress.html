@@ -1750,7 +1750,7 @@
     <!-- HEADER -->
     <div class="calc-header">
       <div class="calc-eyebrow">Ximia AI · Transparencia de precios</div>
-      <h1>Cuánto cuesta<br><span>sumar el poder de Ximia a tu negocio</span></h1>
+      <h1>Cuánto cuesta<br><span>sumar el poder de Ximia.</span></h1>
       <p class="calc-subtitle">Configurá tu caso y obtené un estimado en tiempo real. Los valores se ajustan según tu
         volumen, tu
         mercado
@@ -1992,16 +1992,16 @@
           </div>
 
           <div class="bar-strategy-container">
-            <!-- FRÍO -->
+            <!-- FRÍO (Obligatorio / Bloqueado) -->
             <div class="strategy-row" id="row-frio">
-              <label class="strategy-toggle">
-                <input type="checkbox" id="sw-frio" checked onchange="toggleTier('frio', this)">
-                <span class="st-slider"></span>
+              <label class="strategy-toggle" style="cursor: not-allowed; opacity: 0.85;" title="La base de datos parcial es obligatoria para el costo de infraestructura">
+                <input type="checkbox" id="sw-frio" checked disabled>
+                <span class="st-slider" style="background-color: #e11d48 !important;"></span>
               </label>
               <div class="bar-label-group">
                 <span class="bar-label">Frío <span class="help-icon"
                     data-tip="Contactos iniciales con datos básicos. Sólo nombre o nombre + email.">?</span></span>
-                <span class="bar-sub">Datos Parciales</span>
+                <span class="bar-sub" style="color: #fff;">Obligatorio (Base de Datos)</span>
               </div>
               <div class="bar-track">
                 <div class="bar-fill" id="bar-frio" style="background: var(--accent);"></div>
@@ -2332,10 +2332,10 @@
       };
 
       const MARKET = {
-        latam: { label: 'Latam', flag: '🌎', mktWeight: 1.0, refM2: 1500, refArea: 65, commission: 0.030, humanLeadCost: 50 },
-        europa: { label: 'Europa', flag: '🇪🇺', mktWeight: 2.5, refM2: 2500, refArea: 110, commission: 0.030, humanLeadCost: 100 },
-        usa: { label: 'USA', flag: '🇺🇸', mktWeight: 3.5, refM2: 4000, refArea: 260, commission: 0.025, humanLeadCost: 133 },
-        eau: { label: 'EAU / Dubai', flag: '🇦🇪', mktWeight: 5.0, refM2: 8000, refArea: 450, commission: 0.020, humanLeadCost: 223 },
+        latam: { label: 'Latam', flag: '🌎', mktWeight: 1.0, refM2: 1700, refArea: 65, commission: 0.030, humanLeadCost: 50 },
+        europa: { label: 'Europa', flag: '🇪🇺', mktWeight: 2.5, refM2: 3200, refArea: 85, commission: 0.030, humanLeadCost: 100 },
+        usa: { label: 'USA', flag: '🇺🇸', mktWeight: 3.5, refM2: 3500, refArea: 140, commission: 0.025, humanLeadCost: 133 },
+        eau: { label: 'EAU / Dubai', flag: '🇦🇪', mktWeight: 5.0, refM2: 5500, refArea: 120, commission: 0.020, humanLeadCost: 223 },
       };
 
       const AI_TIERS = {
@@ -2552,8 +2552,20 @@
         const soporteFee = Math.round(baseSLAValue * mkt.mktWeight * supportUnitFactor);
 
         // Fee de gestión basado en el valor teórico del pipeline
-        const pipeWeight = (nNoRebote * 0.1) + (nCali * 2) + (nApro * 20) + (nPreV * 400);
-        const managementFee = (pipeWeight * 0.05 * valueWeight) + (baseLicencia * 0.5);
+        const activeFrioWeight = S.selectedTiers.frio ? (nNoRebote * 0.5) : 0;
+        const activeCaliWeight = S.selectedTiers.calificado ? (nCali * 10) : 0;
+        const activeAproWeight = S.selectedTiers.aprobado ? (nApro * 150) : 0;
+        const activePrevWeight = S.selectedTiers.preventa ? (nPreV * 4000) : 0;
+        
+        // Índice de baja por volumen de leads (Curva asintótica a partir de 35k visitas)
+        const volumeFactor = Math.max(0.3, Math.pow(35000 / Math.max(35000, S.visits), 0.5));
+        
+        const pipeWeight = (activeFrioWeight + activeCaliWeight + activeAproWeight + activePrevWeight) * volumeFactor;
+        
+        // Multiplicador de mercado suavizado para la gestión
+        // Si USA es 3.5x, su impacto en gestión será ~1.87x, evitando saltos absurdos de p.ej 5k a 15k.
+        const mktScale = Math.pow(mkt.mktWeight, 0.5);
+        const managementFee = (pipeWeight * 0.05 * valueWeight * mktScale) + (baseLicencia * 0.5);
 
         const fixedService = Math.round(baseLicencia + soporteFee + managementFee);
         const grandTotal = infraTotalFinal + fixedService;
@@ -2585,9 +2597,9 @@
         };
 
         const wFrio = nNoRebote * 1;
-        const wCali = nCali * 10;
-        const wApro = nApro * 100;
-        const wPrev = nPreV * 1000;
+        const wCali = nCali * 50;
+        const wApro = nApro * 250;
+        const wPrev = nPreV * 18500;
         const totalWeight = (S.selectedTiers.frio ? wFrio : 0) +
           (S.selectedTiers.calificado ? wCali : 0) +
           (S.selectedTiers.aprobado ? wApro : 0) +
