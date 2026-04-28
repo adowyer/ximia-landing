@@ -2062,8 +2062,8 @@
                 <span class="st-slider"></span>
               </label>
               <div class="bar-label-group">
-                <span class="bar-label">Operación<br>Pre-Venta <span class="help-icon"
-                    data-tip="Datos de contacto + perfil de búsqueda + validación financiera positiva + Reserva iniciada en el sistema por 48hs.">?</span></span>
+                <span class="bar-label">Pre-Venta<br>Lista <span class="help-icon"
+                    data-tip="Datos de contacto + perfil de búsqueda + validación financiera positiva + Reserva iniciada en el sistema. Válido si el cliente no define operación en 48hs.">?</span></span>
                 <span class="bar-sub">Reserva Iniciada</span>
               </div>
               <div class="bar-track">
@@ -2242,26 +2242,9 @@
           </div>
         </div>
 
-        <!-- Total (dark) -->
-        <div class="card-dark">
-          <div class="res-tag">Total estimado</div>
-          <div class="res-amount" id="r-total">$—</div>
-          <div class="res-period">USD · infraestructura + servicio</div>
-          <div class="res-rows">
-            <div class="rr"><span class="rr-label">Servicio</span><span class="rr-val teal" id="r-maint">—</span>
-            </div>
-            <div class="rr"><span class="rr-label">Infraestructura</span><span class="rr-val teal" id="r-infra">—</span>
-            </div>
-            <div style="border-top:1px solid rgba(255,255,255,0.08);margin:6px 0"></div>
-            <div style="font-family:var(--font);font-size:11px;color:#94a3b8;line-height:1.6;">
-              Infraestructura + mantenimiento mensual.<br>Setup se define en el primer contacto.
-            </div>
-          </div>
-        </div>
-
         <!-- Lead pricing -->
         <div class="card">
-          <div class="lead-card-tag">Costos por Lead</div>
+          <div class="lead-card-tag">Precios por Lead</div>
           <div class="lead-rows">
             <div class="lead-row">
               <div>
@@ -2286,10 +2269,28 @@
             </div>
             <div class="lead-row">
               <div>
-                <div class="lead-name" style="font-weight: 600;">Operación Pre-Venta</div>
+                <div class="lead-name" style="font-weight: 600;">Pre-Venta Lista</div>
                 <div class="lead-desc">reserva iniciada</div>
+                <div class="lead-desc" style="font-size:10px; margin-top:2px;">(Opcional: 1% comisión)</div>
               </div>
               <span class="lead-price p" id="r-lead-preventa" style="font-weight:700; color:var(--text);">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total (dark) -->
+        <div class="card-dark">
+          <div class="res-tag">Total estimado</div>
+          <div class="res-amount" id="r-total">$—</div>
+          <div class="res-period">USD · infraestructura + servicio</div>
+          <div class="res-rows">
+            <div class="rr"><span class="rr-label">Servicio</span><span class="rr-val teal" id="r-maint">—</span>
+            </div>
+            <div class="rr"><span class="rr-label">Infraestructura</span><span class="rr-val teal" id="r-infra">—</span>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.08);margin:6px 0"></div>
+            <div style="font-family:var(--font);font-size:11px;color:#94a3b8;line-height:1.6;">
+              Infraestructura + mantenimiento mensual.<br>Setup se define en el primer contacto.
             </div>
           </div>
         </div>
@@ -2332,10 +2333,10 @@
       };
 
       const MARKET = {
-        latam: { label: 'Latam', flag: '🌎', mktWeight: 1.00, refM2: 1700, refArea: 65, commission: 0.030, humanLeadCost: 50 },
-        europa: { label: 'Europa', flag: '🇪🇺', mktWeight: 1.20, refM2: 3200, refArea: 85, commission: 0.030, humanLeadCost: 100 },
-        usa: { label: 'USA', flag: '🇺🇸', mktWeight: 1.35, refM2: 3500, refArea: 140, commission: 0.025, humanLeadCost: 133 },
-        eau: { label: 'EAU / Dubai', flag: '🇦🇪', mktWeight: 1.50, refM2: 5500, refArea: 120, commission: 0.020, humanLeadCost: 223 },
+        latam: { label: 'Latam', flag: '🌎', mktWeight: 0.75, refM2: 1700, refArea: 65, commission: 0.030, humanLeadCost: 50 },
+        europa: { label: 'Europa', flag: '🇪🇺', mktWeight: 0.90, refM2: 3200, refArea: 85, commission: 0.030, humanLeadCost: 100 },
+        usa: { label: 'USA', flag: '🇺🇸', mktWeight: 1.00, refM2: 3500, refArea: 140, commission: 0.025, humanLeadCost: 133 },
+        eau: { label: 'EAU / Dubai', flag: '🇦🇪', mktWeight: 1.25, refM2: 5500, refArea: 120, commission: 0.020, humanLeadCost: 223 },
       };
 
       const AI_TIERS = {
@@ -2537,10 +2538,14 @@
           return n * tokens * ai.in;
         };
 
-        const llmRaw = calcLLMDepth(conversations - nNoRebote, 2) +
+        const extraLangs = Math.max(0, S.languages - 1);
+        const langFactorLLM = 1 + (extraLangs * 0.03); // +3% por idioma extra en IA
+        const langFactorMgmt = 1 + (extraLangs * 0.01); // +1% por idioma extra en gestión
+
+        const llmRaw = (calcLLMDepth(conversations - nNoRebote, 2) +
           calcLLMDepth(nNoRebote - nCali, 8) +
           calcLLMDepth(nCali - nApro, 15) +
-          calcLLMDepth(nApro, 25);
+          calcLLMDepth(nApro, 25)) * langFactorLLM;
 
         let markup = S.aiTier === 'premium' ? 1.5 : (S.aiTier === 'balanced' ? 1.7 : 2.0);
         const infraTotalFinal = (hostDynamic + (llmRaw * markup) + (conversations * ai.plat * markup) + db.raw + (S.vendors > 3 ? (S.vendors - 3) * 15 : 0)) * 1.1;
@@ -2565,7 +2570,7 @@
         // Multiplicador de mercado suavizado para la gestión
         // Si USA es 3.5x, su impacto en gestión será ~1.87x, evitando saltos absurdos de p.ej 5k a 15k.
         const mktScale = Math.pow(mkt.mktWeight, 0.5);
-        const managementFee = (pipeWeight * 0.05 * valueWeight * mktScale) + (baseLicencia * 0.5);
+        const managementFee = ((pipeWeight * 0.05 * valueWeight * mktScale) + (baseLicencia * 0.5)) * langFactorMgmt;
 
         const fixedService = Math.round(baseLicencia + soporteFee + managementFee);
         const grandTotal = infraTotalFinal + fixedService;
@@ -2608,7 +2613,7 @@
         // 7. CONTEO ESTRICTO (Si se apagan, Caen a 0 en UI. Si se apaga Pre-Venta, se resta de Aprobado)
         const finalFrio = S.selectedTiers.frio ? nNoRebote : 0;
         const finalCali = S.selectedTiers.calificado ? nCali : 0;
-        const finalApro = S.selectedTiers.aprobado ? (S.selectedTiers.preventa ? nApro : Math.max(0, nApro - nPreV)) : 0;
+        const finalApro = S.selectedTiers.aprobado ? nApro : 0;
         const finalPreV = S.selectedTiers.preventa ? nPreV : 0;
 
         updateRow('frio', finalFrio, S.selectedTiers.frio ? wFrio : 0, totalWeight);
@@ -2617,16 +2622,17 @@
         updateRow('preventa', finalPreV, S.selectedTiers.preventa ? wPrev : 0, totalWeight);
 
         // Sidebar Lead Pricing
-        const fmtLeadRow = (count, weight) => {
+        const fmtLeadRow = (count, weight, cap) => {
           if (count <= 0 || totalWeight <= 0) return `$0`;
-          const unitPrice = (fixedPool * (weight / totalWeight)) / count;
+          let unitPrice = (fixedPool * (weight / totalWeight)) / count;
+          if (cap && unitPrice > cap) unitPrice = cap;
           return fmtLead(unitPrice);
         };
 
         s('r-lead-frio-sb', fmtLeadRow(finalFrio, S.selectedTiers.frio ? wFrio : 0));
         s('r-lead-p', fmtLeadRow(finalCali, S.selectedTiers.calificado ? wCali : 0));
         s('r-lead-q', fmtLeadRow(finalApro, S.selectedTiers.aprobado ? wApro : 0));
-        s('r-lead-preventa', fmtLeadRow(finalPreV, S.selectedTiers.preventa ? wPrev : 0));
+        s('r-lead-preventa', fmtLeadRow(finalPreV, S.selectedTiers.preventa ? wPrev : 0, 250));
 
         // ROI y Benchmarks
         const ingresosMes = nPreV * ticketEst * mkt.commission;
