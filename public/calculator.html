@@ -838,10 +838,37 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 24px;
-      border-radius: 16px;
+      padding: 22px 28px;
+      /* Un poco más de aire para el diseño premium */
+      border-radius: 18px;
       background: var(--surface);
       border: 1.5px solid var(--border);
+      transition: transform 0.2s ease;
+    }
+
+    .row-calc {
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: -0.01em;
+      opacity: 0.8;
+      margin-top: 4px;
+      /* Espacio bajo el precio */
+    }
+
+    .row-total {
+      font-weight: 800;
+      font-family: var(--font-h);
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .lead-price {
+      display: flex;
+      flex-direction: column;
+      /* Apilado vertical */
+      align-items: flex-end;
+      text-align: right;
     }
 
     .lead-name {
@@ -859,24 +886,23 @@
     }
 
     .lead-price {
-      font-size: 28px;
-      font-weight: 800;
-      font-family: var(--font);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
       letter-spacing: -.02em;
     }
 
-    .lead-price.q {
+    .lead-price.q .row-total {
       color: var(--accent);
     }
 
-    .lead-price.p {
+    .lead-price.p .row-total {
       color: var(--amber);
     }
 
-    .lead-price.z {
+    .lead-price.z .row-total {
       color: var(--muted2);
-      font-size: 12px;
-      font-weight: 500;
+      font-size: 20px;
     }
 
     /* ── Funnel section ── */
@@ -1445,95 +1471,275 @@
       }
     }
 
-    .funnel-svg-container {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .f-layer {
-      cursor: default;
-      transition: all 0.3s ease;
-    }
-
-    .f-layer:hover {
-      filter: brightness(1.2);
-      transform: translateY(-2px);
-    }
-
-    .f-text-val {
-      font-family: var(--font-h);
-      font-weight: 800;
-      font-size: 24px;
-      fill: #fff;
-    }
-
-    .f-text-label {
-      font-family: var(--font-h);
-      font-weight: 700;
-      font-size: 14px;
-      fill: rgba(255, 255, 255, 0.5);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    /* ── Funnel Legend ── */
-    .f-legend {
+    /* BAR STRATEGY CHART */
+    .bar-strategy-container {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 12px;
+      margin-top: 32px;
+      padding: 0 10px;
     }
 
-    .f-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      padding-left: 16px;
-      border-left: 3px solid transparent;
+    .st-subtotal {
+      font-size: 11px;
+      color: var(--muted2);
+      font-weight: 600;
+      margin-top: 2px;
+      text-align: right;
     }
 
-    .f-item.v1 {
-      border-color: var(--accent);
-    }
-
-    .f-item.v2 {
-      border-color: #475569;
-    }
-
-    .f-item.v3 {
-      border-color: var(--amber);
-    }
-
-    .f-item.v4 {
-      border-color: var(--accent2);
-    }
-
-    .f-item.v5 {
-      border-color: var(--green);
-    }
-
-    .f-item-title {
-      font-family: var(--font-h);
-      font-size: 18px;
-      font-weight: 800;
+    .help-icon {
+      cursor: help;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
       color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      margin-left: 4px;
+      position: relative;
+      vertical-align: middle;
+    }
+
+    .help-icon:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e293b;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      width: 200px;
+      line-height: 1.4;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+      text-align: left;
+      font-weight: 400;
+    }
+
+    .strategy-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .strategy-row:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .strategy-row.disabled {
+      opacity: 0.3;
+      filter: grayscale(1);
+      transform: scale(0.98);
+    }
+
+    .bar-label-group {
+      width: 160px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bar-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .bar-sub {
+      font-size: 11px;
+      color: var(--muted2);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    .f-item-desc {
-      font-family: var(--font);
-      font-size: 13px;
-      color: var(--muted2);
-      line-height: 1.5;
+    .bar-track {
+      flex: 1;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
     }
 
-    .f-item-val {
-      font-family: var(--font-h);
-      font-size: 20px;
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      /* Dinámico */
+      transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border-radius: 4px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .bar-num {
+      width: 100px;
+      text-align: right;
+      font-size: 18px;
       font-weight: 800;
+      color: #fff;
+      font-family: var(--font-h);
+    }
+
+    /* Strategy Toggle Switch */
+    .strategy-toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+    .strategy-toggle input {
+      display: none;
+    }
+
+    .st-slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.1);
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .st-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked+.st-slider {
+      background-color: var(--green);
+    }
+
+    input:checked+.st-slider:before {
+      transform: translateX(20px);
+    }
+
+    /* ── Dashboard Table Card ── */
+    .table-card {
+      background: rgba(15, 23, 42, 0.4);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 32px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .lead-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font);
+      color: #fff;
+    }
+
+    .lead-table th {
+      text-align: left;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+    }
+
+    .lead-table td {
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 16px;
+    }
+
+    .lead-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .lead-table .val-num {
+      font-family: var(--font-h);
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .lead-table .val-price {
+      color: #94a3b8;
+    }
+
+    .lead-table .val-revenue {
+      font-family: var(--font-h);
+      font-weight: 700;
       color: var(--accent);
-      margin-top: 2px;
+    }
+
+    .lead-table .val-note {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .lead-table .row-total {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .lead-table .row-total td {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .lead-table .row-total .val-revenue {
+      color: var(--green);
+      font-size: 18px;
+    }
+
+    .price-input {
+      background: transparent;
+      border: 1px solid transparent;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 2px 4px;
+      width: 80px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .price-input:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      color: var(--accent);
+    }
+
+    .price-input:focus {
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+    }
+
+    /* Ocultar flechas en input number */
+    .price-input::-webkit-inner-spin-button,
+    .price-input::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
   </style>
 </head>
@@ -1544,7 +1750,7 @@
     <!-- HEADER -->
     <div class="calc-header">
       <div class="calc-eyebrow">Ximia AI · Transparencia de precios</div>
-      <h1>Cuánto cuesta<br><span>sumar el poder de Ximia a tu negocio</span></h1>
+      <h1>Cuánto cuesta<br><span>sumar el poder de Ximia.</span></h1>
       <p class="calc-subtitle">Configurá tu caso y obtené un estimado en tiempo real. Los valores se ajustan según tu
         volumen, tu
         mercado
@@ -1605,10 +1811,11 @@
           <div class="field">
             <div class="slider-head">
               <span class="slider-name">Valor promedio del m² en tu portfolio</span>
-              <span class="slider-val" id="m2-out">USD 1.000</span>
+              <span class="slider-val" id="m2-out">USD 1.700</span>
             </div>
-            <input type="range" id="m2-slider" min="250" max="20000" step="250" value="1000" oninput="onSlider()">
-            <div class="slider-range"><span>USD 250</span><span>USD 20.000</span></div>
+            <input type="range" class="range-field" id="m2-slider" min="500" max="20000" step="100" value="1700"
+              oninput="onSlider()">
+            <div class="slider-range"><span>USD 100</span><span>USD 20.000</span></div>
             <div class="derived-note" id="ticket-derived" style="font-size:14px; line-height:1.4;">
               <div style="margin-bottom: 4px;">📐 Ticket promedio estimado: <strong id="ticket-est">—</strong></div>
               <div style="font-size:14px; opacity:0.8;">
@@ -1619,32 +1826,35 @@
             </div>
           </div>
 
-          <div class="two-col">
-            <div class="field" style="margin-bottom:0">
-              <div class="slider-head">
-                <span class="slider-name">Unidades en cartera</span>
-                <span class="slider-val" id="units-out">50</span>
-              </div>
-              <input type="range" id="units" min="5" max="2000" step="10" value="50" oninput="onSlider()">
-              <div class="slider-range"><span>5</span><span>2.000</span></div>
+          <div class="field" style="margin-bottom:24px">
+            <div class="slider-head">
+              <span class="slider-name">Unidades en cartera</span>
+              <span class="slider-val" id="units-out">50</span>
             </div>
-            <div class="field" style="margin-bottom:0">
-              <div class="slider-head">
-                <span class="slider-name">Vendedores / CRM</span>
-                <span class="slider-val" id="vendors-out">3</span>
-              </div>
-              <input type="range" id="vendors" min="1" max="50" step="1" value="3" oninput="onSlider()">
-              <div class="slider-range"><span>1</span><span>50</span></div>
-            </div>
+            <input type="range" id="units" min="50" max="5000" step="1" value="100" oninput="onSlider()">
+            <div class="slider-range"><span>50</span><span>5.000</span></div>
           </div>
 
-          <div class="field" style="margin-top:18px">
-            <div class="field-label">Idiomas del agente</div>
-            <div class="lang-row">
-              <button class="lang-btn" onclick="changeLang(-1)">−</button>
-              <span class="lang-num" id="lang-out">1</span>
-              <span class="lang-lbl" id="lang-lbl">idioma</span>
-              <button class="lang-btn" onclick="changeLang(1)">+</button>
+          <div class="two-col"
+            style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 24px;">
+            <div class="field" style="flex: 1; margin-bottom:0">
+              <div class="slider-head">
+                <span class="slider-name">Usuarios CRM</span>
+                <span class="slider-val" id="vendors-out">5</span>
+              </div>
+              <input type="range" id="vendors" min="1" max="100" step="1" value="5" oninput="onSlider()">
+              <div class="slider-range"><span>1</span><span>100</span></div>
+            </div>
+
+            <div class="field" style="width: 220px; margin-bottom:0;">
+              <div class="field-label" style="font-size: 14px; margin-bottom: 12px; text-align: left;">Idiomas del
+                agente</div>
+              <div class="lang-row" style="margin-top: 0; padding: 12px 16px; justify-content: space-between;">
+                <button class="lang-btn" onclick="changeLang(-1)">−</button>
+                <span class="lang-num" id="lang-out">1</span>
+                <span class="lang-lbl" id="lang-lbl" style="flex: 1; text-align: center;">idioma</span>
+                <button class="lang-btn" onclick="changeLang(1)">+</button>
+              </div>
             </div>
           </div>
 
@@ -1653,9 +1863,9 @@
                 omnicanal</span></div>
             <div
               style="font-family:var(--font); font-size:16px; color:var(--muted); line-height:1.6; margin-bottom:20px; padding:16px; background:var(--surface); border-radius:var(--radius); border:1px dashed var(--border2);">
-              <strong style="color:var(--text); margin-bottom:4px;">IMPORTANTE:</strong>EEn este número sumá el total de
+              <strong style="color:var(--text); margin-bottom:4px;">IMPORTANTE:</strong>En este número sumá el total de
               contactos, consultas y mensajes provenientes de <strong>tus páginas web, WhatsApp, redes sociales y
-                llamadas telefónicas</strong>. El objetivo calcular el 100% de ese tráfico para derivarlo al motor de
+                llamadas telefónicas</strong>. El objetivo es calcular el 100% de ese tráfico para derivarlo al motor de
               Ximia.
             </div>
             <div class="slider-head">
@@ -1672,7 +1882,7 @@
               <span id="label-conv-est"
                 style="font-size: 22px; color: var(--accent); display: block; margin-bottom: 4px;">—
                 conversaciones/mes</span>
-              <span style="font-weight: 400; opacity: 0.8; font-size: 14px;">Basado en un 60% de interacción por
+              <span style="font-weight: 400; opacity: 0.8; font-size: 14px;">Basado en un 75% de interacción por
                 visibilidad proactiva ("Hero-Integrated"). Rango de mercado: 10–35% chatbot tradicional, hasta 80% con
                 agente animado en primer plano.</span>
             </div>
@@ -1687,11 +1897,11 @@
           <div class="field">
             <div class="field-label">Motor de Inteligencia Artificial</div>
             <div class="tier-grid">
-              <button class="tier-btn" data-tier="economic" onclick="setAI(this)">
+              <button class="tier-btn active" data-tier="economic" onclick="setAI(this)">
                 <span class="tier-icon">⚡</span><span class="tier-label">Estándar</span>
-                <span class="tier-note">Costo optimizado (GPT-4o-mini)</span>
+                <span class="tier-note">Costo optimizado (GPT-4o-mini / DeepSeek)</span>
               </button>
-              <button class="tier-btn active" data-tier="balanced" onclick="setAI(this)">
+              <button class="tier-btn" data-tier="balanced" onclick="setAI(this)">
                 <span class="tier-icon">⚖️</span><span class="tier-label">Pro</span>
                 <span class="tier-note">Equilibrado (GPT-4o / Claude 3.5 Sonnet)</span>
               </button>
@@ -1731,677 +1941,740 @@
             <div class="field-label">Base de datos e infraestructura</div>
             <div class="tier-grid">
               <button class="tier-btn active" data-db="standard" onclick="setDB(this)">
-                <span class="tier-label">Estándar</span><span class="tier-note">Hasta 50k leads</span>
+                <span class="tier-label">Estándar</span>
+                <span class="tier-note">$25 / mes</span>
+                <span class="tier-note">Hasta 50k registros + Backup semanal</span>
               </button>
               <button class="tier-btn" data-db="scalable" onclick="setDB(this)">
-                <span class="tier-label">Pro</span><span class="tier-note">500k+ leads, backups</span>
+                <span class="tier-label">Pro</span>
+                <span class="tier-note">$75 / mes</span>
+                <span class="tier-note">+500k registros + Backup diario</span>
               </button>
               <button class="tier-btn" data-db="enterprise" onclick="setDB(this)">
-                <span class="tier-label">Premium</span><span class="tier-note">Multi-región, 99.9%</span>
+                <span class="tier-label">Premium</span>
+                <span class="tier-note">$200 / mes</span>
+                <span class="tier-note">Servidor Replicado + 99.9% de Disponibilidad</span>
               </button>
             </div>
           </div>
 
           <div class="field" style="margin-bottom:0">
-            <div class="field-label">Nivel de soporte (SLA)</div>
-            <div class="opt-tabs">
-              <button class="opt-tab active" data-sla="standard" onclick="setSLA(this)">Estándar</button>
-              <button class="opt-tab" data-sla="priority" onclick="setSLA(this)">Prioritario</button>
-              <button class="opt-tab" data-sla="enterprise" onclick="setSLA(this)">Enterprise</button>
-            </div>
-            <div id="sla-desc"
-              style="font-family: var(--font); font-size: 14px; color: var(--muted2); line-height: 1.5; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
-              —
+            <div class="field-label">Plataforma & Fee de Servicio</div>
+            <div class="tier-grid">
+              <button class="tier-btn active" data-sla="standard" onclick="setSLA(this)">
+                <span class="tier-label">Estándar</span>
+                <span class="tier-note" id="sla-price-standard">$— </span>
+                <span class="tier-note">Licencia + Respuesta < 48h · 1 actualización mensual</span>
+              </button>
+              <button class="tier-btn" data-sla="priority" onclick="setSLA(this)">
+                <span class="tier-label">Pro</span>
+                <span class="tier-note" id="sla-price-priority">$— </span>
+                <span class="tier-note">Licencia + Respuesta < 12h · 2 actualizaciones mensuales</span>
+              </button>
+              <button class="tier-btn" data-sla="enterprise" onclick="setSLA(this)">
+                <span class="tier-label">Premium</span>
+                <span class="tier-note" id="sla-price-enterprise">$— </span>
+                <span class="tier-note">Licencia + Respuesta < 1h · Actualizaciones ilimitadas</span>
+              </button>
             </div>
           </div>
         </div>
 
-        <!-- NEW GRAPHICAL FUNNEL PREVIEW -->
+        <!-- ESTRATEGIA DE CAPTACIÓN (BARRAS) -->
         <div class="funnel-graph-card na">
-          <div style="text-align: center; margin-bottom: 48px;">
+          <div style="text-align: center; margin-bottom: 32px;">
             <h2
-              style="font-size: 36px; font-weight: 800; color: #fff; font-family: var(--font-h); letter-spacing: -0.03em;">
-              Proyección de Conversión Proactiva</h2>
-            <p style="color: var(--muted2); font-size: 17px; margin-top: 10px;">Visualización estratégica del flujo de
-              leads calificados por Ximia</p>
+              style="font-size: 32px; font-weight: 800; color: #fff; font-family: var(--font-h); letter-spacing: -0.02em;">
+              Costo por Leads
+            </h2>
+            <p style="color: var(--muted2); font-size: 16px; margin-top: 8px;">Selecciona el perfil de leads que queres
+              recibir para obtener el costo total de Ximia.</p>
           </div>
 
-          <div class="funnel-container">
-            <svg viewBox="0 0 800 600" class="funnel-svg-container" id="funnel-svg">
-              <defs>
-                <filter id="depth-glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur" />
-                  <feOffset in="blur" dx="0" dy="4" result="offsetBlur" />
-                  <feFlood flood-color="black" flood-opacity="0.4" result="offsetColor" />
-                  <feComposite in="offsetColor" in2="offsetBlur" operator="in" result="shadow" />
-                  <feMerge>
-                    <feMergeNode in="shadow" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-
-              <!-- Static Funnel Geometry (Maximum Real Estate) -->
-              <polygon points="0,20 800,20 680,120 120,120" class="f-layer" fill="var(--accent)" fill-opacity="0.9" />
-              <polygon points="120,135 680,135 580,235 220,235" class="f-layer" fill="#475569" fill-opacity="0.8" />
-              <polygon points="220,250 580,250 500,350 300,350" class="f-layer" fill="var(--amber)"
-                fill-opacity="0.9" />
-              <polygon points="300,365 500,365 460,465 340,465" class="f-layer" fill="var(--accent2)"
-                fill-opacity="0.9" />
-              <path d="M340,480 L460,480 L440,560 C430,590 370,590 360,560 Z" class="f-layer" fill="var(--green)" />
-
-              <!-- Centered Data Values -->
-              <text x="400" y="75" text-anchor="middle" class="f-text-val" id="f-val-1">0</text>
-              <text x="400" y="190" text-anchor="middle" class="f-text-val" id="f-val-2">0</text>
-              <text x="400" y="305" text-anchor="middle" class="f-text-val" id="f-val-3">0</text>
-              <text x="400" y="420" text-anchor="middle" class="f-text-val" id="f-val-4">0</text>
-              <text x="400" y="525" text-anchor="middle" class="f-text-val" id="f-val-5"
-                style="font-size: 32px;">0</text>
-            </svg>
-
-            <div class="f-legend">
-              <div class="f-item v1">
-                <div class="f-item-title">Iniciadas</div>
-                <div class="f-item-desc">Tráfico total omnicanal que interactúa con el agente.</div>
-                <div class="f-item-val" id="fl-iniciadas">0</div>
+          <div class="bar-strategy-container">
+            <!-- FRÍO (Obligatorio / Bloqueado) -->
+            <div class="strategy-row" id="row-frio">
+              <label class="strategy-toggle" style="cursor: not-allowed; opacity: 0.85;" title="La base de datos parcial es obligatoria para el costo de infraestructura">
+                <input type="checkbox" id="sw-frio" checked disabled>
+                <span class="st-slider" style="background-color: #e11d48 !important;"></span>
+              </label>
+              <div class="bar-label-group">
+                <span class="bar-label">Frío <span class="help-icon"
+                    data-tip="Contactos iniciales con datos básicos. Sólo nombre o nombre + email.">?</span></span>
+                <span class="bar-sub" style="color: #fff;">Obligatorio (Base de Datos)</span>
               </div>
-              <div class="f-item v2">
-                <div class="f-item-title">Rebotes</div>
-                <div class="f-item-desc">
-                  <3 turnos · sin datos útiles · sin cargo</div>
-                    <div class="f-item-val" id="fl-rebotes">0</div>
-                </div>
-                <div class="f-item v3">
-                  <div class="f-item-title">Leads Fríos</div>
-                  <div class="f-item-desc">> datos parciales · base de nurturing automático.</div>
-                  <div class="f-item-val" id="fl-frios">0</div>
-                </div>
-                <div class="f-item v4">
-                  <div class="f-item-title">Leads Calientes</div>
-                  <div class="f-item-desc">Calificación financiera completa y alta intención detectada.</div>
-                  <div class="f-item-val" id="fl-calientes">0</div>
-                </div>
-                <div class="f-item v5">
-                  <div class="f-item-title">Listos para Cierre</div>
-                  <div class="f-item-desc">Perfil validado · derivación directa a tu equipo comercial.</div>
-                  <div class="f-item-val" id="fl-listos" style="color: var(--green);">0</div>
-                </div>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-frio" style="background: var(--accent);"></div>
+              </div>
+              <div class="bar-num-wrap"
+                style="display:flex; flex-direction:column; align-items:flex-end; min-width:60px;">
+                <div class="bar-num" id="bn-frio" style="font-weight:700;">0</div>
+                <div class="st-subtotal" id="st-frio">$0</div>
               </div>
             </div>
 
-            <div
-              style="margin-top: 40px; text-align: center; font-family: var(--font); color: var(--muted2); font-size: 13px; max-width: 600px; margin-inline: auto; line-height: 1.6;">
-              Este embudo representa el <strong>filtrado inteligente de Ximia</strong>. Del total de usuarios que
-              interactúa con el agente, solo los leads con calificación financiera completa y alta intención de compra
-              llegan a la base ("Listos"), optimizando el tiempo de tu equipo de ventas.
-            </div>
-          </div>
-
-          <!-- ROI SECTION -->
-          <div class="roi-section sep">
-            <div class="roi-title-row">
-              <div>
-                <div class="roi-title-text" style="font-size: 33px;">Cuánto vale lo que genera Ximia</div>
-                <div style="font-family:var(--font);font-size:12px;color:var(--muted);margin-top:3px;">Basado en tu
-                  portfolio, mercado y volumen</div>
+            <!-- CALIFICADO -->
+            <div class="strategy-row" id="row-calificado">
+              <label class="strategy-toggle">
+                <input type="checkbox" id="sw-calificado" checked onchange="toggleTier('calificado', this)">
+                <span class="st-slider"></span>
+              </label>
+              <div class="bar-label-group">
+                <span class="bar-label">Calificado <span class="help-icon"
+                    data-tip="Perfil incial completo (nombre + email) + perfil de búsqueda + datos financieros incompletos o completos sin pre-aprobación (deudas, bajos ingresos, calificación crediticia no aprobada).">?</span></span>
+                <span class="bar-sub">Perfil Completo</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-calificado" style="background: var(--amber);"></div>
+              </div>
+              <div class="bar-num-wrap"
+                style="display:flex; flex-direction:column; align-items:flex-end; min-width:60px;">
+                <div class="bar-num" id="bn-calificado" style="font-weight:700;">0</div>
+                <div class="st-subtotal" id="st-calificado">$0</div>
               </div>
             </div>
-            <div class="roi-cards">
 
-              <div class="roi-card">
-                <div class="roi-card-tag">Costo por lead pre-aprobado</div>
-                <div class="roi-card-main accent" id="roi-lead-cost" style="font-size:36px;">$—</div>
-                <div class="roi-card-sub">Ximia · pre-calificado financieramente</div>
-                <div
-                  style="font-family: var(--font); font-size: 11px; color: var(--muted2); margin-top: 12px; margin-bottom: 4px; line-height: 1.4; opacity: 0.8;">
-                  Valor estadístico referencial de tu mercado</div>
-                <div class="roi-compare">
-                  <span class="roi-compare-label" id="roi-benchmark-label">vs. mercado sin calificación</span>
-                  <span class="roi-compare-val" id="roi-benchmark">$—</span>
-                </div>
+            <!-- CALIFICADO APROBADO -->
+            <div class="strategy-row" id="row-aprobado">
+              <label class="strategy-toggle">
+                <input type="checkbox" id="sw-aprobado" checked onchange="toggleTier('aprobado', this)">
+                <span class="st-slider"></span>
+              </label>
+              <div class="bar-label-group">
+                <span class="bar-label">Calificado<br>Pre-aprobado <span class="help-icon"
+                    data-tip="Datos de contacto + perfil de búsqueda + validación financiera positiva y listo para cierre.">?</span></span>
+                <span class="bar-sub">Financiación Ok</span>
               </div>
-
-              <div class="roi-card">
-                <div class="roi-card-tag">Suficiencia de demanda</div>
-                <div class="roi-card-main accent" id="roi-tiempo" style="font-size:36px;">— meses</div>
-                <div class="roi-card-sub" id="roi-tiempo-sub">100% del stock cubierto</div>
-                <div
-                  style="font-family: var(--font); font-size: 11px; color: var(--muted2); margin-top: 12px; margin-bottom: 4px; line-height: 1.4; opacity: 0.8;">
-                  Volumen de interesados para agotar el inventario</div>
-                <div class="roi-compare">
-                  <span class="roi-compare-label">vs. prospección humana</span>
-                  <span class="roi-compare-val" id="roi-tiempo-human">— meses</span>
-                </div>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-aprobado" style="background: var(--accent2);"></div>
               </div>
-
-              <div class="roi-card">
-                <div class="roi-card-tag">Retorno sobre inversión</div>
-                <div class="roi-card-main green" id="roi-mult" style="font-size:36px;">×—</div>
-                <div class="roi-card-sub" id="roi-ingresos-sub">Cierres asistidos por Ximia</div>
-                <div
-                  style="font-family: var(--font); font-size: 11px; color: var(--muted2); margin-top: 12px; margin-bottom: 4px; line-height: 1.4; opacity: 0.8;">
-                  Proyección de comisiones brutas del portfolio</div>
-                <div class="roi-compare">
-                  <span class="roi-compare-label">GCI Estimado / mes</span>
-                  <span style="font-family:var(--font);font-size:12px;font-weight:600;color:var(--green)"
-                    id="roi-ingresos">$—</span>
-                </div>
+              <div class="bar-num-wrap"
+                style="display:flex; flex-direction:column; align-items:flex-end; min-width:60px;">
+                <div class="bar-num" id="bn-aprobado" style="font-weight:700;">0</div>
+                <div class="st-subtotal" id="st-aprobado">$0</div>
               </div>
-
             </div>
-          </div>
 
-          <!-- TECH BREAKDOWN -->
-          <div class="tech-section sep" id="tech-section">
-            <button class="tech-toggle" onclick="toggleTech()">
-              <div class="tt-left">
-                <span style="font-size:20px">🔍</span>
-                <div>
-                  <div class="tt-title">Detalle técnico de costos</div>
-                  <div class="tt-sub">Desglose por componente real + Markup</div>
-                </div>
+            <!-- PRE-VENTA -->
+            <div class="strategy-row" id="row-preventa">
+              <label class="strategy-toggle">
+                <input type="checkbox" id="sw-preventa" checked onchange="toggleTier('preventa', this)">
+                <span class="st-slider"></span>
+              </label>
+              <div class="bar-label-group">
+                <span class="bar-label">Pre-Venta<br>Lista <span class="help-icon"
+                    data-tip="Datos de contacto + perfil de búsqueda + validación financiera positiva + Reserva iniciada en el sistema. Válido si el cliente no define operación en 48hs.">?</span></span>
+                <span class="bar-sub">Reserva Iniciada</span>
               </div>
-              <span class="tt-arrow open" id="tt-arrow">▼</span>
-            </button>
-            <div class="tech-body open" id="tech-body">
-              <div class="tech-thead"><span>Recurso / Volumen de procesamiento</span><span>Costo Gestión</span></div>
-              <div class="tech-row">
-                <span class="tr-label" id="label-hosting">Infraestructura Cloud (VPS 24/7)</span>
-                <span class="tr-marked" id="t-hosting">—</span>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-preventa" style="background: var(--green);"></div>
               </div>
-              <div class="tech-row">
-                <span class="tr-label" id="label-plat">Plataforma & Orquestación</span>
-                <span class="tr-marked" id="t-plat">—</span>
-              </div>
-              <div class="tech-row">
-                <span class="tr-label" id="label-llm">Motor IA (Procesamiento LLM)</span>
-                <span class="tr-marked" id="t-llm">—</span>
-              </div>
-              <div class="tech-row" id="t-voice-row" style="display:none">
-                <span class="tr-label" id="label-voice">Soporte de Voz (STT + TTS)</span>
-                <span class="tr-marked" id="t-voice">—</span>
-              </div>
-              <div class="tech-row">
-                <span class="tr-label" id="label-db">Base de Datos e índice</span>
-                <span class="tr-marked" id="t-db">—</span>
-              </div>
-              <div class="tech-row">
-                <span class="tr-label" id="label-crm">Integraciones CRM & API</span>
-                <span class="tr-marked" id="t-crm">—</span>
-              </div>
-              <div class="tech-total-bar">
-                <div>
-                  <div class="tech-total-label">Total infraestructura / mes</div>
-                  <div style="font-family:var(--font);font-size:12px;color:var(--muted);margin-top:2px;">Cálculo
-                    dinámico
-                    según uso real</div>
-                </div>
-                <div class="tech-total-val" id="t-total" style="font-size:36px;">—</div>
-              </div>
-              <div class="tech-note" style="font-size:10.5px;">El cálculo considera <strong>Context Caching</strong>
-                (factor blended 0.30 — Anthropic 10%, OpenAI 50%) y precios oficiales de OpenAI y Anthropic. El "Costo
-                Gestión" incluye orquestación, integración y soporte.</div>
-              <div
-                style="font-family:var(--font);font-size:11px;color:var(--muted2);margin-top:10px;padding:8px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border);text-align:center;letter-spacing:0.05em;">
-                📅 Valores de referencia · <strong>Abril 2026</strong> · Los precios de los modelos de IA varían con el
-                tiempo
+              <div class="bar-num-wrap"
+                style="display:flex; flex-direction:column; align-items:flex-end; min-width:60px;">
+                <div class="bar-num" id="bn-preventa" style="font-weight:700;">0</div>
+                <div class="st-subtotal" id="st-preventa">$0</div>
               </div>
             </div>
           </div>
 
-          <!-- FINAL CTA CARD -->
-          <div class="final-cta"
-            style="margin-top: 48px; border: 1.5px solid var(--accent); background: linear-gradient(to right, #ffffff, var(--accent-l)); padding: 38px; border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          <div
+            style="margin-top: 32px; padding: 16px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 13px; color: var(--muted2); line-height: 1.6; text-align: center;">
+            <p><strong>Configuración Proactiva:</strong> Al desactivar un nivel, Ximia dejará de enviarte esos
+              contactos, reduciendo el costo mensual de servicio.</p>
+          </div>
+        </div>
+
+        <!-- ROI SECTION -->
+        <div class="roi-section sep">
+          <div class="roi-title-row">
             <div>
-              <div class="cta-label" style="font-size: 27px; font-weight: 800; color: var(--text); margin-bottom: 8px;">
-                Agenda una reunión</div>
-              <div class="cta-sub" style="font-size: 17px; color: var(--muted); max-width: 500px; line-height: 1.5;">
-                Hablemos para resolver las dudas finales y comienza a disfrutar un mundo en que vender es más fácil.
+              <div class="roi-title-text" style="font-size: 33px;">Cuánto vale lo que genera Ximia</div>
+              <div style="font-family:var(--font);font-size:12px;color:var(--muted);margin-top:3px;">Basado en tu
+                portfolio, mercado y volumen</div>
+            </div>
+          </div>
+          <div class="roi-cards">
+
+            <div class="roi-card">
+              <div class="roi-card-tag">Costo por lead pre-aprobado</div>
+              <div class="roi-card-main accent" id="roi-lead-cost" style="font-size:36px;">$—</div>
+              <div class="roi-card-sub">Ximia · pre-calificado financieramente</div>
+              <div
+                style="font-family: var(--font); font-size: 11px; color: var(--muted2); margin-top: 12px; margin-bottom: 4px; line-height: 1.4; opacity: 0.8;">
+                Valor estadístico referencial de tu mercado</div>
+              <div class="roi-compare">
+                <span class="roi-compare-label" id="roi-benchmark-label">vs. mercado sin calificación</span>
+                <span class="roi-compare-val" id="roi-benchmark">$—</span>
               </div>
             </div>
-            <a href="https://calendly.com/hola-ximia-ectr/ximia-demo" target="_blank" class="btn-primary btn-glow"
-              style="padding: 21px 40px; font-size: 19px;">Agendar Demo →</a>
-          </div>
 
+            <div class="roi-card">
+              <div class="roi-card-tag">Tiempo de absorción</div>
+              <div class="roi-card-main accent" id="roi-tiempo" style="font-size:36px;">— meses</div>
+              <div class="roi-card-sub" id="roi-tiempo-sub">100% del stock cubierto</div>
+              <div
+                style="font-family: var(--font); font-size: 11px; color: var(--muted2); margin-top: 12px; margin-bottom: 4px; line-height: 1.4; opacity: 0.8;">
+                Volumen de interesados para agotar el inventario</div>
+              <div class="roi-compare">
+                <span class="roi-compare-label">vs. prospección humana</span>
+                <span class="roi-compare-val" id="roi-tiempo-human">— meses</span>
+              </div>
+            </div>
+
+            <div class="roi-card">
+              <div class="roi-card-tag">ROI</div>
+              <div class="roi-card-main green" id="roi-mult" style="font-size:36px;">×—</div>
+              <div class="roi-card-sub" id="roi-ingresos-sub">Cierres asistidos por Ximia</div>
+              <div
+                style="font-family: var(--font); font-size: 11px; color: var(--muted2); margin-top: 12px; margin-bottom: 4px; line-height: 1.4; opacity: 0.8;">
+                Proyección de comisiones brutas del portfolio</div>
+              <div class="roi-compare">
+                <span class="roi-compare-label">GCI Estimado / mes</span>
+                <span style="font-family:var(--font);font-size:12px;font-weight:600;color:var(--green)"
+                  id="roi-ingresos">$—</span>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <!-- END LEFT -->
 
-        <!-- RIGHT: STICKY RESULTS -->
-        <div class="sticky-col">
-
-          <!-- Servicio (teal) -->
-          <div class="card-teal">
-            <div class="rl-tag">Costo del Servicio / mes</div>
-            <div class="rl-amount" id="r-svc">$—</div>
-            <div class="rl-period">Base SLA + leads calificados × precio/lead</div>
-            <div class="rl-chips" id="svc-chips"></div>
-          </div>
-
-          <!-- Infra (teal) -->
-          <div class="card-teal">
-            <div class="rl-tag">Costo de Infraestructura / mes</div>
-            <div class="rl-amount" id="r-infra2">$—</div>
-            <div class="rl-period">Stack técnico · estimado real mensual</div>
-            <div class="rl-chips">
-              <span class="rl-chip" id="ic-ai">—</span>
-              <span class="rl-chip" id="ic-db">—</span>
-              <span class="rl-chip" id="ic-voice" style="display:none">—</span>
-              <span class="rl-chip" id="ic-crm" style="display:none">—</span>
-              <div class="ver-detalle-wrap">
-                <a href="#tech-section" class="ver-detalle-link">Ver detalle técnico →</a>
+        <!-- TECH BREAKDOWN -->
+        <div class="tech-section sep" id="tech-section">
+          <button class="tech-toggle" onclick="toggleTech()">
+            <div class="tt-left">
+              <span style="font-size:20px">🔍</span>
+              <div>
+                <div class="tt-title">Detalle técnico de costos</div>
+                <div class="tt-sub">Desglose por componente</div>
               </div>
             </div>
-          </div>
-
-          <!-- Total (dark) -->
-          <div class="card-dark">
-            <div class="res-tag">Total estimado / mes</div>
-            <div class="res-amount" id="r-total">$—</div>
-            <div class="res-period">USD · infraestructura + servicio</div>
-            <div class="res-rows">
-              <div class="rr"><span class="rr-label">Servicio / mes</span><span class="rr-val teal"
-                  id="r-maint">—</span>
+            <span class="tt-arrow open" id="tt-arrow">▼</span>
+          </button>
+          <div class="tech-body open" id="tech-body">
+            <div class="tech-thead"><span>Recurso / Volumen de procesamiento</span><span>Costo Gestión</span></div>
+            <div class="tech-row">
+              <span class="tr-label" id="label-hosting">Infraestructura Cloud (VPS 24/7)</span>
+              <span class="tr-marked" id="t-hosting">—</span>
+            </div>
+            <div class="tech-row">
+              <span class="tr-label" id="label-plat">Plataforma & Orquestación</span>
+              <span class="tr-marked" id="t-plat">—</span>
+            </div>
+            <div class="tech-row">
+              <span class="tr-label" id="label-llm">Motor IA (Procesamiento LLM)</span>
+              <span class="tr-marked" id="t-llm">—</span>
+            </div>
+            <div class="tech-row" id="t-voice-row" style="display:none">
+              <span class="tr-label" id="label-voice">Soporte de Voz (STT + TTS)</span>
+              <span class="tr-marked" id="t-voice">—</span>
+            </div>
+            <div class="tech-row">
+              <span class="tr-label" id="label-db">Base de Datos e índice</span>
+              <span class="tr-marked" id="t-db">—</span>
+            </div>
+            <div class="tech-row">
+              <span class="tr-label" id="label-crm">Integraciones CRM & API</span>
+              <span class="tr-marked" id="t-crm">—</span>
+            </div>
+            <div class="tech-total-bar">
+              <div>
+                <div class="tech-total-label">Total infraestructura / mes</div>
+                <div style="font-family:var(--font);font-size:12px;color:var(--muted);margin-top:2px;">Cálculo
+                  dinámico
+                  según uso real</div>
               </div>
-              <div class="rr"><span class="rr-label">Infraestructura / mes</span><span class="rr-val teal"
-                  id="r-infra">—</span></div>
-              <div style="border-top:1px solid rgba(255,255,255,0.08);margin:6px 0"></div>
-              <div style="font-family:var(--font);font-size:11px;color:#94a3b8;line-height:1.6;">
-                Infraestructura + mantenimiento mensual.<br>Setup se define en el primer contacto.
-              </div>
+              <div class="tech-total-val" id="t-total" style="font-size:36px;">—</div>
+            </div>
+            <div class="tech-note" style="font-size:10.5px;">El cálculo considera <strong>Context Caching</strong>
+              (factor blended 0.30 — Anthropic 10%, OpenAI 50%) y precios oficiales de OpenAI y Anthropic. El "Costo
+              Gestión" incluye orquestación, integración y soporte.</div>
+            <div
+              style="font-family:var(--font);font-size:11px;color:var(--muted2);margin-top:10px;padding:8px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border);text-align:center;letter-spacing:0.05em;">
+              📅 Valores de referencia · <strong>Abril 2026</strong> · Los precios de los modelos de IA varían con el
+              tiempo
             </div>
           </div>
-
-          <!-- Lead pricing -->
-          <div class="card">
-            <div class="lead-card-tag">Costo por lead</div>
-            <div class="lead-rows">
-              <div class="lead-row">
-                <div>
-                  <div class="lead-name">Lead Pre-aprobado</div>
-                  <div class="lead-desc">hot/warm · pre-aprobado financieramente</div>
-                </div>
-                <span class="lead-price q" id="r-lead-q">—</span>
-              </div>
-              <div class="lead-row">
-                <div>
-                  <div class="lead-name" style="font-weight: 400;">Lead Frío</div>
-                  <div class="lead-desc">score cold · datos incompletos</div>
-                </div>
-                <span class="lead-price p" id="r-lead-p">—</span>
-              </div>
-              <div class="lead-row">
-                <div>
-                  <div class="lead-name" style="font-weight: 400;">Conversación rebotada</div>
-                  <div class="lead-desc">&lt;3 turnos · sin datos útiles</div>
-                </div>
-                <span class="lead-price z">Sin cargo</span>
-              </div>
-            </div>
-          </div>
-
         </div>
-        <!-- END RIGHT -->
 
-      </div> <!-- main-grid -->
+        <!-- FINAL CTA CARD -->
+        <div class="final-cta"
+          style="margin-top: 48px; border: 1.5px solid var(--accent); background: linear-gradient(to right, #ffffff, var(--accent-l)); padding: 38px; border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          <div>
+            <div class="cta-label" style="font-size: 27px; font-weight: 800; color: var(--text); margin-bottom: 8px;">
+              Agenda una reunión</div>
+            <div class="cta-sub" style="font-size: 17px; color: var(--muted); max-width: 500px; line-height: 1.5;">
+              Hablemos para resolver las dudas finales y comienza a disfrutar un mundo en que vender es más fácil.
+            </div>
+          </div>
+          <a href="https://calendly.com/hola-ximia-ectr/ximia-demo" target="_blank" class="btn-primary btn-glow"
+            style="padding: 21px 40px; font-size: 19px;">Agendar Demo →</a>
+        </div>
+
+      </div>
+      <!-- END LEFT -->
+
+      <!-- RIGHT: STICKY RESULTS -->
+      <div class="sticky-col">
+
+        <!-- Servicio (teal) -->
+        <div class="card-teal">
+          <div class="rl-tag">Plataforma & Gestión</div>
+          <div class="rl-amount" id="r-svc">$—</div>
+          <!--div class="rl-period">Licencia + Platforma + Service Fee</div-->
+          <div class="rl-chips" id="svc-chips">
+            <span class="rl-chip">Licencia + Platforma + Service Fee: <span id="r-platform-total">—</span></span>
+          </div>
+        </div>
+
+        <!-- Infra (teal) -->
+        <div class="card-teal">
+          <div class="rl-tag">Costo de Infraestructura</div>
+          <div class="rl-amount" id="r-infra2">$—</div>
+          <div class="rl-period">Stack técnico · estimado</div>
+          <div class="rl-chips">
+            <span class="rl-chip" id="ic-ai">—</span>
+            <span class="rl-chip" id="ic-db">—</span>
+            <span class="rl-chip" id="ic-voice" style="display:none">—</span>
+            <span class="rl-chip" id="ic-crm" style="display:none">—</span>
+            <div class="ver-detalle-wrap">
+              <a href="#tech-section" class="ver-detalle-link">Ver detalle técnico →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lead pricing -->
+        <div class="card">
+          <div class="lead-card-tag">Precios por Lead</div>
+          <div class="lead-rows">
+            <div class="lead-row">
+              <div>
+                <div class="lead-name" style="font-weight: 400;">Lead Frío</div>
+                <div class="lead-desc">cold · datos parciales</div>
+              </div>
+              <span class="lead-price z" id="r-lead-frio-sb">—</span>
+            </div>
+            <div class="lead-row">
+              <div>
+                <div class="lead-name" style="font-weight: 400;">Calificado</div>
+                <div class="lead-desc">warm · perfil financiero completo</div>
+              </div>
+              <span class="lead-price p" id="r-lead-p">—</span>
+            </div>
+            <div class="lead-row">
+              <div>
+                <div class="lead-name" style="font-weight: 400;">Calificado Aprobado</div>
+                <div class="lead-desc">hot · pre-aprobado / listo</div>
+              </div>
+              <span class="lead-price q" id="r-lead-q">—</span>
+            </div>
+            <div class="lead-row">
+              <div>
+                <div class="lead-name" style="font-weight: 600;">Pre-Venta Lista</div>
+                <div class="lead-desc">reserva iniciada</div>
+                <div class="lead-desc" style="font-size:10px; margin-top:2px;">(Opcional: 1% comisión)</div>
+              </div>
+              <span class="lead-price p" id="r-lead-preventa" style="font-weight:700; color:var(--text);">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total (dark) -->
+        <div class="card-dark">
+          <div class="res-tag">Total estimado</div>
+          <div class="res-amount" id="r-total">$—</div>
+          <div class="res-period">USD · infraestructura + servicio</div>
+          <div class="res-rows">
+            <div class="rr"><span class="rr-label">Servicio</span><span class="rr-val teal" id="r-maint">—</span>
+            </div>
+            <div class="rr"><span class="rr-label">Infraestructura</span><span class="rr-val teal" id="r-infra">—</span>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.08);margin:6px 0"></div>
+            <div style="font-family:var(--font);font-size:11px;color:#94a3b8;line-height:1.6;">
+              Infraestructura + mantenimiento mensual.<br>Setup se define en el primer contacto.
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- END RIGHT -->
+
+    </div> <!-- main-grid -->
 
 
-      <script>
-        // ════════════════════════════════════════════
-        // CONFIGURACIÓN DE PRECIOS REALES (USD)
-        // ════════════════════════════════════════════
-        const MARKUP = { orchestrator: 2.5, platform: 2.0, llm: 2.0, voice: 2.5, database: 2.2, crm: 2.5 };
+    <script>
+      // ════════════════════════════════════════════
+      // CONFIGURACIÓN DE PRECIOS REALES (USD)
+      // ════════════════════════════════════════════
 
-        const MAINT_BASE_SLA = { standard: 500, priority: 800, enterprise: 1500 };
-        const SLA_INFO = {
-          standard: "Mantenimiento mensual (1 actualización KB) · Soporte por ticket (<48h respuesta) · Disponibilidad 99.0%.",
-          priority: "Mantenimiento quincenal (2 actualizaciones KB) · WhatsApp/Slack dedicado (<12h respuesta) · Disponibilidad 99.5%.",
-          enterprise: "Mantenimiento bajo demanda (KB ilimitada) · Account Manager 24/7 · Disponibilidad 99.9% + Backup real-time."
+      // PRECIOS BASE (Calibrados para que el precio FINAL con descuento por volumen sea el benchmark)
+      const LEAD_BASE = {
+        frio: 0.11,   // Dará ~$0.05 con descuento masivo
+        cali: 2.25,   // Dará ~$1.00 con descuento masivo
+        apro: 22.50,  // Dará ~$10.00 con descuento masivo
+        prev: 450.00  // Dará ~$200.00 con descuento masivo
+      };
+
+      // TECHOS ABSOLUTOS: Edita estos valores para topar el precio máximo de un lead en cualquier mercado
+      const LEAD_CEILING = {
+        frio: 50,    // Máximo para Lead Frío
+        cali: 150,   // Máximo para Calificado
+        apro: 500,   // Máximo para Calificado Aprobado
+        prev: 2000   // Máximo para Operación Pre-Venta
+      };
+
+      // MARKUP DINÁMICO: Ahora se calcula en calc() para amortizar costos en volúmenes altos
+      const MARKUP_BASE = 2.0;
+
+      const MAINT_BASE_SLA = { standard: 500, priority: 800, enterprise: 1500 };
+      const SLA_INFO = {
+        standard: "Mantenimiento mensual · Soporte por ticket (<48h respuesta).",
+        priority: "Mantenimiento quincenal · WhatsApp/Slack dedicado (<12h respuesta).",
+        enterprise: "Mantenimiento bajo demanda · Account Manager 24/7 · Soporte Crítico."
+      };
+
+      const MARKET = {
+        latam: { label: 'Latam', flag: '🌎', mktWeight: 0.75, refM2: 1700, refArea: 65, commission: 0.030, humanLeadCost: 50 },
+        europa: { label: 'Europa', flag: '🇪🇺', mktWeight: 0.90, refM2: 3200, refArea: 85, commission: 0.030, humanLeadCost: 100 },
+        usa: { label: 'USA', flag: '🇺🇸', mktWeight: 1.00, refM2: 3500, refArea: 140, commission: 0.025, humanLeadCost: 133 },
+        eau: { label: 'EAU / Dubai', flag: '🇦🇪', mktWeight: 1.25, refM2: 5500, refArea: 120, commission: 0.020, humanLeadCost: 223 },
+      };
+
+      const AI_TIERS = {
+        economic: {
+          label: 'GPT-4o-mini',  // Precios correctos para 4o-mini (Abril 2026)
+          in: 0.15 / 1e6, out: 0.60 / 1e6, plat: 0.005,
+          hostRaw: 75
+        },
+        balanced: {
+          label: 'GPT-4o / Claude 3.5 Sonnet',  // Claude 3.5 Sonnet output = $15/1M (no $10)
+          in: 2.50 / 1e6, out: 10.00 / 1e6, plat: 0.01,
+          hostRaw: 50
+        },
+        premium: {
+          label: 'o1 / Claude Opus 4',  // o1-Preview deprecado Q4 2024; Opus 4 output ≈ $75/1M
+          in: 15.00 / 1e6, out: 60.00 / 1e6, plat: 0.02,
+          hostRaw: 100
+        },
+      };
+
+      const DB_TIERS = { standard: { raw: 25 }, scalable: { raw: 75 }, enterprise: { raw: 200 } };
+
+      const VOICE_STACKS = {
+        none: { stt: 0, tts: 0 },
+        standard: { stt: 0.002, tts: 0.008 },
+        premium: { stt: 0.003, tts: 0.020 }, // Precios Corporativos (Wholesale)
+      };
+
+      // Configuración de Tokens (Estructura Ximia)
+      const TOKENS = {
+        fixedInput: 11180,  // System + KB + Profile (Cachable)
+        turnInput: 200,    // User text + some hist
+        turnOutput: 300,
+        weightedTurns: {
+          rebote: 2.5,   // < 3 turns
+          frio: 8.0,     // partial data
+          caliente: 15.0, // full process
+          ready: 25.0    // qualified closing
+        },
+        cacheFactor: 0.30   // Factor blended: Anthropic 0.10, OpenAI 0.50 — promedio para stack mixto GPT-4o/Claude
+      };
+
+
+      // ════════════════════════════════════════════
+      // STATE
+      // ════════════════════════════════════════════
+      const S = {
+        market: 'latam',
+        m2Value: 1700,
+        units: 50,
+        vendors: 3,
+        languages: 1,
+        sla: 'standard',
+        visits: 35000,
+        engRate: 0.75, // Default 75% — visibilidad alta
+        aiTier: 'economic',
+        dbTier: 'standard',
+        voiceEnabled: false,
+        voiceStack: 'standard',
+        selectedTiers: {
+          frio: true,
+          calificado: true,
+          aprobado: true,
+          preventa: true
+        }
+      };
+
+      // ════════════════════════════════════════════
+      // SETTERS
+      // ════════════════════════════════════════════
+      function activateBtn(sel, btn) { document.querySelectorAll(sel).forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+      function setMarket(btn) {
+        activateBtn('.mkt-btn', btn);
+        const mkey = btn.dataset.mkt;
+        S.market = mkey;
+        // Auto-update m2 slider based on market reference
+        const mref = MARKET[mkey].refM2;
+        S.m2Value = mref;
+        const sld = document.getElementById('m2-slider');
+        if (sld) sld.value = mref;
+        onSlider(); // Update state and UI
+      }
+      function setAI(btn) { activateBtn('.tier-btn[data-tier]', btn); S.aiTier = btn.dataset.tier; calc(); }
+      function setDB(btn) { activateBtn('.tier-btn[data-db]', btn); S.dbTier = btn.dataset.db; calc(); }
+      function setVS(btn) { activateBtn('.vs-btn', btn); S.voiceStack = btn.dataset.vs; calc(); }
+      function setSLA(btn) { activateBtn('.tier-btn[data-sla]', btn); S.sla = btn.dataset.sla; calc(); }
+      function setEngage(btn) { activateBtn('.eng-tab', btn); S.engRate = +btn.dataset.eng; calc(); }
+
+      function toggleTier(tier, el) {
+        S.selectedTiers[tier] = el.checked;
+        const row = document.getElementById('row-' + (tier === 'calificado' ? 'calificado' : (tier === 'aprobado' ? 'aprobado' : (tier === 'preventa' ? 'preventa' : 'frio'))));
+        if (row) {
+          if (el.checked) row.classList.remove('disabled');
+          else row.classList.add('disabled');
+        }
+        calc();
+      }
+
+      function changeLang(d) {
+        S.languages = Math.max(1, Math.min(5, S.languages + d));
+        s('lang-out', S.languages.toString());
+        s('lang-lbl', S.languages === 1 ? 'idioma' : 'idiomas');
+        calc();
+      }
+
+      function toggleVoice() {
+        S.voiceEnabled = document.getElementById('voice-toggle').checked;
+        document.getElementById('voice-section').style.display = S.voiceEnabled ? 'block' : 'none';
+        calc();
+      }
+
+      function onSlider() {
+        S.m2Value = +document.getElementById('m2-slider').value;
+        S.units = +document.getElementById('units').value;
+        S.vendors = +document.getElementById('vendors').value;
+        S.visits = +document.getElementById('visits').value;
+        s('m2-out', 'USD ' + fmt0(S.m2Value));
+        s('units-out', fmt0(S.units));
+        s('vendors-out', S.vendors.toString());
+        s('visits-out', fmt0(S.visits));
+        calc();
+      }
+
+      function toggleTech() {
+        const body = document.getElementById('tech-body'), arrow = document.getElementById('tt-arrow');
+        if (body.classList.contains('open')) {
+          body.classList.remove('open');
+          arrow.classList.remove('open');
+        } else {
+          body.classList.add('open');
+          arrow.classList.add('open');
+        }
+      }
+
+      // ════════════════════════════════════════════
+      // FORMAT
+      // ════════════════════════════════════════════
+      const loc = n => Math.round(n).toLocaleString('es-AR');
+      const fmt0 = n => n.toLocaleString('es-AR');
+      function fmtUSD(n) {
+        if (n === 0) return '$0';
+        if (n >= 1000) return '$' + loc(n);
+        if (n >= 10) return '$' + Math.round(n);
+        return '$' + n.toFixed(2);
+      }
+      function fmtLead(n) {
+        if (n < 0.01) return '<$0.01';
+        if (n < 100) return '$' + n.toFixed(2);
+        return '$' + Math.round(n);
+      }
+      function s(id, val) {
+        const el = document.getElementById(id); if (!el) return;
+        el.innerHTML = val; el.classList.remove('na'); void el.offsetWidth; el.classList.add('na');
+      }
+
+      // ════════════════════════════════════════════
+      // CALCULATE
+      // ════════════════════════════════════════════
+      function calc() {
+        // ── CONFIGURACIÓN DE MERCADO Y TIER ──
+        const mkt = MARKET[S.market];
+        const ai = AI_TIERS[S.aiTier];
+        const db = DB_TIERS[S.dbTier];
+        const vs = VOICE_STACKS[S.voiceEnabled ? S.voiceStack : 'none'];
+
+        // 1. Ticket estimado y ponderación de valor
+        const ticketEst = S.m2Value * mkt.refArea;
+        const valueWeight = Math.pow(S.m2Value / mkt.refM2, 0.25);
+        s('ticket-est', 'USD ' + loc(ticketEst));
+
+        // 2. Bonus por calidad de IA (Standard = base sólida, Premium = mejora)
+        // El LLM no inventa gente — mejora la tasa de calificación y retención
+        const aiBonus = S.aiTier === 'premium' ? 1.30 : (S.aiTier === 'balanced' ? 1.10 : 1.0);
+
+        // 3. Funnel Secuencial (Base real de mercado)
+        const conversations = Math.round(S.visits * S.engRate);
+        s('label-conv-est', loc(conversations) + ' conversaciones/mes');
+
+        // Etapa 1: Fríos — 25% del total (el LLM no puede inventar más gente)
+        const nNoRebote = Math.round(S.visits * 0.25);
+
+        // Etapa 2: Calificados — la IA mejora la tasa de calificación (20% base)
+        const nCali = Math.round(nNoRebote * 0.20 * aiBonus);
+
+        // Etapa 3: Calificados Aprobados — la IA mejora la pre-aprobación (15% base)
+        const nApro = Math.round(nCali * 0.15 * aiBonus);
+
+        // Etapa 4: Operación Pre-Venta — 5% de los aprobados (constante)
+        const nPreV = Math.round(nApro * 0.05);
+
+        // 4. Infraestructura Estabilizada (Elastic Hosting)
+        const hostBase = S.aiTier === 'premium' ? 450 : (S.aiTier === 'balanced' ? 280 : 120);
+        const hostDynamic = (hostBase + (Math.floor(conversations / 10000) * 40)) * valueWeight;
+
+        // Cálculo de tokens por profundidad de etapa
+        const calcLLMDepth = (n, turns) => {
+          if (n <= 0) return 0;
+          const tokens = (TOKENS.fixedInput * 0.3) + (TOKENS.turnInput * turns) + (TOKENS.turnOutput * turns);
+          return n * tokens * ai.in;
         };
 
-        const MARKET = {
-          latam: { label: 'Latam', flag: '🌎', factor: 0.06, ceiling: 80, commission: 0.03, surfaceM2: 80, closeRate: 10, humanLeadCost: 50, slaFactor: { standard: 1.0, priority: 1.4, enterprise: 1.9 } },
-          usa: { label: 'USA', flag: '🇺🇸', factor: 0.08, ceiling: 200, commission: 0.025, surfaceM2: 120, closeRate: 8, humanLeadCost: 133, slaFactor: { standard: 1.0, priority: 1.4, enterprise: 1.9 } },
-          europa: { label: 'Europa', flag: '🇪🇺', factor: 0.08, ceiling: 200, commission: 0.03, surfaceM2: 90, closeRate: 8, humanLeadCost: 100, slaFactor: { standard: 1.0, priority: 1.4, enterprise: 1.9 } },
-          eau: { label: 'EAU / Dubai', flag: '🇦🇪', factor: 0.10, ceiling: 250, commission: 0.02, surfaceM2: 150, closeRate: 10, humanLeadCost: 223, slaFactor: { standard: 1.0, priority: 1.45, enterprise: 2.0 } },
+        const extraLangs = Math.max(0, S.languages - 1);
+        const langFactorMgmt = 1 + (extraLangs * 0.02); // +2% variable
+        const langFixedFee = extraLangs * 150; // +$150 USD fijos por idioma extra (QA/Management)
+
+        const llmRaw = (calcLLMDepth(conversations - nNoRebote, 2) +
+          calcLLMDepth(nNoRebote - nCali, 8) +
+          calcLLMDepth(nCali - nApro, 15) +
+          calcLLMDepth(nApro, 25));
+
+        let markup = S.aiTier === 'premium' ? 1.5 : (S.aiTier === 'balanced' ? 1.7 : 2.0);
+        const infraTotalFinal = (hostDynamic + (llmRaw * markup) + (conversations * ai.plat * markup) + db.raw + (S.vendors > 3 ? (S.vendors - 3) * 15 : 0)) * 1.1;
+
+        // 5. Gestión y Servicio (Markup Amortizado)
+        const baseLicencia = 500 * mkt.mktWeight * valueWeight;
+        const baseSLAValue = MAINT_BASE_SLA[S.sla] * valueWeight;
+        const supportUnitFactor = Math.min(2.5, Math.pow(S.units / 50, 0.2));
+        const soporteFee = Math.round(baseSLAValue * mkt.mktWeight * supportUnitFactor);
+
+        // Fee de gestión basado en el valor teórico del pipeline
+        const activeFrioWeight = S.selectedTiers.frio ? (nNoRebote * 0.5) : 0;
+        const activeCaliWeight = S.selectedTiers.calificado ? (nCali * 10) : 0;
+        const activeAproWeight = S.selectedTiers.aprobado ? (nApro * 150) : 0;
+        const activePrevWeight = S.selectedTiers.preventa ? (nPreV * 4000) : 0;
+        
+        // Índice de baja por volumen de leads (Curva asintótica a partir de 35k visitas)
+        const volumeFactor = Math.max(0.3, Math.pow(35000 / Math.max(35000, S.visits), 0.5));
+        
+        const pipeWeight = (activeFrioWeight + activeCaliWeight + activeAproWeight + activePrevWeight) * volumeFactor;
+        
+        // Multiplicador de mercado suavizado para la gestión
+        // Si USA es 3.5x, su impacto en gestión será ~1.87x, evitando saltos absurdos de p.ej 5k a 15k.
+        const mktScale = Math.pow(mkt.mktWeight, 0.5);
+        const managementFee = (((pipeWeight * 0.05 * valueWeight * mktScale) + (baseLicencia * 0.5)) * langFactorMgmt) + langFixedFee;
+
+        const fixedService = Math.round(baseLicencia + soporteFee + managementFee);
+        const grandTotal = infraTotalFinal + fixedService;
+
+        // 6. ACTUALIZACIÓN DE INTERFAZ (Eliminación de ceros)
+        const fixedPool = grandTotal;
+        s('r-total', fmtUSD(grandTotal));
+        s('r-svc', fmtUSD(fixedService));
+        s('r-maint', fmtUSD(fixedService));
+        s('r-infra', fmtUSD(infraTotalFinal));
+        s('r-infra2', fmtUSD(infraTotalFinal));
+
+        // Subtotales técnicos
+        s('t-hosting', fmtUSD(hostDynamic));
+        s('t-plat', fmtUSD(conversations * ai.plat * markup));
+        s('t-llm', fmtUSD(llmRaw * markup));
+        s('t-db', fmtUSD(db.raw));
+        s('t-total', fmtUSD(infraTotalFinal));
+
+        // Actualización de barras y números centrales
+        const updateRow = (id, count, theorVal, totalWeight) => {
+          const num = document.getElementById('bn-' + id);
+          const st = document.getElementById('st-' + id);
+          if (num) num.textContent = loc(count);
+          if (st) st.textContent = fmtUSD(fixedPool * (totalWeight > 0 ? theorVal / totalWeight : 0));
+
+          const bar = document.getElementById('bar-' + id);
+          if (bar) bar.style.width = Math.max(2, (count / (conversations || 1)) * 100) + '%';
         };
 
-        const AI_TIERS = {
-          economic: {
-            label: 'GPT-4o-mini',  // Precios correctos para 4o-mini (Abril 2026)
-            in: 0.15 / 1e6, out: 0.60 / 1e6, plat: 0.005,
-            hostRaw: 75
-          },
-          balanced: {
-            label: 'GPT-4o / Claude 3.5 Sonnet',  // Claude 3.5 Sonnet output = $15/1M (no $10)
-            in: 2.50 / 1e6, out: 10.00 / 1e6, plat: 0.01,
-            hostRaw: 50
-          },
-          premium: {
-            label: 'o1 / Claude Opus 4',  // o1-Preview deprecado Q4 2024; Opus 4 output ≈ $75/1M
-            in: 15.00 / 1e6, out: 60.00 / 1e6, plat: 0.02,
-            hostRaw: 100
-          },
+        const wFrio = nNoRebote * 1;
+        const wCali = nCali * 50;
+        const wApro = nApro * 250;
+        const wPrev = nPreV * 18500;
+        const totalWeight = (S.selectedTiers.frio ? wFrio : 0) +
+          (S.selectedTiers.calificado ? wCali : 0) +
+          (S.selectedTiers.aprobado ? wApro : 0) +
+          (S.selectedTiers.preventa ? wPrev : 0);
+
+        // 7. CONTEO ESTRICTO (Si se apagan, Caen a 0 en UI. Si se apaga Pre-Venta, se resta de Aprobado)
+        const finalFrio = S.selectedTiers.frio ? nNoRebote : 0;
+        const finalCali = S.selectedTiers.calificado ? nCali : 0;
+        const finalApro = S.selectedTiers.aprobado ? nApro : 0;
+        const finalPreV = S.selectedTiers.preventa ? nPreV : 0;
+
+        updateRow('frio', finalFrio, S.selectedTiers.frio ? wFrio : 0, totalWeight);
+        updateRow('calificado', finalCali, S.selectedTiers.calificado ? wCali : 0, totalWeight);
+        updateRow('aprobado', finalApro, S.selectedTiers.aprobado ? wApro : 0, totalWeight);
+        updateRow('preventa', finalPreV, S.selectedTiers.preventa ? wPrev : 0, totalWeight);
+
+        // Sidebar Lead Pricing
+        const fmtLeadRow = (count, weight, cap) => {
+          if (count <= 0 || totalWeight <= 0) return `$0`;
+          let unitPrice = (fixedPool * (weight / totalWeight)) / count;
+          if (cap && unitPrice > cap) unitPrice = cap;
+          return fmtLead(unitPrice);
         };
 
-        const DB_TIERS = { standard: { raw: 0 }, scalable: { raw: 25 }, enterprise: { raw: 100 } };
+        s('r-lead-frio-sb', fmtLeadRow(finalFrio, S.selectedTiers.frio ? wFrio : 0));
+        s('r-lead-p', fmtLeadRow(finalCali, S.selectedTiers.calificado ? wCali : 0));
+        s('r-lead-q', fmtLeadRow(finalApro, S.selectedTiers.aprobado ? wApro : 0));
+        s('r-lead-preventa', fmtLeadRow(finalPreV, S.selectedTiers.preventa ? wPrev : 0, 250));
 
-        const VOICE_STACKS = {
-          none: { stt: 0, tts: 0 },
-          standard: { stt: 0.004, tts: 0.015 },
-          premium: { stt: 0.004, tts: 0.100 },
+        // ROI y Benchmarks
+        const ingresosMes = nPreV * ticketEst * mkt.commission;
+        s('roi-mult', '×' + (grandTotal > 0 ? (ingresosMes / grandTotal).toFixed(1) : 0));
+        s('roi-ingresos', fmtUSD(ingresosMes));
+        s('roi-lead-cost', fmtLeadRow(nApro, S.selectedTiers.aprobado ? wApro : 0)); // Mantenemos nApro matemático referencial para benchmark
+        s('roi-benchmark', '$' + mkt.humanLeadCost);
+
+        // Cálculo de Tiempo de Absorción según calidad de funnel
+        let effectiveClosures = 0;
+        if (S.selectedTiers.preventa) {
+          effectiveClosures = nPreV * 1.2; // Alta velocidad, cierre casi directo
+        } else if (S.selectedTiers.aprobado) {
+          effectiveClosures = finalApro * 0.04; // Media velocidad (requiere fuerza de ventas fuerte para cerrar un "aprobado")
+        } else if (S.selectedTiers.calificado) {
+          effectiveClosures = finalCali * 0.005; // Baja velocidad
+        } else if (S.selectedTiers.frio) {
+          effectiveClosures = finalFrio * 0.001; // Muy baja
+        }
+
+        const xMeses = effectiveClosures > 0 ? Math.ceil(S.units / effectiveClosures) : 0;
+        s('roi-tiempo', xMeses > 0 ? `${xMeses} meses` : '—');
+        s('roi-tiempo-human', xMeses > 0 ? `${Math.ceil(xMeses * 4)} meses` : '—');
+
+        // Precios SLA
+        const updateSlaPrice = (id, baseVal) => {
+          const totalSla = Math.round((baseLicencia / mkt.mktWeight + (baseVal * supportUnitFactor)) * mkt.mktWeight);
+          s('sla-price-' + id, fmtUSD(totalSla) + ' / mes');
         };
+        updateSlaPrice('standard', MAINT_BASE_SLA.standard);
+        updateSlaPrice('priority', MAINT_BASE_SLA.priority);
+        updateSlaPrice('enterprise', MAINT_BASE_SLA.enterprise);
 
-        // Configuración de Tokens (Estructura Ximia)
-        const TOKENS = {
-          fixedInput: 11180,  // System + KB + Profile (Cachable)
-          turnInput: 200,    // User text + some hist
-          turnOutput: 300,
-          weightedTurns: {
-            rebote: 2.5,   // < 3 turns
-            frio: 8.0,     // partial data
-            caliente: 15.0, // full process
-            ready: 25.0    // qualified closing
-          },
-          cacheFactor: 0.30   // Factor blended: Anthropic 0.10, OpenAI 0.50 — promedio para stack mixto GPT-4o/Claude
-        };
+        s('tb-note-frio', '25% del total de contactos');
+        s('tb-note-caliente', '20% de Fríos');
+        s('tb-note-listo', '15% de Calientes');
+        s('tb-note-trans', '5% de Listos');
+      }
 
-        const FUNNEL = {
-          rebote: 0.65,
-          frio: 0.20,
-          caliente: 0.12,
-          ready: 0.03
-        };
-
-        // Descuento por volumen (Leads Calificados) — Escala Comercial Final
-        const volumeDiscount = (n) => {
-          if (n <= 100) return 1.0;
-          if (n <= 500) return 0.75;
-          if (n <= 1000) return 0.55;
-          return 0.35; // Volumen masivo (1000+)
-        };
-
-        // ════════════════════════════════════════════
-        // STATE
-        // ════════════════════════════════════════════
-        const S = {
-          market: 'latam',
-          m2Value: 1000,
-          units: 50,
-          vendors: 3,
-          languages: 1,
-          sla: 'standard',
-          visits: 35000,
-          engRate: 0.60, // Default 60% — agente prominente y animado (benchmarks: chatbot tradicional 10-35%, widget hero-integrated 40-80%)
-          aiTier: 'balanced',
-          dbTier: 'standard',
-          voiceEnabled: false,
-          voiceStack: 'standard',
-        };
-
-        // ════════════════════════════════════════════
-        // SETTERS
-        // ════════════════════════════════════════════
-        function activateBtn(sel, btn) { document.querySelectorAll(sel).forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
-        function setMarket(btn) { activateBtn('.mkt-btn', btn); S.market = btn.dataset.mkt; calc(); }
-        function setAI(btn) { activateBtn('.tier-btn[data-tier]', btn); S.aiTier = btn.dataset.tier; calc(); }
-        function setDB(btn) { activateBtn('.tier-btn[data-db]', btn); S.dbTier = btn.dataset.db; calc(); }
-        function setVS(btn) { activateBtn('.vs-btn', btn); S.voiceStack = btn.dataset.vs; calc(); }
-        function setSLA(btn) { activateBtn('[data-sla]', btn); S.sla = btn.dataset.sla; calc(); }
-        function setEngage(btn) { activateBtn('.eng-tab', btn); S.engRate = +btn.dataset.eng; calc(); }
-
-        function changeLang(d) {
-          S.languages = Math.max(1, Math.min(5, S.languages + d));
-          s('lang-out', S.languages.toString());
-          s('lang-lbl', S.languages === 1 ? 'idioma' : 'idiomas');
-          calc();
-        }
-
-        function toggleVoice() {
-          S.voiceEnabled = document.getElementById('voice-toggle').checked;
-          document.getElementById('voice-section').style.display = S.voiceEnabled ? 'block' : 'none';
-          calc();
-        }
-
-        function onSlider() {
-          S.m2Value = +document.getElementById('m2-slider').value;
-          S.units = +document.getElementById('units').value;
-          S.vendors = +document.getElementById('vendors').value;
-          S.visits = +document.getElementById('visits').value;
-          s('m2-out', 'USD ' + fmt0(S.m2Value));
-          s('units-out', fmt0(S.units));
-          s('vendors-out', S.vendors.toString());
-          s('visits-out', fmt0(S.visits));
-          calc();
-        }
-
-        function toggleTech() {
-          const body = document.getElementById('tech-body'), arrow = document.getElementById('tt-arrow');
-          if (body.classList.contains('open')) {
-            body.classList.remove('open');
-            arrow.classList.remove('open');
-          } else {
-            body.classList.add('open');
-            arrow.classList.add('open');
-          }
-        }
-
-        // ════════════════════════════════════════════
-        // FORMAT
-        // ════════════════════════════════════════════
-        const loc = n => Math.round(n).toLocaleString('es-AR');
-        const fmt0 = n => n.toLocaleString('es-AR');
-        function fmtUSD(n) {
-          if (n === 0) return '$0';
-          if (n >= 1000) return '$' + loc(n);
-          if (n >= 10) return '$' + Math.round(n);
-          return '$' + n.toFixed(2);
-        }
-        function fmtLead(n) {
-          if (n < 0.01) return '<$0.01';
-          if (n < 100) return '$' + n.toFixed(2);
-          return '$' + Math.round(n);
-        }
-        function s(id, val) {
-          const el = document.getElementById(id); if (!el) return;
-          el.textContent = val; el.classList.remove('na'); void el.offsetWidth; el.classList.add('na');
-        }
-
-        // ════════════════════════════════════════════
-        // CALCULATE RECOGNIZING REAL COSTS
-        // ════════════════════════════════════════════
-        function calc() {
-          const mkt = MARKET[S.market];
-          const ai = AI_TIERS[S.aiTier];
-          const db = DB_TIERS[S.dbTier];
-          const vs = VOICE_STACKS[S.voiceEnabled ? S.voiceStack : 'none'];
-
-          // Ticket estimado
-          const ticketEst = S.m2Value * mkt.surfaceM2;
-          s('ticket-est', 'USD ' + loc(ticketEst));
-
-          // Conversaciones (Base 80%)
-          const conversations = Math.round(S.visits * S.engRate);
-          s('label-conv-est', loc(conversations) + ' conversaciones/mes');
-          s('funnel-badge', loc(conversations) + ' conversaciones');
-
-          const nRebote = Math.round(conversations * FUNNEL.rebote);
-          const nFrio = Math.round(conversations * FUNNEL.frio);
-          const nCaliente = Math.round(conversations * FUNNEL.caliente);
-          const nReady = Math.round(conversations * FUNNEL.ready);
-
-          // 1. IA / LLM WEIGHTED CALC
-          const calcLLMConv = (turns) => {
-            if (turns === 0) return 0;
-            const firstTurnInput = TOKENS.fixedInput + TOKENS.turnInput;
-            const remainingTurnsInput = (TOKENS.turnInput * (turns - 1));
-            const cachedFixedInput = TOKENS.fixedInput * (turns - 1) * TOKENS.cacheFactor;
-
-            const totalIn = firstTurnInput + remainingTurnsInput + cachedFixedInput;
-            const totalOut = TOKENS.turnOutput * turns;
-            return (totalIn * ai.in) + (totalOut * ai.out);
-          };
-
-          const llmRaw =
-            (nRebote * calcLLMConv(TOKENS.weightedTurns.rebote)) +
-            (nFrio * calcLLMConv(TOKENS.weightedTurns.frio)) +
-            (nCaliente * calcLLMConv(TOKENS.weightedTurns.caliente)) +
-            (nReady * calcLLMConv(TOKENS.weightedTurns.ready));
-
-          const llmM = llmRaw * MARKUP.llm;
-
-          // 2. Hosting & fixed infra
-          const hostingRaw = ai.hostRaw;
-          const hostingM = hostingRaw * MARKUP.orchestrator;
-
-          // 3. Platform variable (Managed orquestration overhead)
-          const platRaw = conversations * ai.plat;
-          const platM = platRaw * MARKUP.platform;
-
-          // 4. Database
-          const dbRaw = db.raw;
-          const dbM = dbRaw * MARKUP.database;
-
-          // 5. CRM
-          let crmRawRaw = 0;
-          if (S.vendors > 3) crmRawRaw = (S.vendors - 3) * 15;
-          const crmM = crmRawRaw * MARKUP.crm;
-
-          // 6. Voice
-          // Minutos estimados (1.5 min por turno calificado)
-          const avgMinutesPerTurn = 0.8;
-          const totalTurns = (nRebote * TOKENS.weightedTurns.rebote) + (nFrio * TOKENS.weightedTurns.frio) + (nCaliente * TOKENS.weightedTurns.caliente) + (nReady * TOKENS.weightedTurns.ready);
-          const voiceRaw = S.voiceEnabled ? totalTurns * avgMinutesPerTurn * (vs.stt + vs.tts) : 0;
-          const voiceM = voiceRaw * MARKUP.voice;
-
-          const infraTotal = hostingM + platM + llmM + dbM + crmM + voiceM;
-
-          // Idiomas adicionales: cada idioma extra agrega costo de mantenimiento de KB y QA
-          const langExtra = (S.languages - 1) * 75 * MARKUP.orchestrator;
-          const infraTotalFinal = infraTotal + langExtra;
-
-          // 7. SERVICIO (Lead Pricing) basados en Ximia Lead Pricing Model 2026
-          // Usamos el 3% de Listos como base para el pricing "Calificado"
-          const fQualified = nReady;
-          const vf = volumeDiscount(fQualified);
-
-          // Formula: Amortización de comisión por lead
-          const comisionAmort = ticketEst * (mkt.commission / mkt.closeRate);
-          
-          // Formula: Precio base = min(techo, amortización * factor de captura)
-          const leadPriceBase = Math.min(mkt.ceiling, comisionAmort * mkt.factor);
-          
-          const leadPrice = leadPriceBase * vf;
-          const leadProPrice = Math.max(0.50, leadPrice * 0.30); // Precio simbólico para fríos/rebotes gestionados
-
-          const svcVariable_raw = fQualified * leadPrice;
-          const svcVariable = Math.min(svcVariable_raw, 50000); // Techo absoluto de seguridad $50k
-          const baseSLA = MAINT_BASE_SLA[S.sla] * mkt.slaFactor[S.sla];
-          const maint = Math.round(baseSLA + svcVariable);
-
-          const grandTotal = infraTotalFinal + maint;
-
-          // ── UPDATE DOM ──
-          s('r-total', fmtUSD(grandTotal));
-          s('r-maint', fmtUSD(maint));
-          s('r-infra', fmtUSD(infraTotalFinal));
-          s('r-svc', fmtUSD(maint));
-          s('r-infra2', fmtUSD(infraTotalFinal));
-          s('r-lead-q', fmtLead(leadPrice));
-          s('r-lead-p', fmtLead(leadProPrice));
-
-          s('t-hosting', fmtUSD(hostingM));
-          s('t-plat', fmtUSD(platM));
-          s('t-llm', fmtUSD(llmM));
-          s('t-db', fmtUSD(dbM));
-          s('t-crm', fmtUSD(crmM));
-          s('t-total', fmtUSD(infraTotalFinal));
-
-          // Token Injections
-          const tokenM = (llmRaw / (ai.in + ai.out * 2) / 1e6).toFixed(1); // Rough estimate for display
-          const vLabelLLM = document.getElementById('label-llm');
-          if (vLabelLLM) vLabelLLM.innerHTML = `Motor IA (Procesamiento LLM) <br><small style="opacity:0.7">Gestionando profundidad variable por etapa</small>`;
-
-          const tVoiceRow = document.getElementById('t-voice-row');
-          if (S.voiceEnabled) {
-            tVoiceRow.style.display = 'grid';
-            s('t-voice', fmtUSD(voiceM));
-          }
-
-          // Funnel Injections
-          s('f-iniciadas', loc(conversations));
-          s('f-rebotes', loc(nRebote));
-          s('f-frios', loc(nFrio));
-          s('f-calientes', loc(nCaliente));
-          s('f-listos', loc(nReady));
-
-          // Update Funnel Stats (Legend)
-          const sLegend = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-          sLegend('fl-iniciadas', loc(conversations));
-          sLegend('fl-rebotes', loc(nRebote));
-          sLegend('fl-frios', loc(nFrio));
-          sLegend('fl-calientes', loc(nCaliente));
-          sLegend('fl-listos', loc(nReady));
-
-          // ROI
-          // ROI con haircut de conversión real (70% de leads calificados llegan a cierre)
-          // y cap visual en ×20 para no mostrar números que parezcan fabricados
-          const CONVERSION_HAIRCUT = 0.70;
-          const ventasMes = (nReady * CONVERSION_HAIRCUT) / mkt.closeRate;
-          const ingresosMes = ventasMes * ticketEst * mkt.commission;
-          const roi = grandTotal > 0 ? ingresosMes / grandTotal : 0;
-          const roiDisplay = '×' + loc(roi);
-
-          s('roi-lead-cost', fmtLead(leadPrice));
-          s('roi-benchmark', '$' + mkt.humanLeadCost);
-          s('roi-tiempo', ventasMes > 0 ? Math.ceil(S.units / ventasMes) + ' meses' : '—');
-          const xMeses = ventasMes > 0 ? Math.ceil(S.units / ventasMes) : 0;
-          s('roi-tiempo', xMeses > 0 ? `${xMeses} ${xMeses === 1 ? 'mes' : 'meses'}` : '—');
-          s('roi-tiempo-sub', '100% del stock cubierto');
-
-          // Benchmark humano: mediana NAR 7 cierres/año por agente
-          const humanClosesPerMonth = (5 * 7) / 12;
-          const hMeses = humanClosesPerMonth > 0 ? Math.ceil(S.units / humanClosesPerMonth) : 0;
-          s('roi-tiempo-human', hMeses > 0 ? `${hMeses} ${hMeses === 1 ? 'mes' : 'meses'}` : '—');
-          s('roi-mult', roiDisplay);
-          s('roi-ingresos', fmtUSD(ingresosMes));
-          s('roi-ingresos-sub', 'Cierres asistidos por Ximia');
-
-          const vSlaDesc = document.getElementById('sla-desc');
-          if (vSlaDesc) vSlaDesc.textContent = SLA_INFO[S.sla];
-
-          // Summary Sidebar
-          const icAi = document.getElementById('ic-ai');
-          if (icAi) s('ic-ai', 'IA + Orq: ' + fmtUSD(llmM + platM + hostingM));
-          const icDb = document.getElementById('ic-db');
-          if (icDb) s('ic-db', 'DB: ' + fmtUSD(dbM));
-
-          // Update Funnel Stats (Legend + SVG Labels)
-          const sF = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-
-          const locVal = loc(conversations);
-          const locR = loc(nRebote);
-          const locF = loc(nFrio);
-          const locC = loc(nCaliente);
-          const locReady = loc(nReady);
-
-          // SVG Labels
-          sF('f-val-1', locVal);
-          sF('f-val-2', locR);
-          sF('f-val-3', locF);
-          sF('f-val-4', locC);
-          sF('f-val-5', locReady);
-
-          // Sidebar Legend
-          sF('fl-iniciadas', locVal);
-          sF('fl-rebotes', locR);
-          sF('fl-frios', locF);
-          sF('fl-calientes', locC);
-          sF('fl-listos', locReady);
-        }
-
-        // INIT
-        onSlider();
-      </script>
+      // INIT
+      onSlider();
+    </script>
 </body>
 
 </html>

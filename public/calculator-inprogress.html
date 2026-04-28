@@ -2539,13 +2539,13 @@
         };
 
         const extraLangs = Math.max(0, S.languages - 1);
-        const langFactorLLM = 1 + (extraLangs * 0.03); // +3% por idioma extra en IA
-        const langFactorMgmt = 1 + (extraLangs * 0.01); // +1% por idioma extra en gestión
+        const langFactorMgmt = 1 + (extraLangs * 0.02); // +2% variable
+        const langFixedFee = extraLangs * 150; // +$150 USD fijos por idioma extra (QA/Management)
 
         const llmRaw = (calcLLMDepth(conversations - nNoRebote, 2) +
           calcLLMDepth(nNoRebote - nCali, 8) +
           calcLLMDepth(nCali - nApro, 15) +
-          calcLLMDepth(nApro, 25)) * langFactorLLM;
+          calcLLMDepth(nApro, 25));
 
         let markup = S.aiTier === 'premium' ? 1.5 : (S.aiTier === 'balanced' ? 1.7 : 2.0);
         const infraTotalFinal = (hostDynamic + (llmRaw * markup) + (conversations * ai.plat * markup) + db.raw + (S.vendors > 3 ? (S.vendors - 3) * 15 : 0)) * 1.1;
@@ -2570,7 +2570,7 @@
         // Multiplicador de mercado suavizado para la gestión
         // Si USA es 3.5x, su impacto en gestión será ~1.87x, evitando saltos absurdos de p.ej 5k a 15k.
         const mktScale = Math.pow(mkt.mktWeight, 0.5);
-        const managementFee = ((pipeWeight * 0.05 * valueWeight * mktScale) + (baseLicencia * 0.5)) * langFactorMgmt;
+        const managementFee = (((pipeWeight * 0.05 * valueWeight * mktScale) + (baseLicencia * 0.5)) * langFactorMgmt) + langFixedFee;
 
         const fixedService = Math.round(baseLicencia + soporteFee + managementFee);
         const grandTotal = infraTotalFinal + fixedService;
