@@ -1749,12 +1749,11 @@
 
     <!-- HEADER -->
     <div class="calc-header">
-      <div class="calc-eyebrow">Ximia AI · Transparencia de precios</div>
-      <h1>Cuánto cuesta<br><span>sumar el poder de Ximia.</span></h1>
-      <p class="calc-subtitle">Configurá tu caso y obtené un estimado en tiempo real. Los valores se ajustan según tu
-        volumen, tu
-        mercado
-        y la arquitectura que elijas.</p>
+      <div class="calc-eyebrow">Beneficios que superan los costos.</div>
+      <h1>Simulá Ximia AI en tu negocio.</span></h1>
+      <p class="calc-subtitle">Configurá los valores de tu negocio y obtené un estimado en tiempo real de las ventas que
+        vas a lograr y la inversión final de cada campaña. Los costos están 100% relacionados a tu tráfico, tu mercado y
+        la arquitectura que elijas.</p>
     </div>
 
     <!-- SETUP -->
@@ -1789,6 +1788,19 @@
         <!-- CARD 1: Tu negocio -->
         <div class="card">
           <div class="card-title"><span class="step-dot">1</span> Tu negocio</div>
+
+          <!-- DEV SLIDER -->
+          <div class="field" style="background: rgba(217, 119, 6, 0.05); padding: 18px; border-radius: 12px; border: 1.5px dashed var(--amber);">
+            <div class="slider-head">
+              <span class="slider-name" style="color:var(--amber); font-size: 16px;">[DEV] Markup Management (%)</span>
+              <span class="slider-val" id="base-factor-out" style="color:var(--amber); font-size: 20px;">5.0%</span>
+            </div>
+            <input type="range" id="base-factor" min="0.5" max="15" step="0.5" value="5.0" oninput="onSlider()">
+            <div class="slider-range" style="color: rgba(217, 119, 6, 0.6);"><span>0.5%</span><span>15%</span></div>
+            <div style="font-family: var(--font); font-size: 12px; color: var(--amber); margin-top: 10px; line-height: 1.4;">
+              Ajusta el margen variable (antes 5%). Este valor es la base, y luego se multiplica por el índice de país (USA=1, Latam=0.75, EU=0.9, Dubai=1.5).
+            </div>
+          </div>
 
           <div class="field">
             <div class="field-label">Mercado</div>
@@ -1994,7 +2006,8 @@
           <div class="bar-strategy-container">
             <!-- FRÍO (Obligatorio / Bloqueado) -->
             <div class="strategy-row" id="row-frio">
-              <label class="strategy-toggle" style="cursor: not-allowed; opacity: 0.85;" title="La base de datos parcial es obligatoria para el costo de infraestructura">
+              <label class="strategy-toggle" style="cursor: not-allowed; opacity: 0.85;"
+                title="La base de datos parcial es obligatoria para el costo de infraestructura">
                 <input type="checkbox" id="sw-frio" checked disabled>
                 <span class="st-slider" style="background-color: #e11d48 !important;"></span>
               </label>
@@ -2242,6 +2255,34 @@
           </div>
         </div>
 
+        <!-- Total (dark) -->
+        <div class="card-dark">
+          <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 24px;">
+            <!-- ROI Section -->
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 24px;">
+              <div class="res-tag" style="color: var(--green);">Retorno Estimado (ROI)</div>
+              <div class="res-amount" id="r-roi-main" style="color: var(--green); font-size: 86px;">×—</div>
+              <div class="res-period" style="margin-top: 4px; margin-bottom: 0;">Multiplicador de ingresos sobre tu inversión</div>
+            </div>
+            
+            <!-- Inversion Section -->
+            <div>
+              <div class="res-tag">Inversión mensual</div>
+              <div class="res-amount" id="r-total" style="font-size: 64px;">$—</div>
+              <div class="res-period" style="margin-top: 4px; margin-bottom: 0;">USD · Infraestructura + servicio</div>
+            </div>
+          </div>
+          <div class="res-rows">
+            <div class="rr"><span class="rr-label">Ingresos generados</span><span class="rr-val" style="color: var(--green);" id="r-ingresos-main">—</span></div>
+            <div class="rr"><span class="rr-label">Servicio</span><span class="rr-val teal" id="r-maint">—</span></div>
+            <div class="rr"><span class="rr-label">Infraestructura</span><span class="rr-val teal" id="r-infra">—</span></div>
+            <div style="border-top:1px solid rgba(255,255,255,0.08);margin:6px 0"></div>
+            <div style="font-family:var(--font);font-size:11px;color:#94a3b8;line-height:1.6;">
+              Infraestructura + mantenimiento mensual.<br>Setup se define en el primer contacto.
+            </div>
+          </div>
+        </div>
+
         <!-- Lead pricing -->
         <div class="card">
           <div class="lead-card-tag">Precios por Lead</div>
@@ -2274,23 +2315,6 @@
                 <div class="lead-desc" style="font-size:10px; margin-top:2px;">(Opcional: 1% comisión)</div>
               </div>
               <span class="lead-price p" id="r-lead-preventa" style="font-weight:700; color:var(--text);">—</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Total (dark) -->
-        <div class="card-dark">
-          <div class="res-tag">Total estimado</div>
-          <div class="res-amount" id="r-total">$—</div>
-          <div class="res-period">USD · infraestructura + servicio</div>
-          <div class="res-rows">
-            <div class="rr"><span class="rr-label">Servicio</span><span class="rr-val teal" id="r-maint">—</span>
-            </div>
-            <div class="rr"><span class="rr-label">Infraestructura</span><span class="rr-val teal" id="r-infra">—</span>
-            </div>
-            <div style="border-top:1px solid rgba(255,255,255,0.08);margin:6px 0"></div>
-            <div style="font-family:var(--font);font-size:11px;color:#94a3b8;line-height:1.6;">
-              Infraestructura + mantenimiento mensual.<br>Setup se define en el primer contacto.
             </div>
           </div>
         </div>
@@ -2336,7 +2360,7 @@
         latam: { label: 'Latam', flag: '🌎', mktWeight: 0.75, refM2: 1700, refArea: 65, commission: 0.030, humanLeadCost: 50 },
         europa: { label: 'Europa', flag: '🇪🇺', mktWeight: 0.90, refM2: 3200, refArea: 85, commission: 0.030, humanLeadCost: 100 },
         usa: { label: 'USA', flag: '🇺🇸', mktWeight: 1.00, refM2: 3500, refArea: 140, commission: 0.025, humanLeadCost: 133 },
-        eau: { label: 'EAU / Dubai', flag: '🇦🇪', mktWeight: 1.25, refM2: 5500, refArea: 120, commission: 0.020, humanLeadCost: 223 },
+        eau: { label: 'EAU / Dubai', flag: '🇦🇪', mktWeight: 1.50, refM2: 5500, refArea: 120, commission: 0.020, humanLeadCost: 223 },
       };
 
       const AI_TIERS = {
@@ -2384,6 +2408,7 @@
       // STATE
       // ════════════════════════════════════════════
       const S = {
+        baseFactor: 5.0,
         market: 'latam',
         m2Value: 1700,
         units: 50,
@@ -2449,6 +2474,10 @@
       }
 
       function onSlider() {
+        if (document.getElementById('base-factor')) {
+          S.baseFactor = +document.getElementById('base-factor').value;
+          s('base-factor-out', S.baseFactor.toFixed(1) + '%');
+        }
         S.m2Value = +document.getElementById('m2-slider').value;
         S.units = +document.getElementById('units').value;
         S.vendors = +document.getElementById('vendors').value;
@@ -2561,16 +2590,17 @@
         const activeCaliWeight = S.selectedTiers.calificado ? (nCali * 10) : 0;
         const activeAproWeight = S.selectedTiers.aprobado ? (nApro * 150) : 0;
         const activePrevWeight = S.selectedTiers.preventa ? (nPreV * 4000) : 0;
-        
+
         // Índice de baja por volumen de leads (Curva asintótica a partir de 35k visitas)
         const volumeFactor = Math.max(0.3, Math.pow(35000 / Math.max(35000, S.visits), 0.5));
-        
+
         const pipeWeight = (activeFrioWeight + activeCaliWeight + activeAproWeight + activePrevWeight) * volumeFactor;
-        
+
         // Multiplicador de mercado suavizado para la gestión
         // Si USA es 3.5x, su impacto en gestión será ~1.87x, evitando saltos absurdos de p.ej 5k a 15k.
         const mktScale = Math.pow(mkt.mktWeight, 0.5);
-        const managementFee = (((pipeWeight * 0.05 * valueWeight * mktScale) + (baseLicencia * 0.5)) * langFactorMgmt) + langFixedFee;
+        const effectiveMarkup = (S.baseFactor / 100);
+        const managementFee = (((pipeWeight * effectiveMarkup * valueWeight * mktScale) + (baseLicencia * 0.5)) * langFactorMgmt) + langFixedFee;
 
         const fixedService = Math.round(baseLicencia + soporteFee + managementFee);
         const grandTotal = infraTotalFinal + fixedService;
@@ -2636,10 +2666,14 @@
 
         // ROI y Benchmarks
         const ingresosMes = nPreV * ticketEst * mkt.commission;
-        s('roi-mult', '×' + (grandTotal > 0 ? (ingresosMes / grandTotal).toFixed(1) : 0));
+        const roi = grandTotal > 0 ? ingresosMes / grandTotal : 0;
+        s('roi-mult', '×' + roi.toFixed(1));
         s('roi-ingresos', fmtUSD(ingresosMes));
         s('roi-lead-cost', fmtLeadRow(nApro, S.selectedTiers.aprobado ? wApro : 0)); // Mantenemos nApro matemático referencial para benchmark
         s('roi-benchmark', '$' + mkt.humanLeadCost);
+
+        s('r-roi-main', '×' + roi.toFixed(1));
+        s('r-ingresos-main', fmtUSD(ingresosMes));
 
         // Cálculo de Tiempo de Absorción según calidad de funnel
         let effectiveClosures = 0;
@@ -2670,6 +2704,14 @@
         s('tb-note-caliente', '20% de Fríos');
         s('tb-note-listo', '15% de Calientes');
         s('tb-note-trans', '5% de Listos');
+
+        // Sidebar Summary Chips
+        const icAi = document.getElementById('ic-ai');
+        if (icAi) s('ic-ai', 'IA + Orq: ' + fmtUSD((llmRaw * markup) + (conversations * ai.plat * markup) + hostDynamic));
+        const icDb = document.getElementById('ic-db');
+        if (icDb) s('ic-db', 'DB: ' + fmtUSD(db.raw));
+        const rPlatformTotal = document.getElementById('r-platform-total');
+        if (rPlatformTotal) s('r-platform-total', fmtUSD(fixedService));
       }
 
       // INIT
