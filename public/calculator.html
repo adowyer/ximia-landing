@@ -1791,14 +1791,33 @@
 
           <!-- DEV SLIDER -->
           <div class="field" style="background: rgba(217, 119, 6, 0.05); padding: 18px; border-radius: 12px; border: 1.5px dashed var(--amber);">
-            <div class="slider-head">
-              <span class="slider-name" style="color:var(--amber); font-size: 16px;">[DEV] Markup Management (%)</span>
-              <span class="slider-val" id="base-factor-out" style="color:var(--amber); font-size: 20px;">5.0%</span>
+            <div style="font-family: var(--font-h); font-weight: 700; color:var(--amber); font-size: 16px; margin-bottom: 12px;">[DEV] Índices de Mercado</div>
+            <div style="font-family: var(--font); font-size: 12px; color: var(--amber); margin-bottom: 14px; line-height: 1.4;">
+              USA es fijo (1.00). Ajusta el multiplicador de los otros mercados:
             </div>
-            <input type="range" id="base-factor" min="0.5" max="15" step="0.5" value="5.0" oninput="onSlider()">
-            <div class="slider-range" style="color: rgba(217, 119, 6, 0.6);"><span>0.5%</span><span>15%</span></div>
-            <div style="font-family: var(--font); font-size: 12px; color: var(--amber); margin-top: 10px; line-height: 1.4;">
-              Ajusta el margen variable (antes 5%). Este valor es la base, y luego se multiplica por el índice de país (USA=1, Latam=0.75, EU=0.9, Dubai=1.5).
+            
+            <div style="margin-bottom: 12px;">
+              <div class="slider-head" style="margin-bottom: 6px;">
+                <span class="slider-name" style="color:var(--amber); font-size: 14px;">Latam</span>
+                <span class="slider-val" id="mkt-latam-out" style="color:var(--amber); font-size: 16px;">0.75</span>
+              </div>
+              <input type="range" id="mkt-latam" min="0.10" max="3.00" step="0.05" value="0.75" oninput="onSlider()">
+            </div>
+            
+            <div style="margin-bottom: 12px;">
+              <div class="slider-head" style="margin-bottom: 6px;">
+                <span class="slider-name" style="color:var(--amber); font-size: 14px;">Europa</span>
+                <span class="slider-val" id="mkt-eu-out" style="color:var(--amber); font-size: 16px;">0.90</span>
+              </div>
+              <input type="range" id="mkt-eu" min="0.10" max="3.00" step="0.05" value="0.90" oninput="onSlider()">
+            </div>
+
+            <div>
+              <div class="slider-head" style="margin-bottom: 6px;">
+                <span class="slider-name" style="color:var(--amber); font-size: 14px;">Dubai / EAU</span>
+                <span class="slider-val" id="mkt-dubai-out" style="color:var(--amber); font-size: 16px;">1.50</span>
+              </div>
+              <input type="range" id="mkt-dubai" min="0.10" max="3.00" step="0.05" value="1.50" oninput="onSlider()">
             </div>
           </div>
 
@@ -2408,7 +2427,6 @@
       // STATE
       // ════════════════════════════════════════════
       const S = {
-        baseFactor: 5.0,
         market: 'latam',
         m2Value: 1700,
         units: 50,
@@ -2474,9 +2492,13 @@
       }
 
       function onSlider() {
-        if (document.getElementById('base-factor')) {
-          S.baseFactor = +document.getElementById('base-factor').value;
-          s('base-factor-out', S.baseFactor.toFixed(1) + '%');
+        if (document.getElementById('mkt-latam')) {
+          MARKET.latam.mktWeight = +document.getElementById('mkt-latam').value;
+          s('mkt-latam-out', MARKET.latam.mktWeight.toFixed(2));
+          MARKET.europa.mktWeight = +document.getElementById('mkt-eu').value;
+          s('mkt-eu-out', MARKET.europa.mktWeight.toFixed(2));
+          MARKET.eau.mktWeight = +document.getElementById('mkt-dubai').value;
+          s('mkt-dubai-out', MARKET.eau.mktWeight.toFixed(2));
         }
         S.m2Value = +document.getElementById('m2-slider').value;
         S.units = +document.getElementById('units').value;
@@ -2599,8 +2621,7 @@
         // Multiplicador de mercado suavizado para la gestión
         // Si USA es 3.5x, su impacto en gestión será ~1.87x, evitando saltos absurdos de p.ej 5k a 15k.
         const mktScale = Math.pow(mkt.mktWeight, 0.5);
-        const effectiveMarkup = (S.baseFactor / 100);
-        const managementFee = (((pipeWeight * effectiveMarkup * valueWeight * mktScale) + (baseLicencia * 0.5)) * langFactorMgmt) + langFixedFee;
+        const managementFee = (((pipeWeight * 0.05 * valueWeight * mktScale) + (baseLicencia * 0.5)) * langFactorMgmt) + langFixedFee;
 
         const fixedService = Math.round(baseLicencia + soporteFee + managementFee);
         const grandTotal = infraTotalFinal + fixedService;
