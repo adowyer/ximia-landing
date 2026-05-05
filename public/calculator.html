@@ -221,7 +221,7 @@
     .card-dark {
       background: var(--text);
       border-radius: var(--radius);
-      padding: 40px 48px;
+      padding: 40px 40px;
       position: relative;
       overflow: hidden;
     }
@@ -240,7 +240,7 @@
       background: var(--accent-l);
       border: 1.5px solid rgba(8, 145, 178, 0.2);
       border-radius: var(--radius);
-      padding: 28px;
+      padding: 24px;
     }
 
     .card-title {
@@ -779,7 +779,7 @@
     }
 
     .rl-amount {
-      font-size: 65px;
+      font-size: 60px;
       font-weight: 800;
       letter-spacing: -.06em;
       color: var(--text);
@@ -1400,7 +1400,7 @@
       width: 100%;
       text-align: center;
       margin-top: 14px;
-      padding-top: 10px;
+      padding-top: 0px;
       border-top: 1px solid rgba(8, 145, 178, 0.15);
     }
 
@@ -1790,12 +1790,16 @@
           <div class="card-title"><span class="step-dot">1</span> Tu negocio</div>
 
           <!-- DEV SLIDER -->
-          <div class="field" style="background: rgba(217, 119, 6, 0.05); padding: 18px; border-radius: 12px; border: 1.5px dashed var(--amber);">
-            <div style="font-family: var(--font-h); font-weight: 700; color:var(--amber); font-size: 16px; margin-bottom: 12px;">[DEV] Índices de Mercado</div>
-            <div style="font-family: var(--font); font-size: 12px; color: var(--amber); margin-bottom: 14px; line-height: 1.4;">
+          <div class="field"
+            style="background: rgba(217, 119, 6, 0.05); padding: 18px; border-radius: 12px; border: 1.5px dashed var(--amber);">
+            <div
+              style="font-family: var(--font-h); font-weight: 700; color:var(--amber); font-size: 16px; margin-bottom: 12px;">
+              [DEV] Índices de Mercado</div>
+            <div
+              style="font-family: var(--font); font-size: 12px; color: var(--amber); margin-bottom: 14px; line-height: 1.4;">
               USA es fijo (1.00). Ajusta el multiplicador de los otros mercados:
             </div>
-            
+
             <div style="margin-bottom: 12px;">
               <div class="slider-head" style="margin-bottom: 6px;">
                 <span class="slider-name" style="color:var(--amber); font-size: 14px;">Latam</span>
@@ -1803,7 +1807,7 @@
               </div>
               <input type="range" id="mkt-latam" min="0.10" max="3.00" step="0.05" value="0.75" oninput="onSlider()">
             </div>
-            
+
             <div style="margin-bottom: 12px;">
               <div class="slider-head" style="margin-bottom: 6px;">
                 <span class="slider-name" style="color:var(--amber); font-size: 14px;">Europa</span>
@@ -1903,8 +1907,8 @@
               <span class="slider-name" style="font-size: 16px;">Contactos totales</span>
               <span class="slider-val" id="visits-out">35.000</span>
             </div>
-            <input type="range" id="visits" min="500" max="200000" step="500" value="35000" oninput="onSlider()">
-            <div class="slider-range"><span>500</span><span>200.000</span></div>
+            <input type="range" id="visits" min="1500" max="200000" step="500" value="35000" oninput="onSlider()">
+            <div class="slider-range"><span>1.500</span><span>200.000</span></div>
 
             <!-- Conversaciones iniciadas (80%) -->
             <div class="field-label" style="margin-top:14px">💬 Conversaciones iniciadas</div>
@@ -1913,9 +1917,9 @@
               <span id="label-conv-est"
                 style="font-size: 22px; color: var(--accent); display: block; margin-bottom: 4px;">—
                 conversaciones/mes</span>
-              <span style="font-weight: 400; opacity: 0.8; font-size: 14px;">Basado en un 75% de interacción por
-                visibilidad proactiva ("Hero-Integrated"). Rango de mercado: 10–35% chatbot tradicional, hasta 80% con
-                agente animado en primer plano.</span>
+              <span style="font-weight: 400; opacity: 0.8; font-size: 14px;">Calculamos que el 75% de tus contactos
+                iniciarán una conversación, gracias a la visibilidad del agente de Ximia (muy superior al 10-35% de un
+                chatbot tradicional).</span>
             </div>
           </div>
         </div>
@@ -2281,9 +2285,10 @@
             <div style="border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 24px;">
               <div class="res-tag" style="color: var(--green);">Retorno Estimado (ROI)</div>
               <div class="res-amount" id="r-roi-main" style="color: var(--green); font-size: 86px;">×—</div>
-              <div class="res-period" style="margin-top: 4px; margin-bottom: 0;">Multiplicador de ingresos sobre tu inversión</div>
+              <div class="res-period" style="margin-top: 4px; margin-bottom: 0;">Multiplicador de ingresos sobre tu
+                inversión</div>
             </div>
-            
+
             <!-- Inversion Section -->
             <div>
               <div class="res-tag">Inversión mensual</div>
@@ -2292,9 +2297,11 @@
             </div>
           </div>
           <div class="res-rows">
-            <div class="rr"><span class="rr-label">Ingresos generados</span><span class="rr-val" style="color: var(--green);" id="r-ingresos-main">—</span></div>
+            <div class="rr"><span class="rr-label">Ingresos generados</span><span class="rr-val"
+                style="color: var(--green);" id="r-ingresos-main">—</span></div>
             <div class="rr"><span class="rr-label">Servicio</span><span class="rr-val teal" id="r-maint">—</span></div>
-            <div class="rr"><span class="rr-label">Infraestructura</span><span class="rr-val teal" id="r-infra">—</span></div>
+            <div class="rr"><span class="rr-label">Infraestructura</span><span class="rr-val teal" id="r-infra">—</span>
+            </div>
             <div style="border-top:1px solid rgba(255,255,255,0.08);margin:6px 0"></div>
             <div style="font-family:var(--font);font-size:11px;color:#94a3b8;line-height:1.6;">
               Infraestructura + mantenimiento mensual.<br>Setup se define en el primer contacto.
@@ -2599,7 +2606,9 @@
           calcLLMDepth(nApro, 25));
 
         let markup = S.aiTier === 'premium' ? 1.5 : (S.aiTier === 'balanced' ? 1.7 : 2.0);
-        const infraTotalFinal = (hostDynamic + (llmRaw * markup) + (conversations * ai.plat * markup) + db.raw + (S.vendors > 3 ? (S.vendors - 3) * 15 : 0)) * 1.1;
+        const infraRawTotal = hostDynamic + (llmRaw * markup) + (conversations * ai.plat * markup) + db.raw + (S.vendors > 3 ? (S.vendors - 3) * 15 : 0);
+        const infraMultiplier = 1.1 * mkt.mktWeight;
+        const infraTotalFinal = infraRawTotal * infraMultiplier;
 
         // 5. Gestión y Servicio (Markup Amortizado)
         const baseLicencia = 500 * mkt.mktWeight * valueWeight;
@@ -2635,10 +2644,10 @@
         s('r-infra2', fmtUSD(infraTotalFinal));
 
         // Subtotales técnicos
-        s('t-hosting', fmtUSD(hostDynamic));
-        s('t-plat', fmtUSD(conversations * ai.plat * markup));
-        s('t-llm', fmtUSD(llmRaw * markup));
-        s('t-db', fmtUSD(db.raw));
+        s('t-hosting', fmtUSD(hostDynamic * infraMultiplier));
+        s('t-plat', fmtUSD(conversations * ai.plat * markup * infraMultiplier));
+        s('t-llm', fmtUSD(llmRaw * markup * infraMultiplier));
+        s('t-db', fmtUSD(db.raw * infraMultiplier));
         s('t-total', fmtUSD(infraTotalFinal));
 
         // Actualización de barras y números centrales
@@ -2728,9 +2737,9 @@
 
         // Sidebar Summary Chips
         const icAi = document.getElementById('ic-ai');
-        if (icAi) s('ic-ai', 'IA + Orq: ' + fmtUSD((llmRaw * markup) + (conversations * ai.plat * markup) + hostDynamic));
+        if (icAi) s('ic-ai', 'IA + Orq: ' + fmtUSD(((llmRaw * markup) + (conversations * ai.plat * markup) + hostDynamic) * infraMultiplier));
         const icDb = document.getElementById('ic-db');
-        if (icDb) s('ic-db', 'DB: ' + fmtUSD(db.raw));
+        if (icDb) s('ic-db', 'DB: ' + fmtUSD(db.raw * infraMultiplier));
         const rPlatformTotal = document.getElementById('r-platform-total');
         if (rPlatformTotal) s('r-platform-total', fmtUSD(fixedService));
       }
