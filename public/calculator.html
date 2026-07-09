@@ -385,6 +385,19 @@
       cursor: pointer;
     }
 
+    /* Foco de teclado visible (accesibilidad) */
+    input[type=range]:focus-visible::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px var(--bg), 0 0 0 6px var(--accent);
+    }
+
+    button:focus-visible,
+    .ts-wrap:focus-within,
+    .strategy-toggle:focus-within {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
     input[type=range]::-webkit-slider-thumb {
       -webkit-appearance: none;
       width: 20px;
@@ -539,30 +552,6 @@
       padding: 14px 28px;
       border-radius: 40px;
       font-size: 20.4px;
-    }
-
-    .eng-tab {
-      font-family: var(--font);
-      font-size: 16.8px;
-      padding: 7px 14px;
-      border-radius: 20px;
-      border: 1.5px solid var(--border2);
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all .15s;
-    }
-
-    .eng-tab:hover {
-      border-color: var(--accent);
-      color: var(--text);
-    }
-
-    .eng-tab.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: transparent;
-      font-weight: 500;
     }
 
     /* ── Voice stack ── */
@@ -1637,110 +1626,6 @@
       transform: translateX(20px);
     }
 
-    /* ── Dashboard Table Card ── */
-    .table-card {
-      background: rgba(15, 23, 42, 0.4);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      margin-top: 32px;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .lead-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: var(--font);
-      color: #fff;
-    }
-
-    .lead-table th {
-      text-align: left;
-      padding: 16px 20px;
-      font-size: 13px;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      font-weight: 600;
-    }
-
-    .lead-table td {
-      padding: 18px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 16px;
-    }
-
-    .lead-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .lead-table .val-num {
-      font-family: var(--font-h);
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .lead-table .val-price {
-      color: #94a3b8;
-    }
-
-    .lead-table .val-revenue {
-      font-family: var(--font-h);
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    .lead-table .val-note {
-      font-size: 13px;
-      color: #64748b;
-    }
-
-    .lead-table .row-total {
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .lead-table .row-total td {
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .lead-table .row-total .val-revenue {
-      color: var(--green);
-      font-size: 18px;
-    }
-
-    .price-input {
-      background: transparent;
-      border: 1px solid transparent;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
-      color: #fff;
-      font-family: inherit;
-      font-size: 16px;
-      font-weight: 500;
-      padding: 2px 4px;
-      width: 80px;
-      outline: none;
-      transition: all 0.2s;
-    }
-
-    .price-input:hover {
-      border-color: rgba(255, 255, 255, 0.3);
-      color: var(--accent);
-    }
-
-    .price-input:focus {
-      border-color: var(--accent);
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
-    }
-
-    /* Ocultar flechas en input number */
-    .price-input::-webkit-inner-spin-button,
-    .price-input::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
   </style>
 </head>
 
@@ -1750,7 +1635,7 @@
     <!-- HEADER -->
     <div class="calc-header">
       <div class="calc-eyebrow">Beneficios que superan los costos.</div>
-      <h1>Simulá Ximia AI en tu negocio.</span></h1>
+      <h1>Simulá <span>Ximia AI</span> en tu negocio.</h1>
       <p class="calc-subtitle">Configurá los valores de tu negocio y obtené un estimado en tiempo real de las ventas que
         vas a lograr y la inversión final de cada campaña. Los costos están 100% relacionados a tu tráfico, tu mercado y
         la arquitectura que elijas.</p>
@@ -1773,7 +1658,7 @@
       </div>
       <div class="setup-action" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
         <div class="setup-price"
-          style="font-size: 80px; font-weight: 700; color: #fff; line-height: 2; letter-spacing: -0.04em;">$?</div>
+          style="font-size: 44px; font-weight: 700; color: #fff; line-height: 2; letter-spacing: -0.02em;">A medida</div>
         <a href="https://calendly.com/hola-ximia-ectr/ximia-demo" target="_blank" class="btn-primary btn-glow"
           style="white-space: nowrap;">Agendar Onboarding & Demo →</a>
       </div>
@@ -1794,34 +1679,34 @@
             style="background: rgba(217, 119, 6, 0.05); padding: 18px; border-radius: 12px; border: 1.5px dashed var(--amber);">
             <div
               style="font-family: var(--font-h); font-weight: 700; color:var(--amber); font-size: 16px; margin-bottom: 12px;">
-              [DEV] Índices de Mercado</div>
+              [DEV] Factor de captura por mercado</div>
             <div
               style="font-family: var(--font); font-size: 12px; color: var(--amber); margin-bottom: 14px; line-height: 1.4;">
-              USA es fijo (1.00). Ajusta el multiplicador de los otros mercados:
+              USA fijo en 8%. Ajustá el % de captura (cuánto del valor del lead cobra Ximia) por mercado:
             </div>
 
             <div style="margin-bottom: 12px;">
               <div class="slider-head" style="margin-bottom: 6px;">
                 <span class="slider-name" style="color:var(--amber); font-size: 14px;">Latam</span>
-                <span class="slider-val" id="mkt-latam-out" style="color:var(--amber); font-size: 16px;">0.75</span>
+                <span class="slider-val" id="mkt-latam-out" style="color:var(--amber); font-size: 16px;">6.0%</span>
               </div>
-              <input type="range" id="mkt-latam" min="0.10" max="3.00" step="0.05" value="0.75" oninput="onSlider()">
+              <input type="range" id="mkt-latam" aria-label="DEV: factor de captura Latam" min="0.02" max="0.15" step="0.005" value="0.06" oninput="onSlider()">
             </div>
 
             <div style="margin-bottom: 12px;">
               <div class="slider-head" style="margin-bottom: 6px;">
                 <span class="slider-name" style="color:var(--amber); font-size: 14px;">Europa</span>
-                <span class="slider-val" id="mkt-eu-out" style="color:var(--amber); font-size: 16px;">0.90</span>
+                <span class="slider-val" id="mkt-eu-out" style="color:var(--amber); font-size: 16px;">8.0%</span>
               </div>
-              <input type="range" id="mkt-eu" min="0.10" max="3.00" step="0.05" value="0.90" oninput="onSlider()">
+              <input type="range" id="mkt-eu" aria-label="DEV: factor de captura Europa" min="0.02" max="0.15" step="0.005" value="0.08" oninput="onSlider()">
             </div>
 
             <div>
               <div class="slider-head" style="margin-bottom: 6px;">
                 <span class="slider-name" style="color:var(--amber); font-size: 14px;">Dubai / EAU</span>
-                <span class="slider-val" id="mkt-dubai-out" style="color:var(--amber); font-size: 16px;">1.50</span>
+                <span class="slider-val" id="mkt-dubai-out" style="color:var(--amber); font-size: 16px;">10.0%</span>
               </div>
-              <input type="range" id="mkt-dubai" min="0.10" max="3.00" step="0.05" value="1.50" oninput="onSlider()">
+              <input type="range" id="mkt-dubai" aria-label="DEV: factor de captura Dubái" min="0.02" max="0.15" step="0.005" value="0.10" oninput="onSlider()">
             </div>
           </div>
 
@@ -1845,28 +1730,37 @@
 
           <div class="field">
             <div class="slider-head">
-              <span class="slider-name">Valor promedio del m² en tu portfolio</span>
-              <span class="slider-val" id="m2-out">USD 1.700</span>
+              <span class="slider-name">Precio promedio de una propiedad</span>
+              <span class="slider-val" id="ticket-out">USD 110.500</span>
             </div>
-            <input type="range" class="range-field" id="m2-slider" min="500" max="20000" step="100" value="1700"
-              oninput="onSlider()">
-            <div class="slider-range"><span>USD 100</span><span>USD 20.000</span></div>
+            <input type="range" class="range-field" id="ticket-slider" aria-label="Precio promedio de una propiedad" min="20000" max="2000000" step="5000"
+              value="110500" oninput="onSlider()">
+            <div class="slider-range"><span>USD 20.000</span><span>USD 2.000.000</span></div>
             <div class="derived-note" id="ticket-derived" style="font-size:14px; line-height:1.4;">
-              <div style="margin-bottom: 4px;">📐 Ticket promedio estimado: <strong id="ticket-est">—</strong></div>
+              <div style="margin-bottom: 4px;">📐 Equivale a <strong id="m2-est">—</strong> según el promedio de superficie de
+                tu mercado.</div>
               <div style="font-size:14px; opacity:0.8;">
-                Calculado según m² portfolio × superficie estándar del mercado.<br>
-                <strong>Propósito:</strong> Este valor calibra el costo por lead y asegura que tu proyección de ROI sea
-                realista.
+                Ajustalo al ticket real de tu cartera.<br>
+                <strong>Propósito:</strong> Este es el valor que calibra el costo por lead y tu proyección de ROI.
               </div>
             </div>
           </div>
 
           <div class="field" style="margin-bottom:24px">
             <div class="slider-head">
-              <span class="slider-name">Unidades en cartera</span>
-              <span class="slider-val" id="units-out">50</span>
+              <span class="slider-name">Comisión por venta <span class="field-note">→ tu margen por operación</span></span>
+              <span class="slider-val" id="commission-out">3.0%</span>
             </div>
-            <input type="range" id="units" min="50" max="5000" step="1" value="100" oninput="onSlider()">
+            <input type="range" id="commission" aria-label="Comisión por venta, en porcentaje" min="1" max="8" step="0.1" value="3" oninput="onSlider()">
+            <div class="slider-range"><span>1%</span><span>8%</span></div>
+          </div>
+
+          <div class="field" style="margin-bottom:24px">
+            <div class="slider-head">
+              <span class="slider-name">Unidades en cartera</span>
+              <span class="slider-val" id="units-out">100</span>
+            </div>
+            <input type="range" id="units" aria-label="Unidades en cartera" min="50" max="5000" step="1" value="100" oninput="onSlider()">
             <div class="slider-range"><span>50</span><span>5.000</span></div>
           </div>
 
@@ -1874,10 +1768,10 @@
             style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 24px;">
             <div class="field" style="flex: 1; margin-bottom:0">
               <div class="slider-head">
-                <span class="slider-name">Usuarios CRM</span>
-                <span class="slider-val" id="vendors-out">5</span>
+                <span class="slider-name">Vendedores</span>
+                <span class="slider-val" id="vendors-out">3</span>
               </div>
-              <input type="range" id="vendors" min="1" max="100" step="1" value="5" oninput="onSlider()">
+              <input type="range" id="vendors" aria-label="Cantidad de vendedores / ejecutivos comerciales" min="1" max="100" step="1" value="3" oninput="onSlider()">
               <div class="slider-range"><span>1</span><span>100</span></div>
             </div>
 
@@ -1885,10 +1779,10 @@
               <div class="field-label" style="font-size: 14px; margin-bottom: 12px; text-align: left;">Idiomas del
                 agente</div>
               <div class="lang-row" style="margin-top: 0; padding: 12px 16px; justify-content: space-between;">
-                <button class="lang-btn" onclick="changeLang(-1)">−</button>
+                <button class="lang-btn" aria-label="Quitar un idioma" onclick="changeLang(-1)">−</button>
                 <span class="lang-num" id="lang-out">1</span>
                 <span class="lang-lbl" id="lang-lbl" style="flex: 1; text-align: center;">idioma</span>
-                <button class="lang-btn" onclick="changeLang(1)">+</button>
+                <button class="lang-btn" aria-label="Agregar un idioma" onclick="changeLang(1)">+</button>
               </div>
             </div>
           </div>
@@ -1907,10 +1801,10 @@
               <span class="slider-name" style="font-size: 16px;">Contactos totales</span>
               <span class="slider-val" id="visits-out">35.000</span>
             </div>
-            <input type="range" id="visits" min="1500" max="200000" step="500" value="35000" oninput="onSlider()">
+            <input type="range" id="visits" aria-label="Contactos totales mensuales" min="1500" max="200000" step="500" value="35000" oninput="onSlider()">
             <div class="slider-range"><span>1.500</span><span>200.000</span></div>
 
-            <!-- Conversaciones iniciadas (80%) -->
+            <!-- Conversaciones iniciadas (75%) -->
             <div class="field-label" style="margin-top:14px">💬 Conversaciones iniciadas</div>
             <div
               style="font-family:var(--font); font-size:16px; color:var(--accent2); font-weight:600; padding:18px; background:var(--accent-l); border-radius:var(--radius); border:1px solid rgba(0, 146, 179, 0.2); margin-bottom:12px;">
@@ -1934,15 +1828,15 @@
             <div class="tier-grid">
               <button class="tier-btn active" data-tier="economic" onclick="setAI(this)">
                 <span class="tier-icon">⚡</span><span class="tier-label">Estándar</span>
-                <span class="tier-note">Costo optimizado (GPT-4o-mini / DeepSeek)</span>
+                <span class="tier-note">Costo optimizado (Claude Haiku 4.5)</span>
               </button>
               <button class="tier-btn" data-tier="balanced" onclick="setAI(this)">
                 <span class="tier-icon">⚖️</span><span class="tier-label">Pro</span>
-                <span class="tier-note">Equilibrado (GPT-4o / Claude 3.5 Sonnet)</span>
+                <span class="tier-note">Equilibrado (Claude Sonnet 5)</span>
               </button>
               <button class="tier-btn" data-tier="premium" onclick="setAI(this)">
                 <span class="tier-icon">🔥</span><span class="tier-label">Premium</span>
-                <span class="tier-note">Máximo razonamiento (o1 / Claude Opus 4)</span>
+                <span class="tier-note">Máximo razonamiento (Claude Opus 4.8)</span>
               </button>
             </div>
           </div>
@@ -1954,7 +1848,7 @@
                 <span class="toggle-sub">Conversaciones por voz con el agente</span>
               </div>
               <label class="ts-wrap">
-                <input type="checkbox" id="voice-toggle" onchange="toggleVoice()">
+                <input type="checkbox" id="voice-toggle" aria-label="Activar soporte de voz" onchange="toggleVoice()">
                 <div class="ts-track">
                   <div class="ts-thumb"></div>
                 </div>
@@ -2020,24 +1914,26 @@
           <div style="text-align: center; margin-bottom: 32px;">
             <h2
               style="font-size: 32px; font-weight: 800; color: #fff; font-family: var(--font-h); letter-spacing: -0.02em;">
-              Costo por Leads
+              Tu embudo de leads
             </h2>
-            <p style="color: var(--muted2); font-size: 16px; margin-top: 8px;">Selecciona el perfil de leads que queres
-              recibir para obtener el costo total de Ximia.</p>
+            <p style="color: var(--muted2); font-size: 16px; margin-top: 8px;">De tus conversaciones, Ximia genera
+              estos perfiles de lead — esto es lo que <strong>puede entregarte</strong>. El número es cuántos hay por
+              mes; el valor, lo que cada uno vale en el mercado. Cuánto pagás depende de la capacidad de tu equipo (abajo),
+              no de este volumen.</p>
           </div>
 
           <div class="bar-strategy-container">
-            <!-- FRÍO (Obligatorio / Bloqueado) -->
+            <!-- FRÍO (Base de nurturing · incluida) -->
             <div class="strategy-row" id="row-frio">
               <label class="strategy-toggle" style="cursor: not-allowed; opacity: 0.85;"
-                title="La base de datos parcial es obligatoria para el costo de infraestructura">
-                <input type="checkbox" id="sw-frio" checked disabled>
-                <span class="st-slider" style="background-color: #e11d48 !important;"></span>
+                title="Base propietaria de nurturing: contactos evaluados con perfil financiero parcial, retargetables. Incluida sin costo por lead.">
+                <input type="checkbox" id="sw-frio" aria-label="Recibir leads Frío (base de nurturing, incluida)" checked disabled>
+                <span class="st-slider" style="background-color: var(--green) !important;"></span>
               </label>
               <div class="bar-label-group">
                 <span class="bar-label">Frío <span class="help-icon"
-                    data-tip="Contactos iniciales con datos básicos. Sólo nombre o nombre + email.">?</span></span>
-                <span class="bar-sub" style="color: #fff;">Obligatorio (Base de Datos)</span>
+                    data-tip="Contactos evaluados con datos básicos y perfil financiero parcial. Base propietaria y retargetable — un activo tuyo, no un costo. En 6–12 meses una parte madura a lead calificado.">?</span></span>
+                <span class="bar-sub" style="color: var(--green);">Base de nurturing · incluida</span>
               </div>
               <div class="bar-track">
                 <div class="bar-fill" id="bar-frio" style="background: var(--accent);"></div>
@@ -2052,12 +1948,12 @@
             <!-- CALIFICADO -->
             <div class="strategy-row" id="row-calificado">
               <label class="strategy-toggle">
-                <input type="checkbox" id="sw-calificado" checked onchange="toggleTier('calificado', this)">
+                <input type="checkbox" id="sw-calificado" aria-label="Recibir leads Calificado" checked onchange="toggleTier('calificado', this)">
                 <span class="st-slider"></span>
               </label>
               <div class="bar-label-group">
                 <span class="bar-label">Calificado <span class="help-icon"
-                    data-tip="Perfil incial completo (nombre + email) + perfil de búsqueda + datos financieros incompletos o completos sin pre-aprobación (deudas, bajos ingresos, calificación crediticia no aprobada).">?</span></span>
+                    data-tip="Perfil inicial completo (nombre + email) + perfil de búsqueda + datos financieros aún sin validación positiva (ingresos, deudas o ahorro por confirmar).">?</span></span>
                 <span class="bar-sub">Perfil Completo</span>
               </div>
               <div class="bar-track">
@@ -2073,12 +1969,12 @@
             <!-- CALIFICADO APROBADO -->
             <div class="strategy-row" id="row-aprobado">
               <label class="strategy-toggle">
-                <input type="checkbox" id="sw-aprobado" checked onchange="toggleTier('aprobado', this)">
+                <input type="checkbox" id="sw-aprobado" aria-label="Recibir leads Financieramente Calificado" checked onchange="toggleTier('aprobado', this)">
                 <span class="st-slider"></span>
               </label>
               <div class="bar-label-group">
-                <span class="bar-label">Calificado<br>Pre-aprobado <span class="help-icon"
-                    data-tip="Datos de contacto + perfil de búsqueda + validación financiera positiva y listo para cierre.">?</span></span>
+                <span class="bar-label">Financieramente<br>Calificado <span class="help-icon"
+                    data-tip="Datos de contacto + perfil de búsqueda + validación financiera positiva de Ximia y listo para cierre. No constituye una pre-aprobación crediticia de un prestamista.">?</span></span>
                 <span class="bar-sub">Financiación Ok</span>
               </div>
               <div class="bar-track">
@@ -2094,7 +1990,7 @@
             <!-- PRE-VENTA -->
             <div class="strategy-row" id="row-preventa">
               <label class="strategy-toggle">
-                <input type="checkbox" id="sw-preventa" checked onchange="toggleTier('preventa', this)">
+                <input type="checkbox" id="sw-preventa" aria-label="Recibir leads Pre-Venta" checked onchange="toggleTier('preventa', this)">
                 <span class="st-slider"></span>
               </label>
               <div class="bar-label-group">
@@ -2115,8 +2011,25 @@
 
           <div
             style="margin-top: 32px; padding: 16px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 13px; color: var(--muted2); line-height: 1.6; text-align: center;">
-            <p><strong>Configuración Proactiva:</strong> Al desactivar un nivel, Ximia dejará de enviarte esos
-              contactos, reduciendo el costo mensual de servicio.</p>
+            <p><strong>Configuración Proactiva:</strong> Elegís qué perfiles de lead querés recibir. El fee mensual
+              cubre la plataforma y la gestión; su costo se reparte entre los perfiles que activás — un lead
+              pre-calificado pesa más que uno que solo dejó su perfil.</p>
+          </div>
+
+          <!-- XIMIA CLOSING (Pre-Venta) -->
+          <div
+            style="margin-top: 14px; padding: 20px 22px; background: rgba(5,150,105,0.08); border: 1px solid rgba(5,150,105,0.25); border-radius: 12px; line-height: 1.65;">
+            <div style="font-family: var(--font-h); font-weight: 800; color: var(--green); font-size: 16px; margin-bottom: 8px;">
+              🤝 Ximia Closing · el lead listo para cerrar</div>
+            <p style="font-size: 13.5px; color: var(--muted2); margin: 0;">
+              La <strong style="color:#fff;">Pre-Venta</strong> es el lead más valioso: ya validó su financiación y está
+              listo para reservar. Te lo entregamos con un <strong style="color:#fff;">tiempo de contacto acordado
+                (24–48&nbsp;h)</strong>. Si lo tomás y cerrás en tiempo, la operación es tuya. Si no lo contactás a
+              tiempo, <strong style="color:var(--green);">Ximia cierra la venta y cobra la comisión (~3%)</strong>.
+              <br><span style="font-size:12.5px; opacity:0.85;">¿Por qué? Para que ninguna oportunidad caliente se
+                enfríe y para proteger la experiencia del comprador — la credibilidad de Ximia ante el usuario final
+                depende de que a un lead listo para comprar lo contacten rápido.</span>
+            </p>
           </div>
         </div>
 
@@ -2132,15 +2045,15 @@
           <div class="roi-cards">
 
             <div class="roi-card">
-              <div class="roi-card-tag">Costo por lead pre-aprobado</div>
+              <div class="roi-card-tag">Costo por venta habilitada</div>
               <div class="roi-card-main accent" id="roi-lead-cost" style="font-size:36px;">$—</div>
-              <div class="roi-card-sub">Ximia · pre-calificado financieramente</div>
+              <div class="roi-card-sub" id="roi-cpa-pct">— de tu ticket</div>
               <div
                 style="font-family: var(--font); font-size: 11px; color: var(--muted2); margin-top: 12px; margin-bottom: 4px; line-height: 1.4; opacity: 0.8;">
-                Valor estadístico referencial de tu mercado</div>
+                Lo que te cuesta Ximia por cada operación que tu equipo cierra</div>
               <div class="roi-compare">
-                <span class="roi-compare-label" id="roi-benchmark-label">vs. mercado sin calificación</span>
-                <span class="roi-compare-val" id="roi-benchmark">$—</span>
+                <span class="roi-compare-label">costo efectivo por lead calificado</span>
+                <span class="roi-compare-val" id="roi-benchmark" style="text-decoration:none; color:var(--accent);">$—</span>
               </div>
             </div>
 
@@ -2171,6 +2084,56 @@
               </div>
             </div>
 
+          </div>
+        </div>
+
+        <!-- CAPITAL LIBERADO (#27) -->
+        <div class="roi-section sep" style="margin-top:16px;">
+          <div style="background:linear-gradient(135deg, var(--accent-l), #ffffff); border:1.5px solid var(--accent); border-radius:var(--radius); padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:240px;">
+              <div style="font-family:var(--font); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent2); font-weight:700;">Capital liberado</div>
+              <div style="font-size:15px; color:var(--text2); margin-top:8px; max-width:48ch; line-height:1.6;">Liquidás tu stock <strong id="cl-meses" style="color:var(--accent2);">—</strong> antes que con prospección humana. Ese es el costo de capital que dejás de pagar por tener el inventario inmovilizado.</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:46px; font-weight:800; color:var(--accent); letter-spacing:-.04em; line-height:1;" id="cl-monto">$—</div>
+              <div style="font-size:12px; color:var(--muted); margin-top:6px;">costo de capital ahorrado · <span id="cl-tasa">1</span>%/mes</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMPARATIVA VS MERCADO (#26) -->
+        <div class="roi-section sep" style="margin-top:16px;">
+          <div style="background:#0f172a; border-radius:var(--radius); padding:32px 36px; position:relative; overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--green));"></div>
+            <div style="font-size:22px; font-weight:800; color:#fff; letter-spacing:-.02em; font-family:var(--font-h);">Tu lead pre-calificado vs. el mercado</div>
+            <div style="font-family:var(--font); font-size:14px; color:var(--muted2); margin-top:6px; margin-bottom:24px; max-width:60ch; line-height:1.6;">
+              Facebook, Google y los portales inmobiliarios de tu mercado venden contactos <strong style="color:#cbd5e1;">sin ninguna calificación financiera</strong>. Ximia entrega un lead con ingresos, deudas y ahorro validados — a un precio comparable al de un contacto crudo, y muy por debajo de un portal premium.
+            </div>
+            <div style="display:flex; flex-direction:column; gap:14px;">
+              <div style="display:flex; align-items:center; gap:16px;">
+                <span style="width:150px; font-size:14px; font-weight:700; color:#fff; flex-shrink:0;">Ximia <span style="color:var(--accent);">· pre-calificado</span></span>
+                <div style="flex:1; height:24px; background:rgba(255,255,255,.05); border-radius:6px; overflow:hidden;"><div id="vsm-bar-ximia" style="height:100%; width:0; background:var(--accent); border-radius:6px; transition:width .5s;"></div></div>
+                <span id="vsm-ximia" style="width:70px; text-align:right; font-family:var(--font-h); font-weight:800; font-size:17px; color:var(--accent);">$—</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:16px;">
+                <span style="width:150px; font-size:14px; color:var(--muted2); flex-shrink:0;">Facebook Ads</span>
+                <div style="flex:1; height:24px; background:rgba(255,255,255,.05); border-radius:6px; overflow:hidden;"><div id="vsm-bar-fb" style="height:100%; width:0; background:var(--muted); border-radius:6px; transition:width .5s;"></div></div>
+                <span id="vsm-fb" style="width:70px; text-align:right; font-family:var(--font-h); font-weight:700; font-size:16px; color:#cbd5e1;">$—</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:16px;">
+                <span style="width:150px; font-size:14px; color:var(--muted2); flex-shrink:0;">Google Ads</span>
+                <div style="flex:1; height:24px; background:rgba(255,255,255,.05); border-radius:6px; overflow:hidden;"><div id="vsm-bar-google" style="height:100%; width:0; background:var(--muted); border-radius:6px; transition:width .5s;"></div></div>
+                <span id="vsm-google" style="width:70px; text-align:right; font-family:var(--font-h); font-weight:700; font-size:16px; color:#cbd5e1;">$—</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:16px;">
+                <span style="width:150px; font-size:14px; color:var(--muted2); flex-shrink:0;" id="vsm-portal-name">Zillow</span>
+                <div style="flex:1; height:24px; background:rgba(255,255,255,.05); border-radius:6px; overflow:hidden;"><div id="vsm-bar-zillow" style="height:100%; width:0; background:var(--muted); border-radius:6px; transition:width .5s;"></div></div>
+                <span id="vsm-zillow" style="width:70px; text-align:right; font-family:var(--font-h); font-weight:700; font-size:16px; color:#cbd5e1;">$—</span>
+              </div>
+            </div>
+            <div style="margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.1); font-size:13.5px; color:#cbd5e1; line-height:1.6;">
+              <span style="color:var(--green); font-weight:800;">✓ Garantía Ximia:</span> nunca pagás más por un lead financieramente calificado que por un contacto <strong style="color:#fff;">sin calificar</strong> de <span id="vsm-guarantee-portal" style="color:#fff; font-weight:600;">Zillow</span>.
+            </div>
           </div>
         </div>
 
@@ -2222,19 +2185,40 @@
               <div class="tech-total-val" id="t-total" style="font-size:36px;">—</div>
             </div>
             <div class="tech-note" style="font-size:10.5px;">El cálculo considera <strong>Context Caching</strong>
-              (factor blended 0.30 — Anthropic 10%, OpenAI 50%) y precios oficiales de OpenAI y Anthropic. El "Costo
+              (factor blended 0.30) y precios oficiales de Anthropic (jul 2026). El "Costo
               Gestión" incluye orquestación, integración y soporte.</div>
             <div
               style="font-family:var(--font);font-size:11px;color:var(--muted2);margin-top:10px;padding:8px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border);text-align:center;letter-spacing:0.05em;">
-              📅 Valores de referencia · <strong>Abril 2026</strong> · Los precios de los modelos de IA varían con el
+              📅 Valores de referencia · <strong>Julio 2026</strong> · Los precios de los modelos de IA varían con el
               tiempo
+            </div>
+          </div>
+        </div>
+
+        <!-- GUARDÁ TU COTIZACIÓN (#25) -->
+        <div style="margin-top: 32px; background: var(--text); border-radius: var(--radius); padding: 32px 36px; position: relative; overflow: hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--green));"></div>
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px;">
+            <div style="flex:1; min-width:240px;">
+              <div style="font-family:var(--font-h); font-size:22px; font-weight:800; color:#fff; letter-spacing:-.02em;">Guardá tu cotización</div>
+              <div style="font-family:var(--font); font-size:14px; color:var(--muted2); margin-top:6px; max-width:52ch; line-height:1.6;">Te la mandamos por email en PDF y podés compartir este link exacto con tu equipo.</div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:10px; min-width:280px;">
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <input type="email" id="capture-email" aria-label="Tu email" placeholder="tu@email.com"
+                  style="flex:1; min-width:180px; padding:13px 16px; border-radius:40px; border:1.5px solid var(--border2); background:#fff; color:var(--text); font-family:var(--font); font-size:15px; outline:none;">
+                <button class="btn-primary" onclick="submitEmail()" style="white-space:nowrap;">Recibir por email →</button>
+              </div>
+              <button id="copy-link-btn" onclick="copyPermalink()"
+                style="background:transparent; border:1.5px solid var(--muted); color:#cbd5e1; font-family:var(--font); font-size:13px; font-weight:600; padding:10px 18px; border-radius:40px; cursor:pointer; transition:all .2s;">🔗 Copiar link para compartir</button>
+              <div id="capture-msg" style="font-family:var(--font); font-size:12.5px; color:var(--muted2); min-height:16px; text-align:center;"></div>
             </div>
           </div>
         </div>
 
         <!-- FINAL CTA CARD -->
         <div class="final-cta"
-          style="margin-top: 48px; border: 1.5px solid var(--accent); background: linear-gradient(to right, #ffffff, var(--accent-l)); padding: 38px; border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          style="margin-top: 16px; border: 1.5px solid var(--accent); background: linear-gradient(to right, #ffffff, var(--accent-l)); padding: 38px; border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 24px;">
           <div>
             <div class="cta-label" style="font-size: 27px; font-weight: 800; color: var(--text); margin-bottom: 8px;">
               Agenda una reunión</div>
@@ -2311,7 +2295,7 @@
 
         <!-- Lead pricing -->
         <div class="card">
-          <div class="lead-card-tag">Precios por Lead</div>
+          <div class="lead-card-tag">Valor de mercado por lead</div>
           <div class="lead-rows">
             <div class="lead-row">
               <div>
@@ -2329,8 +2313,8 @@
             </div>
             <div class="lead-row">
               <div>
-                <div class="lead-name" style="font-weight: 400;">Calificado Aprobado</div>
-                <div class="lead-desc">hot · pre-aprobado / listo</div>
+                <div class="lead-name" style="font-weight: 400;">Financieramente Calificado</div>
+                <div class="lead-desc">hot · validación financiera positiva / listo</div>
               </div>
               <span class="lead-price q" id="r-lead-q">—</span>
             </div>
@@ -2338,7 +2322,7 @@
               <div>
                 <div class="lead-name" style="font-weight: 600;">Pre-Venta Lista</div>
                 <div class="lead-desc">reserva iniciada</div>
-                <div class="lead-desc" style="font-size:10px; margin-top:2px;">(Opcional: 1% comisión)</div>
+                <div class="lead-desc" style="font-size:10px; margin-top:2px;">(Ximia Closing · listo para cerrar)</div>
               </div>
               <span class="lead-price p" id="r-lead-preventa" style="font-weight:700; color:var(--text);">—</span>
             </div>
@@ -2356,64 +2340,94 @@
       // CONFIGURACIÓN DE PRECIOS REALES (USD)
       // ════════════════════════════════════════════
 
-      // PRECIOS BASE (Calibrados para que el precio FINAL con descuento por volumen sea el benchmark)
-      const LEAD_BASE = {
-        frio: 0.11,   // Dará ~$0.05 con descuento masivo
-        cali: 2.25,   // Dará ~$1.00 con descuento masivo
-        apro: 22.50,  // Dará ~$10.00 con descuento masivo
-        prev: 450.00  // Dará ~$200.00 con descuento masivo
-      };
+      // ════════════════════════════════════════════
+      // MOTOR DE PRICING POR LEAD (Modelo "Lead Pricing 2026" — comisión amortizada)
+      // precio_lead = min(techo_mercado, (ticket × comisión / close_rate) × factor_captura)
+      // ════════════════════════════════════════════
 
-      // TECHOS ABSOLUTOS: Edita estos valores para topar el precio máximo de un lead en cualquier mercado
-      const LEAD_CEILING = {
-        frio: 50,    // Máximo para Lead Frío
-        cali: 150,   // Máximo para Calificado
-        apro: 500,   // Máximo para Calificado Aprobado
-        prev: 2000   // Máximo para Operación Pre-Venta
-      };
+      // Factor de captura de Ximia por mercado (doc §2.3). % de la comisión amortizada que cobra Ximia.
+      const CAPTURE_FACTOR = { latam: 0.06, usa: 0.08, europa: 0.08, eau: 0.10 };
 
-      // MARKUP DINÁMICO: Ahora se calcula en calc() para amortizar costos en volúmenes altos
-      const MARKUP_BASE = 2.0;
+      // Techo por lead = benchmark de un lead SIN calificar del mercado (Zillow/portales). Garantiza "nunca más que Zillow".
+      const LEAD_CEILING_MKT = { latam: 80, usa: 200, europa: 200, eau: 250 };
 
-      const MAINT_BASE_SLA = { standard: 500, priority: 800, enterprise: 1500 };
+      // close_rate = leads de ese tier necesarios para cerrar 1 venta. Menor close_rate ⇒ lead más valioso.
+      const CLOSE_RATE = { frio: 150, cali: 30, apro: 8, prev: 2 };
+
+      // Productividad de un vendedor humano: leads calificados que genera por mes.
+      // Base citable: doc §4.2 (5 vendedores → 60 leads calificados/mes = 12 c/u).
+      const LEADS_PER_REP = 12;
+
+      // Costo de carrying mensual sobre el stock inmovilizado (capital + impuestos + mantenimiento).
+      const CARRYING_RATE = 0.01; // 1% / mes (~12% anual)
+
+      // Webhook de captura de cotización (Supabase → HubSpot vía n8n). ← REEMPLAZAR por la URL real.
+      const CAPTURE_WEBHOOK = 'https://REEMPLAZAR.n8n/webhook/ximia-cotizacion';
+
+      // Pre-Venta = reserva iniciada (near-sale). Se cobra como % del ticket, no como lead. Queda sobre el techo Zillow.
+      const PREV_COMMISSION = 0.01;
+
+      // Qué tiers se facturan como lead premium. Frío y Calificado van INCLUIDOS (base de nurturing):
+      // Ximia no vende contactos que ya eran del cliente; monetiza cuando el lead madura a Aprobado.
+      // (Pre-Venta se cobra aparte como success-fee 1%.) Flipeá a true para facturar un tier.
+
+      // ── Embudo ANIDADO (Frío + Calificado = conversaciones; Aprobado ⊂ Calificado; Pre-Venta ⊂ Aprobado) ──
+      const CALIF_RATE = 0.50; // % de conversaciones que progresan (perfil + calificación financiera)
+      const APRO_RATE = 0.30;  // % de Calificados que pasan la pre-calificación financiera
+      const PREV_RATE = 0.10;  // % de Aprobados listos para iniciar reserva
+
+      // ── Fee mensual (modelo por tramos: "por eso cobramos fee") ──
+      const LICENCIA_BASE = 700;
+      const SLA_BASE = { standard: 500, priority: 800, enterprise: 1500 }; // piso mensual (doc §2.4)
+      const LEADS_PER_SEAT = 30; // leads calificados que un vendedor trabaja por mes (perilla load-bearing, rango 20-40)
+      // Management fee por contactos/mes (× mktWeight). Tramos de la memoria 2026-05-14.
+      const MGMT_TRAMOS = [
+        { max: 10000, fee: 400 }, { max: 30000, fee: 700 }, { max: 75000, fee: 1000 },
+        { max: 150000, fee: 1700 }, { max: Infinity, fee: 2800 }
+      ];
+      // Comisión de Ximia Closing (si el cliente no toma/cierra el lead listo, Ximia cierra y cobra).
+      const CLOSING_COMMISSION = { latam: 0.03, usa: 0.025, europa: 0.03, eau: 0.02 };
       const SLA_INFO = {
         standard: "Mantenimiento mensual · Soporte por ticket (<48h respuesta).",
         priority: "Mantenimiento quincenal · WhatsApp/Slack dedicado (<12h respuesta).",
         enterprise: "Mantenimiento bajo demanda · Account Manager 24/7 · Soporte Crítico."
       };
 
+      // portal / benchFb / benchGoogle = benchmarks del lead SIN calificar por mercado (Zillow es solo USA).
       const MARKET = {
-        latam: { label: 'Latam', flag: '🌎', mktWeight: 0.75, refM2: 1700, refArea: 65, commission: 0.030, humanLeadCost: 50 },
-        europa: { label: 'Europa', flag: '🇪🇺', mktWeight: 0.90, refM2: 3200, refArea: 85, commission: 0.030, humanLeadCost: 100 },
-        usa: { label: 'USA', flag: '🇺🇸', mktWeight: 1.00, refM2: 3500, refArea: 140, commission: 0.025, humanLeadCost: 133 },
-        eau: { label: 'EAU / Dubai', flag: '🇦🇪', mktWeight: 1.50, refM2: 5500, refArea: 120, commission: 0.020, humanLeadCost: 223 },
+        latam: { label: 'Latam', flag: '🌎', mktWeight: 0.75, refM2: 1700, refArea: 65, commission: 0.030, humanLeadCost: 50, portal: 'Zonaprop / portales', benchFb: 14, benchGoogle: 50 },
+        europa: { label: 'Europa', flag: '🇪🇺', mktWeight: 1.30, refM2: 3200, refArea: 85, commission: 0.030, humanLeadCost: 100, portal: 'Idealista / portales', benchFb: 18, benchGoogle: 80 },
+        usa: { label: 'USA', flag: '🇺🇸', mktWeight: 1.00, refM2: 3500, refArea: 140, commission: 0.025, humanLeadCost: 133, portal: 'Zillow', benchFb: 20, benchGoogle: 100 },
+        eau: { label: 'EAU / Dubai', flag: '🇦🇪', mktWeight: 2.20, refM2: 5500, refArea: 120, commission: 0.020, humanLeadCost: 223, portal: 'Bayut / Property Finder', benchFb: 22, benchGoogle: 120 },
       };
 
+      // Modelos y precios oficiales de Anthropic (por 1M tokens, jul 2026).
       const AI_TIERS = {
         economic: {
-          label: 'GPT-4o-mini',  // Precios correctos para 4o-mini (Abril 2026)
-          in: 0.15 / 1e6, out: 0.60 / 1e6, plat: 0.005,
-          hostRaw: 75
+          label: 'Claude Haiku 4.5',   // $1 in / $5 out
+          in: 1.00 / 1e6, out: 5.00 / 1e6, plat: 0.005
         },
         balanced: {
-          label: 'GPT-4o / Claude 3.5 Sonnet',  // Claude 3.5 Sonnet output = $15/1M (no $10)
-          in: 2.50 / 1e6, out: 10.00 / 1e6, plat: 0.01,
-          hostRaw: 50
+          label: 'Claude Sonnet 5',    // $3 in / $15 out
+          in: 3.00 / 1e6, out: 15.00 / 1e6, plat: 0.01
         },
         premium: {
-          label: 'o1 / Claude Opus 4',  // o1-Preview deprecado Q4 2024; Opus 4 output ≈ $75/1M
-          in: 15.00 / 1e6, out: 60.00 / 1e6, plat: 0.02,
-          hostRaw: 100
+          label: 'Claude Opus 4.8',    // $5 in / $25 out
+          in: 5.00 / 1e6, out: 25.00 / 1e6, plat: 0.02
         },
       };
 
       const DB_TIERS = { standard: { raw: 25 }, scalable: { raw: 75 }, enterprise: { raw: 200 } };
 
+      // VOICE_STACKS: precios en USD por MINUTO de audio (wholesale).
+      // Cada turn ≈ 0.5 min (combinado usuario + agente). Voice solo se cobra
+      // si voiceEnabled = true; se aplica sobre el total de turns del funnel.
       const VOICE_STACKS = {
         none: { stt: 0, tts: 0 },
-        standard: { stt: 0.002, tts: 0.008 },
-        premium: { stt: 0.003, tts: 0.020 }, // Precios Corporativos (Wholesale)
+        standard: { stt: 0.002, tts: 0.008 }, // Whisper/Deepgram bulk + OpenAI TTS standard
+        premium: { stt: 0.003, tts: 0.020 },  // Deepgram Nova + ElevenLabs Turbo wholesale
       };
+      const VOICE_MIN_PER_TURN = 0.5;
 
       // Configuración de Tokens (Estructura Ximia)
       const TOKENS = {
@@ -2426,7 +2440,7 @@
           caliente: 15.0, // full process
           ready: 25.0    // qualified closing
         },
-        cacheFactor: 0.30   // Factor blended: Anthropic 0.10, OpenAI 0.50 — promedio para stack mixto GPT-4o/Claude
+        cacheFactor: 0.10   // Lectura de caché Anthropic ≈ 0.10× del input (stack todo-Claude)
       };
 
 
@@ -2436,12 +2450,13 @@
       const S = {
         market: 'latam',
         m2Value: 1700,
-        units: 50,
+        ticket: 110500,
+        units: 100,
         vendors: 3,
         languages: 1,
         sla: 'standard',
         visits: 35000,
-        engRate: 0.75, // Default 75% — visibilidad alta
+        commission: 0.03,
         aiTier: 'economic',
         dbTier: 'standard',
         voiceEnabled: false,
@@ -2457,23 +2472,26 @@
       // ════════════════════════════════════════════
       // SETTERS
       // ════════════════════════════════════════════
-      function activateBtn(sel, btn) { document.querySelectorAll(sel).forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+      function activateBtn(sel, btn) { document.querySelectorAll(sel).forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); }); btn.classList.add('active'); btn.setAttribute('aria-pressed', 'true'); }
       function setMarket(btn) {
         activateBtn('.mkt-btn', btn);
         const mkey = btn.dataset.mkt;
         S.market = mkey;
-        // Auto-update m2 slider based on market reference
-        const mref = MARKET[mkey].refM2;
-        S.m2Value = mref;
-        const sld = document.getElementById('m2-slider');
-        if (sld) sld.value = mref;
+        // Auto-update ticket to the market's reference average property price (client can re-adjust)
+        const refTicket = Math.round(MARKET[mkey].refM2 * MARKET[mkey].refArea);
+        S.ticket = refTicket;
+        const tsld = document.getElementById('ticket-slider');
+        if (tsld) tsld.value = refTicket;
+        // Reset commission to the market default (client can re-adjust)
+        S.commission = MARKET[mkey].commission;
+        const csld = document.getElementById('commission');
+        if (csld) csld.value = (S.commission * 100).toFixed(1);
         onSlider(); // Update state and UI
       }
       function setAI(btn) { activateBtn('.tier-btn[data-tier]', btn); S.aiTier = btn.dataset.tier; calc(); }
       function setDB(btn) { activateBtn('.tier-btn[data-db]', btn); S.dbTier = btn.dataset.db; calc(); }
       function setVS(btn) { activateBtn('.vs-btn', btn); S.voiceStack = btn.dataset.vs; calc(); }
       function setSLA(btn) { activateBtn('.tier-btn[data-sla]', btn); S.sla = btn.dataset.sla; calc(); }
-      function setEngage(btn) { activateBtn('.eng-tab', btn); S.engRate = +btn.dataset.eng; calc(); }
 
       function toggleTier(tier, el) {
         S.selectedTiers[tier] = el.checked;
@@ -2500,18 +2518,22 @@
 
       function onSlider() {
         if (document.getElementById('mkt-latam')) {
-          MARKET.latam.mktWeight = +document.getElementById('mkt-latam').value;
-          s('mkt-latam-out', MARKET.latam.mktWeight.toFixed(2));
-          MARKET.europa.mktWeight = +document.getElementById('mkt-eu').value;
-          s('mkt-eu-out', MARKET.europa.mktWeight.toFixed(2));
-          MARKET.eau.mktWeight = +document.getElementById('mkt-dubai').value;
-          s('mkt-dubai-out', MARKET.eau.mktWeight.toFixed(2));
+          CAPTURE_FACTOR.latam = +document.getElementById('mkt-latam').value;
+          s('mkt-latam-out', (CAPTURE_FACTOR.latam * 100).toFixed(1) + '%');
+          CAPTURE_FACTOR.europa = +document.getElementById('mkt-eu').value;
+          s('mkt-eu-out', (CAPTURE_FACTOR.europa * 100).toFixed(1) + '%');
+          CAPTURE_FACTOR.eau = +document.getElementById('mkt-dubai').value;
+          s('mkt-dubai-out', (CAPTURE_FACTOR.eau * 100).toFixed(1) + '%');
         }
-        S.m2Value = +document.getElementById('m2-slider').value;
+        S.ticket = +document.getElementById('ticket-slider').value;
+        // m² is now a derived readout: ticket ÷ superficie promedio del mercado. Keep S.m2Value in sync for legacy uses.
+        S.m2Value = Math.round(S.ticket / MARKET[S.market].refArea);
         S.units = +document.getElementById('units').value;
         S.vendors = +document.getElementById('vendors').value;
         S.visits = +document.getElementById('visits').value;
-        s('m2-out', 'USD ' + fmt0(S.m2Value));
+        const commEl = document.getElementById('commission');
+        if (commEl) { S.commission = (+commEl.value) / 100; s('commission-out', (+commEl.value).toFixed(1) + '%'); }
+        s('ticket-out', 'USD ' + fmt0(S.ticket));
         s('units-out', fmt0(S.units));
         s('vendors-out', S.vendors.toString());
         s('visits-out', fmt0(S.visits));
@@ -2532,8 +2554,17 @@
       // ════════════════════════════════════════════
       // FORMAT
       // ════════════════════════════════════════════
-      const loc = n => Math.round(n).toLocaleString('es-AR');
-      const fmt0 = n => n.toLocaleString('es-AR');
+      // Idioma / locale de números. Se lee de ?lang=en o del <html lang>; default es.
+      // (Un anglófono lee "$1.700" como "1,70" — el formato debe seguir el idioma del visitante.)
+      const LANG = (() => {
+        try {
+          const q = new URLSearchParams(location.search).get('lang');
+          return (q || (document.documentElement && document.documentElement.lang) || 'es').slice(0, 2).toLowerCase();
+        } catch (e) { return 'es'; }
+      })();
+      const NUM_LOCALE = LANG === 'en' ? 'en-US' : 'es-AR';
+      const loc = n => Math.round(n).toLocaleString(NUM_LOCALE);
+      const fmt0 = n => n.toLocaleString(NUM_LOCALE);
       function fmtUSD(n) {
         if (n === 0) return '$0';
         if (n >= 1000) return '$' + loc(n);
@@ -2547,6 +2578,7 @@
       }
       function s(id, val) {
         const el = document.getElementById(id); if (!el) return;
+        if (el.innerHTML === String(val)) return; // sin cambio: evita reflow y re-animación
         el.innerHTML = val; el.classList.remove('na'); void el.offsetWidth; el.classList.add('na');
       }
 
@@ -2560,191 +2592,236 @@
         const db = DB_TIERS[S.dbTier];
         const vs = VOICE_STACKS[S.voiceEnabled ? S.voiceStack : 'none'];
 
-        // 1. Ticket estimado y ponderación de valor
-        const ticketEst = S.m2Value * mkt.refArea;
-        const valueWeight = Math.pow(S.m2Value / mkt.refM2, 0.25);
-        s('ticket-est', 'USD ' + loc(ticketEst));
+        // 1. Ticket = input directo del cliente. El m² es una lectura derivada informativa.
+        const ticketEst = S.ticket;
+        const m2Equiv = Math.round(ticketEst / mkt.refArea);
+        s('m2-est', 'USD ' + loc(m2Equiv) + ' / m²');
 
-        // 2. Bonus por calidad de IA (Standard = base sólida, Premium = mejora)
-        // El LLM no inventa gente — mejora la tasa de calificación y retención
-        const aiBonus = S.aiTier === 'premium' ? 1.30 : (S.aiTier === 'balanced' ? 1.10 : 1.0);
-
-        // 3. Funnel Secuencial (Base real de mercado)
-        const conversations = Math.round(S.visits * S.engRate);
+        // 2. Embudo ANIDADO — Frío + Calificado = conversaciones. Aprobado ⊂ Calificado, Pre-Venta ⊂ Aprobado.
+        const ENGAGE_RATE = 0.75; // % de contactos que inicia conversación (constante de producto)
+        const conversations = Math.round(S.visits * ENGAGE_RATE);
         s('label-conv-est', loc(conversations) + ' conversaciones/mes');
 
-        // Etapa 1: Fríos — 25% del total (el LLM no puede inventar más gente)
-        const nNoRebote = Math.round(S.visits * 0.25);
+        const nCaliProgress = Math.round(conversations * CALIF_RATE); // progresaron (perfil + calificación financiera)
+        const nApro = Math.round(nCaliProgress * APRO_RATE);          // pasaron la pre-calificación (subset)
+        const nPreV = Math.round(nApro * PREV_RATE);                  // listos para reservar (subset)
+        // Buckets EXCLUSIVOS que particionan las conversaciones (Σ = conversations):
+        const leafFrio = conversations - nCaliProgress; // solo perfil personal
+        const leafCali = nCaliProgress - nApro;         // hizo la calificación, no la pasó
+        const leafApro = nApro - nPreV;                 // pre-calificado (sin reserva)
+        const leafPreV = nPreV;                         // listo para reservar
 
-        // Etapa 2: Calificados — la IA mejora la tasa de calificación (20% base)
-        const nCali = Math.round(nNoRebote * 0.20 * aiBonus);
+        // 3. VALOR de mercado por lead (comisión amortizada / portal). Maneja el reparto del costo.
+        const leadValue = (tier) => {
+          if (tier === 'prev') return LEAD_CEILING_MKT[S.market]; // Pre-Venta/Ximia Closing: nivel portal premium
+          const amortized = ticketEst * S.commission / CLOSE_RATE[tier];
+          return Math.min(LEAD_CEILING_MKT[S.market], amortized * CAPTURE_FACTOR[S.market]);
+        };
+        const vFrio = leadValue('frio'), vCali = leadValue('cali'), vApro = leadValue('apro'), vPrev = leadValue('prev');
 
-        // Etapa 3: Calificados Aprobados — la IA mejora la pre-aprobación (15% base)
-        const nApro = Math.round(nCali * 0.15 * aiBonus);
+        // 4. Conteo por toggles (buckets exclusivos).
+        const cFrio = S.selectedTiers.frio ? leafFrio : 0;
+        const cCali = S.selectedTiers.calificado ? leafCali : 0;
+        const cApro = S.selectedTiers.aprobado ? leafApro : 0;
+        const cPreV = S.selectedTiers.preventa ? leafPreV : 0;
 
-        // Etapa 4: Operación Pre-Venta — 5% de los aprobados (constante)
-        const nPreV = Math.round(nApro * 0.05);
+        // 5. SERVICIO MENSUAL = PISO predecible (Licencia + SLA) + VARIABLE (modelo del doc, escala con el negocio).
+        const extraLangs = Math.max(0, S.languages - 1);
+        const langFixedFee = extraLangs * 150;
+        // SERVICIO = base_SLA + CAPACIDAD DE ABSORCIÓN del equipo (asientos comerciales). El driver es el EQUIPO,
+        // no el inventario ni el tráfico: Ximia puede generar leads casi infinitos, pero el cliente sólo puede
+        // trabajar los que su fuerza de ventas absorbe. Se factura el asiento comprometido (committed-use, tipo SaaS).
+        const seats = Math.max(1, S.vendors);
+        const capacidadLeads = seats * LEADS_PER_SEAT;   // leads que Ximia se compromete a entregar (SLA de supply)
+        const precioAsiento = LEADS_PER_SEAT * vApro;    // cada asiento cuesta los ~30 leads que ese vendedor trabaja; vApro = precio_lead (intacto)
+        const variableFee = seats * precioAsiento;
+        const servicioMensual = Math.round(SLA_BASE[S.sla] + variableFee + langFixedFee);
+        const grandTotal = servicioMensual;
+        // Chequeo de supply (NO factura): con el tráfico actual, ¿Ximia satura la capacidad del equipo?
+        const supplyQualified = nApro;
+        const supplyOk = supplyQualified >= capacidadLeads;
 
-        // 4. Infraestructura Estabilizada (Elastic Hosting)
+        // 6. INFRAESTRUCTURA — costo INTERNO de Ximia. Se muestra como "incluida", NO se suma al total.
+        //    [Ajustes de valueWeight/cacheFactor y precios LLM quedan para los pasos de higiene #10/#11/#14.]
         const hostBase = S.aiTier === 'premium' ? 450 : (S.aiTier === 'balanced' ? 280 : 120);
-        const hostDynamic = (hostBase + (Math.floor(conversations / 10000) * 40)) * valueWeight;
-
-        // Cálculo de tokens por profundidad de etapa
+        const hostDynamic = hostBase + (Math.floor(conversations / 10000) * 40);
         const calcLLMDepth = (n, turns) => {
           if (n <= 0) return 0;
-          const tokens = (TOKENS.fixedInput * 0.3) + (TOKENS.turnInput * turns) + (TOKENS.turnOutput * turns);
-          return n * tokens * ai.in;
+          const inputTokens = (TOKENS.fixedInput * TOKENS.cacheFactor) + (TOKENS.turnInput * turns);
+          const outputTokens = TOKENS.turnOutput * turns;
+          return n * (inputTokens * ai.in + outputTokens * ai.out);
         };
+        const wT = TOKENS.weightedTurns;
+        const llmRaw = calcLLMDepth(leafFrio, wT.rebote) + calcLLMDepth(leafCali, wT.frio) +
+          calcLLMDepth(leafApro, wT.caliente) + calcLLMDepth(leafPreV, wT.ready);
+        const totalTurns = leafFrio * wT.rebote + leafCali * wT.frio +
+          leafApro * wT.caliente + leafPreV * wT.ready;
+        const voiceRaw = S.voiceEnabled ? Math.max(0, totalTurns) * VOICE_MIN_PER_TURN * (vs.stt + vs.tts) : 0;
+        const crmRaw = S.vendors > 3 ? (S.vendors - 3) * 15 : 0;
+        const infraTotalFinal = hostDynamic + llmRaw + (conversations * ai.plat) + db.raw + voiceRaw + crmRaw;
 
-        const extraLangs = Math.max(0, S.languages - 1);
-        const langFactorMgmt = 1 + (extraLangs * 0.02); // +2% variable
-        const langFixedFee = extraLangs * 150; // +$150 USD fijos por idioma extra (QA/Management)
+        // 7. VALOR — ventas que el equipo puede HABILITAR por mes (capacidad / close_rate) y el CPA por venta.
+        const ventasHabilitadas = capacidadLeads / CLOSE_RATE.apro;        // ventas/mes que el equipo puede cerrar
+        const monthlySales = Math.min(ventasHabilitadas, S.units);         // topado por stock (para la absorción)
+        const ingresosMes = ventasHabilitadas * ticketEst * S.commission;  // GCI mensual habilitado
+        const cpaPorVenta = ventasHabilitadas > 0 ? servicioMensual / ventasHabilitadas : 0; // costo por venta habilitada (la estrella)
+        const cpaPct = ticketEst > 0 ? (cpaPorVenta / ticketEst) : 0;      // ~0,2% del ticket
+        const ROI_CAP = 30; // techo alto sólo para casos extremos; el modelo del doc da ~×8-16 creíble
+        const roiRaw = grandTotal > 0 ? ingresosMes / grandTotal : 0;
+        const roi = Math.min(roiRaw, ROI_CAP);
+        const roiTxt = (roiRaw > ROI_CAP ? '≥×' : '×') + roi.toFixed(1);
+        const absorMonths = monthlySales > 0 ? Math.ceil(S.units / monthlySales) : 0;
 
-        const llmRaw = (calcLLMDepth(conversations - nNoRebote, 2) +
-          calcLLMDepth(nNoRebote - nCali, 8) +
-          calcLLMDepth(nCali - nApro, 15) +
-          calcLLMDepth(nApro, 25));
-
-        let markup = S.aiTier === 'premium' ? 1.5 : (S.aiTier === 'balanced' ? 1.7 : 2.0);
-        const infraRawTotal = hostDynamic + (llmRaw * markup) + (conversations * ai.plat * markup) + db.raw + (S.vendors > 3 ? (S.vendors - 3) * 15 : 0);
-        const infraMultiplier = 1.1 * mkt.mktWeight;
-        const infraTotalFinal = infraRawTotal * infraMultiplier;
-
-        // 5. Gestión y Servicio (Markup Amortizado)
-        const baseLicencia = 500 * mkt.mktWeight * valueWeight;
-        const baseSLAValue = MAINT_BASE_SLA[S.sla] * valueWeight;
-        const supportUnitFactor = Math.min(2.5, Math.pow(S.units / 50, 0.2));
-        const soporteFee = Math.round(baseSLAValue * mkt.mktWeight * supportUnitFactor);
-
-        // Fee de gestión basado en el valor teórico del pipeline
-        const activeFrioWeight = S.selectedTiers.frio ? (nNoRebote * 0.5) : 0;
-        const activeCaliWeight = S.selectedTiers.calificado ? (nCali * 10) : 0;
-        const activeAproWeight = S.selectedTiers.aprobado ? (nApro * 150) : 0;
-        const activePrevWeight = S.selectedTiers.preventa ? (nPreV * 4000) : 0;
-
-        // Índice de baja por volumen de leads (Curva asintótica a partir de 35k visitas)
-        const volumeFactor = Math.max(0.3, Math.pow(35000 / Math.max(35000, S.visits), 0.5));
-
-        const pipeWeight = (activeFrioWeight + activeCaliWeight + activeAproWeight + activePrevWeight) * volumeFactor;
-
-        // Multiplicador de mercado suavizado para la gestión
-        // Si USA es 3.5x, su impacto en gestión será ~1.87x, evitando saltos absurdos de p.ej 5k a 15k.
-        const mktScale = Math.pow(mkt.mktWeight, 0.5);
-        const managementFee = (((pipeWeight * 0.05 * valueWeight * mktScale) + (baseLicencia * 0.5)) * langFactorMgmt) + langFixedFee;
-
-        const fixedService = Math.round(baseLicencia + soporteFee + managementFee);
-        const grandTotal = infraTotalFinal + fixedService;
-
-        // 6. ACTUALIZACIÓN DE INTERFAZ (Eliminación de ceros)
-        const fixedPool = grandTotal;
+        // ── DISPLAY ──
         s('r-total', fmtUSD(grandTotal));
-        s('r-svc', fmtUSD(fixedService));
-        s('r-maint', fmtUSD(fixedService));
-        s('r-infra', fmtUSD(infraTotalFinal));
+        s('r-svc', fmtUSD(servicioMensual));
+        s('r-maint', fmtUSD(servicioMensual));
+        s('r-infra', 'incluida');
         s('r-infra2', fmtUSD(infraTotalFinal));
 
-        // Subtotales técnicos
-        s('t-hosting', fmtUSD(hostDynamic * infraMultiplier));
-        s('t-plat', fmtUSD(conversations * ai.plat * markup * infraMultiplier));
-        s('t-llm', fmtUSD(llmRaw * markup * infraMultiplier));
-        s('t-db', fmtUSD(db.raw * infraMultiplier));
-        s('t-total', fmtUSD(infraTotalFinal));
-
-        // Actualización de barras y números centrales
-        const updateRow = (id, count, theorVal, totalWeight) => {
-          const num = document.getElementById('bn-' + id);
-          const st = document.getElementById('st-' + id);
-          if (num) num.textContent = loc(count);
-          if (st) st.textContent = fmtUSD(fixedPool * (totalWeight > 0 ? theorVal / totalWeight : 0));
-
+        // Barras del embudo: cuenta (leaf) + COSTO (reparto del fee). Σ costos = Servicio.
+        const updateRow = (id, count, subtotal) => {
+          const num = document.getElementById('bn-' + id); if (num) num.textContent = loc(count);
+          const st = document.getElementById('st-' + id); if (st) st.textContent = subtotal;
           const bar = document.getElementById('bar-' + id);
           if (bar) bar.style.width = Math.max(2, (count / (conversations || 1)) * 100) + '%';
         };
+        updateRow('frio', cFrio, S.selectedTiers.frio ? (fmtLead(vFrio) + ' c/u') : '$0');
+        updateRow('calificado', cCali, S.selectedTiers.calificado ? (fmtLead(vCali) + ' c/u') : '$0');
+        updateRow('aprobado', cApro, S.selectedTiers.aprobado ? (fmtLead(vApro) + ' c/u') : '$0');
+        updateRow('preventa', cPreV, S.selectedTiers.preventa ? 'Ximia Closing' : '$0');
 
-        const wFrio = nNoRebote * 1;
-        const wCali = nCali * 50;
-        const wApro = nApro * 250;
-        const wPrev = nPreV * 18500;
-        const totalWeight = (S.selectedTiers.frio ? wFrio : 0) +
-          (S.selectedTiers.calificado ? wCali : 0) +
-          (S.selectedTiers.aprobado ? wApro : 0) +
-          (S.selectedTiers.preventa ? wPrev : 0);
+        // Sidebar "Precios por Lead" — VALOR de mercado de cada lead (lente de ROI, no el costo).
+        s('r-lead-frio-sb', S.selectedTiers.frio ? fmtLead(vFrio) : '$0');
+        s('r-lead-p', S.selectedTiers.calificado ? fmtLead(vCali) : '$0');
+        s('r-lead-q', S.selectedTiers.aprobado ? fmtLead(vApro) : '$0');
+        s('r-lead-preventa', S.selectedTiers.preventa ? fmtLead(vPrev) : '$0');
+        const costPerApro = capacidadLeads > 0 ? servicioMensual / capacidadLeads : vApro; // costo efectivo por lead calificado
 
-        // 7. CONTEO ESTRICTO (Si se apagan, Caen a 0 en UI. Si se apaga Pre-Venta, se resta de Aprobado)
-        const finalFrio = S.selectedTiers.frio ? nNoRebote : 0;
-        const finalCali = S.selectedTiers.calificado ? nCali : 0;
-        const finalApro = S.selectedTiers.aprobado ? nApro : 0;
-        const finalPreV = S.selectedTiers.preventa ? nPreV : 0;
-
-        updateRow('frio', finalFrio, S.selectedTiers.frio ? wFrio : 0, totalWeight);
-        updateRow('calificado', finalCali, S.selectedTiers.calificado ? wCali : 0, totalWeight);
-        updateRow('aprobado', finalApro, S.selectedTiers.aprobado ? wApro : 0, totalWeight);
-        updateRow('preventa', finalPreV, S.selectedTiers.preventa ? wPrev : 0, totalWeight);
-
-        // Sidebar Lead Pricing
-        const fmtLeadRow = (count, weight, cap) => {
-          if (count <= 0 || totalWeight <= 0) return `$0`;
-          let unitPrice = (fixedPool * (weight / totalWeight)) / count;
-          if (cap && unitPrice > cap) unitPrice = cap;
-          return fmtLead(unitPrice);
+        // Comparativa vs mercado (#26): lead pre-calificado de Ximia vs contactos sin calificar (benchmarks por mercado).
+        const vsBench = { fb: mkt.benchFb, google: mkt.benchGoogle, zillow: mkt.humanLeadCost };
+        const vsMax = Math.max(vApro, vsBench.fb, vsBench.google, vsBench.zillow);
+        const setVs = (id, val) => {
+          s('vsm-' + id, fmtLead(val));
+          const bar = document.getElementById('vsm-bar-' + id);
+          if (bar) bar.style.width = Math.max(4, (val / vsMax) * 100) + '%';
         };
+        setVs('ximia', vApro); setVs('fb', vsBench.fb); setVs('google', vsBench.google); setVs('zillow', vsBench.zillow);
+        s('vsm-portal-name', mkt.portal); // nombre del portal según el mercado (Zillow solo aplica en USA)
+        s('vsm-guarantee-portal', mkt.portal);
 
-        s('r-lead-frio-sb', fmtLeadRow(finalFrio, S.selectedTiers.frio ? wFrio : 0));
-        s('r-lead-p', fmtLeadRow(finalCali, S.selectedTiers.calificado ? wCali : 0));
-        s('r-lead-q', fmtLeadRow(finalApro, S.selectedTiers.aprobado ? wApro : 0));
-        s('r-lead-preventa', fmtLeadRow(finalPreV, S.selectedTiers.preventa ? wPrev : 0, 250));
+        // Tech breakdown (infra interna, mostrada como "incluida")
+        s('t-hosting', fmtUSD(hostDynamic));
+        s('t-plat', fmtUSD(conversations * ai.plat));
+        s('t-llm', fmtUSD(llmRaw));
+        s('t-db', fmtUSD(db.raw));
+        s('t-crm', fmtUSD(crmRaw));
+        s('t-total', fmtUSD(infraTotalFinal));
+        const voiceRow = document.getElementById('t-voice-row');
+        if (voiceRow) voiceRow.style.display = S.voiceEnabled ? '' : 'none';
+        if (S.voiceEnabled) s('t-voice', fmtUSD(voiceRaw));
 
-        // ROI y Benchmarks
-        const ingresosMes = nPreV * ticketEst * mkt.commission;
-        const roi = grandTotal > 0 ? ingresosMes / grandTotal : 0;
-        s('roi-mult', '×' + roi.toFixed(1));
+        // ROI cards
+        s('roi-mult', roiTxt);
         s('roi-ingresos', fmtUSD(ingresosMes));
-        s('roi-lead-cost', fmtLeadRow(nApro, S.selectedTiers.aprobado ? wApro : 0)); // Mantenemos nApro matemático referencial para benchmark
-        s('roi-benchmark', '$' + mkt.humanLeadCost);
-
-        s('r-roi-main', '×' + roi.toFixed(1));
+        s('roi-lead-cost', fmtUSD(cpaPorVenta));                 // costo por venta habilitada (la estrella: ~0,2% del ticket)
+        s('roi-cpa-pct', '≈ ' + (cpaPct * 100).toFixed(2) + '% de tu ticket');
+        s('roi-benchmark', fmtLead(costPerApro) + ' c/u');       // costo efectivo por lead calificado
+        s('r-roi-main', roiTxt);
         s('r-ingresos-main', fmtUSD(ingresosMes));
+        s('roi-tiempo', absorMonths > 0 ? (absorMonths + (absorMonths === 1 ? ' mes' : ' meses')) : '—');
+        // Baseline humano: (vendedores × leads/vendedor) / close_rate → ventas/mes → meses para el stock.
+        const humanSales = (Math.max(1, S.vendors) * LEADS_PER_REP) / CLOSE_RATE.apro;
+        const humanMonths = humanSales > 0 ? Math.ceil(S.units / humanSales) : 0;
+        s('roi-tiempo-human', humanMonths > 0 ? (humanMonths + ' meses') : '—');
 
-        // Cálculo de Tiempo de Absorción según calidad de funnel
-        let effectiveClosures = 0;
-        if (S.selectedTiers.preventa) {
-          effectiveClosures = nPreV * 1.2; // Alta velocidad, cierre casi directo
-        } else if (S.selectedTiers.aprobado) {
-          effectiveClosures = finalApro * 0.04; // Media velocidad (requiere fuerza de ventas fuerte para cerrar un "aprobado")
-        } else if (S.selectedTiers.calificado) {
-          effectiveClosures = finalCali * 0.005; // Baja velocidad
-        } else if (S.selectedTiers.frio) {
-          effectiveClosures = finalFrio * 0.001; // Muy baja
-        }
+        // Capital liberado (#27): costo de carrying evitado al liquidar el stock antes.
+        // Inventario promedio ≈ mitad del stock durante el período de venta.
+        const monthsSaved = Math.max(0, humanMonths - absorMonths);
+        const stockValue = S.units * ticketEst;
+        const capitalLiberado = monthsSaved * CARRYING_RATE * (stockValue * 0.5);
+        s('cl-meses', monthsSaved > 0 ? (monthsSaved + (monthsSaved === 1 ? ' mes' : ' meses')) : '—');
+        s('cl-monto', fmtUSD(capitalLiberado));
+        s('cl-tasa', (CARRYING_RATE * 100).toString());
 
-        const xMeses = effectiveClosures > 0 ? Math.ceil(S.units / effectiveClosures) : 0;
-        s('roi-tiempo', xMeses > 0 ? `${xMeses} meses` : '—');
-        s('roi-tiempo-human', xMeses > 0 ? `${Math.ceil(xMeses * 4)} meses` : '—');
+        // SLA tabs — base fija del doc (item #12: ahora coincide con lo realmente cobrado).
+        s('sla-price-standard', fmtUSD(SLA_BASE.standard) + ' / mes');
+        s('sla-price-priority', fmtUSD(SLA_BASE.priority) + ' / mes');
+        s('sla-price-enterprise', fmtUSD(SLA_BASE.enterprise) + ' / mes');
 
-        // Precios SLA
-        const updateSlaPrice = (id, baseVal) => {
-          const totalSla = Math.round((baseLicencia / mkt.mktWeight + (baseVal * supportUnitFactor)) * mkt.mktWeight);
-          s('sla-price-' + id, fmtUSD(totalSla) + ' / mes');
-        };
-        updateSlaPrice('standard', MAINT_BASE_SLA.standard);
-        updateSlaPrice('priority', MAINT_BASE_SLA.priority);
-        updateSlaPrice('enterprise', MAINT_BASE_SLA.enterprise);
-
-        s('tb-note-frio', '25% del total de contactos');
-        s('tb-note-caliente', '20% de Fríos');
-        s('tb-note-listo', '15% de Calientes');
-        s('tb-note-trans', '5% de Listos');
-
-        // Sidebar Summary Chips
+        // Sidebar chips (infra incluida)
         const icAi = document.getElementById('ic-ai');
-        if (icAi) s('ic-ai', 'IA + Orq: ' + fmtUSD(((llmRaw * markup) + (conversations * ai.plat * markup) + hostDynamic) * infraMultiplier));
+        if (icAi) s('ic-ai', 'IA + Orq: ' + fmtUSD(llmRaw + conversations * ai.plat + hostDynamic));
         const icDb = document.getElementById('ic-db');
-        if (icDb) s('ic-db', 'DB: ' + fmtUSD(db.raw * infraMultiplier));
+        if (icDb) s('ic-db', 'DB: ' + fmtUSD(db.raw));
+        const icVoice = document.getElementById('ic-voice');
+        if (icVoice) { icVoice.style.display = S.voiceEnabled ? '' : 'none'; if (S.voiceEnabled) s('ic-voice', 'Voz: ' + fmtUSD(voiceRaw)); }
         const rPlatformTotal = document.getElementById('r-platform-total');
-        if (rPlatformTotal) s('r-platform-total', fmtUSD(fixedService));
+        if (rPlatformTotal) s('r-platform-total', fmtUSD(SLA_BASE[S.sla]) + ' base + ' + fmtUSD(variableFee) + ' equipo')
+      }
+
+      // ════════════════════════════════════════════
+      // PERMALINK + CAPTURA DE EMAIL (#25)
+      // ════════════════════════════════════════════
+      function serializeState() {
+        const t = S.selectedTiers;
+        return new URLSearchParams({
+          mkt: S.market, ticket: S.ticket, comm: (S.commission * 100).toFixed(1),
+          units: S.units, vendors: S.vendors, visits: S.visits, sla: S.sla,
+          ai: S.aiTier, db: S.dbTier, voice: S.voiceEnabled ? 1 : 0,
+          tiers: (t.frio ? 1 : 0) + '' + (t.calificado ? 1 : 0) + (t.aprobado ? 1 : 0) + (t.preventa ? 1 : 0),
+          lang: LANG
+        }).toString();
+      }
+      function permalink() { return location.origin + location.pathname + '?' + serializeState(); }
+
+      function hydrateFromURL() {
+        try {
+          const p = new URLSearchParams(location.search);
+          if (![...p.keys()].length) return;
+          const sv = (id, k) => { const v = p.get(k), el = document.getElementById(id); if (v != null && el) el.value = v; };
+          const act = (sel, val, prop) => document.querySelectorAll(sel).forEach(b => { const on = b.dataset[prop] === val; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+          if (p.get('mkt') && MARKET[p.get('mkt')]) { S.market = p.get('mkt'); act('.mkt-btn', S.market, 'mkt'); }
+          sv('ticket-slider', 'ticket'); sv('commission', 'comm'); sv('units', 'units'); sv('vendors', 'vendors'); sv('visits', 'visits');
+          if (p.get('sla')) { S.sla = p.get('sla'); act('.tier-btn[data-sla]', S.sla, 'sla'); }
+          if (p.get('ai')) { S.aiTier = p.get('ai'); act('.tier-btn[data-tier]', S.aiTier, 'tier'); }
+          if (p.get('db')) { S.dbTier = p.get('db'); act('.tier-btn[data-db]', S.dbTier, 'db'); }
+          if (p.get('voice') === '1') { S.voiceEnabled = true; const vt = document.getElementById('voice-toggle'); if (vt) vt.checked = true; const vsec = document.getElementById('voice-section'); if (vsec) vsec.style.display = 'block'; }
+          const tiers = p.get('tiers');
+          if (tiers && tiers.length === 4) {
+            const keys = ['frio', 'calificado', 'aprobado', 'preventa'];
+            keys.forEach((k, i) => { S.selectedTiers[k] = tiers[i] === '1'; });
+            ['calificado', 'aprobado', 'preventa'].forEach(k => {
+              const sw = document.getElementById('sw-' + k); if (sw) sw.checked = S.selectedTiers[k];
+              const row = document.getElementById('row-' + k); if (row) row.classList.toggle('disabled', !S.selectedTiers[k]);
+            });
+          }
+        } catch (e) { }
+      }
+
+      function copyPermalink() {
+        const link = permalink();
+        const done = () => { const b = document.getElementById('copy-link-btn'); if (b) { const o = b.textContent; b.textContent = '✓ Link copiado'; setTimeout(() => b.textContent = o, 2000); } };
+        if (navigator.clipboard) navigator.clipboard.writeText(link).then(done).catch(() => prompt('Copiá tu link:', link));
+        else prompt('Copiá tu link:', link);
+      }
+
+      function submitEmail() {
+        const el = document.getElementById('capture-email'), msg = document.getElementById('capture-msg');
+        const email = (el.value || '').trim();
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { msg.textContent = 'Ingresá un email válido.'; msg.style.color = 'var(--amber)'; return; }
+        const payload = {
+          email, market: S.market, ticket: S.ticket, servicio_mensual: document.getElementById('r-total').innerHTML,
+          quote: serializeState(), permalink: permalink()
+        };
+        msg.textContent = 'Enviando…'; msg.style.color = 'var(--muted)';
+        fetch(CAPTURE_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+          .then(() => { msg.textContent = '✓ ¡Listo! Te enviamos la cotización por email.'; msg.style.color = 'var(--green)'; el.value = ''; })
+          .catch(() => { msg.textContent = 'No pudimos enviarla ahora. Probá el link para compartir.'; msg.style.color = 'var(--amber)'; });
       }
 
       // INIT
+      hydrateFromURL();
       onSlider();
     </script>
 </body>
