@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Construir Fácil — ¿Cuánto te conviene?</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --surface2: #f1f5f9;
+      --border: #e2e8f0;
+      --border2: #cbd5e1;
+      --text: #0f172a;
+      --text2: #334155;
+      --muted: #64748b;
+      --muted2: #94a3b8;
+      --accent: #0092B3;
+      --accent-l: #eefcfe;
+      --accent2: #0e7490;
+      --green: #059669;
+      --amber: #d97706;
+      --red: #dc2626;
+      --font: 'Plus Jakarta Sans', sans-serif;
+      --font-h: 'Outfit', sans-serif;
+      --radius: 18px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 12px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.06);
+    }
+
+    body { background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; font-size: 18px; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 44px 20px 80px; }
+
+    .eyebrow { font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-weight: 700; }
+    .eyebrow::before { content: ''; width: 30px; height: 2px; background: var(--accent); border-radius: 2px; }
+    h1 { font-size: clamp(34px, 5.4vw, 58px); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; font-family: var(--font-h); margin-bottom: 14px; }
+    h1 span { color: var(--accent); }
+    .subtitle { font-size: 19px; color: var(--muted); max-width: 620px; line-height: 1.6; margin-bottom: 44px; }
+
+    .step { margin-bottom: 36px; }
+    .step-label { font-family: var(--font-h); font-size: 22px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+    .step-n { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 15px; font-weight: 700; flex: none; }
+    .step-help { font-size: 15px; color: var(--muted); margin: 0 0 16px 38px; line-height: 1.5; }
+
+    /* ── Plan cards ── */
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 820px) { .plans { grid-template-columns: 1fr; } }
+    .plan { text-align: left; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 20px; cursor: pointer; transition: .15s; font-family: var(--font); }
+    .plan:hover { border-color: var(--border2); }
+    .plan.on { border-color: var(--accent); background: var(--accent-l); box-shadow: var(--shadow); }
+    .plan-name { font-family: var(--font-h); font-size: 17px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 3px; }
+    .plan-scope { font-size: 14px; color: var(--muted); line-height: 1.45; margin-bottom: 14px; min-height: 42px; }
+    .plan-price { font-family: var(--font-h); font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+    .plan-price small { font-size: 14px; font-weight: 600; color: var(--muted); letter-spacing: 0; }
+    .plan-rev { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Chips (rubro) ── */
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-left: 38px; }
+    .chip { font-family: var(--font); font-size: 16px; font-weight: 600; padding: 11px 20px; border-radius: 999px; border: 2px solid var(--border); background: #fff; color: var(--text2); cursor: pointer; transition: .15s; }
+    .chip:hover { border-color: var(--border2); }
+    .chip.on { border-color: var(--accent); background: var(--accent-l); color: var(--accent2); }
+
+    /* ── Slider ── */
+    .field { margin-left: 38px; max-width: 560px; }
+    .field-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .field-val { font-family: var(--font-h); font-size: 26px; font-weight: 800; color: var(--accent2); letter-spacing: -.02em; }
+    .field-note { font-size: 14px; color: var(--muted); }
+    input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 3px; background: var(--surface2); outline: none; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.18); }
+    input[type=range]::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 3px solid #fff; }
+    .ticks { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted2); margin-top: 6px; }
+
+    /* ── Result ── */
+    .result { background: var(--text); color: #fff; border-radius: var(--radius); padding: 36px 34px 30px; margin-top: 48px; }
+    .result-head { font-size: 15px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted2); font-weight: 700; margin-bottom: 20px; }
+    .verdict { font-family: var(--font-h); font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.15; letter-spacing: -.025em; margin-bottom: 12px; }
+    .verdict b { color: #5ee0f7; }
+    .verdict-sub { font-size: 17px; color: #cbd5e1; line-height: 1.6; max-width: 660px; }
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,.14); border-radius: var(--radius-sm); overflow: hidden; margin-top: 28px; }
+    @media (max-width: 820px) { .metrics { grid-template-columns: 1fr; } }
+    .metric { background: var(--text); padding: 20px 18px; }
+    .metric-k { font-size: 13px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted2); font-weight: 700; margin-bottom: 6px; }
+    .metric-v { font-family: var(--font-h); font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+    .metric-n { font-size: 14px; color: #94a3b8; margin-top: 4px; line-height: 1.45; }
+
+    /* ── Incluido ── */
+    .incl { margin-top: 40px; border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 28px; }
+    .incl h3 { font-family: var(--font-h); font-size: 21px; font-weight: 700; margin-bottom: 16px; }
+    .incl ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 11px 26px; }
+    @media (max-width: 820px) { .incl ul { grid-template-columns: 1fr; } }
+    .incl li { font-size: 16px; line-height: 1.5; color: var(--text2); padding-left: 26px; position: relative; }
+    .incl li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+
+    .foot { margin-top: 26px; font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 760px; }
+    .cta { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { background: var(--accent); color: #fff; border: none; font-family: var(--font); font-size: 17px; font-weight: 700; padding: 15px 28px; border-radius: 999px; cursor: pointer; transition: .15s; }
+    .btn:hover { background: var(--accent2); }
+    .btn-ghost { background: transparent; color: var(--text2); border: 1.5px solid var(--border2); }
+    .btn-ghost:hover { background: var(--surface); color: var(--text); }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="eyebrow">Construir Fácil · Plan anual 2026/27</div>
+    <h1>¿Cuántas ventas necesitás para que <span>te rinda</span>?</h1>
+    <p class="subtitle">Elegí un plan y decinos qué vendés. Te decimos cuántas ventas por mes cubren la inversión — con
+      tus números, no con los nuestros.</p>
+
+    <!-- 1 · Plan -->
+    <div class="step">
+      <div class="step-label"><span class="step-n">1</span> ¿Hasta dónde querés llegar?</div>
+      <p class="step-help">Los tres planes incluyen vidriera, campañas, prensa, eventos, social y Ximia.AI. Se
+        diferencian por territorio y volumen de exposición.</p>
+      <div class="plans" id="plans"></div>
+    </div>
+
+    <!-- 2 · Rubro -->
+    <div class="step">
+      <div class="step-label"><span class="step-n">2</span> ¿Qué vendés?</div>
+      <p class="step-help">Sólo para estimar cuánto te queda de cada venta. No te pedimos tus números.</p>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <!-- 3 · Precio -->
+    <div class="step">
+      <div class="step-label"><span class="step-n">3</span> ¿Cuánto sale, en promedio?</div>
+      <p class="step-help" id="precioHelp"></p>
+      <div class="field">
+        <div class="field-top">
+          <div class="field-val" id="precioTxt"></div>
+          <div class="field-note" id="precioNote"></div>
+        </div>
+        <input type="range" id="precio" min="0" max="40" value="14">
+        <div class="ticks"><span>USD 100</span><span>USD 5.000</span><span>USD 200.000</span></div>
+      </div>
+    </div>
+
+    <!-- Resultado -->
+    <div class="result">
+      <div class="result-head">Tu punto de equilibrio</div>
+      <div class="verdict" id="verdict"></div>
+      <div class="verdict-sub" id="verdictSub"></div>
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-k">Ventas por mes</div>
+          <div class="metric-v" id="mBe"></div>
+          <div class="metric-n" id="mBeN"></div>
+        </div>
+        <div class="metric">
+          <div class="metric-k">Cierre necesario</div>
+          <div class="metric-v" id="mCierre"></div>
+          <div class="metric-n" id="mCierreN"></div>
+        </div>
+        <div class="metric">
+          <div class="metric-k">Te queda por venta</div>
+          <div class="metric-v" id="mMargen"></div>
+          <div class="metric-n" id="mMargenN"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Incluido -->
+    <div class="incl">
+      <h3 id="inclTitle"></h3>
+      <ul id="inclList"></ul>
+    </div>
+
+    <p class="foot" id="foot"></p>
+
+    <div class="cta">
+      <button class="btn" id="btnTalk">Quiero sumarme</button>
+      <button class="btn btn-ghost" id="btnPdf">Ver el plan completo</button>
+    </div>
+
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════════════════════
+       PARÁMETROS  ·  fuente: doc "Subite al primer marketplace de casas"
+       ─────────────────────────────────────────────────────────────── */
+    const REV_SHARE = null;   // ← "X% sobre ventas": SIN DEFINIR. Poner el nº (ej: 3) cuando se decida.
+                              //    Con REV_SHARE cargado, el punto de equilibrio lo contempla.
+
+    const PLANS = {
+      main: {
+        name: 'Main Partner Nacional', price: 5000, contactos: 1000,
+        scope: 'Protagonista en todo el país.',
+        items: [
+          'Banner principal en la Home',
+          'Banner principal en todas las páginas del sitio',
+          '500.000 impresiones en campañas y Medios Asociados de todo el país',
+          'Tráfico segmentado por Ximia hacia tu espacio',
+          'Tu marca en 12 notas de prensa (DIB + Medios Federales)',
+          'Oferta directa de tus productos a desarrolladores y constructores',
+          'Presencia destacada en eventos + stands propios en workshops',
+          'Contenido propio en el Social Media de Construir Fácil',
+          'Ximia.AI atendiendo consultas 24/7 + condiciones especiales para tu web',
+          '~1.000 contactos calificados por mes, con datos e historial de consulta',
+        ],
+      },
+      regional: {
+        name: 'Socio Regional', price: 2500, contactos: 500,
+        scope: 'Protagonista en tu zona de influencia.',
+        items: [
+          'Banner principal en la Home de tu zona',
+          'Banner rotativo en todas las páginas del sitio',
+          '250.000 impresiones en campañas y Medios Asociados',
+          'Tráfico segmentado por Ximia hacia tu espacio',
+          'Tu contenido en 12 notas de prensa (DIB + Medios Federales)',
+          'Oferta directa de tus productos a desarrolladores y constructores',
+          'Presencia destacada en eventos y ferias de tu zona',
+          'Contenido propio en el Social Media de Construir Fácil',
+          'Ximia.AI atendiendo consultas 24/7 + condiciones especiales para tu web',
+          '~500 contactos calificados por mes, con datos e historial de consulta',
+        ],
+      },
+      proveedor: {
+        name: 'Proveedor Estratégico', price: 1000, contactos: 100,
+        scope: 'Materiales, accesorios y servicios para los proyectos con los que trabajamos.',
+        items: [
+          'Banner rotativo en las páginas afines a tu rubro',
+          '100.000 impresiones en campañas y Medios Asociados de todo el país',
+          'Tráfico segmentado por Ximia hacia tu espacio',
+          'Oferta directa de tus productos a desarrolladores y constructores',
+          'Mailing directo a cada nuevo contacto listo para construir',
+          'Presencia asociada en el calendario anual de eventos',
+          'Contenido propio en el Social Media de Construir Fácil',
+          'Ximia.AI recomendando tus productos 24/7 a quien está por construir',
+          '~100 contactos calificados por mes, con datos e historial de consulta',
+        ],
+      },
+    };
+
+    /* Rubros: el margen es un SUPUESTO nuestro por categoría, editable acá.
+       Evita pedirle al cliente un dato que no va a querer dar. */
+    const RUBROS = {
+      materiales: { label: 'Materiales y accesorios', margen: 0.25, unidad: 'una compra promedio', ref: [500, 20000] },
+      servicios:  { label: 'Servicios e instalación', margen: 0.40, unidad: 'un trabajo promedio', ref: [300, 15000] },
+      viviendas:  { label: 'Viviendas y proyectos',   margen: 0.15, unidad: 'una vivienda promedio', ref: [30000, 200000] },
+    };
+
+    // Escala del slider de precio (discreta: más legible que un rango continuo)
+    const PRECIO_STEPS = [100, 150, 200, 300, 400, 500, 700, 900, 1200, 1500, 2000, 2500, 3000, 4000,
+      5000, 6000, 7000, 8000, 10000, 12000, 15000, 18000, 20000, 25000, 30000, 35000, 40000, 45000,
+      50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 135000, 150000, 165000, 180000, 200000];
+
+    let plan = 'regional';
+    let rubro = 'materiales';
+
+    const $ = id => document.getElementById(id);
+    const usd = n => 'USD ' + Math.round(n).toLocaleString('es-AR');
+    const num = n => Math.round(n).toLocaleString('es-AR');
+    const nice = n => n < 10 ? n.toFixed(1).replace('.0', '') : num(n);
+
+    function renderPlans() {
+      $('plans').innerHTML = Object.entries(PLANS).map(([k, p]) => `
+        <button class="plan ${k === plan ? 'on' : ''}" data-k="${k}">
+          <div class="plan-name">${p.name}</div>
+          <div class="plan-scope">${p.scope}</div>
+          <div class="plan-price">${usd(p.price)}<small> /mes</small></div>
+          <div class="plan-rev">${REV_SHARE ? '+ ' + REV_SHARE + '% sobre ventas' : '+ un % sobre ventas'}</div>
+        </button>`).join('');
+      document.querySelectorAll('.plan').forEach(el =>
+        el.onclick = () => { plan = el.dataset.k; renderPlans(); calc(); });
+    }
+
+    function renderChips() {
+      $('chips').innerHTML = Object.entries(RUBROS).map(([k, r]) => `
+        <button class="chip ${k === rubro ? 'on' : ''}" data-k="${k}">${r.label}</button>`).join('');
+      document.querySelectorAll('.chip').forEach(el =>
+        el.onclick = () => { rubro = el.dataset.k; renderChips(); calc(); });
+    }
+
+    function calc() {
+      const p = PLANS[plan];
+      const r = RUBROS[rubro];
+      const precio = PRECIO_STEPS[+$('precio').value];
+      const margen = precio * r.margen;
+
+      // El % sobre ventas, si existe, se descuenta del margen antes de calcular equilibrio.
+      const margenNeto = REV_SHARE ? margen - precio * (REV_SHARE / 100) : margen;
+
+      const ventasBE = p.price / margenNeto;              // ventas/mes para cubrir el plan
+      const cierreBE = ventasBE / p.contactos;            // % de contactos que hay que cerrar
+      const unoCada = p.contactos / ventasBE;             // 1 venta cada N contactos
+
+      $('precioHelp').textContent = 'Precio de venta de ' + r.unidad + ', al público.';
+      $('precioTxt').textContent = usd(precio);
+      $('precioNote').textContent = 'margen estimado ' + Math.round(r.margen * 100) + '%';
+
+      const v = $('verdict'), vs = $('verdictSub');
+      if (ventasBE <= 1) {
+        v.innerHTML = `Con <b>1 sola venta al mes</b> cubrís el plan entero.`;
+      } else {
+        v.innerHTML = `Cubrís el plan con <b>${nice(ventasBE)} ventas al mes</b>.`;
+      }
+
+      if (cierreBE > 1) {
+        vs.textContent = `Este plan te queda grande: harían falta más ventas de las que dan los ${num(p.contactos)} `
+          + `contactos que recibís. Mirá un plan de menor alcance, o hablemos de algo a medida.`;
+      } else if (cierreBE <= 0.05) {
+        vs.textContent = `Recibís ~${num(p.contactos)} contactos calificados por mes. Cerrando apenas `
+          + `${(cierreBE * 100).toFixed(1)}% de ellos ya estás en cero — todo lo que cierres de ahí en más es ganancia. `
+          + `Y eso sin contar la vidriera, las campañas, la prensa y los eventos, que van incluidos.`;
+      } else if (cierreBE <= 0.20) {
+        vs.textContent = `Recibís ~${num(p.contactos)} contactos calificados por mes: tenés que cerrar `
+          + `${(cierreBE * 100).toFixed(0)}% para llegar a cero. Es una tasa de cierre normal para el rubro. `
+          + `La vidriera, las campañas, la prensa y los eventos van incluidos aparte.`;
+      } else {
+        vs.textContent = `Recibís ~${num(p.contactos)} contactos calificados por mes y necesitás cerrar `
+          + `${(cierreBE * 100).toFixed(0)}% para llegar a cero — es exigente. Con un ticket más alto o un plan `
+          + `de menor alcance el número se acomoda.`;
+      }
+
+      // Bajo 1 venta el número fraccionado confunde: se redondea a "1" y se aclara en la nota.
+      $('mBe').textContent = ventasBE < 1 ? '1' : nice(ventasBE);
+      $('mBeN').textContent = ventasBE < 1
+        ? `una sola venta cubre los ${usd(p.price)} del mes`
+        : `para cubrir ${usd(p.price)} de inversión mensual`;
+
+      $('mCierre').textContent = cierreBE > 1 ? '—' : (cierreBE * 100).toFixed(cierreBE < 0.1 ? 1 : 0) + '%';
+      $('mCierreN').textContent = cierreBE > 1
+        ? `no alcanzan los ${num(p.contactos)} contactos del plan`
+        : ventasBE < 1
+          ? `te sobran contactos: recibís ~${num(p.contactos)} por mes`
+          : `1 venta cada ${nice(unoCada)} contactos recibidos`;
+
+      $('mMargen').textContent = usd(margenNeto);
+      $('mMargenN').textContent = `${Math.round(r.margen * 100)}% sobre ${usd(precio)}`
+        + (REV_SHARE ? `, ya descontado el ${REV_SHARE}% sobre ventas` : '');
+
+      $('inclTitle').textContent = 'Qué incluye ' + p.name;
+      $('inclList').innerHTML = p.items.map(i => `<li>${i}</li>`).join('');
+
+      $('foot').innerHTML = `El margen del ${Math.round(r.margen * 100)}% es un promedio de referencia para `
+        + `<b>${r.label.toLowerCase()}</b>: si el tuyo es distinto, el número se mueve en proporción. `
+        + `El volumen de contactos es un promedio mensual estimado. El plan es anual y se factura por mes.`;
+    }
+
+    $('precio').oninput = calc;
+    $('btnTalk').onclick = () => window.parent.postMessage({ type: 'cf-calc-cta', plan, rubro }, '*');
+    $('btnPdf').onclick = () => window.parent.postMessage({ type: 'cf-calc-plan', plan }, '*');
+
+    renderPlans();
+    renderChips();
+    calc();
+  </script>
+</body>
+
+</html>
