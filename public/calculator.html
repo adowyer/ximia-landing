@@ -1828,7 +1828,7 @@
             <div class="tier-grid">
               <button class="tier-btn active" data-tier="economic" onclick="setAI(this)">
                 <span class="tier-icon">⚡</span><span class="tier-label">Estándar</span>
-                <span class="tier-note">Costo optimizado (Claude Haiku 4.5)</span>
+                <span class="tier-note">Costo optimizado (Gemini 3 Flash)</span>
               </button>
               <button class="tier-btn" data-tier="balanced" onclick="setAI(this)">
                 <span class="tier-icon">⚖️</span><span class="tier-label">Pro</span>
@@ -2404,8 +2404,12 @@
       // Modelos y precios oficiales de Anthropic (por 1M tokens, jul 2026).
       const AI_TIERS = {
         economic: {
-          label: 'Claude Haiku 4.5',   // $1 in / $5 out
-          in: 1.00 / 1e6, out: 5.00 / 1e6, plat: 0.005
+          // Motor real del tier Estándar. Precio de lista Gemini 3 Flash (jul-2026).
+          // OJO: la salida de Gemini incluye thinking tokens -> el costo real puede ser
+          // varias veces turnOutput. Validar contra la facturación de AI Studio / GCP.
+          // OJO 2: Google ya encabeza con Gemini 3.6 Flash ($1.50 / $7.50). Al migrar, actualizar.
+          label: 'Gemini 3 Flash',     // $0.50 in / $3 out
+          in: 0.50 / 1e6, out: 3.00 / 1e6, plat: 0.005
         },
         balanced: {
           label: 'Claude Sonnet 5',    // $3 in / $15 out

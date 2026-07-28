@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Zap, BarChart3, Target, Check, Database, Cpu, Home, Braces, Landmark, Radar, BrainCircuit, Calculator, UserCheck, ShieldCheck, AlertTriangle } from "lucide-react";
+import { Zap, BarChart3, Target, Check, Database, Cpu, Home, Braces, Landmark, Radar, BrainCircuit, Calculator, UserCheck, ShieldCheck, AlertTriangle, X } from "lucide-react";
 
 // i18n
 import i18n from "i18next";
@@ -21,6 +21,7 @@ i18n.use(initReactI18next).init({
 
 export default function App() {
   const { t, i18n: i18nInstance } = useTranslation();
+  const [showCalculator, setShowCalculator] = useState(false);
 
   const handleCalendlyClick = () => {
     if (window.Calendly) {
@@ -363,12 +364,15 @@ export default function App() {
             </p>
 
             <div className="flex gap-4">
-              {/* <button className="border px-6 py-3 rounded-xl text-lg">
+              <button 
+                onClick={() => setShowCalculator(true)}
+                className="border border-gray-300 px-6 py-3 rounded-xl text-lg hover:bg-gray-50 transition-colors"
+              >
                 {t("hero_cta_secondary")}
-              </button> */}
+              </button>
               <button
                 onClick={handleCalendlyClick}
-                className="bg-black text-white px-6 py-3 rounded-xl text-lg"
+                className="bg-black text-white px-6 py-3 rounded-xl text-lg hover:opacity-90 transition-opacity"
               >
                 {t("hero_cta_primary")}
               </button>
@@ -885,6 +889,39 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* CALCULATOR MODAL */}
+      {showCalculator && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div 
+            className="absolute inset-0 bg-black/80 transition-opacity"
+            onClick={() => setShowCalculator(false)}
+          />
+          <div className="relative w-full max-w-6xl h-full max-h-[90vh] bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col z-10 animate-in fade-in zoom-in duration-200 [transform:translateZ(0)]">
+            <div className="flex justify-between items-center p-6 border-b border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#0092B3]/10 rounded-xl flex items-center justify-center text-[#0092B3]">
+                  <Calculator size={22} />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 tracking-tight">Ximia AI — Cost Calculator</h3>
+              </div>
+              <button 
+                onClick={() => setShowCalculator(false)}
+                className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <div className="flex-1 w-full bg-white overflow-auto">
+              <iframe 
+                src="/calculator.html" 
+                className="w-full h-full border-none"
+                title="Ximia Cost Calculator"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
