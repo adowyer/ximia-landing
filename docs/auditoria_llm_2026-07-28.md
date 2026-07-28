@@ -1,6 +1,6 @@
 # Auditoría de costos LLM del calculador — 2026-07-28
 
-**Archivo auditado:** `public/calculator_v2.html`
+**Archivo auditado:** `public/simulador.html`
 **Método:** workflow multi-agente, 13 agentes (4 lentes independientes + verificación adversarial de cada hallazgo material), ~1,1M tokens.
 **Escenario canónico:** 10.000 contactos propios · Latam · campaña off · voz off · 3 asientos.
 **Doc vivo relacionado:** `MOTOR_COSTOS_LLM.md` (cómo funciona el motor de costos y qué no romper).
@@ -113,6 +113,6 @@ Hasta medir: los números son **piso defendible** dentro del 2,5×, **no** costo
 
 ## Cambios aplicados al repo en esta auditoría (2026-07-28)
 
-- `public/calculator_v2.html`: flag de Opus 5 borrado (verificado); documentados en código los 3 supuestos (cache intra-charla válido por widget sincrónico · thinking-vs-turnos · triage `escalationRate=0`). **Ningún precio mostrado se movió.**
+- `public/simulador.html`: flag de Opus 5 borrado (verificado); documentados en código los 3 supuestos (cache intra-charla válido por widget sincrónico · thinking-vs-turnos · triage `escalationRate=0`). **Ningún precio mostrado se movió.**
 - `MOTOR_COSTOS_LLM.md`: sección de auditoría agregada.
 - `docs/auditoria_llm_2026-07-28.md`: este documento.

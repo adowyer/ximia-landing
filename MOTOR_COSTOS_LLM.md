@@ -1,6 +1,6 @@
 # Motor de costos LLM del calculador — cómo funciona y qué NUNCA volver a romper
 
-**Archivo:** `public/calculator_v2.html` · **Última revisión:** 2026-07-28
+**Archivo:** `public/simulador.html` · **Última revisión:** 2026-07-28
 **Entrada canónica del calculador:** `HANDOFF_CALCULADOR_2026-07-09.md`
 
 > El costo del LLM es **uno de los costos más importantes** de Ximia. Este documento existe
@@ -73,7 +73,7 @@ real; el cache es secundario.
 
 ---
 
-## 🎛️ Parámetros a calibrar (todos `[DEV]`, en `calc()` de `public/calculator_v2.html`)
+## 🎛️ Parámetros a calibrar (todos `[DEV]`, en `calc()` de `public/simulador.html`)
 
 Cuando tengamos **facturación real** de un cliente, ajustar estos y queda clavado:
 
