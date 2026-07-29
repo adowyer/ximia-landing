@@ -144,7 +144,7 @@
     }
 
     .setup-title {
-      font-size: 48px;
+      font-size: 40px;
       font-weight: 800;
       color: #fff;
       letter-spacing: -.02em;
@@ -153,9 +153,9 @@
     }
 
     .setup-desc {
-      font-size: 19px;
+      font-size: 16px;
       color: #cbd5e1;
-      max-width: 480px;
+      max-width: 580px;
       line-height: 1.6;
       margin-top: 2px;
     }
@@ -374,13 +374,22 @@
     }
     .plan-name { font-family: var(--font-h); font-size: 21px; font-weight: 800; color: var(--text); margin-bottom: 18px; }
     /* 3 items facturables — categoría + costo (arriba) y qué incluye (abajo) */
-    .plan-lines { display: flex; flex-direction: column; gap: 16px; }
+    .plan-lines { display: flex; flex-direction: column; gap: 16px;margin-bottom: 15px; }
     .plan-line-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
     .plan-line-cat { font-family: var(--font); font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3; }
     .plan-line-head b { font-family: var(--font-h); font-weight: 800; font-size: 15px; color: var(--text); white-space: nowrap; }
     .plan-line-desc { font-family: var(--font); font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+    .plan-incl { list-style: none; margin: 7px 0 0; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+    .plan-incl li { font-family: var(--font); font-size: 11.5px; color: var(--muted); line-height: 1.35; padding-left: 16px; position: relative; }
+    .plan-incl li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--accent); font-size: 10px; font-weight: 700; }
+    .plan-incl li em { font-style: normal; color: var(--text); font-weight: 600; }
     .plan-line.pb-camp .plan-line-cat, .plan-line.pb-camp b { color: var(--amber); }
     .plan-line.pb-camp { padding-top: 12px; border-top: 1px dashed var(--border); }
+    /* Línea de voz: apagada/gris por default, se prende (accent) con el switch general */
+    .plan-line.pb-voice { padding-top: 12px; border-top: 1px dashed var(--border); opacity: 0.55; transition: opacity .2s; }
+    .plan-line.pb-voice.on { opacity: 1; }
+    .plan-line.pb-voice .plan-line-cat, .plan-line.pb-voice b { color: var(--muted2); }
+    .plan-line.pb-voice.on .plan-line-cat, .plan-line.pb-voice.on b { color: var(--accent); }
     .plan-total { margin-top: auto; padding-top: 18px; border-top: 1.5px solid var(--border); }
     .plan-card.selected .plan-total { border-top-color: rgba(8,145,178,0.25); }
     .plan-total-amount { font-family: var(--font-h); font-size: 40px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; line-height: 1; }
@@ -402,7 +411,7 @@
       line-height: 1.4;
     }
     .plan-roi b {
-      font-family: var(--font-h); font-weight: 800; font-size: 40px;
+      font-family: var(--font-h); font-weight: 800; font-size: 55px;
       color: var(--green); display: block; margin-bottom: 6px; letter-spacing: -0.02em; line-height: 1;
     }
     @media(max-width: 600px) { .plan-roi b { font-size: 34px; } }
@@ -637,7 +646,7 @@
     }
 
     .toggle-name {
-      font-size: 18px;
+      font-size: 25px;
       font-weight: 700;
       color: var(--text);
     }
@@ -1696,25 +1705,26 @@
     /* ── XIMIA CLOSING · feature destacado full-width ── */
     .closing-feature {
       margin-top: 22px;
-      background: linear-gradient(135deg, rgba(5,150,105,0.10), rgba(5,150,105,0.04));
-      border: 1.5px solid rgba(5,150,105,0.3);
+      background: var(--text);
+      border: none;
       border-radius: var(--radius);
       padding: 40px;
       position: relative;
       overflow: hidden;
+      color: #fff;
     }
     .closing-feature::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; bottom: 0; width: 5px;
-      background: var(--green);
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--green));
     }
     .closing-badge {
       display: inline-block;
       font-family: var(--font-h);
       font-weight: 800;
-      color: var(--green);
-      font-size: 30px;
+      color: #fff;
+      font-size: 40px;
       letter-spacing: -0.02em;
       margin-bottom: 10px;
     }
@@ -1730,7 +1740,7 @@
       font-family: var(--font);
       font-size: 18px;
       font-weight: 400;
-      color: var(--text);
+      color: #fff;
       line-height: 1.5;
       margin: 0;
     }
@@ -1738,7 +1748,7 @@
       font-family: var(--font-h);
       font-size: 20px;
       font-weight: 800;
-      color: var(--text);
+      color: #fff;
       letter-spacing: -0.02em;
       line-height: 1.25;
       margin: 0 0 12px;
@@ -1746,21 +1756,21 @@
     .closing-text {
       font-family: var(--font);
       font-size: 18px;
-      color: var(--text2);
+      color: rgba(255,255,255,0.92);
       line-height: 1.6;
       margin: 0;
     }
-    .closing-text strong { color: var(--text); }
+    .closing-text strong { color: #fff; }
     .closing-guarantee {
-      background: rgba(5,150,105,0.08);
-      border: 1px solid rgba(5,150,105,0.22);
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.3);
       border-radius: 14px;
       padding: 18px 20px;
     }
     .closing-guarantee-head {
       font-family: var(--font-h);
       font-weight: 800;
-      color: var(--green);
+      color: #fff;
       font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -1969,7 +1979,7 @@
       </div>
       <div class="setup-action" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
         <div class="setup-price"
-          style="font-size: 44px; font-weight: 700; color: #fff; line-height: 2; letter-spacing: -0.02em;">A cotizar</div>
+          style="font-size: 40px; font-weight: 700; color: #fff; line-height: 2; letter-spacing: -0.02em;">A cotizar</div>
         <a href="https://calendly.com/hola-ximia-ectr/ximia-demo" target="_blank" class="btn-primary btn-glow"
           style="white-space: nowrap;">Agendar Onboarding & Demo →</a>
       </div>
@@ -2113,19 +2123,19 @@
                 <div class="tier-grid" style="grid-template-columns: 1fr; gap:8px;">
                   <button class="tier-btn" data-pkg="premium" onclick="setPkg(this)">
                     <span class="tier-label">Main Partner Nacional</span>
-                    <span class="pkg-price">USD 5.000<span class="pkg-per">/mes + % ventas</span></span>
+                    <span class="pkg-price">USD 2.500<span class="pkg-per">/mes (plan anual) + % ventas</span></span>
                     <span class="tier-note">500.000 impresiones · alcance nacional</span>
                     <span class="tier-note">Protagonista en todo el país · ~1.000 leads/mes</span>
                   </button>
                   <button class="tier-btn active" data-pkg="regional" onclick="setPkg(this)">
                     <span class="tier-label">Socio Regional</span>
-                    <span class="pkg-price">USD 2.500<span class="pkg-per">/mes + % ventas</span></span>
+                    <span class="pkg-price">USD 1.750<span class="pkg-per">/mes (plan anual) + % ventas</span></span>
                     <span class="tier-note">250.000 impresiones · tu zona de influencia</span>
                     <span class="tier-note">Protagonista en tu región · ~500 leads/mes</span>
                   </button>
                   <button class="tier-btn" data-pkg="basica" onclick="setPkg(this)">
                     <span class="tier-label">Proveedor Estratégico</span>
-                    <span class="pkg-price">USD 1.000<span class="pkg-per">/mes + % ventas</span></span>
+                    <span class="pkg-price">USD 800<span class="pkg-per">/mes (plan anual) + % ventas</span></span>
                     <span class="tier-note">100.000 impresiones · páginas afines</span>
                     <span class="tier-note">Materiales y servicios · ~100 leads/mes</span>
                   </button>
@@ -2264,7 +2274,7 @@
         <div class="roi-section sep" style="margin-top:16px;">
           <div style="background:#fff; border:1.5px solid var(--border); border-radius:var(--radius); padding:32px 36px; position:relative; overflow:hidden; box-shadow:var(--shadow);">
             <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--green));"></div>
-            <div style="font-size:22px; font-weight:800; color:var(--text); letter-spacing:-.02em; font-family:var(--font-h);">El mismo lead de Ximia vs. otros canales</div>
+            <div style="font-size:25px; font-weight:800; color:var(--text); letter-spacing:-.02em; font-family:var(--font-h);">El lead de Ximia vs. otros canales</div>
             <div style="font-family:var(--font); font-size:14px; color:var(--text2); margin-top:6px; margin-bottom:24px; max-width:62ch; line-height:1.6;">
               Facebook, Zonaprop y Google venden contactos <strong style="color:var(--text);">sin calificación financiera</strong>: hay que llamarlos, calificarlos y descartar la mayoría. El lead de Ximia llega con <strong style="color:var(--text);">perfil completo + scoring</strong> — y aún así, más barato que todos.
             </div>
@@ -2310,7 +2320,7 @@
 
           <!-- Soporte de Voz (add-on) — arriba, debajo del título, con aire -->
           <div class="field" style="margin-top:8px; margin-bottom:30px; padding-bottom:22px; border-bottom:1px solid var(--border);">
-            <div class="toggle-row">
+            <div class="toggle-row" style="justify-content:flex-start; gap:20px;">
               <div class="toggle-info">
                 <span class="toggle-name">🎙️ Soporte de Voz (STT / TTS)</span>
                 <span class="toggle-sub">Conversaciones por voz con el agente</span>
@@ -2323,7 +2333,6 @@
           </div>
 
           <div class="field">
-            <div class="field-note" style="margin-bottom:14px;">→ tocá un plan para elegirlo</div>
             <div class="grid3 plan-grid">
 
               <div class="plan-col">
@@ -2332,16 +2341,37 @@
                 <div class="plan-name">⚡ Estándar</div>
                 <div class="plan-lines">
                   <div class="plan-line">
-                    <div class="plan-line-head"><span class="plan-line-cat">🧠 Motor de Inteligencia Artificial</span><b id="cmotor-standard">$—</b></div>
-                    <div class="plan-line-desc">Gemini 3 Flash · costo optimizado</div>
+                    <div class="plan-line-head"><span class="plan-line-cat">🧠 Agente de IA a medida</span><b id="cagente-standard">$—</b></div>
+                    <ul class="plan-incl">
+                      <li>Modelo de Lenguaje (LLM) · <em>Gemini 3 Flash</em></li>
+                      <li>Base de Conocimiento a medida</li>
+                      <li>Entrenamiento continuo</li>
+                      <li>Memoria conversacional</li>
+                      <li>Guardrails y seguridad</li>
+                      <li>Multi-idioma</li>
+                    </ul>
                   </div>
                   <div class="plan-line">
-                    <div class="plan-line-head"><span class="plan-line-cat">💾 Base de datos e infraestructura</span><b id="cbase-standard">$—</b></div>
-                    <div class="plan-line-desc">Hasta 50k registros · backup semanal</div>
+                    <div class="plan-line-head"><span class="plan-line-cat">🏗️ Plataforma y desarrollo</span><b id="cplataforma-standard">$—</b></div>
+                    <ul class="plan-incl">
+                      <li>Motor de scoring y calificación</li>
+                      <li>Perfilado y base de datos de leads · <em>hasta 50k</em></li>
+                      <li>Análisis y reportes</li>
+                      <li>Integraciones (WhatsApp / web / CRM)</li>
+                      <li>Infraestructura 24/7 · <em>backup semanal</em></li>
+                    </ul>
                   </div>
                   <div class="plan-line">
-                    <div class="plan-line-head"><span class="plan-line-cat">🛠️ Plataforma y Fee de Servicio</span><b id="cplat-standard">$—</b></div>
-                    <div class="plan-line-desc">Respuesta &lt; 48h · 1 actualización / mes</div>
+                    <div class="plan-line-head"><span class="plan-line-cat">🤝 Soporte · Help Desk</span><b id="csoporte-standard">$—</b></div>
+                    <ul class="plan-incl">
+                      <li>Setup y puesta en marcha</li>
+                      <li>Resolución de incidentes y problemas técnicos</li>
+                      <li>Actualizaciones · <em>1 por mes</em></li>
+                      <li>Acuerdo de nivel de servicio (SLA) · <em>&lt; 48h</em></li>
+                    </ul>
+                  </div>
+                  <div class="plan-line pb-voice" id="pvoice-row-standard">
+                    <div class="plan-line-head"><span class="plan-line-cat">🎙️ Soporte de voz</span><b id="pvoice-standard">—</b></div>
                   </div>
                   <div class="plan-line pb-camp" id="pcamp-row-standard" style="display:none;">
                     <div class="plan-line-head"><span class="plan-line-cat" id="pcamp-name-standard">Campaña</span><b id="pcamp-standard">$—</b></div>
@@ -2361,16 +2391,37 @@
                 <div class="plan-name">⚖️ Pro</div>
                 <div class="plan-lines">
                   <div class="plan-line">
-                    <div class="plan-line-head"><span class="plan-line-cat">🧠 Motor de Inteligencia Artificial</span><b id="cmotor-pro">$—</b></div>
-                    <div class="plan-line-desc">Claude Sonnet 5 · equilibrado</div>
+                    <div class="plan-line-head"><span class="plan-line-cat">🧠 Agente de IA a medida</span><b id="cagente-pro">$—</b></div>
+                    <ul class="plan-incl">
+                      <li>Modelo de Lenguaje (LLM) · <em>Claude Sonnet 5</em></li>
+                      <li>Base de Conocimiento a medida</li>
+                      <li>Entrenamiento continuo</li>
+                      <li>Memoria conversacional</li>
+                      <li>Guardrails y seguridad</li>
+                      <li>Multi-idioma</li>
+                    </ul>
                   </div>
                   <div class="plan-line">
-                    <div class="plan-line-head"><span class="plan-line-cat">💾 Base de datos e infraestructura</span><b id="cbase-pro">$—</b></div>
-                    <div class="plan-line-desc">+500k registros · backup diario</div>
+                    <div class="plan-line-head"><span class="plan-line-cat">🏗️ Plataforma y desarrollo</span><b id="cplataforma-pro">$—</b></div>
+                    <ul class="plan-incl">
+                      <li>Motor de scoring y calificación</li>
+                      <li>Perfilado y base de datos de leads · <em>+500k registros</em></li>
+                      <li>Análisis y reportes</li>
+                      <li>Integraciones (WhatsApp / web / CRM)</li>
+                      <li>Infraestructura 24/7 · <em>backup diario</em></li>
+                    </ul>
                   </div>
                   <div class="plan-line">
-                    <div class="plan-line-head"><span class="plan-line-cat">🛠️ Plataforma y Fee de Servicio</span><b id="cplat-pro">$—</b></div>
-                    <div class="plan-line-desc">Respuesta &lt; 12h · 2 actualizaciones / mes</div>
+                    <div class="plan-line-head"><span class="plan-line-cat">🤝 Soporte · Help Desk</span><b id="csoporte-pro">$—</b></div>
+                    <ul class="plan-incl">
+                      <li>Setup y puesta en marcha</li>
+                      <li>Resolución de incidentes y problemas técnicos</li>
+                      <li>Actualizaciones · <em>2 por mes</em></li>
+                      <li>Acuerdo de nivel de servicio (SLA) · <em>&lt; 24h</em></li>
+                    </ul>
+                  </div>
+                  <div class="plan-line pb-voice" id="pvoice-row-pro">
+                    <div class="plan-line-head"><span class="plan-line-cat">🎙️ Soporte de voz</span><b id="pvoice-pro">—</b></div>
                   </div>
                   <div class="plan-line pb-camp" id="pcamp-row-pro" style="display:none;">
                     <div class="plan-line-head"><span class="plan-line-cat" id="pcamp-name-pro">Campaña</span><b id="pcamp-pro">$—</b></div>
@@ -2390,16 +2441,37 @@
                 <div class="plan-name">🔥 Premium</div>
                 <div class="plan-lines">
                   <div class="plan-line">
-                    <div class="plan-line-head"><span class="plan-line-cat">🧠 Motor de Inteligencia Artificial</span><b id="cmotor-premium">$—</b></div>
-                    <div class="plan-line-desc">Claude Opus 5 · máximo razonamiento</div>
+                    <div class="plan-line-head"><span class="plan-line-cat">🧠 Agente de IA a medida</span><b id="cagente-premium">$—</b></div>
+                    <ul class="plan-incl">
+                      <li>Modelo de Lenguaje (LLM) · <em>Claude Opus 5</em></li>
+                      <li>Base de Conocimiento a medida</li>
+                      <li>Entrenamiento continuo</li>
+                      <li>Memoria conversacional</li>
+                      <li>Guardrails y seguridad</li>
+                      <li>Multi-idioma</li>
+                    </ul>
                   </div>
                   <div class="plan-line">
-                    <div class="plan-line-head"><span class="plan-line-cat">💾 Base de datos e infraestructura</span><b id="cbase-premium">$—</b></div>
-                    <div class="plan-line-desc">Servidor replicado · 99.9% de disponibilidad</div>
+                    <div class="plan-line-head"><span class="plan-line-cat">🏗️ Plataforma y desarrollo</span><b id="cplataforma-premium">$—</b></div>
+                    <ul class="plan-incl">
+                      <li>Motor de scoring y calificación</li>
+                      <li>Perfilado y base de datos de leads · <em>registros ilimitados</em></li>
+                      <li>Análisis y reportes</li>
+                      <li>Integraciones (WhatsApp / web / CRM)</li>
+                      <li>Infraestructura 24/7 · <em>replicado 99.9%</em></li>
+                    </ul>
                   </div>
                   <div class="plan-line">
-                    <div class="plan-line-head"><span class="plan-line-cat">🛠️ Plataforma y Fee de Servicio</span><b id="cplat-premium">$—</b></div>
-                    <div class="plan-line-desc">Respuesta &lt; 1h · actualizaciones ilimitadas</div>
+                    <div class="plan-line-head"><span class="plan-line-cat">🤝 Soporte · Help Desk</span><b id="csoporte-premium">$—</b></div>
+                    <ul class="plan-incl">
+                      <li>Setup y puesta en marcha</li>
+                      <li>Resolución de incidentes y problemas técnicos</li>
+                      <li>Actualizaciones · <em>ilimitadas</em></li>
+                      <li>Acuerdo de nivel de servicio (SLA) · <em>&lt; 6h</em></li>
+                    </ul>
+                  </div>
+                  <div class="plan-line pb-voice" id="pvoice-row-premium">
+                    <div class="plan-line-head"><span class="plan-line-cat">🎙️ Soporte de voz</span><b id="pvoice-premium">—</b></div>
                   </div>
                   <div class="plan-line pb-camp" id="pcamp-row-premium" style="display:none;">
                     <div class="plan-line-head"><span class="plan-line-cat" id="pcamp-name-premium">Campaña</span><b id="pcamp-premium">$—</b></div>
@@ -2459,7 +2531,7 @@
         <p style="font-family:var(--font); font-size:13.5px; color:var(--muted); margin:-6px 0 18px; line-height:1.6;">Tres maneras de participar y destacarte dentro del ecosistema. Cada plan suma tráfico segmentado por Ximia hacia tu espacio, más medios y presencia de marca.</p>
 
         <div class="pkg-row">
-          <h4>Main Partner Nacional <span class="imp">· USD 5.000/mes + % sobre ventas · ~1.000 leads/mes</span></h4>
+          <h4>Main Partner Nacional <span class="imp">· USD 2.500/mes (plan anual) + % sobre ventas · ~1.000 leads/mes</span></h4>
           <p>Para quienes quieren ser protagonistas en todo el país.</p>
           <ul>
             <li>Banner Principal en la Home y en todas las páginas de ConstruirFacil.com</li>
@@ -2474,7 +2546,7 @@
         </div>
 
         <div class="pkg-row">
-          <h4>Socio Regional <span class="imp">· USD 2.500/mes + % sobre ventas · ~500 leads/mes</span></h4>
+          <h4>Socio Regional <span class="imp">· USD 1.750/mes (plan anual) + % sobre ventas · ~500 leads/mes</span></h4>
           <p>Para quienes quieren ser protagonistas en su zona y crecer sin esfuerzo.</p>
           <ul>
             <li>Banner Principal en la Home de tu zona + Banner Rotativo en tu región</li>
@@ -2489,7 +2561,7 @@
         </div>
 
         <div class="pkg-row">
-          <h4>Proveedor Estratégico <span class="imp">· USD 1.000/mes + % sobre ventas · ~100 leads/mes</span></h4>
+          <h4>Proveedor Estratégico <span class="imp">· USD 800/mes (plan anual) + % sobre ventas · ~100 leads/mes</span></h4>
           <p>Para empresas de materiales, accesorios y servicios para construir.</p>
           <ul>
             <li>Banner Rotativo en páginas específicas afines</li>
@@ -2557,12 +2629,13 @@
       // Paquetes de campaña (difusión ConstruirFácil) = leads objetivo/mes del documento [DEV].
       // Inyectan TRÁFICO = leads / (ENGAGE_RATE × CALIF_RATE), para que el embudo rinda ~esos leads calificados.
       const CAMPAIGN_PACKAGES = { basica: 100, regional: 500, premium: 1000 };
-      // Costo mensual de cada campaña (del doc: Main Partner 5.000 · Socio Regional 2.500 · Proveedor 1.000 USD/mes
-      // + % sobre ventas). Se SUMA a la inversión cuando la campaña está activa, como línea DIFERENCIADA (no es fee de Ximia).
+      // Costo mensual de cada campaña = PLAN ANUAL / 12 (para que no sume tanto al mensual):
+      // Main Partner 30.000/12=2.500 · Socio Regional 21.000/12=1.750 · Proveedor 9.600/12=800 USD/mes + % sobre ventas.
+      // Se SUMA a la inversión cuando la campaña está activa, como línea DIFERENCIADA (no es fee de Ximia).
       const CAMPAIGN_INFO = {
-        premium:  { cost: 5000, label: 'Main Partner Nacional' },
-        regional: { cost: 2500, label: 'Socio Regional' },
-        basica:   { cost: 1000, label: 'Proveedor Estratégico' },
+        premium:  { cost: 2500, label: 'Main Partner Nacional' },   // 30.000 anual / 12
+        regional: { cost: 1750, label: 'Socio Regional' },          // 21.000 anual / 12
+        basica:   { cost: 800,  label: 'Proveedor Estratégico' },   // 9.600 anual / 12
       };
 
       // ── Fee mensual (modelo por tramos: "por eso cobramos fee") ──
@@ -2573,6 +2646,13 @@
       const TARIFA_CONV = 0.022; // costo real por conversación (blend de tramos del embudo real). [DEV, rango 0.005-0.06]
       const INFRA_MARKUP = 1.4;  // markup de infra (hosting, DB, voz, orquestación). El costo es por-modelo y se actualiza con el precio del modelo
       const LLM_MARKUP = 2.5;    // markup SEPARADO y más alto para el motor de IA — el costo LLM es el más volátil (tokens/cache/largo de respuesta). Blindaje. [DEV]
+      // MARKUP DE SOPORTE / SERVICIO GESTIONADO (pivote a precio-por-valor, 2026-07-28): el cost-plus subvalúa un
+      // servicio donde Andrea hace setup, soporte, resolución y desarrollo continuo. El cliente NO puede saber los
+      // volúmenes de tokens → se cobra por VALOR, no por costo. Calibrado para que el default (Latam Estándar) ≈ $1.800. [DEV]
+      const SUPPORT_MARKUP = 1.86;
+      // Reparto POR VALOR del total en las 3 tarjetas visibles (NO por costo — el "Agente a medida" es la línea premium,
+      // no la factura de tokens). Suman 1.0; el remanente va a Soporte para que el total cierre exacto. [DEV]
+      const VALUE_SPLIT = { agente: 0.39, plataforma: 0.36 /* soporte = resto */ };
       // Management fee por contactos/mes (× mktWeight). Tramos de la memoria 2026-05-14.
       const MGMT_TRAMOS = [
         { max: 10000, fee: 400 }, { max: 30000, fee: 700 }, { max: 75000, fee: 1000 },
@@ -2621,15 +2701,20 @@
 
       const DB_TIERS = { standard: { raw: 25 }, scalable: { raw: 75 }, enterprise: { raw: 200 } };
 
-      // VOICE_STACKS: precios en USD por MINUTO de audio (wholesale).
-      // Cada turn ≈ 0.5 min (combinado usuario + agente). Voice solo se cobra
-      // si voiceEnabled = true; se aplica sobre el total de turns del funnel.
+      // ── VOZ: modelo honesto (auditoría 2026-07-28) ──────────────────────────────────────────────
+      // STT se factura por MINUTO de audio del USUARIO; TTS por CARÁCTER de la respuesta del AGENTE.
+      // Así se factura de verdad — el modelo viejo (0.5 min × precio plano) sub-contaba ~10× la voz.
+      // Rebotes (la mayoría del volumen) corren TTS BARATO — misma lógica que el triage del LLM: no
+      // gastamos voz cara en gente que se fue. ElevenLabs ($50/1M) descartado por caro.
+      // Precios reales verificados (por 1M caracteres TTS / por minuto STT):
       const VOICE_STACKS = {
-        none: { stt: 0, tts: 0 },
-        standard: { stt: 0.002, tts: 0.008 }, // Whisper/Deepgram bulk + OpenAI TTS standard
-        premium: { stt: 0.003, tts: 0.020 },  // Deepgram Nova + ElevenLabs Turbo wholesale
+        none:     { sttMin: 0,      ttsChar: 0 },
+        standard: { sttMin: 0.006,  ttsChar: 16 / 1e6 }, // Whisper/Deepgram + Google Neural2 ($16/1M)
+        premium:  { sttMin: 0.0077, ttsChar: 30 / 1e6 }, // Deepgram Nova streaming + Deepgram Aura-2 / Google Chirp3 HD ($30/1M)
       };
-      const VOICE_MIN_PER_TURN = 0.5;
+      const TTS_BOUNCE_CHAR = 4 / 1e6;         // rebotes → TTS barato (Google Standard $4/1M), vía tipo triage
+      const VOICE_USER_MIN_PER_TURN  = 0.4;    // [DEV] min de habla del USUARIO por turno (a la gente le encanta hablar → STT pesa)
+      const VOICE_AGENT_CHARS_PER_TURN = 250;  // [DEV] largo de la respuesta HABLADA del agente — corta a propósito (controla TTS)
 
       // Configuración de Tokens (Estructura Ximia)
       // [DEV] PAR A CALIBRAR CON FACTURACIÓN REAL (auditoría 2026-07-28): turnOutput NO modela los "thinking tokens"
@@ -2896,9 +2981,15 @@
         const hostBase = S.aiTier === 'premium' ? 450 : (S.aiTier === 'balanced' ? 280 : 120);
         const hostDynamic = hostBase + (Math.floor(conversations / 10000) * 40);
         const wT = TOKENS.weightedTurns;
-        const totalTurns = leafFrio * wT.rebote + leafCali * wT.frio +
-          leafApro * wT.caliente + leafPreV * wT.ready;
-        const voiceRaw = S.voiceEnabled ? Math.max(0, totalTurns) * VOICE_MIN_PER_TURN * (vs.stt + vs.tts) : 0;
+        // Turnos de audio: rebotes (la mayoría) + las que progresan. Mapeo consistente con el LLM (Frío=8, Cali=15, Apro/PreV=25).
+        const bounceTurns = Math.max(0, conversations - nFrio) * wT.rebote;
+        const progTurns   = leafFrio * wT.frio + leafCali * wT.caliente + leafApro * wT.ready + leafPreV * wT.ready;
+        // STT sobre TODO el audio (el usuario habla en rebotes y progresadas); TTS: rebotes por la vía barata, progresadas por la del stack.
+        const voiceRaw = S.voiceEnabled
+          ? (bounceTurns + progTurns) * VOICE_USER_MIN_PER_TURN * vs.sttMin
+            + bounceTurns * VOICE_AGENT_CHARS_PER_TURN * TTS_BOUNCE_CHAR
+            + progTurns   * VOICE_AGENT_CHARS_PER_TURN * vs.ttsChar
+          : 0;
         // ⭐ MODELO DE COSTO LLM — documentado en MOTOR_COSTOS_LLM.md (leer antes de tocar).
         //    NUNCA volver a una tarifa plana por conversación: el costo DEBE salir de tokens × precio del motor.
         // Motor IA: COSTO REAL por tokens × precio del motor, con DOS optimizaciones de arquitectura:
@@ -2972,8 +3063,14 @@
           const lF = Math.max(0, nFrio - pCali), lC = Math.max(0, pCali - pApro), lA = Math.max(0, pApro - pPreV), lP = pPreV;
           const pServ = Math.round(SLA_BASE[m.sla] + seats * ASIENTO_PRECIO + langFixedFee);
           const pHost = (m.ai === 'premium' ? 450 : (m.ai === 'balanced' ? 280 : 120)) + Math.floor(conversations / 10000) * 40;
-          const pTurns = lF * wT.rebote + lC * wT.frio + lA * wT.caliente + lP * wT.ready;
-          const pVoice = S.voiceEnabled ? Math.max(0, pTurns) * VOICE_MIN_PER_TURN * (vs.stt + vs.tts) : 0;
+          // Voz: rebotes (compartidos, vía TTS barata) + progresadas del plan (vía TTS del stack). STT sobre todo el audio.
+          const pBounceTurns = Math.max(0, conversations - nFrio) * wT.rebote;
+          const pProgTurns = lF * wT.frio + lC * wT.caliente + lA * wT.ready + lP * wT.ready;
+          const pVoice = S.voiceEnabled
+            ? (pBounceTurns + pProgTurns) * VOICE_USER_MIN_PER_TURN * vs.sttMin
+              + pBounceTurns * VOICE_AGENT_CHARS_PER_TURN * TTS_BOUNCE_CHAR
+              + pProgTurns   * VOICE_AGENT_CHARS_PER_TURN * vs.ttsChar
+            : 0;
           let pIn = 0, pOut = 0;
           for (const [n, t] of [[lF, wT.frio], [lC, wT.caliente], [lA, wT.ready], [lP, wT.ready]]) {
             const fx = TOKENS.fixedInput * (firstTurnMult + CACHE_READ * Math.max(0, t - 1));
@@ -2982,28 +3079,42 @@
           const pLlm = triageRaw + (pIn * pai.in + pOut * pai.out);
           // 3 ITEMS FACTURABLES. La INFRA no escala por mercado (cuesta lo mismo en todos lados). El FEE DE SERVICIO
           // (SLA + asientos + orquestación) SÍ escala por mercado × mktFactor — un asiento/fee/soporte cuesta más donde el mercado es más caro.
-          const catMotor = Math.round(pLlm * LLM_MARKUP);                                                        // 1) Motor de IA (infra, NO escala)
-          const catBase  = Math.round((pHost + pdb.raw + pVoice) * INFRA_MARKUP);                                // 2) Base de datos e infra (NO escala)
-          const catPlat  = Math.round((pServ + conversations * pai.plat * INFRA_MARKUP) * mktFactor);            // 3) Plataforma y Fee de Servicio (SÍ escala por mercado)
-          const ximiaTotal = catMotor + catBase + catPlat;
-          // Costo de campaña (si está activa) — se suma al total pero es una línea DIFERENCIADA (difusión ConstruirFácil, no fee de Ximia).
+          const catMotor = Math.round(pLlm * LLM_MARKUP);                                                        // Motor de IA (LLM, NO escala por mercado)
+          const catBase  = Math.round((pHost + pdb.raw) * INFRA_MARKUP);                                         // Infra + DB (voz va en línea propia, NO acá)
+          const catPlat  = Math.round((pServ + conversations * pai.plat * INFRA_MARKUP) * mktFactor);            // Servicio (SLA + asientos + orquestación) — SÍ escala por mercado
+          const costTotal = catMotor + catBase + catPlat;                                                        // costo real + markups de costo (piso interno) — SIN voz
+          // MARKUP DE SOPORTE → precio por VALOR (servicio gestionado: setup, soporte, resolución, desarrollo continuo).
+          const valueTotal = Math.round(costTotal * SUPPORT_MARKUP);
+          // Subtotales de las 3 tarjetas repartidos POR VALOR (no por costo): el Agente a medida es la línea premium.
+          const cAgente     = Math.round(valueTotal * VALUE_SPLIT.agente);
+          const cPlataforma = Math.round(valueTotal * VALUE_SPLIT.plataforma);
+          const cSoporte    = valueTotal - cAgente - cPlataforma;                                                // remanente → los 3 suman EXACTO el subtotal
+          // Voz: LÍNEA PROPIA (se saca de las 3 líneas para que no se muevan al togglear). Mismo markup que la infra + soporte.
+          const cVoice = S.voiceEnabled ? Math.round(pVoice * INFRA_MARKUP * SUPPORT_MARKUP) : 0;
+          // Costo de campaña (si está activa) — línea DIFERENCIADA, NO lleva markup de soporte (difusión ConstruirFácil, no fee de Ximia).
           const campCost = S.trafficCampaign ? (CAMPAIGN_INFO[S.campaignPkg]?.cost || 0) : 0;
-          const pTotal = ximiaTotal + campCost;
+          const pTotal = valueTotal + cVoice + campCost;
           // Valor de mercado de los leads que ESTE plan genera (su propio embudo) → ROI = valor / costo
           const valueGen = (lF * INCIDENCIA.frio + lC * INCIDENCIA.cali + lA * INCIDENCIA.apro + lP * INCIDENCIA.prev) * BASE_LEAD_VALUE * mktFactor;
           const roi = pTotal > 0 ? valueGen / pTotal : 0;
-          return { cMotor: catMotor, cBase: catBase, cPlat: catPlat, campania: campCost, total: pTotal, motor: pai.label, valueGen, roi, listos: lP };
+          return { cAgente, cPlataforma, cSoporte, voice: cVoice, campania: campCost, total: pTotal, motor: pai.label, valueGen, roi, listos: lP };
         }
         const campActive = S.trafficCampaign;
         const campLabel = CAMPAIGN_INFO[S.campaignPkg]?.label || '';
         ['standard', 'pro', 'premium'].forEach(k => {
           const c = costForPlan(k);
           s('pt-' + k, fmtUSD(c.total));
-          s('cmotor-' + k, fmtUSD(c.cMotor)); s('cbase-' + k, fmtUSD(c.cBase)); s('cplat-' + k, fmtUSD(c.cPlat));
+          s('cagente-' + k, fmtUSD(c.cAgente)); s('cplataforma-' + k, fmtUSD(c.cPlataforma)); s('csoporte-' + k, fmtUSD(c.cSoporte));
           // MULTIPLICADOR de ventas = leads "Listo para cerrar" que entrega el plan ÷ ventas actuales del equipo (input).
           const mult = c.listos / Math.max(1, S.baseSales);
           const multStr = mult >= 10 ? Math.round(mult).toString() : (Math.round(mult * 10) / 10).toString().replace(/\.0$/, '');
           s('roi-' + k, '<b>ROI ' + multStr + '×</b>Ximia multiplica por ' + multStr + ' tus oportunidades de venta actuales.');
+          // Línea de voz: siempre visible, gris/apagada; se prende (accent) + muestra su valor con el switch general.
+          const voiceRow = document.getElementById('pvoice-row-' + k);
+          if (voiceRow) {
+            voiceRow.classList.toggle('on', S.voiceEnabled);
+            s('pvoice-' + k, S.voiceEnabled ? fmtUSD(c.voice) : '—');
+          }
           // Línea de campaña (diferenciada) — se muestra sólo si la campaña está activa
           const campRow = document.getElementById('pcamp-row-' + k);
           if (campRow) {

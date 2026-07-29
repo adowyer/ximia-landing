@@ -151,3 +151,70 @@ del 2,5×, no un costo esperado — **no comprometer Pro/Premium como precio fij
 Opus vs Sonnet es empírico. Andrea ya probó Sonnet en real (el gap no era enorme). Pendiente: **A/B Opus vs Sonnet
 con el mismo guión** en el agente n8n. Si Opus no gana claro → Premium en Sonnet es defendible y más barato
 ($15 vs $25 de output). 4.8 ↔ 5 es indistinto en costo.
+
+---
+
+## 🎙️ Modelo de costo de VOZ (corregido 2026-07-28)
+
+El modelo viejo (`0,5 min × precio plano`) sub-contaba la voz **~10×**. Corregido a facturación real:
+
+- **STT por MINUTO de audio del USUARIO** · **TTS por CARÁCTER de la respuesta del AGENTE** (así se factura de verdad).
+- **Rebotes → TTS barato** (Google Standard $4/1M) — misma lógica que el triage del LLM: no gastamos voz cara en
+  gente que se fue. Solo las que progresan usan la voz buena.
+- **ElevenLabs descartado** ($50/1M, carísimo). Precios reales verificados (jul-2026, por 1M car TTS / por min STT):
+
+| Stack | STT/min | TTS/1M car | Proveedores |
+|---|---|---|---|
+| standard | $0,006 | **$16** (Google Neural2) | Whisper/Deepgram + Google Neural2 |
+| premium | $0,0077 | **$30** (Aura-2 / Chirp3 HD) | Deepgram Nova streaming + Deepgram Aura-2 |
+| rebotes | (del stack) | **$4** (Google Standard) | vía barata tipo triage |
+
+- Alternativas más baratas que ElevenLabs, todas verificadas: Google Neural2 $16 · Aura-2 / Chirp3 HD $30 · Cartesia ~$40-50.
+- **LiveKit NO es un TTS** — es orquestación (WebRTC) que enruta a un TTS. Benchmark útil: agente full-loaded ~$0,077/min.
+- Perillas `[DEV]`: `VOICE_USER_MIN_PER_TURN = 0.4` (min de habla del usuario) · `VOICE_AGENT_CHARS_PER_TURN = 250`
+  (respuesta corta a propósito) · precios por stack · `TTS_BOUNCE_CHAR`.
+- **Confianza:** precios = altos (verificados). Volúmenes = estimados (mismas perillas a medir con uso real; el
+  driver más grande y riesgoso es el STT — "a la gente le encanta hablar"). El neto ($130-200 raw) es defendible;
+  el $90 viejo era imposible. Voz off por default; cae dentro del markup, riesgo acotado.
+- Ximia corre en **widget sincrónico** → aplica el cache de KB intra-charla (0,10×); revisar solo si se agrega WhatsApp/async.
+
+---
+
+## 💰 PRECIO POR VALOR (pivote 2026-07-28) — cómo se arma el número que ve el cliente
+
+El cost-plus subvalúa un servicio gestionado. **Nadie paga por tokens; paga porque Andrea hace que funcione**
+(setup, soporte, resolución, desarrollo continuo). Y el cliente **no puede saber los volúmenes de tokens** → se
+cobra por VALOR, no por costo.
+
+### La mecánica (en `costForPlan`, `public/simulador.html`)
+```
+costTotal  = catMotor + catBase + catPlat           // costo real + markups (piso INTERNO) — SIN voz
+valueTotal = round(costTotal × SUPPORT_MARKUP)       // SUPPORT_MARKUP = 1.86 → default Latam Estándar ≈ $1.808
+cAgente/cPlataforma/cSoporte = split(valueTotal)     // VALUE_SPLIT 0.39/0.36/resto — ESTABLES (no cambian con voz)
+cVoice     = round(pVoice × INFRA_MARKUP × SUPPORT_MARKUP)  // VOZ = LÍNEA PROPIA (off por default; se saca de las 3 líneas)
+pTotal     = valueTotal + cVoice + campCost          // voz = línea aparte · campaña = pass-through (sin markup soporte)
+```
+
+- **Subtotales por VALOR, no por costo.** El "🧠 Agente de IA a medida" es la línea premium (la más gruesa),
+  NO la factura de tokens. Mostrar el costo crudo del LLM ("$97") lo hacía sonar a suscripción de Claude — error.
+- El **modelo de costos LLM/infra/voz sigue siendo el piso interno** para defender el número si preguntan.
+- Perillas `[DEV]`: `SUPPORT_MARKUP` (1.86) · `VALUE_SPLIT` (0.39 / 0.36 / resto).
+
+### Las 3 tarjetas (renombradas a valor, con "qué incluye")
+| Línea | Qué comunica | Bullets |
+|---|---|---|
+| 🧠 **Agente de IA a medida** | el cerebro custom, no un LLM crudo | Modelo de Lenguaje (LLM · modelo/plan) · Base de Conocimiento · Entrenamiento continuo · Memoria conversacional · Guardrails · Multi-idioma |
+| 🏗️ **Plataforma y desarrollo** | lo que YA está construido | Scoring y calificación · Perfilado + base de datos · Análisis y reportes · Integraciones · Infra 24/7 |
+| 🤝 **Soporte · Help Desk** | tu trabajo continuo | Setup · Resolución de incidentes · Integraciones nuevas/mes · Optimización continua · Soporte dedicado (SLA) |
+
+Diferenciadores por plan: modelo · tamaño de base + backup · integraciones nuevas/mes + SLA de respuesta.
+
+### Salida (Latam, campaña/voz off)
+| Plan | 🧠 Agente | 🏗️ Plataforma | 🤝 Soporte | **Total** |
+|---|---|---|---|---|
+| Estándar | $705 | $651 | $452 | **$1.808** |
+| Pro | $1.368 | $1.263 | $877 | **$3.508** |
+| Premium | $2.439 | $2.252 | $1.564 | **$6.255** |
+
+Pendiente de validar con **Guillermo**: nivel del `SUPPORT_MARKUP`, el split, y si Premium a ~$6.255 pide un
+markup escalonado en vez de parejo.
