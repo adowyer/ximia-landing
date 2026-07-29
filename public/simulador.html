@@ -3089,8 +3089,9 @@
           const cAgente     = Math.round(valueTotal * VALUE_SPLIT.agente);
           const cPlataforma = Math.round(valueTotal * VALUE_SPLIT.plataforma);
           const cSoporte    = valueTotal - cAgente - cPlataforma;                                                // remanente → los 3 suman EXACTO el subtotal
-          // Voz: LÍNEA PROPIA (se saca de las 3 líneas para que no se muevan al togglear). Mismo markup que la infra + soporte.
-          const cVoice = S.voiceEnabled ? Math.round(pVoice * INFRA_MARKUP * SUPPORT_MARKUP) : 0;
+          // Voz: LÍNEA PROPIA. Lleva SOLO el markup de infra (1,4×), NO el de soporte — es casi un pass-through de APIs
+          // (STT/TTS), no da trabajo de servicio gestionado como el agente. Cobrarle el markup de soporte encima era de más.
+          const cVoice = S.voiceEnabled ? Math.round(pVoice * INFRA_MARKUP) : 0;
           // Costo de campaña (si está activa) — línea DIFERENCIADA, NO lleva markup de soporte (difusión ConstruirFácil, no fee de Ximia).
           const campCost = S.trafficCampaign ? (CAMPAIGN_INFO[S.campaignPkg]?.cost || 0) : 0;
           const pTotal = valueTotal + cVoice + campCost;

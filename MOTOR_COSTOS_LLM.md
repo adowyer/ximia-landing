@@ -191,7 +191,7 @@ cobra por VALOR, no por costo.
 costTotal  = catMotor + catBase + catPlat           // costo real + markups (piso INTERNO) — SIN voz
 valueTotal = round(costTotal × SUPPORT_MARKUP)       // SUPPORT_MARKUP = 1.86 → default Latam Estándar ≈ $1.808
 cAgente/cPlataforma/cSoporte = split(valueTotal)     // VALUE_SPLIT 0.39/0.36/resto — ESTABLES (no cambian con voz)
-cVoice     = round(pVoice × INFRA_MARKUP × SUPPORT_MARKUP)  // VOZ = LÍNEA PROPIA (off por default; se saca de las 3 líneas)
+cVoice     = round(pVoice × INFRA_MARKUP)           // VOZ = LÍNEA PROPIA · SOLO markup infra (1,4×), NO soporte (es pass-through de APIs)
 pTotal     = valueTotal + cVoice + campCost          // voz = línea aparte · campaña = pass-through (sin markup soporte)
 ```
 
