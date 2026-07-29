@@ -62,11 +62,25 @@
       margin-bottom: 48px;
     }
 
-    .header-ximia-logo {
-      height: 50px;
+    /* ── Lockup co-brand: Ximia (izq) + Construir Fácil (der), como el header del sitio CF ── */
+    .cobrand-band {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 34px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cobrand-ximia-logo {
+      height: 58px;
       width: auto;
       display: block;
-      margin-bottom: 30px;
+    }
+    .cobrand-cf {
+      height: 56px; /* misma medida que en construirfacil.com (.cf-site-header-cf) */
+      width: auto;
+      display: block;
     }
 
     .calc-eyebrow {
@@ -355,7 +369,7 @@
     .price-col.selected .price-break { border-top-color: rgba(8,145,178,0.25); }
     .pb-row { display: flex; justify-content: space-between; font-family: var(--font); font-size: 13px; color: var(--text2); margin-bottom: 7px; }
     .pb-row b { color: var(--text); font-weight: 700; }
-    /* Línea de campaña — diferenciada (difusión, no fee de Ximia) */
+    /* Línea de campaña — diferenciada (difusión ConstruirFácil, no fee de Ximia) */
     .pb-camp { color: var(--amber) !important; margin-top: 4px; padding-top: 8px; border-top: 1px dashed var(--border); }
     .pb-camp b { color: var(--amber) !important; }
     .price-motor { font-family: var(--font); font-size: 12px; color: var(--muted); margin-top: 12px; }
@@ -1964,9 +1978,12 @@
 
     <!-- HEADER -->
     <div class="calc-header">
-      <img src="/ximia_logo.png" alt="Ximia AI" class="header-ximia-logo">
+      <div class="cobrand-band">
+        <img src="/ximia_logo.png" alt="Ximia AI" class="cobrand-ximia-logo">
+        <img src="/cf_logo_gris.png" alt="Construir Fácil" class="cobrand-cf">
+      </div>
       <div class="calc-eyebrow">Beneficios que superan los costos.</div>
-      <h1>Simulá <span>Ximia AI</span> en tu negocio.</h1>
+      <h1>Combiná el poder de <br><span>Construir Fácil y Ximia.ai</span><br> en tu negocio.</h1>
       <p class="calc-subtitle">Configurá los valores de tu negocio y obtené un estimado en tiempo real de las ventas que
         vas a lograr y la inversión final de cada campaña. Los costos están 100% relacionados a tu tráfico, tu mercado y
         la arquitectura que elijas.</p>
@@ -2533,24 +2550,24 @@
 
     </div> <!-- main-grid -->
 
-    <!-- MODAL: qué incluye cada campaña -->
+    <!-- MODAL: qué incluye cada campaña (fuente: doc "Costos y Condiciones Construir Fácil + Ximia") -->
     <div class="modal-overlay" id="pkg-modal" onclick="if(event.target===this)closePkgModal()">
       <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="pkg-modal-title">
         <button class="modal-close" aria-label="Cerrar" onclick="closePkgModal()">×</button>
-        <h3 class="modal-title" id="pkg-modal-title">Campañas de difusión</h3>
+        <h3 class="modal-title" id="pkg-modal-title">Campañas de difusión de ConstruirFácil</h3>
         <p style="font-family:var(--font); font-size:13.5px; color:var(--muted); margin:-6px 0 18px; line-height:1.6;">Tres maneras de participar y destacarte dentro del ecosistema. Cada plan suma tráfico segmentado por Ximia hacia tu espacio, más medios y presencia de marca.</p>
 
         <div class="pkg-row">
           <h4>Main Partner Nacional <span class="imp">· USD 2.500/mes (plan anual) + % sobre ventas · ~1.000 leads/mes</span></h4>
           <p>Para quienes quieren ser protagonistas en todo el país.</p>
           <ul>
-            <li>Banner Principal en la Home y en todas las páginas del sitio</li>
+            <li>Banner Principal en la Home y en todas las páginas de ConstruirFacil.com</li>
             <li>500.000 impresiones en campañas y Medios Asociados (alcance nacional)</li>
             <li>Tráfico segmentado por Ximia dirigido a tu espacio</li>
-            <li>Mención de marca en notas de prensa del plan de medios</li>
+            <li>Mención de marca en 12 notas de prensa (DIB + Medios Federales)</li>
             <li>Oferta directa B2B a desarrolladores y constructores del ecosistema</li>
             <li>Presencia destacada en eventos presenciales (stands y workshops)</li>
-            <li>Social Media con contenido de tu marca</li>
+            <li>Social Media de ConstruirFácil con contenido de tu marca</li>
             <li>Ximia.AI 24/7 + condiciones para sumarla a tu propia web</li>
           </ul>
         </div>
@@ -2562,10 +2579,10 @@
             <li>Banner Principal en la Home de tu zona + Banner Rotativo en tu región</li>
             <li>250.000 impresiones en campañas y Medios Asociados</li>
             <li>Tráfico segmentado por Ximia dirigido a tu espacio</li>
-            <li>Contenido de marca en notas de prensa del plan de medios</li>
+            <li>Contenido de marca en 12 notas de prensa (DIB + Medios Federales)</li>
             <li>Oferta directa B2B a desarrolladores y constructores</li>
             <li>Presencia en eventos, ferias y exposiciones de tu zona</li>
-            <li>Social Media con contenido de tu marca</li>
+            <li>Social Media de ConstruirFácil con contenido de tu marca</li>
             <li>Ximia.AI 24/7 + condiciones para sumarla a tu web</li>
           </ul>
         </div>
@@ -2580,7 +2597,7 @@
             <li>Oferta directa de tus productos a desarrolladores y constructores</li>
             <li>Mailing directo a cada nuevo lead precalificado listo para comprar</li>
             <li>Presencia asociada en eventos y acciones presenciales</li>
-            <li>Social Media con contenido de tu marca</li>
+            <li>Social Media de ConstruirFácil con contenido de tu marca</li>
             <li>Recomendaciones de Ximia.AI ofreciendo tus productos 24/7</li>
           </ul>
         </div>
@@ -2618,8 +2635,8 @@
       const CARRYING_RATE = 0.01; // 1% / mes (~12% anual)
 
       // Webhook de captura de cotización (Supabase → HubSpot vía n8n). ← REEMPLAZAR por la URL real.
-      const CAPTURE_WEBHOOK = 'https://REEMPLAZAR.n8n/webhook/ximia-cotizacion';
-      const LEAD_NOTIFY_EMAIL = 'hola@ximia.ai';   // destino interno del lead/cotización (versión Ximia)
+      const CAPTURE_WEBHOOK = 'https://construirfacil.app.n8n.cloud/webhook/simulador-cotizacion';  // n8n → Resend (envía al lead + BCC interno)
+      const LEAD_NOTIFY_EMAIL = 'hola@construirfacil.com';   // destino interno del lead/cotización (versión Construir Fácil)
 
       // Pre-Venta = reserva iniciada (near-sale). Se cobra como % del ticket, no como lead. Queda sobre el techo Zillow.
       const PREV_COMMISSION = 0.01;
@@ -2637,7 +2654,7 @@
       const CALIF_RATE = 0.50; // Frío → perfil completo (Calificado, paso intermedio)
       const APRO_RATE  = 0.30; // Calificado → validación financiera (Financiero); Frío→Fin = 0.50×0.30 = 15% ✓ ("precalificados")
       const PREV_RATE  = 0.05; // Financiero → reserva iniciada (Pre-Venta / "listos para comprar" 5-7%)
-      // Paquetes de campaña (difusión) = leads objetivo/mes del documento [DEV].
+      // Paquetes de campaña (difusión ConstruirFácil) = leads objetivo/mes del documento [DEV].
       // Inyectan TRÁFICO = leads / (ENGAGE_RATE × CALIF_RATE), para que el embudo rinda ~esos leads calificados.
       const CAMPAIGN_PACKAGES = { basica: 100, regional: 500, premium: 1000 };
       // Costo mensual de cada campaña = PLAN ANUAL / 12 (para que no sume tanto al mensual):
@@ -2761,7 +2778,7 @@
         sla: 'standard',
         visitsWa: 5000, visitsWeb: 3000, visitsPhone: 2000, visits: 10000,
         trafficOwn: true,       // fuente: tráfico propio del cliente (activo por defecto)
-        trafficCampaign: false, // fuente: tráfico que trae la campaña
+        trafficCampaign: false, // fuente: tráfico que trae la campaña de ConstruirFácil
         campaignPkg: 'regional',
         commission: 0.03,
         plan: 'standard',   // selector único de plan → setea aiTier + dbTier + sla juntos
@@ -3103,7 +3120,7 @@
           // Voz: LÍNEA PROPIA. Lleva SOLO el markup de infra (1,4×), NO el de soporte — es casi un pass-through de APIs
           // (STT/TTS), no da trabajo de servicio gestionado como el agente. Cobrarle el markup de soporte encima era de más.
           const cVoice = S.voiceEnabled ? Math.round(pVoice * INFRA_MARKUP) : 0;
-          // Costo de campaña (si está activa) — línea DIFERENCIADA, NO lleva markup de soporte (difusión, no fee de Ximia).
+          // Costo de campaña (si está activa) — línea DIFERENCIADA, NO lleva markup de soporte (difusión ConstruirFácil, no fee de Ximia).
           const campCost = S.trafficCampaign ? (CAMPAIGN_INFO[S.campaignPkg]?.cost || 0) : 0;
           const pTotal = valueTotal + cVoice + campCost;
           // Valor de mercado de los leads que ESTE plan genera (su propio embudo) → ROI = valor / costo
@@ -3274,7 +3291,7 @@
             premium:  document.getElementById('pt-premium')?.textContent || null
           },
           quote: serializeState(), permalink: permalink(),
-          brand: 'ximia', notify: LEAD_NOTIFY_EMAIL
+          brand: 'construirfacil', notify: LEAD_NOTIFY_EMAIL
         };
         // Fallback SIEMPRE bueno: copiamos el link (funciona sin backend). El email sale sólo si el webhook real está configurado — nunca mostramos error.
         const linkOk = () => {
