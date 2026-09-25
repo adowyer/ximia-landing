@@ -2361,8 +2361,9 @@
       // Costo de carrying mensual sobre el stock inmovilizado (capital + impuestos + mantenimiento).
       const CARRYING_RATE = 0.01; // 1% / mes (~12% anual)
 
-      // Webhook de captura de cotización (Supabase → HubSpot vía n8n). ← REEMPLAZAR por la URL real.
-      const CAPTURE_WEBHOOK = 'https://REEMPLAZAR.n8n/webhook/ximia-cotizacion';
+      // Webhook de captura de cotización. Lo atiende el workflow `Ximia · Calculador` en n8n:
+      // guarda la fila en `calculator_quotes` (Supabase) y recién después manda el mail.
+      const CAPTURE_WEBHOOK = 'https://n8n.construirfacil.com/webhook/ximia-cotizacion';
 
       // Pre-Venta = reserva iniciada (near-sale). Se cobra como % del ticket, no como lead. Queda sobre el techo Zillow.
       const PREV_COMMISSION = 0.01;
@@ -2820,7 +2821,11 @@
         };
         msg.textContent = 'Enviando…'; msg.style.color = 'var(--muted)';
         fetch(CAPTURE_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-          .then(() => { msg.textContent = '✓ ¡Listo! Te enviamos la cotización por email.'; msg.style.color = 'var(--green)'; el.value = ''; })
+           .then(res => {
+              if (!res.ok) throw new Error('HTTP ' + res.status);
+              msg.textContent = '✓ ¡Listo! Te enviamos la cotización por email.';
+              msg.style.color = 'var(--green)'; el.value = '';
+            })
           .catch(() => { msg.textContent = 'No pudimos enviarla ahora. Probá el link para compartir.'; msg.style.color = 'var(--amber)'; });
       }
 
