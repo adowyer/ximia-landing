@@ -1971,6 +1971,7 @@
   </style>
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="/html2pdf.bundle.min.js" defer></script>
 </head>
 
 <body>
@@ -2635,7 +2636,7 @@
       const CARRYING_RATE = 0.01; // 1% / mes (~12% anual)
 
       // Webhook de captura de cotización (Supabase → HubSpot vía n8n). ← REEMPLAZAR por la URL real.
-      const CAPTURE_WEBHOOK = 'https://construirfacil.app.n8n.cloud/webhook/simulador-cotizacion';  // n8n → Resend (envía al lead + BCC interno)
+      const CAPTURE_WEBHOOK = 'https://n8n.construirfacil.com/webhook/simulador-cotizacion';  // n8n → Resend (envía al lead + BCC interno)
       const LEAD_NOTIFY_EMAIL = 'hola@construirfacil.com';   // destino interno del lead/cotización (versión Construir Fácil)
 
       // Pre-Venta = reserva iniciada (near-sale). Se cobra como % del ticket, no como lead. Queda sobre el techo Zillow.
@@ -3271,6 +3272,30 @@
         else prompt('Copiá tu link:', link);
       }
 
+      // Genera un PDF de las 3 tarjetas tal como se ven (oculta las cajas de ROI para la captura).
+      // Devuelve base64 (sin prefijo data:) o null si algo falla — el envío nunca depende del PDF.
+      async function generateQuotePDF() {
+        if (!window.html2pdf) return null;
+        const grid = document.querySelector('.plan-grid');
+        if (!grid) return null;
+        const rois = [...grid.querySelectorAll('.plan-roi')];
+        const prev = rois.map(r => r.style.display);
+        rois.forEach(r => { r.style.display = 'none'; });
+        try {
+          const rect = grid.getBoundingClientRect();
+          const w = Math.ceil(rect.width) + 16, h = Math.ceil(rect.height) + 48;  // headroom → 1 sola página
+          const dataUri = await html2pdf().set({
+            margin: 8,
+            image: { type: 'jpeg', quality: 0.95 },
+            html2canvas: { scale: 1.7, backgroundColor: '#ffffff', useCORS: true, logging: false, windowWidth: document.documentElement.scrollWidth },
+            jsPDF: { unit: 'px', format: [w, h], orientation: w >= h ? 'landscape' : 'portrait', hotfixes: ['px_scaling'] },
+            pagebreak: { mode: ['avoid-all'] }
+          }).from(grid).outputPdf('datauristring');
+          return (dataUri && dataUri.indexOf(',') >= 0) ? dataUri.split(',')[1] : null;
+        } catch (e) { return null; }
+        finally { rois.forEach((r, i) => { r.style.display = prev[i]; }); }
+      }
+
       // Calendly en modal (popup widget), no en página aparte. Fallback a nueva pestaña si el widget no cargó.
       const CALENDLY_URL = 'https://calendly.com/hola-ximia-ectr/ximia-demo';
       function openCalendly() {
@@ -3279,7 +3304,7 @@
         return false;
       }
 
-      function submitEmail() {
+      async function submitEmail() {
         const el = document.getElementById('capture-email'), msg = document.getElementById('capture-msg');
         const email = (el.value || '').trim();
         if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { msg.textContent = 'Ingresá un email válido.'; msg.style.color = 'var(--amber)'; return; }
@@ -3300,9 +3325,15 @@
           msg.style.color = 'var(--green)'; el.value = '';
         };
         if (CAPTURE_WEBHOOK.includes('REEMPLAZAR')) { linkOk(); return; }
+        msg.textContent = 'Generando tu cotización…'; msg.style.color = 'var(--muted)';
+        try { const pdf = await generateQuotePDF(); if (pdf) payload.pdf = pdf; } catch (e) {}
         msg.textContent = 'Enviando…'; msg.style.color = 'var(--muted)';
         fetch(CAPTURE_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-          .then(() => { msg.textContent = '✓ ¡Listo! Te enviamos la cotización a ' + email + '.'; msg.style.color = 'var(--green)'; el.value = ''; })
+          .then(res => {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            msg.textContent = '✓ ¡Listo! Te enviamos la cotización a ' + email + '.';
+            msg.style.color = 'var(--green)'; el.value = '';
+          })
           .catch(linkOk);
       }
 
