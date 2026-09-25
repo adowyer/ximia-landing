@@ -1968,7 +1968,40 @@
       transform: translateX(20px);
     }
 
+
+    /* --- Two faces, one page ------------------------------------------------
+       ximia.ai sells Ximia; construirfacil.com sells the pair. Same engine, same
+       file: every element declares which face it belongs to, so the two skins
+       cannot drift apart the way the split copies did between July and September. */
+    html[data-brand="ximia"] .only-cf { display: none !important; }
+    html[data-brand="construirfacil"] .only-ximia { display: none !important; }
+
+    /* Column 2 of the traffic row IS the campaign card, and it only exists on the
+       CF face. The row keeps its three tracks -- they are the same tracks as the
+       plan grid below, which is what keeps the funnel aligned with the Premium
+       column -- and the funnel spans two of them instead. Its right edge does not
+       move; it just reaches left to where Pro starts. Guarded by min-width so it
+       never overrides the single column the 760px query sets for phones. */
+    @media (min-width: 761px) {
+      html[data-brand="ximia"] .traffic-grid .cockpit-funnel { grid-column: span 2; }
+    }
   </style>
+
+  <script>
+    // Which face to wear. `?brand=cf` wins -- that is the door construirfacil.com
+    // redirects through. With no param the hostname decides, so the page stays
+    // right while CF still serves its own copy of this file.
+    // Runs in <head> on purpose: once the header has painted it is already wrong,
+    // and a logo that swaps after the fact is worse than the wrong one.
+    (function () {
+      var p = (new URLSearchParams(location.search).get('brand') || '').toLowerCase();
+      var cf = p === 'cf' || p === 'construirfacil' ||
+               (!p && /construirfacil/i.test(location.hostname));
+      document.documentElement.setAttribute('data-brand', cf ? 'construirfacil' : 'ximia');
+      document.title = cf ? 'Construir F\u00e1cil + Ximia \u2014 Calculadora de Costos'
+                          : 'Ximia \u2014 Calculadora de Costos';
+    })();
+  </script>
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script src="/html2pdf.bundle.min.js" defer></script>
@@ -1979,14 +2012,18 @@
 
     <!-- HEADER -->
     <div class="calc-header">
-      <div class="cobrand-band">
+      <div class="cobrand-band only-cf">
         <img src="/ximia_logo.png" alt="Ximia AI" class="cobrand-ximia-logo">
         <img src="/cf_logo_gris.png" alt="Construir Fácil" class="cobrand-cf">
       </div>
+      <div class="cobrand-band only-ximia">
+        <img src="/ximia_logo.png" alt="Ximia AI" class="cobrand-ximia-logo">
+      </div>
       <div class="calc-eyebrow">Beneficios que superan los costos.</div>
-      <h1>Combiná el poder de <br><span>Construir Fácil y Ximia.ai</span><br> en tu negocio.</h1>
+      <h1 class="only-cf">Combiná el poder de <br><span>Construir Fácil y Ximia.ai</span><br> en tu negocio.</h1>
+      <h1 class="only-ximia">Simulá <span>Ximia AI</span> en tu negocio.</h1>
       <p class="calc-subtitle">Configurá los valores de tu negocio y obtené un estimado en tiempo real de las ventas que
-        vas a lograr y la inversión final de cada campaña. Los costos están 100% relacionados a tu tráfico, tu mercado y
+        vas a lograr y la inversión final de cada plan. Los costos están 100% relacionados a tu tráfico, tu mercado y
         la arquitectura que elijas.</p>
     </div>
 
@@ -2095,7 +2132,7 @@
         <!-- SECCIÓN 2: Fuente de tráfico — grilla de 3 columnas (propio | campaña | Leads), mismos tracks que planes -->
         <div class="card">
           <div class="card-title"><span class="step-dot">2</span> Origen de los contactos</div>
-          <div class="field-label" style="margin-top:-14px; margin-bottom:14px;">De dónde provienen los contactos que Ximia califica <span class="field-note">— podés sumar tus canales propios y contratar nuestras campañas</span></div>
+          <div class="field-label" style="margin-top:-14px; margin-bottom:14px;">De dónde provienen los contactos que Ximia califica <span class="field-note only-cf">— podés sumar tus canales propios y contratar nuestras campañas</span><span class="field-note only-ximia">— los canales por los que ya te escriben hoy</span></div>
 
           <div class="grid3 traffic-grid">
 
@@ -2134,8 +2171,12 @@
               </div>
             </div>
 
-            <!-- COLUMNA 2: Contratar campaña -->
-            <div style="display:flex; flex-direction:column;">
+            <!-- COLUMNA 2: Contratar campana -- ONLY on the ConstruirFacil face.
+                 Not an option the Ximia prospect "just does not pick": the package is
+                 exposure in ConstruirFacil's OWN media (its banner, its press notes,
+                 its social media), so it cannot be delivered to anyone outside that
+                 marketplace. Offering it would be selling what we cannot hand over. -->
+            <div class="only-cf" style="display:flex; flex-direction:column;">
               <div class="tier-btn" id="card-campaign">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                   <span class="tier-icon" style="margin:0;">📣</span>
@@ -2270,8 +2311,10 @@
             </div><!-- /cockpit-funnel (Leads, col 3) -->
           </div><!-- /grid3 traffic -->
 
-          <!-- Nota al pie: objetivos de leads referenciales -->
-          <div style="margin-top:24px; background:rgba(217,119,6,0.06); border-left:4px solid var(--amber); border-radius:12px; padding:18px 22px; font-family:var(--font); font-size:14px; color:var(--text2); line-height:1.6;">
+          <!-- Nota al pie: objetivos de leads referenciales. CF face only: the "lead
+               goals" it qualifies are the campaign packages' (~1000/500/100 a month),
+               and "Main Partner" is one of those packages by name. -->
+          <div class="only-cf" style="margin-top:24px; background:rgba(217,119,6,0.06); border-left:4px solid var(--amber); border-radius:12px; padding:18px 22px; font-family:var(--font); font-size:14px; color:var(--text2); line-height:1.6;">
             Los objetivos de leads son <strong style="color:var(--amber);">referenciales</strong> y se ajustan por demanda, categoría, territorio y calidad de la oferta. En el Main Partner puede sumarse un fee variable sobre ventas atribuibles, acordado por categoría antes del inicio.
           </div>
         </div><!-- /card: Fuente de tráfico -->
@@ -2641,7 +2684,17 @@
       // de la URL de n8n y sólo se arregla con un deploy. Si alguna vez movés el host, buscá
       // TODAS: `grep -rn n8n.construirfacil.com` en los DOS repos (CONSTRUIRFACIL y ximia-landing).
       const CAPTURE_WEBHOOK = 'https://n8n.construirfacil.com/webhook/simulador-cotizacion';  // n8n → Resend (envía al lead + BCC interno)
-      const LEAD_NOTIFY_EMAIL = 'hola@construirfacil.com';   // destino interno del lead/cotización (versión Construir Fácil)
+      // One webhook for both faces, on purpose: `simulador-cotizacion` is the only
+      // workflow that understands THIS payload (it reads `totales`, the three plans).
+      // `ximia-cotizacion` belongs to the older single-total calculator and reads
+      // `servicio_mensual` -- pointing this page at it would send a mail that looks
+      // right with the number missing. Which Resend ACCOUNT signs the mail is decided
+      // downstream in n8n, from `brand`, because a node holds a single credential.
+      const BRAND = document.documentElement.getAttribute('data-brand') === 'construirfacil'
+        ? 'construirfacil' : 'ximia';
+      const LEAD_NOTIFY_EMAIL = BRAND === 'construirfacil'
+        ? 'hola@construirfacil.com'   // destino interno del lead (cara Construir Fácil)
+        : 'hola@ximia.ai';            // destino interno del lead (cara Ximia)
 
       // Pre-Venta = reserva iniciada (near-sale). Se cobra como % del ticket, no como lead. Queda sobre el techo Zillow.
       const PREV_COMMISSION = 0.01;
@@ -3231,7 +3284,12 @@
           plan: S.plan, voice: S.voiceEnabled ? 1 : 0,
           own: S.trafficOwn ? 1 : 0, camp: S.trafficCampaign ? 1 : 0, pkg: S.campaignPkg,
           tiers: (t.frio ? 1 : 0) + '' + (t.calificado ? 1 : 0) + (t.aprobado ? 1 : 0) + (t.preventa ? 1 : 0),
-          lang: LANG
+          lang: LANG,
+          // The brand rides along for the same reason `lang` does: it is what the
+          // page WEARS, and this string is both the permalink the visitor shares and
+          // the `quote` column stored in `calculator_quotes`. Leaving it out meant a
+          // ConstruirFacil prospect shared a link that opened the Ximia face.
+          brand: BRAND
         }).toString();
       }
       function permalink() { return location.origin + location.pathname + '?' + serializeState(); }
@@ -3249,6 +3307,12 @@
           if (p.get('voice') === '1') { S.voiceEnabled = true; const vt = document.getElementById('voice-toggle'); if (vt) vt.checked = true; }
           // Fuente de tráfico: restaurar switches, cards y paquete
           const restoreSource = (key, on) => {
+            // The campaign source exists only on the CF face. `trafficCampaign` is not
+            // just a cost line: it injects LEADS too. Restoring it from a link on the
+            // Ximia face would show more leads and a campaign charge with no control
+            // on screen to switch off -- so it is refused here, where the state is
+            // written, rather than hidden in the layout.
+            if (key === 'campaign' && BRAND !== 'construirfacil') on = false;
             if (key === 'own') S.trafficOwn = on; else S.trafficCampaign = on;
             const sw = document.getElementById(key === 'own' ? 'sw-own' : 'sw-campaign'); if (sw) sw.checked = on;
             const body = document.getElementById(key === 'own' ? 'own-body' : 'campaign-body'); if (body) body.classList.toggle('src-off', !on);
@@ -3322,7 +3386,7 @@
             premium:  document.getElementById('pt-premium')?.textContent || null
           },
           quote: serializeState(), permalink: permalink(),
-          brand: 'construirfacil', notify: LEAD_NOTIFY_EMAIL
+          brand: BRAND, notify: LEAD_NOTIFY_EMAIL
         };
         // Fallback SIEMPRE bueno: copiamos el link (funciona sin backend). El email sale sólo si el webhook real está configurado — nunca mostramos error.
         const linkOk = () => {
