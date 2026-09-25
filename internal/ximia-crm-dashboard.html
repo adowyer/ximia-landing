@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ximia CRM Dashboard</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0f172a;
+      --bg-sidebar: #020617;
+      --surface: #1e293b;
+      --surface-hover: #334155;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #0092B3;
+      --accent-glow: rgba(0, 146, 179, 0.15);
+      --green: #10b981;
+      --amber: #f59e0b;
+      --font: 'Plus Jakarta Sans', sans-serif;
+      --font-h: 'Outfit', sans-serif;
+      --radius: 12px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 260px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+    }
+
+    .brand {
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      height: 28px;
+    }
+
+    .nav-item {
+      padding: 12px 16px;
+      color: var(--text-muted);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .nav-item.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+      border: 1px solid rgba(0, 146, 179, 0.3);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .header {
+      height: 80px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      justify-content: space-between;
+    }
+
+    .header h1 {
+      font-family: var(--font-h);
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 32px;
+      padding: 40px;
+      max-width: 1400px;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline-title {
+      font-family: var(--font-h);
+      font-size: 18px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .timeline-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .timeline-card.ai-highlight {
+      border: 1px solid var(--accent);
+      background: linear-gradient(180deg, rgba(0,146,179,0.05) 0%, var(--surface) 100%);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .tl-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+
+    .tl-agent {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--accent);
+    }
+
+    .tl-agent img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .tl-time {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .tl-body {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #e2e8f0;
+    }
+
+    .tl-data-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .data-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .data-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .data-val {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    /* ── WIDGET AI RIGHT ── */
+    .widget {
+      background: var(--bg-sidebar);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .widget-title {
+      font-family: var(--font-h);
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .score-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 8px solid var(--surface);
+      border-top-color: var(--accent);
+      border-right-color: var(--accent);
+      margin: 0 auto 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-num {
+      font-family: var(--font-h);
+      font-size: 36px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .status-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .st-label {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .st-val {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .badge-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    
+    .badge-accent {
+      background: rgba(0, 146, 179, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(0, 146, 179, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <!-- Se asume que X.png o Ximia-Header.png existe en la carpeta -->
+      <img src="X.png" alt="Ximia Logo" onerror="this.src='https://via.placeholder.com/30/0092B3/0092B3'">
+      <span style="font-family: var(--font-h); font-weight: 800; font-size: 20px; letter-spacing: -0.02em;">XIMIA</span>
+    </div>
+    <div class="nav-item">📊 Dashboard</div>
+    <div class="nav-item">👥 Contactos</div>
+    <div class="nav-item active">🚀 Pipeline & Deals</div>
+    <div class="nav-item">⚙️ Configuración</div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <header class="header">
+      <h1>Deal: Sarah Johnson - Proyecto Miami 2 Hab</h1>
+      <div class="header-actions">
+        <button class="btn btn-secondary">Asignar Humano</button>
+        <button class="btn btn-primary">Aprobar Reserva</button>
+      </div>
+    </header>
+
+    <div class="content-grid">
+      <!-- TIMELINE -->
+      <div>
+        <div class="timeline-title">
+          <span>Actividad Reciente</span>
+          <span style="font-size: 14px; color: var(--text-muted); font-weight: 400; font-family: var(--font);">Filtro: Todo ▼</span>
+        </div>
+
+        <!-- AI CARD -->
+        <div class="timeline-card ai-highlight">
+          <div class="tl-header">
+            <div class="tl-agent">
+              <span style="font-size: 18px;">✨</span> Ximia AI Agent Log
+            </div>
+            <div class="tl-time">Hace 12 minutos</div>
+          </div>
+          <div class="tl-body">
+            El prospecto ha completado exitosamente la calificación y la validación financiera. El agente autónomo confirmó el interés explícito por el proyecto <strong>"Aria Reserve - 2 Habitaciones"</strong> y procedió a iniciar la reserva de la unidad. 
+          </div>
+          <div class="tl-data-grid">
+            <div class="data-item">
+              <span class="data-label">Presupuesto Confirmado</span>
+              <span class="data-val">$450,000 USD</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label">Validación</span>
+              <span class="data-val" style="color: var(--green);">Comprobantes Aprobados</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label">Próximo paso (Bot)</span>
+              <span class="data-val">Esperando firma digital 48hs</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label">Intervención humana</span>
+              <span class="data-val">No requerida actualmente</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- OLDER CARD -->
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-agent" style="color: var(--text-muted);">
+              <span style="font-size: 18px;">🌐</span> Web Visit
+            </div>
+            <div class="tl-time">Hace 2 horas</div>
+          </div>
+          <div class="tl-body" style="color: var(--text-muted);">
+            Sesión iniciada desde campaña Meta Ads (US-Latam). Tiempo en página: 4m 12s. Vio 3 propiedades.
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT WIDGETS -->
+      <div>
+        <!-- WIDGET 1 -->
+        <div class="widget">
+          <div class="widget-title">🧠 Ximia Intelligence</div>
+          
+          <div class="score-circle">
+            <div class="score-num">98</div>
+            <div class="score-label">Scoring Real</div>
+          </div>
+
+          <div class="status-row">
+            <span class="st-label">Clasificación Lead</span>
+            <span class="badge badge-accent">Pre-Venta Lista</span>
+          </div>
+          <div class="status-row">
+            <span class="st-label">Estado Financiero</span>
+            <span class="badge badge-green">Calificado Aprobado</span>
+          </div>
+          <div class="status-row">
+            <span class="st-label">Nivel de Intención</span>
+            <span class="st-val" style="color: var(--green);">Extremadamente Alto</span>
+          </div>
+          <div class="status-row">
+            <span class="st-label">Probabilidad Cierre</span>
+            <span class="st-val">94% (< 48hs)</span>
+          </div>
+        </div>
+
+        <!-- WIDGET 2 -->
+        <div class="widget">
+          <div class="widget-title">👤 Perfil Extraído</div>
+          <div class="status-row">
+            <span class="st-label">Nombre</span>
+            <span class="st-val">Sarah Johnson</span>
+          </div>
+          <div class="status-row">
+            <span class="st-label">Teléfono (Validado OTP)</span>
+            <span class="st-val">+1 (305) 555-0199</span>
+          </div>
+          <div class="status-row">
+            <span class="st-label">Ubicación</span>
+            <span class="st-val">Miami, FL</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+</body>
+
+</html>
