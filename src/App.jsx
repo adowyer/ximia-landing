@@ -913,8 +913,13 @@ export default function App() {
               </button>
             </div>
             <div className="flex-1 w-full bg-white overflow-auto">
+              {/* The simulator, not calculator.html. Same product, one generation apart:
+                  same headline and the same seat model, but calculator.html returns a
+                  single monthly figure while this one breaks the quote into three plans,
+                  mails it with the PDF attached and stores the row in calculator_quotes.
+                  It wears the Ximia face here because the host is ximia.ai (no ?brand). */}
               <iframe 
-                src="/calculator.html" 
+                src="/simulador.html" 
                 className="w-full h-full border-none"
                 title="Ximia Cost Calculator"
               />
