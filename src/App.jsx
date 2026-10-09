@@ -8,6 +8,12 @@ import { initReactI18next, useTranslation } from "react-i18next";
 import en from "./locales/en/translation.json";
 import es from "./locales/es/translation.json";
 
+// Ximia's identity: the living X (ported from ConstruirFácil, see src/ximia/).
+import XimiaMark from "./ximia/XimiaMark";
+import XimiaActor from "./ximia/XimiaActor";
+import XimiaShowcase from "./ximia/XimiaShowcase";
+import { ximiaSays, ximiaStands, ximiaPerches } from "./ximia/moments";
+
 // INIT i18n
 i18n.use(initReactI18next).init({
   resources: {
@@ -289,8 +295,20 @@ export default function App() {
   // UI
   // =========================
 
+  // Index of Ximia's latest message in the hero demo: the only avatar there that moves.
+  const heroMessages = heroScenarios[activeScenario]?.messages ?? [];
+  const lastAiIndex = heroMessages.reduce((acc, m, i) => (m.from === "ai" ? i : acc), -1);
+
   return (
     <div className="font-sans text-gray-900">
+
+      {/* Ximia herself, on the page. A line of hers names an ACTION, not a question:
+          there is no conversation to open here, so taking her up on it runs that action. */}
+      <XimiaActor
+        hidden={showCalculator}
+        label={t("ximia_actor_label")}
+        onOpen={(ask) => (ask === "calculator" ? setShowCalculator(true) : handleCalendlyClick())}
+      />
 
       {/* NAVBAR */}
       <header className="fixed top-0 left-0 w-full bg-white shadow z-50">
@@ -339,7 +357,7 @@ export default function App() {
       </header>
 
       {/* HERO */}
-      <section className="pt-44 pb-36 md:pt-52 md:pb-44 bg-gradient-to-b from-white to-gray-50">
+      <section className="pt-44 pb-36 md:pt-52 md:pb-44 bg-gradient-to-b from-white to-gray-50" {...ximiaStands({ id: "hero", x: "box-right", y: 0.9, size: 200, wave: true, exit: "right" })}>
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-stretch">
 
           {/* LEFT SIDE */}
@@ -394,7 +412,11 @@ export default function App() {
                     style={{ animationDelay: `${i * 0.15}s`, animationFillMode: "both" }}
                   >
                     {msg.from === "ai" && (
-                      <img src="/AI-Icon.gif" alt="AI Agent" className="w-6 h-6 mt-1 rounded-full shadow-sm shrink-0" />
+                      // Only her latest message is alive; the earlier ones stay still.
+                      <XimiaMark
+                        still={i !== lastAiIndex}
+                        className="w-6 h-6 mt-1 shrink-0"
+                      />
                     )}
 
                     <div
@@ -439,19 +461,14 @@ export default function App() {
         </div>
       </section>
 
-      <div className="w-full h-[700px] overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover object-top"
-        >
-          <source src="/AI.mp4" type="video/mp4" />
-        </video>
-      </div>
+      {/* Was a stock clip of holograms over a laptop (/AI.mp4). Now it is her. */}
+      <XimiaShowcase
+        {...ximiaStands({ id: "showcase", away: true, exit: "right" })}
+        eyebrow={t("ximia_show_eyebrow")}
+        items={Array.isArray(t("ximia_show_items", { returnObjects: true })) ? t("ximia_show_items", { returnObjects: true }) : []}
+      />
 
-      <section className="py-20 md:py-40 text-center bg-white">
+      <section className="py-20 md:py-40 text-center bg-white" {...ximiaStands({ id: "statement", x: 0.76, y: 0.8, size: 190, wave: true, exit: "right" })}>
         <div className="w-full max-w-7xl mx-auto px-6 flex flex-col items-center">
           <p className="text-xl md:text-3xl text-gray-600 leading-snug whitespace-pre-line max-w-6xl mb-12">
             {t("problem_intro_line2")}
@@ -463,7 +480,7 @@ export default function App() {
         </div>
       </section>
 
-      <section ref={problemRef} id="problem" className="py-40 bg-gray-900 text-white text-center">
+      <section ref={problemRef} id="problem" className="py-40 bg-gray-900 text-white text-center" {...ximiaSays({ line: t("ximia_line_cost"), ask: "calculator" })}>
         <div className="max-w-8xl mx-auto px-6">
           <h2 ref={headlineRef} className="text-5xl md:text-8xl font-bold leading-tight tracking-tight mb-10">
             <span className="block">
@@ -547,7 +564,9 @@ export default function App() {
       </section>
 
       {/* THE SOLUTION (STICKY STEPPER) */}
-      <section id="solution" className="pt-20 pb-40 bg-white relative">
+      {/* She stands at the bottom, in the middle, and acts out the step being read. Leaving
+          this section she goes to the LEFT edge, so the page walks her across. */}
+      <section id="solution" className="pt-20 pb-40 bg-white relative" {...ximiaStands({ id: "steps", x: 0.45, y: 0.87, size: 130, pose: ["listening", "thinking", "speaking", "idle"][activeStep] ?? "idle", exit: "left" })}>
         <style>{`
           @keyframes stepFadeIn {
             from { opacity: 0; transform: translateY(10px) scale(0.98); }
@@ -608,8 +627,8 @@ export default function App() {
                     {/* Header Chat */}
                     <div className="bg-white border-b border-gray-100 p-4 flex items-center justify-between z-10 shrink-0">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-gray-200 overflow-hidden">
-                          <img src="/AI-Icon.gif" alt="Ximia.ai" className="h-8 w-auto object-contain scale-125" />
+                        <div className="w-10 h-10 flex items-center justify-center">
+                          <XimiaMark state={activeStep === 1 ? "thinking" : "idle"} className="w-9 h-9" />
                         </div>
                       </div>
                     </div>
@@ -697,7 +716,7 @@ export default function App() {
       </section>
 
       {/* 2. THE VS TABLE (LIGHT) */}
-      <section ref={tableRef} id="vs" className="py-32 md:py-40 bg-gray-50 text-gray-900 border-b border-gray-100/50">
+      <section ref={tableRef} id="vs" className="py-32 md:py-40 bg-gray-50 text-gray-900 border-b border-gray-100/50" {...ximiaSays({ line: t("ximia_line_demo"), ask: "demo" })}>
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-10">
             <h2 className="text-5xl md:text-6xl tracking-tight font-bold text-center mb-16 md:mb-20">
@@ -841,6 +860,7 @@ export default function App() {
             </p>
             <button
               onClick={handleCalendlyClick}
+              {...ximiaPerches()}
               className={`relative overflow-hidden group bg-white text-black px-12 py-6 rounded-full text-xl font-bold transition-all duration-1000 delay-700 uppercase tracking-widest flex mx-auto items-center gap-3 shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.6)] ${ctaInView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-90"}`}
             >
               <span className="relative z-10 flex items-center gap-2">{t("cta_button")} <Zap size={20} fill="currentColor" /></span>
@@ -898,21 +918,17 @@ export default function App() {
             onClick={() => setShowCalculator(false)}
           />
           <div className="relative w-full max-w-6xl h-full max-h-[90vh] bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col z-10 animate-in fade-in zoom-in duration-200 [transform:translateZ(0)]">
-            <div className="flex justify-between items-center p-6 border-b border-gray-100">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#0092B3]/10 rounded-xl flex items-center justify-center text-[#0092B3]">
-                  <Calculator size={22} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 tracking-tight">Ximia AI — Cost Calculator</h3>
-              </div>
-              <button 
-                onClick={() => setShowCalculator(false)}
-                className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors"
-              >
-                <X size={24} />
-              </button>
-            </div>
-            <div className="flex-1 w-full bg-white overflow-auto">
+            {/* No header of its own: the simulator brings one (Andrea, 2026-10-02). Only the
+                way out stays, floating over the corner. */}
+            <button
+              onClick={() => setShowCalculator(false)}
+              aria-label={t("ximia_close")}
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 shadow hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              <X size={24} />
+            </button>
+            {/* Padded: the simulator sat right against the rounded edges. */}
+            <div className="flex-1 w-full bg-white overflow-hidden px-4 pt-6 pb-4 md:px-12 md:pt-10 md:pb-8">
               {/* The simulator, not calculator.html. Same product, one generation apart:
                   same headline and the same seat model, but calculator.html returns a
                   single monthly figure while this one breaks the quote into three plans,

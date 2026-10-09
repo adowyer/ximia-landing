@@ -1,0 +1,132 @@
+/* XimiaMark states. Transforms pivot on the crossing of the X (125, 118.5 in the viewBox). */
+.mark {
+  display: block;
+  overflow: visible;
+}
+.whole,
+.arm,
+.halo {
+  transform-box: view-box;
+  transform-origin: 125px 118.5px;
+}
+.halo {
+  opacity: 0;
+}
+
+/* idle — never fully still (Andrea, 2026-09-30): a slow sway. The wave every ~10 s is a
+   greeting triggered by XimiaActor. */
+.mark[data-state='idle'] .whole {
+  animation: sway 6s ease-in-out infinite;
+}
+
+/* listening — head tilted toward the person, nodding slowly. Quiet on purpose: she is not the
+   one talking. */
+.mark[data-state='listening'] .whole {
+  animation: nod 2.4s ease-in-out infinite;
+}
+
+/* thinking — the arms open and close like scissors */
+.mark[data-state='thinking'] .armA {
+  animation: scissorA 1.25s ease-in-out infinite;
+}
+.mark[data-state='thinking'] .armB {
+  animation: scissorB 1.25s ease-in-out infinite;
+}
+
+/* speaking — leans in and pulses. This was «listening» until Andrea read it as talking
+   (2026-10-01), and she was right: a pulse going out is a voice. */
+.mark[data-state='speaking'] .whole {
+  transform: rotate(-5deg) scale(1.03);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.mark[data-state='speaking'] .halo {
+  animation: ping 1.8s ease-out infinite;
+}
+
+/* greeting — waves her right arm, pivoting on the bottom-left end of that arm like a raised
+   hand. */
+.mark[data-state='greeting'] .armB {
+  transform-origin: 45px 236px;
+  animation: wave 1.9s ease-in-out both;
+}
+
+/* falling — stretched a little along the drop */
+.mark[data-state='fall'] .whole {
+  transform: scale(0.93, 1.09);
+}
+
+/* landing — flattens against the ground she lands on, springs back and settles. The squash
+   pivots on her feet, not on her center, or she would sink below her spot. */
+.mark[data-state='land'] .whole {
+  transform-origin: 125px 237px;
+  animation: land 0.7s cubic-bezier(0.3, 0.6, 0.3, 1) both;
+}
+
+/* a small jump — her celebration when the profile is complete */
+.mark[data-state='bounce'] .whole {
+  animation: bounce 0.62s ease-out both;
+}
+
+/* peeking — half behind the edge, breathing. No waving from here (Andrea, 2026-10-01).
+   The tilt of «leaning out» is NOT here: it lives on the HTML button (XimiaWidget.module.css),
+   because a CSS transition on this SVG group did not ease — measured, it jumped to the angle
+   on the first frame. */
+.mark[data-state='peek'] .whole {
+  animation: peek 3.6s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(0) scale(1); }
+  30% { transform: rotate(-3deg) scale(1.025); }
+  70% { transform: rotate(2deg) scale(1.01); }
+}
+@keyframes wave {
+  0%, 22% { transform: none; }
+  38% { transform: rotate(-13deg); }
+  52% { transform: rotate(8deg); }
+  66% { transform: rotate(-11deg); }
+  80% { transform: rotate(5deg); }
+  100% { transform: none; }
+}
+@keyframes nod {
+  0%, 100% { transform: rotate(7deg) translateY(0); }
+  50% { transform: rotate(7deg) translateY(5px); }
+}
+@keyframes land {
+  0% { transform: scale(1.26, 0.66); }
+  30% { transform: scale(0.92, 1.1) translateY(-16px); }
+  55% { transform: scale(1.07, 0.93); }
+  78% { transform: scale(0.98, 1.02) translateY(-4px); }
+  100% { transform: none; }
+}
+@keyframes bounce {
+  0% { transform: translateY(0) scale(1.06, 0.92); }
+  30% { transform: translateY(-28px) scale(0.97, 1.04); }
+  55% { transform: translateY(0) scale(1.04, 0.95); }
+  75% { transform: translateY(-9px) scale(1, 1); }
+  100% { transform: none; }
+}
+@keyframes peek {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.045); }
+}
+@keyframes ping {
+  0% { opacity: 0.55; transform: scale(0.85); }
+  100% { opacity: 0; transform: scale(1.35); }
+}
+@keyframes scissorA {
+  0%, 100% { transform: rotate(0); }
+  50% { transform: rotate(13deg); }
+}
+@keyframes scissorB {
+  0%, 100% { transform: rotate(0); }
+  50% { transform: rotate(-13deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark *,
+  .mark[data-state] * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

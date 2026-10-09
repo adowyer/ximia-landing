@@ -274,5 +274,28 @@
   "cta_button": "Agendar Demo",
   "footer_rights": "Todos los derechos reservados.",
   "footer_privacy": "Política de Privacidad",
-  "footer_terms": "Términos de Servicio"
+  "footer_terms": "Términos de Servicio",
+  "ximia_actor_label": "Agendar una demo con Ximia",
+  "ximia_line_cost": "¿Calculamos cuánto te cuesta cada lead sin atender?",
+  "ximia_line_demo": "¿Querés verme hacer esto con tu propio inventario?",
+  "ximia_show_eyebrow": "Conocé a Ximia",
+  "ximia_show_items": [
+    {
+      "verb": "Saluda.",
+      "sub": "Apenas alguien llega a tu sitio, a cualquier hora."
+    },
+    {
+      "verb": "Escucha.",
+      "sub": "Qué busca, cuánto puede pagar y para cuándo."
+    },
+    {
+      "verb": "Piensa.",
+      "sub": "Contra tu inventario real y tus reglas de financiación."
+    },
+    {
+      "verb": "Responde.",
+      "sub": "Con una opción que le sirve, no con un guion."
+    }
+  ],
+  "ximia_close": "Cerrar"
 }

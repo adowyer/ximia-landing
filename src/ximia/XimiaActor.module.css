@@ -1,0 +1,118 @@
+/* Ximia on her own site: the X alone, moved around the screen by XimiaActor.
+   The square is a fixed 220px box whose CENTER is placed with `transform`; her size is a scale
+   of the button inside it, so growing and shrinking between spots is one eased transition. */
+.actor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 220px;
+  height: 220px;
+  will-change: transform;
+  z-index: 9990;
+  /* The square is bigger than she is: only she and her balloon take the pointer. */
+  pointer-events: none;
+}
+/* Before her entrance she is off stage: not visible and not clickable. */
+.actorOffstage {
+  opacity: 0;
+}
+.actorOffstage * {
+  pointer-events: none !important;
+}
+
+.fab {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  /* No disc behind her (Andrea, 2026-09-30). The shadow follows the drawing, not the box:
+     `drop-shadow`, never `box-shadow`. */
+  background: transparent;
+  filter:
+    drop-shadow(0 4px 6px rgba(0, 0, 0, 0.36))
+    drop-shadow(0 20px 36px rgba(0, 0, 0, 0.48));
+  cursor: pointer;
+  pointer-events: auto;
+  /* Size and the «leaning out of a doorway» tilt, both eased. They live on this HTML button
+     and not inside the SVG: a CSS transition on the SVG group jumped instead of easing. */
+  transform: scale(var(--ximia-scale, 1)) rotate(var(--ximia-tilt, 0deg));
+  transition: transform 0.6s ease;
+}
+.fab:focus-visible {
+  outline: 3px solid rgba(0, 150, 200, 0.6);
+  outline-offset: 2px;
+}
+.fabImg {
+  /* Room around the X inside the hit area, so the bounce and the wave are not clipped. */
+  width: 76%;
+  height: 76%;
+  margin: 12%;
+  pointer-events: none;
+}
+
+/* What she says: one line, next to her, with the tail on her side. A speech balloon, not a
+   chat window — no header, no input, gone in a few seconds. */
+.say {
+  position: absolute;
+  right: calc(50% + var(--ximia-half, 70px) - 14px);
+  top: calc(50% - var(--ximia-half, 70px) - 6px);
+  width: max-content;
+  max-width: 270px;
+  padding: 14px 38px 14px 18px;
+  background: #ffffff;
+  color: #1a1a1c;
+  border-radius: 18px 18px 4px 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  line-height: 1.35;
+  text-align: left;
+  pointer-events: auto;
+  transform-origin: 100% 100%;
+  animation: sayIn 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+/* She is on the left half of the screen: the balloon opens to her right. */
+.sayFlip {
+  right: auto;
+  left: calc(50% + var(--ximia-half, 70px) - 14px);
+  border-radius: 18px 18px 18px 4px;
+  transform-origin: 0 100%;
+}
+.sayText {
+  all: unset;
+  display: block;
+  cursor: pointer;
+}
+.sayText:focus-visible,
+.sayClose:focus-visible {
+  outline: 2px solid rgba(0, 150, 200, 0.7);
+  outline-offset: 2px;
+}
+.sayClose {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  color: #8a8d93;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+@keyframes sayIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 768px) {
+  .say {
+    max-width: 190px;
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .say { animation: none; }
+  .fab { transition: none; }
+}

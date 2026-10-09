@@ -274,5 +274,28 @@
   "cta_button": "Book Demo",
   "footer_rights": "All rights reserved.",
   "footer_privacy": "Privacy Policy",
-  "footer_terms": "Terms of Service"
+  "footer_terms": "Terms of Service",
+  "ximia_actor_label": "Book a demo with Ximia",
+  "ximia_line_cost": "Shall we work out what each unanswered lead costs you?",
+  "ximia_line_demo": "Want to see me do this with your own inventory?",
+  "ximia_show_eyebrow": "Meet Ximia",
+  "ximia_show_items": [
+    {
+      "verb": "Says hello.",
+      "sub": "The moment someone lands on your site, at any hour."
+    },
+    {
+      "verb": "Listens.",
+      "sub": "What they are looking for, what they can pay, and by when."
+    },
+    {
+      "verb": "Thinks.",
+      "sub": "Against your real inventory and your financing rules."
+    },
+    {
+      "verb": "Answers.",
+      "sub": "With an option that fits them, not with a script."
+    }
+  ],
+  "ximia_close": "Close"
 }
